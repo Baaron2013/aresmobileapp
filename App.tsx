@@ -14,6 +14,7 @@ const App = () => {
         
         <StatusBar />
         {/* <Navigation /> */}
+        <Text>Hello World!!</Text>
         
       </SafeAreaView>
       )
