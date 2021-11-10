@@ -1,0 +1,33 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aresmobileapp-dev-173749-authRole",
+      "UnauthRoleArn": "arn:aws:iam::195446890258:role/amplify-aresmobileapp-dev-173749-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::195446890258:role/amplify-aresmobileapp-dev-173749-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-aresmobileapp-dev-173749-deployment",
+      "UnauthRoleName": "amplify-aresmobileapp-dev-173749-unauthRole",
+      "StackName": "amplify-aresmobileapp-dev-173749",
+      "StackId": "arn:aws:cloudformation:us-east-1:195446890258:stack/amplify-aresmobileapp-dev-173749/ed0f66c0-424c-11ec-bc07-0a494b6818d5",
+      "AmplifyAppId": "d381wg059x3fw"
+    },
+    "categories": {
+      "auth": {
+        "aresmobileappe366d01a": {}
+      }
+    }
+  },
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify9df98df1c2214-staging-144203-authRole",
+      "UnauthRoleArn": "arn:aws:iam::195446890258:role/amplify-amplify9df98df1c2214-staging-144203-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::195446890258:role/amplify-amplify9df98df1c2214-staging-144203-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplify9df98df1c2214-staging-144203-deployment",
+      "UnauthRoleName": "amplify-amplify9df98df1c2214-staging-144203-unauthRole",
+      "StackName": "amplify-amplify9df98df1c2214-staging-144203",
+      "StackId": "arn:aws:cloudformation:us-east-1:195446890258:stack/amplify-amplify9df98df1c2214-staging-144203/5ecd7ae0-4234-11ec-acc4-0e6d84e0733f",
+      "AmplifyAppId": "d381wg059x3fw"
+    }
+  }
+}

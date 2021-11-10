@@ -1,0 +1,13 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  imageUr: String!
+  status: String!
+}
+
+type Todo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+}
+  
