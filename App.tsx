@@ -13,8 +13,8 @@ const App = () => {
       <SafeAreaView style={styles.root}>
         
         <StatusBar />
-        {/* <Navigation /> */}
-        <Text>Hello World!!</Text>
+        <Navigation /> 
+        {/*<Text>Hello World!! Yes!</Text>*/}
         
       </SafeAreaView>
       )

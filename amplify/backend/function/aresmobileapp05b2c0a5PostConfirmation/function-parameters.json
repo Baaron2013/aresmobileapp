@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "aresmobileapp05b2c0a5",
+  "functionName": "aresmobileapp05b2c0a5PostConfirmation",
+  "resourceName": "aresmobileapp05b2c0a5PostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "C:\\Users\\brook\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "aresmobileapp05b2c0a5PostConfirmation",
+  "skipEdit": true,
+  "enableCors": false
+}
