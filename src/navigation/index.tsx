@@ -9,13 +9,14 @@ import HomeCoach from '../screens/HomeCoach';
 import Profile from '../screens/Profile';
 import Reset from '../screens/ResetPassword';
 import SignUpScreen from '../screens/SignUpScreen';
+import ConfirmSignUp from '../screens/ConfirmSignUp';
 import ForgotPassword from '../screens/ForgotPassword';
 import ConfirmNewPassword from '../screens/ConfirmNewPassword';
 import ConfirmEmail from '../screens/ConfirmEmail';
 import ConfirmForgotPassword from '../screens/ConfirmForgotPassword';
 import Chooseuser from '../screens/ChooseUserType';
 import useUserStatus from '../screens/UserStatus';
-//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //import { Auth } from 'aws-amplify';
 //import { Hub } from 'aws-amplify';
 //import { isPredicateGroup } from '@aws-amplify/datastore';
@@ -32,7 +33,7 @@ const Tabs = createBottomTabNavigator();
 function profileTabs() {
     return (
         <ProfileStack.Navigator>
-            <ProfileStack.Screen name="Profile" component={Reset} options={{ title: 'Profile Settings' }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="Profile" component={Profile} options={{ title: 'Profile Settings' }}></ProfileStack.Screen>
             <ProfileStack.Screen name="Reset" component={Reset} options={{ title: 'Reset Password' }}></ProfileStack.Screen>
         </ProfileStack.Navigator>
 
@@ -62,6 +63,7 @@ function HomeTabsRanger() {
                     tabBarIcon: ({ color, size }) => (
                       <Icon name="account-cog" color={color} size={size} />
                     ),
+                    header: () => null
                   }}
             ></Tabs.Screen>
         </Tabs.Navigator>
@@ -120,15 +122,15 @@ const Navigation = () => {
                         
                         <Stack.Screen name="SignIn" component={SignInScreen}></Stack.Screen>    
                         <Stack.Screen name="Forgot" component={ForgotPassword} ></Stack.Screen>
-                        {/* <Stack.Screen name="ConfirmForgot" component={ConfirmForgotPassword}></Stack.Screen> */}
+                        <Stack.Screen name="ConfirmForgot" component={ConfirmForgotPassword}></Stack.Screen>
                         <Stack.Screen name="SignUp" component={SignUpScreen} ></Stack.Screen>
-                        {/* <Stack.Screen name="Confirm" component={ConfirmSignUp}></Stack.Screen>
-                        <Stack.Screen name="ConfirmNew" component={ConfirmNewPassword}></Stack.Screen> */}
+                        <Stack.Screen name="Confirm" component={ConfirmSignUp}></Stack.Screen>
+                        <Stack.Screen name="ConfirmNew" component={ConfirmNewPassword}></Stack.Screen>
                         
                     </>
                 ) :  userStatus.attributes.nickname == 'Ranger' ? (
                     <>
-                        <Stack.Screen name="Home" component={Reset} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="Home" component={HomeTabsRanger} options={{header: () => false}}></Stack.Screen>
                         
                     </>
                 ) : userStatus.attributes.nickname == 'Coach' ? (
