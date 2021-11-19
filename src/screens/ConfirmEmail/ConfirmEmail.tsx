@@ -18,7 +18,7 @@ const ConfirmSignUp = () => {
                 "Updated!",
                 "Your account settings have been successfully updated",
                 [
-                    {text: "OK", onPress: () => navigation.navigate('Profile')} 
+                    {text: "OK", onPress: () => navigation.navigate('MainProfile')} 
                 ]
             )
           } catch (error) {
@@ -29,7 +29,7 @@ const ConfirmSignUp = () => {
 
     return (
         <View style={styles.root}>
-            <Text>Confirm Sign Up</Text>
+            <Text>Confirm New Email</Text>
             <CustomInput 
                 placeholder="Code"
                 value={code}

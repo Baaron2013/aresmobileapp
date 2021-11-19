@@ -1,3 +1,4 @@
+'use strict'
 import React, { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { Hub } from '@aws-amplify/core';

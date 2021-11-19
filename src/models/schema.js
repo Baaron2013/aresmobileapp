@@ -17,15 +17,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "imageUr": {
-                    "name": "imageUr",
+                "email": {
+                    "name": "email",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "status": {
-                    "name": "status",
+                "type": {
+                    "name": "type",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -110,5 +110,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4738de33cddaa3b391001c0eb5056471"
+    "version": "159d4749b3e39fe7ce4d50b9454b9b73"
 };

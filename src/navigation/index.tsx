@@ -6,17 +6,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
 import HomeRanger from '../screens/HomeRanger';
 import HomeCoach from '../screens/HomeCoach';
-import Profile from '../screens/Profile';
+import Profile from '../screens/ProfileCopy';
 import Reset from '../screens/ResetPassword';
 import SignUpScreen from '../screens/SignUpScreen';
-import ConfirmSignUp from '../screens/ConfirmSignUp';
 import ForgotPassword from '../screens/ForgotPassword';
 import ConfirmNewPassword from '../screens/ConfirmNewPassword';
 import ConfirmEmail from '../screens/ConfirmEmail';
 import ConfirmForgotPassword from '../screens/ConfirmForgotPassword';
+import ConfirmSignUp from '../screens/ConfirmSignUp';
 import Chooseuser from '../screens/ChooseUserType';
 import useUserStatus from '../screens/UserStatus';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { DataStore } from '@aws-amplify/datastore'
 //import { Auth } from 'aws-amplify';
 //import { Hub } from 'aws-amplify';
 //import { isPredicateGroup } from '@aws-amplify/datastore';
@@ -29,12 +30,23 @@ const Tabs = createBottomTabNavigator();
 
 //const [user, setUser] = useState('');
 
+const dbSet = async () => {
+    await DataStore.start();
+    return dbSet;
+}
+
 
 function profileTabs() {
     return (
         <ProfileStack.Navigator>
-            <ProfileStack.Screen name="Profile" component={Profile} options={{ title: 'Profile Settings' }}></ProfileStack.Screen>
-            <ProfileStack.Screen name="Reset" component={Reset} options={{ title: 'Reset Password' }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="MainProfile" component={Profile} options={{ title: 'Profile Settings' }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="ResetPassword" component={Reset} options={{ title: 'Reset Password' }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="ConfirmEmail" 
+                component={ConfirmEmail} 
+                options={{ 
+                    title: 'Confirm New Email',
+                    header: () => null
+                }}></ProfileStack.Screen>
         </ProfileStack.Navigator>
 
     )
@@ -46,7 +58,7 @@ function HomeTabsRanger() {
     return (
         <Tabs.Navigator>
             <Tabs.Screen 
-                name="Home" 
+                name="HomeRanger" 
                 component={HomeRanger}
                 options={{
                     tabBarLabel: 'Home',
@@ -56,7 +68,7 @@ function HomeTabsRanger() {
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
-                name="Profile" 
+                name="ProfileRanger" 
                 component={profileTabs}
                 options={{
                     tabBarLabel: 'Account',
@@ -78,18 +90,18 @@ function HomeTabsCoach() {
     return (
         <Tabs.Navigator>
             <Tabs.Screen 
-                name="HomeCoach1" 
+                name="HomeCoach" 
                 component={HomeCoach}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                       <Icon name="home" color={color} size={size} />
                     ),
-                    //header: () => null
+                    header: () => null
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
-                name="Profile" 
+                name="ProfileCoach" 
                 component={profileTabs}
                 options={{
                     tabBarLabel: 'Account',
@@ -128,14 +140,14 @@ const Navigation = () => {
                         <Stack.Screen name="ConfirmNew" component={ConfirmNewPassword}></Stack.Screen>
                         
                     </>
-                ) :  userStatus.attributes.nickname == 'Ranger' ? (
+                ) :  (dbSet() && userStatus.attributes.nickname == 'Ranger') ? (
                     <>
-                        <Stack.Screen name="Home" component={HomeTabsRanger} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="MainHomeRanger" component={HomeTabsRanger} options={{header: () => false}}></Stack.Screen>
                         
                     </>
-                ) : userStatus.attributes.nickname == 'Coach' ? (
+                ) : (dbSet() && userStatus.attributes.nickname == 'Coach') ? (
                     <>
-                        <Stack.Screen name="HomeCoach" component={Reset} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="MainHomeCoach" component={HomeTabsCoach} options={{header: () => false}}></Stack.Screen>
                         
                     </>
                 ) : null}

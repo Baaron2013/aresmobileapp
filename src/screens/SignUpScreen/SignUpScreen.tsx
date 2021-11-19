@@ -64,7 +64,7 @@ const SignUpScreen = ( props ) => {
                 setValue={setName}
             />
             <CustomInput 
-                placeholder="Username"
+                placeholder="Email"
                 value={username}
                 setValue={setUsername}
             />

@@ -4,6 +4,7 @@ import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
+import { DataStore } from '@aws-amplify/datastore'
 
 const SignInScreen = (  ) => {
     const [username, setUsername] = useState('');
@@ -30,6 +31,7 @@ const SignInScreen = (  ) => {
         }).catch(e => {
             console.log(e);
         });
+        await DataStore.start();
     }
 
     const sendAuthCode = () => {
@@ -58,7 +60,7 @@ const SignInScreen = (  ) => {
         <View style={styles.root}>
             <Text>Sign In Screen</Text>
             <CustomInput 
-                placeholder="Username"
+                placeholder="Email"
                 value={username}
                 setValue={setUsername}
             />

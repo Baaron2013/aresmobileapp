@@ -27,7 +27,7 @@ const ConfirmSignUp = () => {
         <View style={styles.root}>
             <Text>Confirm Sign Up</Text>
             <CustomInput 
-                placeholder="Username"
+                placeholder="Email"
                 value={username}
                 setValue={setUsername}
             />

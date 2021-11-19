@@ -23,7 +23,7 @@ const forgotPassword = (  ) => {
         <View style={styles.root}>
             <Text>Forgot Password</Text>
             <CustomInput 
-                placeholder="Username"
+                placeholder="Email"
                 value={username}
                 setValue={setUsername}
             />

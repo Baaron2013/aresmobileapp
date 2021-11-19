@@ -9,10 +9,14 @@ import { Auth } from 'aws-amplify'
 
 const HomeRanger = () => {
 
+
     const navigation = useNavigation(); 
 
     return (
-        <Text>My Home Ranger Page</Text> 
+        <View>
+            <Text>My Home Ranger Page</Text> 
+        </View>
+        
 
     )
 }
