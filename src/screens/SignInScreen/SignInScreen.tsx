@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
+import Logo from '../../../assets/images/ares-login-logo.png'
 
 const SignInScreen = (  ) => {
     const [username, setUsername] = useState('');
@@ -31,7 +32,7 @@ const SignInScreen = (  ) => {
         }).catch(e => {
             console.log(e);
         });
-        await DataStore.start();
+        //await DataStore.start();
     }
 
     const sendAuthCode = () => {
@@ -58,7 +59,7 @@ const SignInScreen = (  ) => {
 
     return (
         <View style={styles.root}>
-            <Text>Sign In Screen</Text>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <CustomInput 
                 placeholder="Email"
                 value={username}
@@ -89,7 +90,7 @@ const SignInScreen = (  ) => {
                 text="Ranger Sign Up"
                 onPress={onSignUpRangerPressed}
                 style={{
-                    backgroundColor: 'coral',
+                    backgroundColor: 'grey',
                     opacity: .5,
 
                 }}
@@ -103,7 +104,7 @@ const SignInScreen = (  ) => {
                 text="Strength Coach Sign Up"
                 onPress={onSignUpCoachPressed}
                 style={{
-                    backgroundColor: 'coral',
+                    backgroundColor: 'grey',
                     opacity: .5,
 
                 }}
@@ -120,6 +121,10 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
+    },
+    logo: {
+        width: '70%',
+        height: 100,
     }
 })
 

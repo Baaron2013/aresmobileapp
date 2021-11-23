@@ -107,14 +107,14 @@ const Profile = () => {
     }
 
     const reset = () => {
-        navigation.navigate("Reset")
+        navigation.navigate("ResetPassword")
     }
 
 
         return (
             
             <View style={styles.root}>
-                <Text>My Account</Text>
+                <Text style={styles.header}>Account Settings</Text>
                 <CustomInput 
                     defaultValue={currentName}
                     //value={newName}
@@ -146,7 +146,7 @@ const Profile = () => {
                     text="Sign Out"
                     onPress={signOut}
                     style={{
-                        backgroundColor: 'coral',
+                        backgroundColor: 'grey',
                     }}
                     styleText={{
                         color: 'white'
@@ -162,6 +162,10 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
+    },
+    header: {
+        fontSize: 20,
+        fontWeight: 'bold',
     }
 })
 

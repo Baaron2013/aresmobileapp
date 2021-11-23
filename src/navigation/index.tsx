@@ -39,7 +39,11 @@ const dbSet = async () => {
 function profileTabs() {
     return (
         <ProfileStack.Navigator>
-            <ProfileStack.Screen name="MainProfile" component={Profile} options={{ title: 'Profile Settings' }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="MainProfile" 
+                component={Profile} 
+                options = {{
+                    header: () => null
+                }}></ProfileStack.Screen>
             <ProfileStack.Screen name="ResetPassword" component={Reset} options={{ title: 'Reset Password' }}></ProfileStack.Screen>
             <ProfileStack.Screen name="ConfirmEmail" 
                 component={ConfirmEmail} 
@@ -132,7 +136,11 @@ const Navigation = () => {
                 {!isLoggedIn ? (
                     <>
                         
-                        <Stack.Screen name="SignIn" component={SignInScreen}></Stack.Screen>    
+                        <Stack.Screen name="SignIn" 
+                            component={SignInScreen}
+                            options = {{
+                                header: () => null
+                            }}></Stack.Screen>    
                         <Stack.Screen name="Forgot" component={ForgotPassword} ></Stack.Screen>
                         <Stack.Screen name="ConfirmForgot" component={ConfirmForgotPassword}></Stack.Screen>
                         <Stack.Screen name="SignUp" component={SignUpScreen} ></Stack.Screen>
