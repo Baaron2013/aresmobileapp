@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
@@ -10,10 +10,7 @@ import Logo from '../../../assets/images/ares-login-logo.png'
 const SignInScreen = (  ) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState('');
-    const [newPassword] = useState('12345678');
 
-    //const type = props.route.params.paramKey;
 
     const navigation = useNavigation();
 
@@ -60,59 +57,45 @@ const SignInScreen = (  ) => {
     return (
         <View style={styles.root}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
+            <View style={styles.banner}>
+            </View>
             <CustomInput 
+                icon="account"
                 placeholder="Email"
                 value={username}
                 setValue={setUsername}
+                
             />
             <CustomInput 
+                icon="lock"
                 placeholder="Password"
                 value={password}
                 setValue={setPassword}
                 secureTextEntry
             />
             <Custombutton 
-                text="Sign In"
+                text="LOG IN"
                 onPress={onSignInPressed}
-            />
-            <Custombutton 
-                text="Forgot Password"
-                onPress={onForgotPressed}
                 style={{
-                    backgroundColor: 'transparent',
+                    marginTop: 100,
+                    marginBottom: 20,
                 }}
                 styleText={{
-                    color: 'black'
+                    fontSize: 20,
 
                 }}
             />
-            <Custombutton 
-                text="Ranger Sign Up"
-                onPress={onSignUpRangerPressed}
-                style={{
-                    backgroundColor: 'grey',
-                    opacity: .5,
+            <Pressable onPress={onForgotPressed}>
+                <Text style={styles.text}>Forgot your password?</Text>
 
-                }}
-                styleText={{
-                    color: 'black'
+            </Pressable> 
+            <Pressable onPress={() => {
+                navigation.navigate('ChooseUser');
+            }}>
+                <Text style={styles.text}>Create a new account</Text>
 
-                }}
-            />
-                        
-            <Custombutton 
-                text="Strength Coach Sign Up"
-                onPress={onSignUpCoachPressed}
-                style={{
-                    backgroundColor: 'grey',
-                    opacity: .5,
+            </Pressable> 
 
-                }}
-                styleText={{
-                    color: 'black'
-
-                }}
-            />
         </View>
     )
 }
@@ -120,11 +103,23 @@ const SignInScreen = (  ) => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        padding: 20,
+        backgroundColor: 'white',
+        flex: 1,
     },
     logo: {
         width: '70%',
         height: 100,
+        marginBottom: 30,
+        marginTop: 20,
+    },
+    banner: {
+        backgroundColor: '#022b3a',
+        width: '100%',
+        height: 20,
+        marginBottom: 70,
+    },
+    text: {
+        color: 'grey',
     }
 })
 

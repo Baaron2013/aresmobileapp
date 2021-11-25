@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,6 +18,7 @@ import Chooseuser from '../screens/ChooseUserType';
 import useUserStatus from '../screens/UserStatus';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DataStore } from '@aws-amplify/datastore'
+import Logo from '../../assets/images/ares-login-logo.png'
 //import { Auth } from 'aws-amplify';
 //import { Hub } from 'aws-amplify';
 //import { isPredicateGroup } from '@aws-amplify/datastore';
@@ -38,13 +39,14 @@ const dbSet = async () => {
 
 function profileTabs() {
     return (
-        <ProfileStack.Navigator>
+        <ProfileStack.Navigator
+        screenOptions={{headerRight: () => <Image source={Logo} style={styles.logo} resizeMode="contain" />}}>
             <ProfileStack.Screen name="MainProfile" 
                 component={Profile} 
                 options = {{
                     header: () => null
                 }}></ProfileStack.Screen>
-            <ProfileStack.Screen name="ResetPassword" component={Reset} options={{ title: 'Reset Password' }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="ResetPassword" component={Reset} options={{ title: '' }}></ProfileStack.Screen>
             <ProfileStack.Screen name="ConfirmEmail" 
                 component={ConfirmEmail} 
                 options={{ 
@@ -60,24 +62,35 @@ function profileTabs() {
 
 function HomeTabsRanger() {
     return (
-        <Tabs.Navigator>
+        <Tabs.Navigator
+            screenOptions={{
+                tabBarActiveTintColor: '#1f7a8c',
+                tabBarLabelStyle: {
+                    fontWeight: 'bold'
+                },
+                tabBarInactiveTintColor: '#d5dcdf',
+                tabBarStyle: {
+                    backgroundColor: '#022b3a', 
+                } 
+            }}>
             <Tabs.Screen 
                 name="HomeRanger" 
                 component={HomeRanger}
                 options={{
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'menu',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="home" color={color} size={size} />
+                      <Icon name="view-grid-outline" color={color} size={size} />
                     ),
+                    header: () => null
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
                 name="ProfileRanger" 
                 component={profileTabs}
                 options={{
-                    tabBarLabel: 'Account',
+                    tabBarLabel: 'profile',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="account-cog" color={color} size={size} />
+                      <Icon name="account-circle" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -92,14 +105,24 @@ function HomeTabsRanger() {
 
 function HomeTabsCoach() {
     return (
-        <Tabs.Navigator>
+        <Tabs.Navigator
+            screenOptions={{
+            tabBarActiveTintColor: '#1f7a8c',
+            tabBarLabelStyle: {
+                fontWeight: 'bold'
+            },
+            tabBarInactiveTintColor: '#d5dcdf',
+            tabBarStyle: {
+                backgroundColor: '#022b3a', 
+            } 
+        }}>
             <Tabs.Screen 
                 name="HomeCoach" 
                 component={HomeCoach}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="home" color={color} size={size} />
+                      <Icon name="view-grid-outline" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -110,7 +133,7 @@ function HomeTabsCoach() {
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="account-cog" color={color} size={size} />
+                      <Icon name="account-circle" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -132,7 +155,8 @@ const Navigation = () => {
 
     return (
          <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator 
+                screenOptions={{headerRight: () => <Image source={Logo} style={styles.logo} resizeMode="contain" />}}>
                 {!isLoggedIn ? (
                     <>
                         
@@ -141,11 +165,12 @@ const Navigation = () => {
                             options = {{
                                 header: () => null
                             }}></Stack.Screen>    
-                        <Stack.Screen name="Forgot" component={ForgotPassword} ></Stack.Screen>
-                        <Stack.Screen name="ConfirmForgot" component={ConfirmForgotPassword}></Stack.Screen>
+                        <Stack.Screen name="Forgot" component={ForgotPassword} options={{ title: '' }}></Stack.Screen>
+                        <Stack.Screen name="ConfirmForgot" component={ConfirmForgotPassword} options={{ header: () => null }}></Stack.Screen>
                         <Stack.Screen name="SignUp" component={SignUpScreen} ></Stack.Screen>
-                        <Stack.Screen name="Confirm" component={ConfirmSignUp}></Stack.Screen>
+                        <Stack.Screen name="Confirm" component={ConfirmSignUp} options={{ header: () => null }}></Stack.Screen>
                         <Stack.Screen name="ConfirmNew" component={ConfirmNewPassword}></Stack.Screen>
+                        <Stack.Screen name="ChooseUser" component={Chooseuser} options={{ title: '' }}></Stack.Screen>
                         
                     </>
                 ) :  (dbSet() && userStatus.attributes.nickname == 'Ranger') ? (
@@ -172,6 +197,15 @@ const styles = StyleSheet.create ({
         marginVertical: 5,
         alignItems: 'center',
         borderRadius: 5,
+    },
+    logo: {
+        width: '80%',
+        height: 100,
+        //marginBottom: 30,
+        //marginTop: 20,
+    },
+    tabColor: {
+        backgroundColor: '#022b3a',
     },
     text: {
         fontWeight: 'bold',

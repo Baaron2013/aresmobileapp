@@ -21,15 +21,18 @@ const forgotPassword = (  ) => {
 
     return (
         <View style={styles.root}>
-            <Text>Forgot Password</Text>
             <CustomInput 
                 placeholder="Email"
                 value={username}
                 setValue={setUsername}
+
             />
             <Custombutton 
                 text="Forgot Password"
                 onPress={onForgotPressed}
+                style= {{
+                    marginTop: 20,
+                }}
             />
         </View>
     )
@@ -39,6 +42,8 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: 'white',
+        flex: 1,
     }
 })
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
+import Logo from '../../../assets/images/ares-login-logo.png'
 //import { Navigate } from 'react-router'
 
 const confirmForgotPassword = (  ) => {
@@ -23,7 +24,7 @@ const confirmForgotPassword = (  ) => {
 
     return (
         <View style={styles.root}>
-            <Text>New Password</Text>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <CustomInput 
                 placeholder="Email"
                 value={username}
@@ -45,6 +46,9 @@ const confirmForgotPassword = (  ) => {
             <Custombutton 
                 text="Confirm New Password"
                 onPress={confirmPressed}
+                style={{
+                    marginTop: 20,
+                }}
                 
             />
         </View>
@@ -55,7 +59,15 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
-    }
+        backgroundColor: 'white',
+        flex: 1,
+    },
+    logo: {
+        width: '70%',
+        height: 100,
+        marginBottom: 30,
+        marginTop: 20,
+    },
 })
 
 

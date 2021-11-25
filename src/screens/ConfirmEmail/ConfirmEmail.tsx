@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { View, Text, StyleSheet, Alert, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
+import Logo from '../../../assets/images/ares-login-logo.png'
 
 const ConfirmSignUp = () => {
     const [username, setUsername] = useState('');
@@ -29,16 +30,19 @@ const ConfirmSignUp = () => {
 
     return (
         <View style={styles.root}>
-            <Text>Confirm New Email</Text>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <CustomInput 
-                placeholder="Code"
+                placeholder="Verification Code"
                 value={code}
                 setValue={setCode}
                 secureTextEntry
             />
             <Custombutton 
-                text="Confirm"
+                text="Confirm New Email"
                 onPress={onConfirmPressed}
+                style={{
+                    marginTop: 20,
+                }}
             />
         </View>
     )
@@ -47,8 +51,15 @@ const ConfirmSignUp = () => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        padding: 20,
-    }
+        backgroundColor: '#bfdbf7',
+        flex: 1,
+    },
+    logo: {
+        width: '70%',
+        height: 70,
+        marginBottom: 30,
+        marginTop: 20,
+    },
 })
 
 export default ConfirmSignUp

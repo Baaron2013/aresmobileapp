@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
+import Logo from '../../../assets/images/ares-login-logo.png'
 
 const ConfirmSignUp = () => {
     const [username, setUsername] = useState('');
@@ -25,14 +26,15 @@ const ConfirmSignUp = () => {
 
     return (
         <View style={styles.root}>
-            <Text>Confirm Sign Up</Text>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
+            <Text style={styles.text}>Confirm Sign Up</Text>
             <CustomInput 
                 placeholder="Email"
                 value={username}
                 setValue={setUsername}
             />
             <CustomInput 
-                placeholder="Code"
+                placeholder="Verification Code"
                 value={code}
                 setValue={setCode}
                 secureTextEntry
@@ -40,6 +42,9 @@ const ConfirmSignUp = () => {
             <Custombutton 
                 text="Confirm"
                 onPress={onConfirmPressed}
+                style={{
+                    marginTop: 20,
+                }}
             />
         </View>
     )
@@ -49,7 +54,19 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
-    }
+        backgroundColor: 'white',
+        flex: 1,
+    },
+    logo: {
+        width: '70%',
+        height: 100,
+        marginBottom: 30,
+        marginTop: 20,
+    },
+    text: {
+        fontSize: 20,
+        marginBottom: 20,
+    },
 })
 
 export default ConfirmSignUp

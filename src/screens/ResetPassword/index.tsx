@@ -53,6 +53,9 @@ const reset = () => {
                 <Custombutton 
                     text="Reset Password"
                     onPress={reset}
+                    style={{
+                        marginTop: 20,
+                    }}
                 />
                 
             </View>
@@ -64,6 +67,8 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: 'white',
+        flex: 1,
     },
     header: {
         fontSize: 20,

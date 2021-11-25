@@ -14,12 +14,12 @@ const Custombutton = ({ onPress, text, style, styleText}) => {
 
 const styles = StyleSheet.create ({
     container: {
-        width: '100%',
-        padding: 15,
+        width: '70%',
+        padding: 10,
         marginVertical: 5,
         alignItems: 'center',
-        borderRadius: 5,
-        backgroundColor: 'blue',
+        //borderRadius: 5,
+        backgroundColor: '#1f7a8c',
 
         
     },

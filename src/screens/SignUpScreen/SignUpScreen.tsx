@@ -57,7 +57,6 @@ const SignUpScreen = ( props ) => {
 
     return (
         <View style={styles.root}>
-            <Text>Sign Up Screen</Text>
             <CustomInput 
                 placeholder="Name"
                 value={name}
@@ -77,6 +76,9 @@ const SignUpScreen = ( props ) => {
             <Custombutton 
                 text="Sign Up"
                 onPress={onSignUpPressed}
+                style={{
+                    marginTop: 20,
+                }}
             />
         </View>
     )
@@ -86,6 +88,8 @@ const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
         padding: 20,
+        backgroundColor: 'white',
+        flex: 1,
     }
 })
 

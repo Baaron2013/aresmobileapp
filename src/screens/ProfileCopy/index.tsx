@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, Alert } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Pressable, Alert, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { User as UserModel } from "../../models"
+import Logo from '../../../assets/images/ares-login-logo.png'
 
 
 
@@ -114,6 +115,7 @@ const Profile = () => {
         return (
             
             <View style={styles.root}>
+                <Image source={Logo} style={styles.logo} resizeMode="contain" />
                 <Text style={styles.header}>Account Settings</Text>
                 <CustomInput 
                     defaultValue={currentName}
@@ -130,6 +132,9 @@ const Profile = () => {
                 <Custombutton 
                     text="Save Changes"
                     onPress={onPressSave}
+                    style={{
+                        marginTop: 20
+                    }}
                 />
                 <Custombutton 
                     text="Reset Password"
@@ -161,12 +166,26 @@ const Profile = () => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        padding: 20,
+        backgroundColor: 'white',
+        flex: 1,
     },
     header: {
         fontSize: 20,
         fontWeight: 'bold',
-    }
+        marginBottom: 20,
+    },
+    logo: {
+        width: '70%',
+        height: 70,
+        marginBottom: 30,
+        marginTop: 20,
+    },
+    banner: {
+        backgroundColor: '#022b3a',
+        width: '100%',
+        height: 20,
+        marginBottom: 70,
+    },
 })
 
 export default Profile
