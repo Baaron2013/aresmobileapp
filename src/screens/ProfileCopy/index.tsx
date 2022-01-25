@@ -7,6 +7,8 @@ import { Auth } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { User as UserModel } from "../../models"
 import Logo from '../../../assets/images/ares-login-logo.png'
+import { DrawerActions } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 
@@ -185,6 +187,10 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 20,
         marginBottom: 70,
+    },
+    backButton: {
+        marginRight: 350,
+        marginTop: 10,
     },
 })
 

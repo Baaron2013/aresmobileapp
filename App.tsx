@@ -5,6 +5,9 @@ import { StyleSheet, Text, View, SafeAreaView, Platform, InteractionManager } fr
 import Amplify from "aws-amplify";
 import config from "./src/aws-exports";
 //import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-content";
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry} from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 Amplify.configure(config);
 
 
@@ -54,13 +57,17 @@ if (Platform.OS === 'android') {
 
 const App = () => {
   return (
-      <SafeAreaView style={styles.root}>
-        
-        <StatusBar />
-        <Navigation /> 
-        {/*<Text>Hello World!! Yes!</Text>*/}
-        
-      </SafeAreaView>
+    <>
+    <IconRegistry icons={EvaIconsPack} />
+    <ApplicationProvider {...eva} theme={eva.light}>
+          <SafeAreaView style={styles.root}>
+
+              <StatusBar />
+              <Navigation />
+              {/*<Text>Hello World!! Yes!</Text>*/}
+
+          </SafeAreaView>
+      </ApplicationProvider></>
       )
 }
     

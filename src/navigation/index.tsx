@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Pressable, Image, SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,6 +7,7 @@ import SignInScreen from '../screens/SignInScreen';
 import HomeRanger from '../screens/HomeRanger';
 import HomeCoach from '../screens/HomeCoach';
 import Profile from '../screens/ProfileCopy';
+import Nutrition from '../screens/Nutrition';
 import Reset from '../screens/ResetPassword';
 import SignUpScreen from '../screens/SignUpScreen';
 import ForgotPassword from '../screens/ForgotPassword';
@@ -16,9 +17,23 @@ import ConfirmForgotPassword from '../screens/ConfirmForgotPassword';
 import ConfirmSignUp from '../screens/ConfirmSignUp';
 import Chooseuser from '../screens/ChooseUserType';
 import useUserStatus from '../screens/UserStatus';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DataStore } from '@aws-amplify/datastore'
 import Logo from '../../assets/images/ares-login-logo.png'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+    Drawer,
+    DrawerItem,
+    DrawerGroup,
+    IndexPath, } from '@ui-kitten/components';
+  import {
+    HomeIcon,
+    SearchIcon,
+    PlusIcon
+  } from '../../assets/icons.js';
+  import { Icon } from "@ui-kitten/components"; 
+  
+
 //import { Auth } from 'aws-amplify';
 //import { Hub } from 'aws-amplify';
 //import { isPredicateGroup } from '@aws-amplify/datastore';
@@ -29,12 +44,52 @@ const HomeStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
+//const Drawer = createDrawerNavigator();
+
 //const [user, setUser] = useState('');
 
 const dbSet = async () => {
     await DataStore.start();
     return dbSet;
 }
+
+
+const { Navigator, Screen } = createDrawerNavigator();
+
+   
+const DrawerContent = () => {
+    const [selectedIndex, setSelectedIndex] = React.useState(null);
+    return (
+    <Drawer
+      selectedIndex={selectedIndex}
+      onSelect={index => setSelectedIndex(index)}>
+        <DrawerItem title = "Home" />
+        <DrawerGroup title='Nutrition' accessoryRight={PlusIcon}/>
+            <DrawerItem title = 'Sample 1'/>
+            <DrawerItem title = 'Sample 2'/>
+        <DrawerGroup title='Combat Conditioning' accessoryRight={PlusIcon}/>
+            <DrawerItem title = "Sample 4"/>
+            <DrawerItem title = "Sample 5"/>
+
+    </Drawer>
+    )
+}
+
+const drawerNavigationCoach = () => (
+    <Navigator drawerContent={props => <DrawerContent {...props}/>}>
+      <Screen name="Home" component={HomeTabsCoach} 
+                options={{ 
+                    headerTitle: () => null,
+                    drawerIcon: ({color, size}) => (
+                        <RNIcon
+                           name="home" size={size} color={color}
+                        />),
+                    drawerLabel: () => null
+                }}/>
+      <Screen name="Nutrition" component={Nutrition}/>
+
+    </Navigator>
+  );
 
 
 function profileTabs() {
@@ -73,13 +128,14 @@ function HomeTabsRanger() {
                     backgroundColor: '#022b3a', 
                 } 
             }}>
+
             <Tabs.Screen 
                 name="HomeRanger" 
                 component={HomeRanger}
                 options={{
                     tabBarLabel: 'menu',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="view-grid-outline" color={color} size={size} />
+                      <RNIcon name="view-grid-outline" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -90,7 +146,7 @@ function HomeTabsRanger() {
                 options={{
                     tabBarLabel: 'profile',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="account-circle" color={color} size={size} />
+                      <RNIcon name="account-circle" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -122,7 +178,7 @@ function HomeTabsCoach() {
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="view-grid-outline" color={color} size={size} />
+                      <RNIcon name="view-grid-outline" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -133,7 +189,7 @@ function HomeTabsCoach() {
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
-                      <Icon name="account-circle" color={color} size={size} />
+                      <RNIcon name="account-circle" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -175,12 +231,12 @@ const Navigation = () => {
                     </>
                 ) :  (dbSet() && userStatus.attributes.nickname == 'Ranger') ? (
                     <>
-                        <Stack.Screen name="MainHomeRanger" component={HomeTabsRanger} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="MainHomeRanger" component={HomeTabsCoach} options={{header: () => false}}></Stack.Screen>
                         
                     </>
                 ) : (dbSet() && userStatus.attributes.nickname == 'Coach') ? (
                     <>
-                        <Stack.Screen name="MainHomeCoach" component={HomeTabsCoach} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="MainHomeCoach" component={drawerNavigationCoach} options={{header: () => false}}></Stack.Screen>
                         
                     </>
                 ) : null}
@@ -214,5 +270,6 @@ const styles = StyleSheet.create ({
     }
 
 })
+
 
 export default Navigation

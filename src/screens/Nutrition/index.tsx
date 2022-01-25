@@ -5,18 +5,25 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
+import { DrawerActions } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
-const HomeCoach = () => {
+{/* name of function - edited */}
+const nutrition = () => {
 
 
     const navigation = useNavigation(); 
 
     return (
         <View style={styles.root}>
-            <Image source={Logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.banner}></View>
-            <Text>My Home Coach Page</Text> 
+            {/* inserts header label - edited*/}
+            <View style={styles.backButton}>
+                <Pressable  onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+                    <Icon name="arrow-left" size = {27}/>
+                </Pressable> 
+            </View>
+            {/* body of page - edited */}
+            <Text>Philosophy Page</Text> 
         </View>
     )
 }
@@ -31,7 +38,7 @@ const styles = StyleSheet.create({
         width: '70%',
         height: 70,
         marginBottom: 30,
-        marginTop: -10,
+        marginTop: 20,
     },
     banner: {
         backgroundColor: '#022b3a',
@@ -39,7 +46,11 @@ const styles = StyleSheet.create({
         height: 20,
         marginBottom: 70,
     },
+    backButton: {
+        marginRight: 350,
+        marginTop: 10,
+    },
 })
 
-
-export default HomeCoach
+{/* name of function - edited */}
+export default nutrition
