@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
 import HomeRanger from '../screens/HomeRanger';
 import HomeCoach from '../screens/HomeCoach';
+import Plans from '../screens/Plans';
+import Messages from '../screens/Messages';
 import Profile from '../screens/ProfileCopy';
 import Nutrition from '../screens/Nutrition';
 import Reset from '../screens/ResetPassword';
@@ -91,6 +93,22 @@ const drawerNavigationCoach = () => (
     </Navigator>
   );
 
+  const drawerNavigationRanger = () => (
+    <Navigator drawerContent={props => <DrawerContent {...props}/>}>
+      <Screen name="Home" component={HomeTabsRanger} 
+                options={{ 
+                    headerTitle: () => null,
+                    drawerIcon: ({color, size}) => (
+                        <RNIcon
+                           name="home" size={size} color={color}
+                        />),
+                    drawerLabel: () => null
+                }}/>
+      <Screen name="Nutrition" component={Nutrition}/>
+
+    </Navigator>
+  );
+
 
 function profileTabs() {
     return (
@@ -133,9 +151,31 @@ function HomeTabsRanger() {
                 name="HomeRanger" 
                 component={HomeRanger}
                 options={{
-                    tabBarLabel: 'menu',
+                    tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="view-grid-outline" color={color} size={size} />
+                    ),
+                    header: () => null
+                  }}
+            ></Tabs.Screen>
+            <Tabs.Screen 
+                name="Plans" 
+                component={Plans}
+                options={{
+                    tabBarLabel: 'Plans',
+                    tabBarIcon: ({ color, size }) => (
+                      <RNIcon name="dumbbell" color={color} size={size} />
+                    ),
+                    header: () => null
+                  }}
+            ></Tabs.Screen>
+            <Tabs.Screen 
+                name="Messages" 
+                component={Messages}
+                options={{
+                    tabBarLabel: 'Messages',
+                    tabBarIcon: ({ color, size }) => (
+                      <RNIcon name="message" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -144,7 +184,7 @@ function HomeTabsRanger() {
                 name="ProfileRanger" 
                 component={profileTabs}
                 options={{
-                    tabBarLabel: 'profile',
+                    tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="account-circle" color={color} size={size} />
                     ),
@@ -179,6 +219,28 @@ function HomeTabsCoach() {
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="view-grid-outline" color={color} size={size} />
+                    ),
+                    header: () => null
+                  }}
+            ></Tabs.Screen>
+            <Tabs.Screen 
+                name="Plans" 
+                component={Plans}
+                options={{
+                    tabBarLabel: 'Plans',
+                    tabBarIcon: ({ color, size }) => (
+                      <RNIcon name="dumbbell" color={color} size={size} />
+                    ),
+                    header: () => null
+                  }}
+            ></Tabs.Screen>
+            <Tabs.Screen 
+                name="Messages" 
+                component={Messages}
+                options={{
+                    tabBarLabel: 'Messages',
+                    tabBarIcon: ({ color, size }) => (
+                      <RNIcon name="message" color={color} size={size} />
                     ),
                     header: () => null
                   }}
@@ -231,7 +293,7 @@ const Navigation = () => {
                     </>
                 ) :  (dbSet() && userStatus.attributes.nickname == 'Ranger') ? (
                     <>
-                        <Stack.Screen name="MainHomeRanger" component={HomeTabsCoach} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="MainHomeRanger" component={drawerNavigationRanger} options={{header: () => false}}></Stack.Screen>
                         
                     </>
                 ) : (dbSet() && userStatus.attributes.nickname == 'Coach') ? (
