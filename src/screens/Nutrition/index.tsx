@@ -18,9 +18,6 @@ const nutrition = () => {
         <View style={styles.root}>
             {/* inserts header label - edited*/}
             <View style={styles.backButton}>
-                <Pressable  onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                    <Icon name="arrow-left" size = {27}/>
-                </Pressable> 
             </View>
             {/* body of page - edited */}
             <Text>Nutrition Page</Text> 
