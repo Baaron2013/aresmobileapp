@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
 import HomeRanger from '../screens/HomeRanger';
-import HomeCoach from '../screens/HomeCoach';
+import HomeCoachNavigation from '../screens/HomeCoach/HomeNavigation';
 import Plans from '../screens/Plans';
 import Messages from '../screens/Messages';
 import Profile from '../screens/ProfileCopy';
@@ -214,7 +214,7 @@ function HomeTabsCoach() {
         }}>
             <Tabs.Screen 
                 name="HomeCoach" 
-                component={HomeCoach}
+                component={HomeCoachNavigation}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (

@@ -23,7 +23,7 @@ const nutrition = () => {
                 </Pressable> 
             </View>
             {/* body of page - edited */}
-            <Text>Philosophy Page</Text> 
+            <Text>Nutrition Page</Text> 
         </View>
     )
 }

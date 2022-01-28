@@ -10,8 +10,7 @@ const HomeCoach = () => {
 
     const navigation = useNavigation();
     const buttonClickedHandler = () => {
-        console.log('You clciked a button');
-        // do something
+        navigation.navigate('Philosophy');
     }; 
 
     return (
