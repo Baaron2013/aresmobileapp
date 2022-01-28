@@ -5,7 +5,7 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
-
+import PopUpModule from '../PopUp/PopUp'
 
 const HomeRanger = () => {
 
@@ -17,6 +17,8 @@ const HomeRanger = () => {
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.banner}></View>
             <Text>My Home Ranger Page</Text> 
+            
+            <PopUpModule/>
         </View>
     )
 }

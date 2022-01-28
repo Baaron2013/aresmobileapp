@@ -1,14 +1,16 @@
 {
+  "version": "1",
+  "cognitoConfig": {
     "identityPoolName": "aresmobileapp05b2c0a5_identitypool_05b2c0a5",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "aresmo05b2c0a5",
     "userPoolName": "aresmobileapp05b2c0a5_userpool_05b2c0a5",
     "autoVerifiedAttributes": [
-        "email"
+      "email"
     ],
     "mfaConfiguration": "OFF",
     "mfaTypes": [
-        "SMS Text Message"
+      "SMS Text Message"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -18,60 +20,66 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+      "email"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-        "email"
+      "email"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+      "email"
     ],
     "userpoolClientLambdaRole": "aresmo05b2c0a5_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "05b2c0a5",
-    "resourceName": "aresmobileapp05b2c0a5",
     "authSelections": "identityPoolAndUserPool",
+    "resourceName": "aresmobileapp05b2c0a5",
+    "serviceName": "Cognito",
+    "useDefault": "manual",
+    "sharedId": "05b2c0a5",
+    "userPoolGroupList": [],
+    "userPoolGroups": false,
+    "usernameAttributes": [
+      "email"
+    ],
+    "adminQueries": false,
+    "hostedUI": false,
+    "thirdPartyAuth": false,
+    "authProviders": [],
+    "triggers": {
+      "PostConfirmation": [
+        "custom"
+      ]
+    },
     "authRoleArn": {
-        "Fn::GetAtt": [
-            "AuthRole",
-            "Arn"
-        ]
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
     },
     "unauthRoleArn": {
-        "Fn::GetAtt": [
-            "UnauthRole",
-            "Arn"
-        ]
-    },
-    "useDefault": "manual",
-    "usernameAttributes": [
-        "email"
-    ],
-    "userPoolGroupList": [],
-    "serviceName": "Cognito",
-    "dependsOn": [
-        {
-            "category": "function",
-            "resourceName": "aresmobileapp05b2c0a5PostConfirmation",
-            "triggerProvider": "Cognito",
-            "attributes": [
-                "Arn",
-                "Name"
-            ]
-        }
-    ],
-    "thirdPartyAuth": false,
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
-    "hostedUI": false,
-    "parentStack": {
-        "Ref": "AWS::StackId"
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
     },
     "breakCircularDependency": false,
+    "useEnabledMfas": false,
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "aresmobileapp05b2c0a5PostConfirmation",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
     "permissions": [],
-    "authProviders": []
+    "authTriggerConnections": [
+      "{\"triggerType\":\"PostConfirmation\",\"lambdaFunctionName\":\"aresmobileapp05b2c0a5PostConfirmation\"}"
+    ]
+  }
 }

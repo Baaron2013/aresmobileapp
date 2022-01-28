@@ -13,7 +13,8 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
-            "AppClientID": "string"
+            "AppClientID": "string",
+            "CreatedSNSRole": "string"
         }
     },
     "function": {
@@ -21,6 +22,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Name": "string",
             "Arn": "string",
             "LambdaExecutionRole": "string",
+            "Region": "string"
+        }
+    },
+    "storage": {
+        "s3aresmobileappfilestorage": {
+            "BucketName": "string",
             "Region": "string"
         }
     }
