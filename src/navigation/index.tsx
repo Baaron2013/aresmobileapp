@@ -65,7 +65,6 @@ const DrawerContent = () => {
     <Drawer
       selectedIndex={selectedIndex}
       onSelect={index => setSelectedIndex(index)}>
-        <DrawerItem title = "Home" />
         <DrawerGroup title='Nutrition' accessoryRight={PlusIcon}/>
             <DrawerItem title = 'Sample 1'/>
             <DrawerItem title = 'Sample 2'/>
