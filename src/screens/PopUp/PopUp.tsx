@@ -40,8 +40,6 @@ export default function PopUpModule({ }) {
               <CustomInput2 value={bodyWeight} setValue={setBodyWeight} />
           </View>
 
-
-
           <View style={styles.row}>
             <View style={styles.fieldName}>
             <Text style={styles.textStyle}>
@@ -75,7 +73,6 @@ export default function PopUpModule({ }) {
               <Text style={styles.spacingIcons}>  8+ </Text>
             </View>
           </View>
-
 
           <View style={styles.row}>
             <View style={styles.fieldName}>
@@ -137,7 +134,6 @@ export default function PopUpModule({ }) {
             </View>
           </View>
 
-
           <View>
             <View style={styles.row}>
               <Text style={styles.spacingMetrics}>  Poor</Text>
@@ -145,7 +141,6 @@ export default function PopUpModule({ }) {
               <Text style={styles.spacingMetrics}>  Good</Text>
             </View>
           </View>
-
 
           <View style={styles.row}>
             <View style={styles.fieldName}>
@@ -213,8 +208,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    
+    justifyContent: 'center',  
   },
   title: {
     fontSize: 20,
