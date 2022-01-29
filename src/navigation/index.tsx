@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
 import HomeRanger from '../screens/HomeRanger';
-import HomeCoach from '../screens/HomeCoach';
+import HomeCoachNavigation from '../screens/HomeCoach/HomeNavigation';
 import Plans from '../screens/Plans';
 import Messages from '../screens/Messages';
 import Profile from '../screens/ProfileCopy';
@@ -65,7 +65,6 @@ const DrawerContent = () => {
     <Drawer
       selectedIndex={selectedIndex}
       onSelect={index => setSelectedIndex(index)}>
-        <DrawerItem title = "Home" />
         <DrawerGroup title='Nutrition' accessoryRight={PlusIcon}/>
             <DrawerItem title = 'Sample 1'/>
             <DrawerItem title = 'Sample 2'/>
@@ -214,7 +213,7 @@ function HomeTabsCoach() {
         }}>
             <Tabs.Screen 
                 name="HomeCoach" 
-                component={HomeCoach}
+                component={HomeCoachNavigation}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (

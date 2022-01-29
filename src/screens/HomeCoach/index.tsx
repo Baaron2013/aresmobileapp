@@ -9,11 +9,9 @@ const HomeCoach = () => {
 
 
     const navigation = useNavigation();
-    const buttonClickedHandler = () => {
-        console.log('You clciked a button');
-        // do something
+    const buttonClickedHandler = ({screenName}) => {
+        navigation.navigate('{screenName}');
     }; 
-
     return (
         <View style={styles.root}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
@@ -22,7 +20,7 @@ const HomeCoach = () => {
             <View style={styles.line1}>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Philosophy')}}
                     style={styles.button1}>
                     <Text>Philosophy</Text>
                 </TouchableOpacity>
@@ -67,7 +65,7 @@ const HomeCoach = () => {
 
             <View style={styles.line4}>
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Nutrition')}}
                     style={styles.button2}>
                     <Text>Nutrition</Text>
                 </TouchableOpacity>
