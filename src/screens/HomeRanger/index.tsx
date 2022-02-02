@@ -1,21 +1,17 @@
 import React from 'react'
-import { View, TouchableOpacity, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native'
-import CustomInput from '../../component/CustomInput'
-import Custombutton from '../../component/CustomButton/Custombutton'
+import { View, TouchableOpacity,Text, StyleSheet, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { Auth } from 'aws-amplify'
+import { Auth, formRow } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
-import PopUpModule from '../PopUp/PopUp'
+
 
 const HomeRanger = () => {
 
 
     const navigation = useNavigation();
-    const buttonClickedHandler = () => {
-        console.log('You clciked a button');
-        // do something
+    const buttonClickedHandler = ({screenName}) => {
+        navigation.navigate('{screenName}');
     }; 
-
     return (
         <View style={styles.root}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
@@ -24,28 +20,28 @@ const HomeRanger = () => {
             <View style={styles.line1}>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Philosophy')}}
                     style={styles.button1}>
                     <Text>Philosophy</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('InjuryPrevention')}}
                     style={styles.button2}>
-                    <Text>Injury Prevention </Text>
+                    <Text>Injury Prevention</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.line2}>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Core')}}
                     style={styles.button2}>
                     <Text>Core</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Techniques')}}
                     style={styles.button1}>
                     <Text>Techniques</Text>
                 </TouchableOpacity>
@@ -54,13 +50,13 @@ const HomeRanger = () => {
 
             <View style={styles.line3}>
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Programs')}}
                     style={styles.button1}>
                     <Text>Programs</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('CombatConditioning')}}
                     style={styles.button2}>
                     <Text>Combat Conditioning</Text>
                 </TouchableOpacity>
@@ -69,25 +65,25 @@ const HomeRanger = () => {
 
             <View style={styles.line4}>
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Nutrition')}}
                     style={styles.button2}>
                     <Text>Nutrition</Text>
                 </TouchableOpacity>
 
                 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Brain')}}
                     style={styles.button1}>
                     <Text>Brain</Text>
                 </TouchableOpacity>
 
             </View>
             <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Combatives')}}
                     style={styles.button3}>
                     <Text>Combatives</Text>
             </TouchableOpacity>
-        <PopUpModule/>
+
         </View>
     )
 }

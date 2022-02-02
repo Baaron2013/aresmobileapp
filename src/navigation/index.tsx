@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
-import HomeRanger from '../screens/HomeRanger';
+import HomeRangerNavigation from '../screens/HomeRanger/HomeRNavigation';
 import HomeCoachNavigation from '../screens/HomeCoach/HomeNavigation';
 import Plans from '../screens/Plans';
 import Messages from '../screens/Messages';
@@ -148,7 +148,7 @@ function HomeTabsRanger() {
 
             <Tabs.Screen 
                 name="HomeRanger" 
-                component={HomeRanger}
+                component={HomeRangerNavigation}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (

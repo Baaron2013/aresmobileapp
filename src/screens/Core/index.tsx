@@ -5,18 +5,23 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
+import { DrawerActions } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
-const plans = () => {
+{/* name of function - edited */}
+const core = () => {
 
 
     const navigation = useNavigation(); 
 
     return (
         <View style={styles.root}>
-            <Image source={Logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.banner}></View>
-            <Text>My Plans Page</Text> 
+            {/* inserts header label - edited*/}
+            <View style={styles.backButton}>
+                
+            </View>
+            {/* body of page - edited */}
+            <Text>Core Page</Text> 
         </View>
     )
 }
@@ -39,7 +44,11 @@ const styles = StyleSheet.create({
         height: 20,
         marginBottom: 70,
     },
+    backButton: {
+        marginRight: 350,
+        marginTop: 10,
+    },
 })
 
-
-export default plans
+{/* name of function - edited */}
+export default core

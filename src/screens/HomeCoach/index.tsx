@@ -26,22 +26,22 @@ const HomeCoach = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('InjuryPrevention')}}
                     style={styles.button2}>
-                    <Text>Injury Prevention </Text>
+                    <Text>Injury Prevention</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.line2}>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Core')}}
                     style={styles.button2}>
                     <Text>Core</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Techniques')}}
                     style={styles.button1}>
                     <Text>Techniques</Text>
                 </TouchableOpacity>
@@ -50,13 +50,13 @@ const HomeCoach = () => {
 
             <View style={styles.line3}>
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Programs')}}
                     style={styles.button1}>
                     <Text>Programs</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('CombatConditioning')}}
                     style={styles.button2}>
                     <Text>Combat Conditioning</Text>
                 </TouchableOpacity>
@@ -72,14 +72,14 @@ const HomeCoach = () => {
 
                 
                 <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Brain')}}
                     style={styles.button1}>
                     <Text>Brain</Text>
                 </TouchableOpacity>
 
             </View>
             <TouchableOpacity
-                    onPress={buttonClickedHandler}
+                    onPress={() => {navigation.navigate('Combatives')}}
                     style={styles.button3}>
                     <Text>Combatives</Text>
             </TouchableOpacity>

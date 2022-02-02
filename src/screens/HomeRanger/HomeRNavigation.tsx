@@ -16,7 +16,7 @@ import Combatives from '../Combatives'
 
 const homeStack = createNativeStackNavigator();
 
-function homeNavigation() {
+function homeRNavigation() {
     return (
         <homeStack.Navigator>
             <homeStack.Screen name="Home" 
@@ -59,4 +59,4 @@ function homeNavigation() {
 
 }
 
-export default homeNavigation
+export default homeRNavigation

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         width: '70%',
         height: 70,
         marginBottom: 30,
-        marginTop: -10,
+        marginTop: 20,
     },
     banner: {
         backgroundColor: '#022b3a',
