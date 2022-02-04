@@ -1,25 +1,85 @@
-import React from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native'
+/* import React from 'react' */
+import * as React from 'react';
+
+import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList} from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
+import ChatRoomItem from '../../component/ChatRoomItem';
+import { SearchBar } from 'react-native-elements';
+import { ApplicationProvider,  Avatar, Input } from '@ui-kitten/components'
 
 
+
+
+import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
+/* import Logo from '../../../assets/images/ares-login-logo.png' */
+
+const chatRoom0 = chatRoomsData[0];
+const chatRoom1 = chatRoomsData[1];
+const chatRoom2 = chatRoomsData[2];
+const chatRoom3 = chatRoomsData[3];
+const chatRoom4 = chatRoomsData[4];
+
+//type SearchBarComponentProps = {};
+
+
+/* const renderHeader = () => {
+  return (
+    <SearchBar
+      placeholder="Type Here..."
+      lightTheme
+      round
+      //onChangeText={this.handleSearch}
+      //value={this.state.query}
+    />
+  );
+}; */
 const messages = () => {
 
 
     const navigation = useNavigation(); 
 
+    
     return (
-        <View style={styles.root}>
-            <Image source={Logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.banner}></View>
-            <Text>My Messages Page</Text> 
-        </View>
+        <View style={styles.page}> 
+        <FlatList
+            ListHeaderComponent={renderHeader}
+            data={chatRoomsData}
+            renderItem={({item}) => <ChatRoomItem chatRoom={item} />}
+        />
+    </View>
     )
 }
+
+function renderHeader() {
+    return (
+      <View
+        style={{
+          backgroundColor: '#fff',
+          padding: 8,
+          marginVertical: 10,
+          borderRadius: 19,
+          borderStyle: 'solid',
+          borderColor: 'black',
+          borderWidth: 2
+        }}
+      >
+        <TextInput
+          autoCapitalize="none"
+          autoCorrect={false}
+          clearButtonMode="always"
+          value={"Search..."}
+          //onChangeText={queryText => handleSearch(queryText)}
+          placeholder="Search"
+          style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+        />
+      </View>
+    );
+  }
+
 
 const styles = StyleSheet.create({
     root: {
@@ -39,6 +99,10 @@ const styles = StyleSheet.create({
         height: 20,
         marginBottom: 70,
     },
+    page: {
+        backgroundColor: 'white',
+        flex: 1
+    }
 })
 
 

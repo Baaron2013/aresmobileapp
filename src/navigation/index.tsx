@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, Image, SafeAreaView } from 'react-native'
+import { ColorSchemeName, View, Text, TextInput, StyleSheet, Pressable, Image, SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,7 +7,8 @@ import SignInScreen from '../screens/SignInScreen';
 import HomeRangerNavigation from '../screens/HomeRanger/HomeRNavigation';
 import HomeCoachNavigation from '../screens/HomeCoach/HomeNavigation';
 import Plans from '../screens/Plans';
-import Messages from '../screens/Messages';
+//import Messages from '../screens/Messages';
+import Messages from '../navigation/MessagingNavigation';
 import Profile from '../screens/ProfileCopy';
 import Nutrition from '../screens/Nutrition';
 import Reset from '../screens/ResetPassword';
@@ -23,6 +24,16 @@ import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DataStore } from '@aws-amplify/datastore'
 import Logo from '../../assets/images/ares-login-logo.png'
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import ChatRoomScreen from '../screens/ChatRoomScreen';
+
+import {
+    DefaultTheme,
+    DarkTheme,
+    useNavigation
+} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
+import LinkingConfiguration from "./LinkingConfiguration";
+
 import {
     Drawer,
     DrawerItem,
@@ -34,6 +45,7 @@ import {
     PlusIcon
   } from '../../assets/icons.js';
   import { Icon } from "@ui-kitten/components"; 
+import messages from '../screens/Messages';
   
 
 //import { Auth } from 'aws-amplify';
@@ -211,7 +223,7 @@ function HomeTabsCoach() {
                 backgroundColor: '#022b3a', 
             } 
         }}>
-            <Tabs.Screen 
+            <Tabs.Screen  
                 name="HomeCoach" 
                 component={HomeCoachNavigation}
                 options={{
