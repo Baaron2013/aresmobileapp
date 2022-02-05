@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Auth, formRow } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { DrawerActions } from '@react-navigation/native'
 
 const HomeRanger = () => {
 
@@ -14,7 +14,11 @@ const HomeRanger = () => {
         navigation.navigate('{screenName}');
     }; 
     return (
-
+        <><View><Pressable style={styles.icon}
+        onPress={( ) => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>    
+        </View>
         <View style={styles.root}>
 
 
@@ -89,7 +93,7 @@ const HomeRanger = () => {
                     <Text>Combatives</Text>
                 </TouchableOpacity>
 
-            </View>
+            </View></>
     )
 }
 
@@ -99,6 +103,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         backgroundColor: 'white',
         flex: 1,
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10
     },
     logo: {
         width: '70%',
