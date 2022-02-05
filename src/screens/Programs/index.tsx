@@ -25,7 +25,7 @@ const programs = () => {
             <Text>Search for Programs</Text>
             <View style={styles.calcView}>
                 <Text style={styles.calcText}> ENTER YOUR WEIGHTS FOR THE CORE EXERCISES</Text> 
-            
+                <View style={styles.inputFields}>
                 <TextInput style={styles.input}
                     underlineColorAndroid = "transparent"
                     placeholder = "Clean"
@@ -43,7 +43,7 @@ const programs = () => {
                     placeholder = "Squat"
                     placeholderTextColor = 'gray'
                     autoCapitalize = "none"/>
-                
+                </View>  
             </View>
             
         </View>
@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
         height: 70,
         marginBottom: 20,
         marginTop: 20,
+    },
+    inputFields: {
+        flex: 1, 
+        flexDirection: "row"
     },
     banner: {
         backgroundColor: '#022b3a',

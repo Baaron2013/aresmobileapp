@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "aresmobileapp05b2c0a5_identitypool_05b2c0a5",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "aresmo05b2c0a5",
     "userPoolName": "aresmobileapp05b2c0a5_userpool_05b2c0a5",
     "autoVerifiedAttributes": [
@@ -80,6 +80,9 @@
     "permissions": [],
     "authTriggerConnections": [
       "{\"triggerType\":\"PostConfirmation\",\"lambdaFunctionName\":\"aresmobileapp05b2c0a5PostConfirmation\"}"
-    ]
+    ],
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    }
   }
 }

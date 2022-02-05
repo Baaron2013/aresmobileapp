@@ -2,10 +2,5 @@
   "AppSyncApiName": "aresmobileapp",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthCognitoUserPoolId": {
-    "Fn::GetAtt": [
-      "autharesmobileapp05b2c0a5",
-      "Outputs.UserPoolId"
-    ]
-  }
+  "AuthModeLastUpdated": "2022-01-30T05:40:04.638Z"
 }

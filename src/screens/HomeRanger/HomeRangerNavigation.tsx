@@ -7,7 +7,7 @@ import Core from '../Core'
 import Techniques from '../Techniques'
 import Programs from '../Programs'
 import Nutrition from '../Nutrition'
-import HomeCoach from '../HomeCoach'
+import HomeRanger from '../HomeRanger'
 import CombatConditioning from '../CombatConditioning'
 import Brain from '../Brain'
 import Combatives from '../Combatives'
@@ -22,7 +22,7 @@ const HomeRangerNavigation = () => {
     return (
          <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name = "HomeCoach" component={HomeCoach} ></Stack.Screen>
+                <Stack.Screen name = "HomeCoach" component={HomeRanger} ></Stack.Screen>
             
                 <Stack.Screen name="Philosophy" component={Philosophy}></Stack.Screen>
                 <Stack.Screen name="Injury Prevention" component={InjuryPrevention} options={{ title: '' }}></Stack.Screen> 

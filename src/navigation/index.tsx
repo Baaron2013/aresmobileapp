@@ -93,10 +93,6 @@ const drawerNavigationCoach = () => (
       <Screen name="Home" component={HomeTabsCoach} 
                 options={{ 
                     headerTitle: () => null,
-                    drawerIcon: ({color, size}) => (
-                        <RNIcon
-                           name="home" size={size} color={color}
-                        />),
                     drawerLabel: () => null
                 }}/>
       <Screen name="Nutrition" component={Nutrition}/>
@@ -105,7 +101,10 @@ const drawerNavigationCoach = () => (
   );
 
   const drawerNavigationRanger = () => (
-    <Navigator drawerContent={props => <DrawerContent {...props}/>}>
+    <Navigator drawerContent={props => <DrawerContent {...props}/>}
+    screenOptions={{header: () => null
+
+    }}>
       <Screen name="Home" component={HomeTabsRanger} 
                 options={{ 
                     headerTitle: () => null,
@@ -166,7 +165,8 @@ function HomeTabsRanger() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="view-grid-outline" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
@@ -177,7 +177,8 @@ function HomeTabsRanger() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="dumbbell" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
@@ -188,7 +189,8 @@ function HomeTabsRanger() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="message" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
@@ -199,7 +201,8 @@ function HomeTabsRanger() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="account-circle" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
                   }}
             ></Tabs.Screen>
         </Tabs.Navigator>
@@ -231,7 +234,8 @@ function HomeTabsCoach() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="view-grid-outline" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
@@ -242,7 +246,9 @@ function HomeTabsCoach() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="dumbbell" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
+                    
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
@@ -253,7 +259,8 @@ function HomeTabsCoach() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="message" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
@@ -264,7 +271,8 @@ function HomeTabsCoach() {
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="account-circle" color={color} size={size} />
                     ),
-                    header: () => null
+                    header: () => null,
+                    tabBarLabelStyle: {paddingBottom: 5},
                   }}
             ></Tabs.Screen>
         </Tabs.Navigator>

@@ -8,7 +8,7 @@ import Core from '../Core'
 import Techniques from '../Techniques'
 import Programs from '../Programs'
 import Nutrition from '../Nutrition'
-import HomeCoach from '../HomeCoach'
+import HomeRanger from '../HomeRanger'
 import CombatConditioning from '../CombatConditioning'
 import Brain from '../Brain'
 import Combatives from '../Combatives'
@@ -20,7 +20,7 @@ function homeRNavigation() {
     return (
         <homeStack.Navigator>
             <homeStack.Screen name="Home" 
-                component={HomeCoach} 
+                component={HomeRanger} 
                 options = {{
                     header: () => null
                 }}></homeStack.Screen>

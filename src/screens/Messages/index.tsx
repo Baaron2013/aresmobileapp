@@ -58,13 +58,15 @@ function renderHeader() {
     return (
       <View
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: '#022b3a',
           padding: 8,
           marginVertical: 10,
           borderRadius: 19,
           borderStyle: 'solid',
           borderColor: 'black',
-          borderWidth: 2
+          borderWidth: 2,
+          margin: 10,
+          
         }}
       >
         <TextInput
@@ -74,7 +76,7 @@ function renderHeader() {
           value={"Search..."}
           //onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
-          style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
+          style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
         />
       </View>
     );
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
         marginBottom: 70,
     },
     page: {
-        backgroundColor: 'white',
+        backgroundColor: '#bfdbf7',
         flex: 1
     }
 })

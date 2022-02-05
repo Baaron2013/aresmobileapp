@@ -5,36 +5,33 @@ const tableName = process.env.USERTABLE;
 
 exports.handler = async (event) => {
   // insert code to be executed by your lambda trigger
-  if (!event?.request?.userAttributes?.sub){
-    console.log("No sub provided.");
+  if(!event?.request?.userAttributes?.sub){
+    console.log("No sub provided")
     return;
   }
 
   const now = new Date();
-  const timestamp = now.getTime();
+  const timeStamp = now.getTime();
 
-  const userItem = {
-    __typename: { S: 'User' },
-    _lastChangedAt: { N: timestamp.toString() },
-    _version: { N: "1" },
-    updatedAt: { S: now.toISOString() },
-    createdAt: { S: now.toISOString() },
-    id: { S: event.request.userAttributes.sub },
-    email: { S: event.request.userAttributes.email },
-    name: { S: event.request.userAttributes.name },
-    type: { S: event.request.userAttributes.nickname },
+  const userItem ={
+    __typename: {S: 'User'},
+    _lastChangedAt: { N: timeStamp.toString() } ,
+    _version: {N: '1'},
+    createdAt: {S:now.toISOString()},
+    updatedAt: {S:now.toISOString()},
+    id: {S:event.request.userAttributes.sub},
+    name: {S:event.request.userAttributes.name},
+
   }
-
   const params = {
     Item: userItem,
     TableName: tableName
   }
+  try{
 
-  try {
     await ddb.putItem(params).promise();
-    console.log('user added to database');
-  }catch (e) {
-    console.log(e);
+    console.log("success");
+  } catch (e){
+    console.log(e)
   }
-  
 };
