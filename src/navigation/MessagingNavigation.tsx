@@ -10,7 +10,7 @@ import ChatRoomScreen from '../screens/ChatRoomScreen';
 
 
 
-const messageNavigation = () =>  {
+const MessageNavigation = () =>  {
     const MessageStack = createNativeStackNavigator();
     return (
         <MessageStack.Navigator>
@@ -52,4 +52,4 @@ const styles = StyleSheet.create ({
 
 })
 
-export default messageNavigation;
+export default MessageNavigation;

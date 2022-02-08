@@ -9,7 +9,7 @@ import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 {/* name of function - edited */}
-const nutrition = () => {
+const Nutrition = () => {
 
 
     const navigation = useNavigation(); 
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
 })
 
 {/* name of function - edited */}
-export default nutrition
+export default Nutrition

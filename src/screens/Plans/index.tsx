@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 
 
-const plans = () => {
+const Plans = () => {
 
 
     const navigation = useNavigation(); 
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default plans
+export default Plans

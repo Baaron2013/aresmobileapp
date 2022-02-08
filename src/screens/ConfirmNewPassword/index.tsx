@@ -5,7 +5,7 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 
-const newPassword = (  ) => {
+const NewPassword = (  ) => {
     const navigation = useNavigation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default newPassword
+export default NewPassword

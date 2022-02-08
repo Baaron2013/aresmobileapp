@@ -9,7 +9,7 @@ import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 {/* name of function - edited */}
-const programs = () => {
+const Programs = () => {
 
 
     const navigation = useNavigation(); 
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
 })
 
 {/* name of function - edited */}
-export default programs
+export default Programs

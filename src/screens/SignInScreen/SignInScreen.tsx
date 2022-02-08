@@ -25,6 +25,7 @@ const SignInScreen = (  ) => {
 
             } else {
                 Auth.currentAuthenticatedUser().then(console.log)
+                
             }
         }).catch(e => {
             console.log(e);

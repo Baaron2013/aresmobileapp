@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 //import { Navigate } from 'react-router'
 
-const confirmForgotPassword = (  ) => {
+const ConfirmForgotPassword = (  ) => {
     const navigation = useNavigation();
     const [username, setUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default confirmForgotPassword
+export default ConfirmForgotPassword

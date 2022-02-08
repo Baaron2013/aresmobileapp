@@ -9,14 +9,14 @@ import { Auth } from 'aws-amplify'
 
 
 
-const reset = () => {
+const Reset = () => {
     
     const navigation = useNavigation();
     const [oldPassword, setOld] = useState('');
     const [newPassword, setNew] = useState('');
 
 
-    const reset = () => {
+    const Reset = () => {
         Auth.currentAuthenticatedUser()
             .then(user => {
             return Auth.changePassword(user, oldPassword, newPassword);
@@ -52,7 +52,7 @@ const reset = () => {
                 />
                 <Custombutton 
                     text="Reset Password"
-                    onPress={reset}
+                    onPress={Reset}
                     style={{
                         marginTop: 20,
                     }}
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default reset
+export default Reset

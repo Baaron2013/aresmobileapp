@@ -21,7 +21,8 @@ exports.handler = async (event) => {
     updatedAt: {S:now.toISOString()},
     id: {S:event.request.userAttributes.sub},
     name: {S:event.request.userAttributes.name},
-
+    type: {S:event.request.userAttributes.nickname},
+    email: {S:event.request.userAttributes.email}
   }
   const params = {
     Item: userItem,

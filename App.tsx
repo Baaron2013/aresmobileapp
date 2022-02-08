@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from "./src/navigation";
 import { StyleSheet, Text, View, SafeAreaView, Platform, InteractionManager } from 'react-native';
-import Amplify from "aws-amplify";
+import { Amplify, Hub } from "aws-amplify";
+import { DataStore, Predicates } from "@aws-amplify/datastore";
 import config from "./src/aws-exports";
 //import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-content";
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { User } from './src/models'
 Amplify.configure(config);
+
 
 
 const _setTimeout = global.setTimeout;
@@ -56,6 +59,30 @@ if (Platform.OS === 'android') {
 }
 
 const App = () => {
+    const [user, setUsers] = useState<User[]>([]);
+ 
+    useEffect(() => {
+      // Create listener that will stop observing the model once the sync process is done
+      const removeListener = Hub.listen("datastore", async (capsule) => {
+        const {
+          payload: { event, data },
+        } = capsule;
+   
+        console.log("DataStore event", event, data);
+   
+        if (event === "ready") {
+          const users = await DataStore.query(User).then(setUsers);
+          console.log(users);
+        }
+      });
+   
+      // Start the DataStore, this kicks-off the sync process.
+      DataStore.start();
+   
+      return () => {
+        removeListener();
+      };
+    }, []);
   return (
     <>
     <IconRegistry icons={EvaIconsPack} />

@@ -9,7 +9,7 @@ import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 {/* name of function - edited */}
-const brain = () => {
+const Brain = () => {
 
 
     const navigation = useNavigation(); 
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
 })
 
 {/* name of function - edited */}
-export default brain
+export default Brain

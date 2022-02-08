@@ -19,7 +19,7 @@
       "function": {
         "aresmobileapp05b2c0a5PostConfirmation": {
           "deploymentBucketName": "amplify-aresmobileapp-dev-173749-deployment",
-          "s3Key": "amplify-builds/aresmobileapp05b2c0a5PostConfirmation-7349474a4d7342777363-build.zip"
+          "s3Key": "amplify-builds/aresmobileapp05b2c0a5PostConfirmation-3658546a417634325959-build.zip"
         }
       }
     }

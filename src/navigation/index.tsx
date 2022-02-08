@@ -88,7 +88,7 @@ const DrawerContent = () => {
     )
 }
 
-const drawerNavigationCoach = () => (
+const DrawerNavigationCoach = () => (
     <Navigator drawerContent={props => <DrawerContent {...props}/>}>
       <Screen name="Home" component={HomeTabsCoach} 
                 options={{ 
@@ -100,7 +100,7 @@ const drawerNavigationCoach = () => (
     </Navigator>
   );
 
-  const drawerNavigationRanger = () => (
+  const DrawerNavigationRanger = () => (
     <Navigator drawerContent={props => <DrawerContent {...props}/>}
     screenOptions={{header: () => null
 
@@ -120,7 +120,7 @@ const drawerNavigationCoach = () => (
   );
 
 
-function profileTabs() {
+function ProfileTabs() {
     return (
         <ProfileStack.Navigator
         screenOptions={{headerRight: () => <Image source={Logo} style={styles.logo} resizeMode="contain" />}}>
@@ -195,7 +195,7 @@ function HomeTabsRanger() {
             ></Tabs.Screen>
             <Tabs.Screen 
                 name="ProfileRanger" 
-                component={profileTabs}
+                component={ProfileTabs}
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
@@ -265,7 +265,7 @@ function HomeTabsCoach() {
             ></Tabs.Screen>
             <Tabs.Screen 
                 name="ProfileCoach" 
-                component={profileTabs}
+                component={ProfileTabs}
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
@@ -312,12 +312,12 @@ const Navigation = () => {
                     </>
                 ) :  (dbSet() && userStatus.attributes.nickname == 'Ranger') ? (
                     <>
-                        <Stack.Screen name="MainHomeRanger" component={drawerNavigationRanger} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="MainHomeRanger" component={DrawerNavigationRanger} options={{header: () => false}}></Stack.Screen>
                         
                     </>
                 ) : (dbSet() && userStatus.attributes.nickname == 'Coach') ? (
                     <>
-                        <Stack.Screen name="MainHomeCoach" component={drawerNavigationCoach} options={{header: () => false}}></Stack.Screen>
+                        <Stack.Screen name="MainHomeCoach" component={DrawerNavigationCoach} options={{header: () => false}}></Stack.Screen>
                         
                     </>
                 ) : null}

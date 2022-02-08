@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import Logo from '../../../assets/images/ares-login-logo.png'
 
-const chooseUser = (  ) => {
+const ChooseUser = (  ) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default chooseUser
+export default ChooseUser
