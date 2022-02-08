@@ -69,7 +69,7 @@ const Profile = () => {
         console.log(dbUser);
         console.log('starting saving process')
         await DataStore.save(
-            UserModel.copyOf(dbUser, (updated) => {
+            UserModel.copyOf(dbUser, updated => {
                 updated.name = newName,
                 updated.email = newEmail
             })
@@ -95,6 +95,7 @@ const Profile = () => {
             )
             setName(newName);
             setEmail(newEmail);
+            console.log('name before edits: ' + newName);
 
         }
     }

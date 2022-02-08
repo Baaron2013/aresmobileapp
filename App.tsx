@@ -59,30 +59,7 @@ if (Platform.OS === 'android') {
 }
 
 const App = () => {
-    const [user, setUsers] = useState<User[]>([]);
- 
-    useEffect(() => {
-      // Create listener that will stop observing the model once the sync process is done
-      const removeListener = Hub.listen("datastore", async (capsule) => {
-        const {
-          payload: { event, data },
-        } = capsule;
-   
-        console.log("DataStore event", event, data);
-   
-        if (event === "ready") {
-          const users = await DataStore.query(User).then(setUsers);
-          console.log(users);
-        }
-      });
-   
-      // Start the DataStore, this kicks-off the sync process.
-      DataStore.start();
-   
-      return () => {
-        removeListener();
-      };
-    }, []);
+    
   return (
     <>
     <IconRegistry icons={EvaIconsPack} />
