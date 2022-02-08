@@ -107,33 +107,32 @@ const styles = StyleSheet.create({
     icon: {
         backgroundColor: 'white',
         paddingLeft: 15,
-        paddingTop: 10
+        paddingTop: 10,
     },
     logo: {
         width: '70%',
-        height: 70,
-        marginBottom: 7,
-        marginTop: 7,
+        height: 75,
+        marginBottom: 0,
+        marginTop: 0,
     },
     banner: {
         backgroundColor: '#022b3a',
         width: '100%',
         height: 20,
-        marginBottom: 15,
     },
     button1: {
-        width: 158,
+        width: 160,
         height: 87,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 42,
         backgroundColor: '#BFDBF7',
     },
 
     button2: {
-        width: 158,
+        width: 160,
         height: 87,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 42,
         backgroundColor: '#E1E5F2',
