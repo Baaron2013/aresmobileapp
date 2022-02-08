@@ -76,6 +76,7 @@ const programs = () => {
                     style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
                     placeholderStyle={styles.placeholderStyle}
                     selectedTextStyle={styles.selectedTextStyle}
+                    iconStyle={styles.iconStyle}
 
                     data={data}
     
@@ -125,6 +126,10 @@ const styles = StyleSheet.create({
         marginRight: 350,
         marginTop: 10,
     },
+    iconStyle: {
+        width: 20,
+        height: 20,
+      },
     calcView2: {
         width: 350,
         height:100,
