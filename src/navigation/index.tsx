@@ -5,11 +5,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
 import HomeRangerNavigation from '../screens/HomeRanger/HomeRNavigation';
-import HomeCoachNavigation from '../screens/HomeCoach/HomeNavigation';
+import HomeCoachNavigation from '../screens/HomeCoach/HomeCoachNavigation';
 import Plans from '../screens/Plans';
 //import Messages from '../screens/Messages';
 import Messages from '../navigation/MessagingNavigation';
-import Profile from '../screens/ProfileCopy';
+import Profile from '../screens/Profile';
 import Nutrition from '../screens/Nutrition';
 import Reset from '../screens/ResetPassword';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -62,10 +62,6 @@ const Tabs = createBottomTabNavigator();
 
 //const [user, setUser] = useState('');
 
-const dbSet = async () => {
-    await DataStore.start();
-    return dbSet;
-}
 
 
 const { Navigator, Screen } = createDrawerNavigator();
@@ -173,7 +169,7 @@ function HomeTabsRanger() {
                 name="Plans" 
                 component={Plans}
                 options={{
-                    tabBarLabel: 'Plans',
+                    tabBarLabel: 'Programs',
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="dumbbell" color={color} size={size} />
                     ),
@@ -242,7 +238,7 @@ function HomeTabsCoach() {
                 name="Plans" 
                 component={Plans}
                 options={{
-                    tabBarLabel: 'Plans',
+                    tabBarLabel: 'Programs',
                     tabBarIcon: ({ color, size }) => (
                       <RNIcon name="dumbbell" color={color} size={size} />
                     ),
@@ -310,12 +306,12 @@ const Navigation = () => {
                         <Stack.Screen name="ChooseUser" component={Chooseuser} options={{ title: '' }}></Stack.Screen>
                         
                     </>
-                ) :  (dbSet() && userStatus.attributes.nickname == 'Ranger') ? (
+                ) :  (userStatus.attributes.nickname == 'Ranger') ? (
                     <>
                         <Stack.Screen name="MainHomeRanger" component={DrawerNavigationRanger} options={{header: () => false}}></Stack.Screen>
                         
                     </>
-                ) : (dbSet() && userStatus.attributes.nickname == 'Coach') ? (
+                ) : (userStatus.attributes.nickname == 'Coach') ? (
                     <>
                         <Stack.Screen name="MainHomeCoach" component={DrawerNavigationCoach} options={{header: () => false}}></Stack.Screen>
                         

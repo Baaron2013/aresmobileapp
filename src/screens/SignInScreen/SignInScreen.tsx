@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Image, Pressable, Alert } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
@@ -8,50 +8,62 @@ import { DataStore } from '@aws-amplify/datastore'
 import Logo from '../../../assets/images/ares-login-logo.png'
 
 const SignInScreen = (  ) => {
+    //set initial state for username and passowrd
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-
+    //create navigator
     const navigation = useNavigation();
 
 
 
-
+    //function when Sign In is pressed
     const onSignInPressed = async function () {
-        Auth.signIn(username, password)
+        //authentication for signin via amplify
+        if (username == '' || password == ''){
+            Alert.alert(
+                "Email and password cannot be blank.",
+                "",
+                [
+                    {text: "OK"} 
+                ]
+            )
+            return;
+
+        } else {
+            Auth.signIn(username, password)
         .then(user => {
+            //if user has not confirmed their account, i.e. they are a coach, send them to page to reset their password
             if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
                 sendAuthCode();
 
             } else {
+                //user is a ranger and will be logged in
                 Auth.currentAuthenticatedUser().then(console.log)
                 
             }
         }).catch(e => {
-            console.log(e);
+            Alert.alert(
+                "Incorrect Email or Password!",
+                "Your account could not be verified. Please try again.",
+                [
+                    {text: "OK"} 
+                ]
+            )
         });
-        //await DataStore.start();
+
+        }
+        
     }
 
     const sendAuthCode = () => {
+            //navigate to confirm new password page if coach
              navigation.navigate('ConfirmNew');
 
     }
 
-
-    const onSignUpCoachPressed = () => {
-        navigation.navigate('SignUp', {
-            paramKey: 'Coach',
-        });
-    }
-
-    const onSignUpRangerPressed = () => {
-        navigation.navigate('SignUp', {
-            paramKey: 'Ranger',
-        });
-    }
-
     const onForgotPressed = () => {
+        //navigate to forgot password page
         navigation.navigate('Forgot')
     }
 
@@ -60,6 +72,8 @@ const SignInScreen = (  ) => {
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.banner}>
             </View>
+
+            {/* input field for username */}
             <CustomInput 
                 icon="account"
                 placeholder="Email"
@@ -67,6 +81,7 @@ const SignInScreen = (  ) => {
                 setValue={setUsername}
                 
             />
+            {/* input field for password */}
             <CustomInput 
                 icon="lock"
                 placeholder="Password"
@@ -74,6 +89,7 @@ const SignInScreen = (  ) => {
                 setValue={setPassword}
                 secureTextEntry
             />
+            {/* button for signing in */}
             <Custombutton 
                 text="LOG IN"
                 onPress={onSignInPressed}
@@ -86,10 +102,12 @@ const SignInScreen = (  ) => {
 
                 }}
             />
+            {/* button for forgot password page */}
             <Pressable onPress={onForgotPressed}>
                 <Text style={styles.text}>Forgot your password?</Text>
 
             </Pressable> 
+            {/* button for sign up page that ask if the user is signing up as a ranger or coach */}
             <Pressable onPress={() => {
                 navigation.navigate('ChooseUser');
             }}>

@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, Alert, Image } from 'react-native'
+import { View, Text, StyleSheet, Alert, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth } from 'aws-amplify'
+import { Auth, Hub } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { User as UserModel } from "../../models"
 import Logo from '../../../assets/images/ares-login-logo.png'
-import { DrawerActions } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-
-
 
 
 const Profile = () => {
@@ -23,7 +18,31 @@ const Profile = () => {
     const [userID, setID] = useState(undefined);
     const [user, setUser] = useState(undefined);
 
-    
+    const [users, setUsers] = useState<UserModel[]>([]);
+ 
+    useEffect(() => {
+      // Create listener that will stop observing the model once the sync process is done
+      const removeListener = Hub.listen("datastore", async (capsule) => {
+        const {
+          payload: { event, data },
+        } = capsule;
+   
+        console.log("DataStore event", event, data);
+   
+        if (event === "ready") {
+          const users = await DataStore.query(UserModel).then(setUsers);
+        }
+      });
+   
+      // Start the DataStore, this kicks-off the sync process.
+      DataStore.start();
+   
+      return () => {
+        removeListener();
+      };
+    }, []);
+
+    //get authenticated user 1 time
     const getUser = async () => {
         const authUser = await Auth.currentAuthenticatedUser();
         if (authUser){
@@ -32,55 +51,37 @@ const Profile = () => {
             setID(authUser.attributes.sub)
             setUser(authUser)
         }
-
     }
-
     useEffect (() => {
         getUser();
     }, []);
     
-
+    //save user udpates to DynamoDB and cognito
     const onPressSave = async () => {
-       console.log('current name: ' + currentName);
-       console.log('current email: ' + currentEmail);
-
-       console.log('new name: ' + newName);
-       console.log('new email: ' + newEmail);
-       const dbUser = await DataStore.query(UserModel, userID);
-        console.log('dbuser is set! ' + dbUser)
-       if (dbUser === undefined) {
-           console.log(dbUser + 'error finding user' + userID);
-           return;
-       } else {
-           console.log('db user exists');
-           
-           console.log(dbUser);
-
-       }
-        
+        const dbUser = await DataStore.query(UserModel, userID);
+        if (dbUser === undefined) {
+            console.log(dbUser + 'error finding user' + userID);
+            return;
+        } 
         if (newName === '') {
             newName = currentName;
         }
         if (newEmail === '') {
             newEmail = currentEmail;
         }
-        console.log('name before edits: ' + newName);
-        console.log('email before edits: ' + newEmail);
-        console.log(dbUser);
-        console.log('starting saving process')
+        //save to DynamoDB
         await DataStore.save(
             UserModel.copyOf(dbUser, updated => {
                 updated.name = newName,
                 updated.email = newEmail
             })
         )
-        console.log(dbUser);
+        //save to Cognito
         await Auth.updateUserAttributes(user, {
-            'email': newEmail,
             'name': newName,
-            //'email_verified': true
-
+            'email': newEmail    
         })
+        //if updating email, send to new page to enter in confirmation code. 
         if (currentEmail !== newEmail){
             navigation.navigate("ConfirmEmail")
             setName(newName);
@@ -100,21 +101,21 @@ const Profile = () => {
         }
     }
 
+    //sign user out and clear datastore
     const signOut = async () => {
         try {
+            DataStore.clear();
             await Auth.signOut();
-            console.warn("logout success");
         } catch (error) {
             console.log('error signing out: ', error);
         }
-        DataStore.clear();
+        
     }
 
+    //reset password
     const reset = () => {
         navigation.navigate("ResetPassword")
     }
-
-
         return (
             
             <View style={styles.root}>

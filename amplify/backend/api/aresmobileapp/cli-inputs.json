@@ -18,6 +18,6 @@
       }
     },
     "apiName": "aresmobileapp",
-    "gqlSchemaPath": "/tmp/amplify-949b83e1-d330-433f-a481-637570b73acf/amplify/backend/api/aresmobileapp/schema.graphql"
+    "gqlSchemaPath": "C:\\Users\\brook\\aresmobileapp\\amplify\\backend\\api\\aresmobileapp\\schema.graphql"
   }
 }

@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Alert, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
+import { Auth } from 'aws-amplify'
 
-const ConfirmSignUp = () => {
-    const [username, setUsername] = useState('');
+const ConfirmEmail = () => {
+    //set initial state for verification code
     const [code, setCode] = useState('');
 
+    //create navigator
     const navigation = useNavigation();
-
+    
+    //confirm email changes
     const onConfirmPressed = async function () {
         try {
             await Auth.verifyCurrentUserAttributeSubmit("email", code)
@@ -23,7 +25,13 @@ const ConfirmSignUp = () => {
                 ]
             )
           } catch (error) {
-              console.log('error confirming email', error);
+            Alert.alert(
+                "Your verification code could not be verified.",
+                "Please try again.",
+                [
+                    {text: "OK"} 
+                ]
+            )
           }
             
     }
@@ -62,4 +70,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ConfirmSignUp
+export default ConfirmEmail

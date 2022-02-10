@@ -17,7 +17,7 @@ const data = [
     { label: 'Matt Block', value: '4' },
     { label: 'PT Improvement Plans', value: '5' },
 ];
-const programs = () => {
+const Programs = () => {
 
 
     const navigation = useNavigation(); 
@@ -210,4 +210,4 @@ const styles = StyleSheet.create({
 })
 
 {/* name of function - edited */}
-export default programs
+export default Programs

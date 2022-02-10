@@ -1,40 +1,43 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 
-const ConfirmSignUp = () => {
-    //set initial state for username and verification code
-    const [username, setUsername] = useState('');
-    const [code, setCode] = useState('');
-
+const ConfirmForgotPassword = (  ) => {
     //create navigator
     const navigation = useNavigation();
 
-    //complete signup process
-    const onConfirmPressed = async function () {
-        try {
-            console.warn("trying");
-            await Auth.confirmSignUp(username, code);
-            console.warn("success");
-            navigation.navigate('SignIn');
-          } catch (error) {
-              console.log('error confirming sign up', error);
-          }
-            
+    //set initial state for username, password, and verification code
+    const [username, setUsername] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [code, setCode] = useState('');
+
+    //complete password update
+    const confirmPressed = async function () {
+        Auth.forgotPasswordSubmit(username, code, newPassword)
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+        navigation.navigate('SignIn')
+
     }
+
 
     return (
         <View style={styles.root}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
-            <Text style={styles.text}>Confirm Sign Up</Text>
             <CustomInput 
                 placeholder="Email"
                 value={username}
                 setValue={setUsername}
+            />
+            <CustomInput 
+                placeholder="New Password"
+                value={newPassword}
+                setValue={setNewPassword}
+                secureTextEntry
             />
             <CustomInput 
                 placeholder="Verification Code"
@@ -42,12 +45,14 @@ const ConfirmSignUp = () => {
                 setValue={setCode}
                 secureTextEntry
             />
+
             <Custombutton 
-                text="Confirm"
-                onPress={onConfirmPressed}
+                text="Confirm New Password"
+                onPress={confirmPressed}
                 style={{
                     marginTop: 20,
                 }}
+                
             />
         </View>
     )
@@ -66,10 +71,7 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         marginTop: 20,
     },
-    text: {
-        fontSize: 20,
-        marginBottom: 20,
-    },
 })
 
-export default ConfirmSignUp
+
+export default ConfirmForgotPassword

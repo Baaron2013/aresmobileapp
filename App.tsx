@@ -1,19 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Navigation from "./src/navigation";
-import { StyleSheet, Text, View, SafeAreaView, Platform, InteractionManager } from 'react-native';
-import { Amplify, Hub } from "aws-amplify";
-import { DataStore, Predicates } from "@aws-amplify/datastore";
+import { StyleSheet, SafeAreaView, Platform, InteractionManager } from 'react-native';
+import { Amplify} from '@aws-amplify/core';
 import config from "./src/aws-exports";
-//import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-content";
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { User } from './src/models'
+import { LogBox } from "react-native"
 Amplify.configure(config);
 
 
 
+LogBox.ignoreAllLogs(true);
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
 const MAX_TIMER_DURATION_MS = 60 * 1000;
@@ -59,17 +58,13 @@ if (Platform.OS === 'android') {
 }
 
 const App = () => {
-    
   return (
     <>
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={styles.root}>
-
               <StatusBar />
               <Navigation />
-              {/*<Text>Hello World!! Yes!</Text>*/}
-
           </SafeAreaView>
       </ApplicationProvider></>
       )

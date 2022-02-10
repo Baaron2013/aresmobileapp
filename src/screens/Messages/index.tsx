@@ -37,7 +37,7 @@ const chatRoom4 = chatRoomsData[4];
     />
   );
 }; */
-const messages = () => {
+const Messages = () => {
 
 
     const navigation = useNavigation(); 
@@ -108,4 +108,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default messages
+export default Messages
