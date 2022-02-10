@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, TouchableOpacity,Text, StyleSheet, Image } from 'react-native'
+import { View, TouchableOpacity,Text, StyleSheet, Image, Pressable } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Auth, formRow } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
-
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { DrawerActions } from '@react-navigation/native'
 
 const HomeCoach = () => {
 
@@ -13,78 +14,82 @@ const HomeCoach = () => {
         navigation.navigate('{screenName}');
     }; 
     return (
-        <View style={styles.root}>
-            <Image source={Logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.banner}></View>
-            
-            <View style={styles.line1}>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><View style={styles.root}>
+                <Image source={Logo} style={styles.logo} resizeMode="contain" />
+                <View style={styles.banner}></View>
 
+                <View style={styles.line1}>
+
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Philosophy') } }
+                        style={styles.button1}>
+                        <Text>Philosophy</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('InjuryPrevention') } }
+                        style={styles.button2}>
+                        <Text>Injury Prevention</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.line2}>
+
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Core') } }
+                        style={styles.button2}>
+                        <Text>Core</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Techniques') } }
+                        style={styles.button1}>
+                        <Text>Techniques</Text>
+                    </TouchableOpacity>
+
+                </View>
+
+                <View style={styles.line3}>
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Programs') } }
+                        style={styles.button1}>
+                        <Text>Programs</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('CombatConditioning') } }
+                        style={styles.button2}>
+                        <Text>Combat Conditioning</Text>
+                    </TouchableOpacity>
+
+                </View>
+
+                <View style={styles.line4}>
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Nutrition') } }
+                        style={styles.button2}>
+                        <Text>Nutrition</Text>
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Brain') } }
+                        style={styles.button1}>
+                        <Text>Brain</Text>
+                    </TouchableOpacity>
+
+                </View>
                 <TouchableOpacity
-                    onPress={() => {navigation.navigate('Philosophy')}}
-                    style={styles.button1}>
-                    <Text>Philosophy</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    onPress={() => {navigation.navigate('InjuryPrevention')}}
-                    style={styles.button2}>
-                    <Text>Injury Prevention</Text>
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.line2}>
-
-                <TouchableOpacity
-                    onPress={() => {navigation.navigate('Core')}}
-                    style={styles.button2}>
-                    <Text>Core</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    onPress={() => {navigation.navigate('Techniques')}}
-                    style={styles.button1}>
-                    <Text>Techniques</Text>
-                </TouchableOpacity>
-
-            </View>
-
-            <View style={styles.line3}>
-                <TouchableOpacity
-                    onPress={() => {navigation.navigate('Programs')}}
-                    style={styles.button1}>
-                    <Text>Programs</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    onPress={() => {navigation.navigate('CombatConditioning')}}
-                    style={styles.button2}>
-                    <Text>Combat Conditioning</Text>
-                </TouchableOpacity>
-
-            </View>
-
-            <View style={styles.line4}>
-                <TouchableOpacity
-                    onPress={() => {navigation.navigate('Nutrition')}}
-                    style={styles.button2}>
-                    <Text>Nutrition</Text>
-                </TouchableOpacity>
-
-                
-                <TouchableOpacity
-                    onPress={() => {navigation.navigate('Brain')}}
-                    style={styles.button1}>
-                    <Text>Brain</Text>
-                </TouchableOpacity>
-
-            </View>
-            <TouchableOpacity
-                    onPress={() => {navigation.navigate('Combatives')}}
+                    onPress={() => { navigation.navigate('Combatives') } }
                     style={styles.button3}>
                     <Text>Combatives</Text>
-            </TouchableOpacity>
+                </TouchableOpacity>
 
-        </View>
+            </View></>
     )
 }
 
@@ -94,6 +99,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         backgroundColor: 'white',
         flex: 1,
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
     },
     logo: {
         width: '70%',

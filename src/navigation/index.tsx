@@ -85,7 +85,8 @@ const DrawerContent = () => {
 }
 
 const DrawerNavigationCoach = () => (
-    <Navigator drawerContent={props => <DrawerContent {...props}/>}>
+    <Navigator drawerContent={props => <DrawerContent {...props}/>}
+    screenOptions={{header: () => null}}>
       <Screen name="Home" component={HomeTabsCoach} 
                 options={{ 
                     headerTitle: () => null,

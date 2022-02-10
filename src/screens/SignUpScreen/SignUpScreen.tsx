@@ -52,6 +52,7 @@ const SignUpScreen = ( props ) => {
                 });
                 console.log(user);
                 Alert.alert(
+                    "",
                     "Thanks for signing up! Please contact your administrator, so they can verify your request.",
                     [
                         {text: "OK"} 
