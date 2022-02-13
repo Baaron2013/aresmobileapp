@@ -1,7 +1,8 @@
-import { StyleSheet, Modal, Pressable } from 'react-native';
+import { StyleSheet, Modal, Pressable, KeyboardAvoidingView } from 'react-native';
 import React, {useState} from 'react';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import CustomInput2 from '../../component/customInput2';
+import Custombutton from '../../component/CustomButton/Custombutton'
 
 import { Text, View } from 'react-native';
 //import { RootTabScreenProps } from '../../types';
@@ -59,12 +60,22 @@ export default function PopUpModule({ }) {
 
   }
 
+  const save = () => {
+    setModalOpen(false)
+    //do DB things
+
+  }
+
   return (
+    <KeyboardAvoidingView
+        behavior="padding"
+        style={styles.container}>
     <View style={styles.container}>
       <Modal 
         visible={modalOpen} 
         animationType='slide'
         transparent={true}
+        statusBarTranslucent={true}
         >
         <View style={styles.modalContent}>
           <AntDesign
@@ -206,9 +217,18 @@ export default function PopUpModule({ }) {
                 name={'star'}>
             </PopUpButton>
             </View>
+
+          </View>
+          <View style={styles.save}>
+            <Custombutton 
+                    text="Save"
+                    onPress={save}
+                    style={styles.saveButton}
+                />
           </View>
 
         </View>
+        
       </Modal>
       
     {/* <MaterialIcons
@@ -220,6 +240,7 @@ export default function PopUpModule({ }) {
       <Text style={styles.title}>Open PopUp</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" /> */}
     </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -259,7 +280,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 15,
     marginTop: 120,
-    marginBottom: Platform.OS === 'android' ? 60 : 100,
+    marginBottom: Platform.OS === 'android' ? 55 : 100,
     borderWidth: 2,
     borderColor: '#f2f2f2',
     borderRadius: 30,
@@ -285,6 +306,19 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 20,
+  },
+  save: {
+    alignItems: 'center',
+    flex: 1,
+    
+    
+  },
+  saveButton: {
+    height: 30,
+    width: 70,
+    padding: 5,
+    marginTop: 15,
+    marginLeft: 10
   }
 
 });

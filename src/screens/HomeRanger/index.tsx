@@ -1,12 +1,12 @@
 import React from 'react'
-import { View, TouchableOpacity,Text, StyleSheet, Image, Pressable } from 'react-native'
+import { View, TouchableOpacity,Text, StyleSheet, Image, Pressable, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Auth, formRow } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DrawerActions } from '@react-navigation/native'
 import Popup from '../PopUp/PopUp'
-//import { styles } from 'react-native-element-dropdown/src/TextInput/styles'
+import { Dimensions } from 'react-native';
 
 const HomeRanger = () => {
 
@@ -16,7 +16,11 @@ const HomeRanger = () => {
     
 
     return (
-        <>
+    <>
+        <ScrollView>
+        <KeyboardAvoidingView
+        behavior="padding"
+        style={styles.container}>
         <View style={styles.popup}>
             <Popup />
         </View>
@@ -100,11 +104,16 @@ const HomeRanger = () => {
                     <Text>Combatives</Text>
                 </TouchableOpacity>
 
-            </View></>
+            </View>
+            </KeyboardAvoidingView>
+            </ScrollView></>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     root: {
         alignItems: 'center',
         justifyContent: 'space-around',

@@ -16,7 +16,7 @@ const CustomInput2 = ({ value, setValue }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: '#eeefed',
         width: '50%',
         borderRadius: 5,
         borderColor: '#e8e8e8',
