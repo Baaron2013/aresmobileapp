@@ -1,4 +1,4 @@
-import { StyleSheet, Modal, ImageBackgroundBase, ImageBackground, TouchableHighlightBase, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Modal, Pressable } from 'react-native';
 import React, {useState} from 'react';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import CustomInput2 from '../../component/customInput2';
@@ -9,14 +9,54 @@ import { Text, View } from 'react-native';
 export default function PopUpModule({ }) {
   const [modalOpen, setModalOpen] = useState(true);
   const [bodyWeight, setBodyWeight] = useState('');
+  const [selectedRow1, setSelectedRow1] = useState(null);
+  const [selectedRow2, setSelectedRow2] = useState(null);
+  const [selectedRow3, setSelectedRow3] = useState(null);
+  const [selectedRow4, setSelectedRow4] = useState(null);
+  const [backgroundColor, setBackgroundColor] = useState('white')
+  let count = 1;
 
   const emptyStar = <FontAwesome name='star-o' size={28} />
   const halfStar =  <FontAwesome name='star-half-full' size={28} />
   const fullStar = <FontAwesome name='star' size={28} />
 
+  
+  function PopUpButton({ onPress, value, text, name }) {
 
-  const buttonClickHandler = () => {
+    return (
+      <Pressable
+        onPress={() => onPress(text)}
+        style={[styles.button, {backgroundColor: value === text ? '#bfdbf7' : 'white' }]}
+        >
+        <FontAwesome name={name} size={28} />
+        <Text style={styles.text}> {text} </Text>
+      </Pressable>
+    );
+  }
+
+  const buttonClickHandler1 = (value) => {
     console.log("Button has been pressed.");
+    setSelectedRow1(value)
+    
+
+  }
+  const buttonClickHandler2 = (value) => {
+    console.log("Button has been pressed.");
+    setSelectedRow2(value)
+    
+
+  }
+  const buttonClickHandler3 = (value) => {
+    console.log("Button has been pressed.");
+    setSelectedRow3(value)
+    
+
+  }
+  const buttonClickHandler4 = (value) => {
+    console.log("Button has been pressed.");
+    setSelectedRow4(value)
+    
+
   }
 
   return (
@@ -47,30 +87,28 @@ export default function PopUpModule({ }) {
           </View>
           <View style={styles.row}>
             <View style={styles.spacingIcons}>
-              <TouchableOpacity
-                onPress={buttonClickHandler}>
-                <FontAwesome name='star-o' size={28} />
-              </TouchableOpacity>
+              <PopUpButton
+                onPress={buttonClickHandler1}
+                text={'<6'}
+                value={selectedRow1}
+                name={'star-o'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {halfStar}
-              </TouchableOpacity>
+            <PopUpButton
+                onPress={buttonClickHandler1}
+                text={'6-8'}
+                value={selectedRow1}
+                name={'star-half-full'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {fullStar}
-            </TouchableOpacity>
-            </View>
-          </View>
-
-          <View>
-            <View style={styles.row}>
-              <Text style={styles.spacingIcons}> {'<6'} </Text>
-              <Text style={styles.spacingIcons}>  6-8 </Text>
-              <Text style={styles.spacingIcons}>  8+ </Text>
+            <PopUpButton
+                onPress={buttonClickHandler1}
+                text={'8+'}
+                value={selectedRow1}
+                name={'star'}>
+            </PopUpButton>
             </View>
           </View>
 
@@ -81,30 +119,28 @@ export default function PopUpModule({ }) {
           </View>
           <View style={styles.row}>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {emptyStar}
-              </TouchableOpacity>
+            <PopUpButton
+                onPress={buttonClickHandler2}
+                text={'Low'}
+                value={selectedRow2}
+                name={'star-o'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {halfStar}
-              </TouchableOpacity>
+            <PopUpButton
+                onPress={buttonClickHandler2}
+                text={'Average'}
+                value={selectedRow2}
+                name={'star-half-full'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {fullStar}
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View>
-            <View style={styles.row}>
-              <Text style={styles.spacingMetrics}>  Low</Text>
-              <Text style={styles.spacingMetrics}>   Average</Text>
-              <Text style={styles.spacingMetrics}>  High</Text>
+            <PopUpButton
+                onPress={buttonClickHandler2}
+                text={'High'}
+                value={selectedRow2}
+                name={'star'}>
+            </PopUpButton>
             </View>
           </View>
 
@@ -115,30 +151,28 @@ export default function PopUpModule({ }) {
           </View> 
           <View style={styles.row}>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {emptyStar}
-              </TouchableOpacity>
+            <PopUpButton
+                onPress={buttonClickHandler3}
+                text={'Poor'}
+                value={selectedRow3}
+                name={'star-o'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {halfStar}
-              </TouchableOpacity>
+            <PopUpButton
+                onPress={buttonClickHandler3}
+                text={'Normal'}
+                value={selectedRow3}
+                name={'star-half-full'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {fullStar}
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View>
-            <View style={styles.row}>
-              <Text style={styles.spacingMetrics}>  Poor</Text>
-              <Text style={styles.spacingMetrics}>  Normal</Text>
-              <Text style={styles.spacingMetrics}>  Good</Text>
+            <PopUpButton
+                onPress={buttonClickHandler3}
+                text={'Good'}
+                value={selectedRow3}
+                name={'star'}>
+            </PopUpButton>
             </View>
           </View>
 
@@ -149,30 +183,28 @@ export default function PopUpModule({ }) {
           </View>
           <View style={styles.row}>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-            {emptyStar}
-            </TouchableOpacity>
+            <PopUpButton
+                onPress={buttonClickHandler4}
+                text={'None'}
+                value={selectedRow4}
+                name={'star-o'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {halfStar}
-              </TouchableOpacity>
+            <PopUpButton
+                onPress={buttonClickHandler4}
+                text={'Mild'}
+                value={selectedRow4}
+                name={'star-half-full'}>
+              </PopUpButton>
             </View>
             <View style={styles.spacingIcons}>
-            <TouchableOpacity
-                onPress={buttonClickHandler}>
-              {fullStar}
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View>
-            <View style={styles.row}>
-              <Text style={styles.spacingMetrics}>  None</Text>
-              <Text style={styles.spacingMetrics}>    Mild</Text>
-              <Text style={styles.spacingMetrics}>  Moderate</Text>
+            <PopUpButton
+                onPress={buttonClickHandler4}
+                text={'Moderate'}
+                value={selectedRow4}
+                name={'star'}>
+            </PopUpButton>
             </View>
           </View>
 
@@ -197,9 +229,13 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center'
   },
+  button: {
+    width: 65,
+    alignItems: 'center',
+  },
   spacingIcons: {
     alignContent: 'center',
-    paddingHorizontal: 35,
+    paddingHorizontal: 15,
   },
   spacingMetrics: {
     alignContent: 'center',
@@ -221,14 +257,22 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
-    margin: 20,
+    margin: 15,
     marginTop: 120,
-    marginBottom: 100,
+    marginBottom: Platform.OS === 'android' ? 60 : 100,
     borderWidth: 2,
     borderColor: '#f2f2f2',
     borderRadius: 30,
     padding: 15,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
   },
   modalToggle: {
     alignSelf: 'flex-end',

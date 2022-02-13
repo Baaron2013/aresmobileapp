@@ -17,6 +17,7 @@ const Profile = () => {
     const [currentEmail, setEmail] = useState('');
     const [userID, setID] = useState(undefined);
     const [user, setUser] = useState(undefined);
+    const [dbName, setDBName] = useState('');
 
     const [users, setUsers] = useState<UserModel[]>([]);
  
@@ -59,6 +60,7 @@ const Profile = () => {
     //save user udpates to DynamoDB and cognito
     const onPressSave = async () => {
         const dbUser = await DataStore.query(UserModel, userID);
+
         if (dbUser === undefined) {
             console.log(dbUser + 'error finding user' + userID);
             return;

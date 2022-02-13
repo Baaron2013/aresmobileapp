@@ -13,7 +13,7 @@ Amplify.configure(config);
 
 
 LogBox.ignoreAllLogs(true);
-const _setTimeout = global.setTimeout;
+/* const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;
 const MAX_TIMER_DURATION_MS = 60 * 1000;
 if (Platform.OS === 'android') {
@@ -55,7 +55,7 @@ if (Platform.OS === 'android') {
         }
         _clearTimeout(id);
     };
-}
+} */
 
 const App = () => {
   return (

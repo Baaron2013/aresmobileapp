@@ -7,9 +7,9 @@ import SignInScreen from '../screens/SignInScreen';
 import HomeRangerNavigation from '../screens/HomeRanger/HomeRNavigation';
 import HomeCoachNavigation from '../screens/HomeCoach/HomeCoachNavigation';
 import Plans from '../screens/Plans';
-//import Messages from '../screens/Messages';
 import Messages from '../navigation/MessagingNavigation';
-import Profile from '../screens/Profile';
+import Profile from '../screens/Account/Profile';
+import Account from '../screens/Account/ProfileNavigator';
 import Nutrition from '../screens/Nutrition';
 import Reset from '../screens/ResetPassword';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -117,7 +117,29 @@ const DrawerNavigationCoach = () => (
   );
 
 
-function ProfileTabs() {
+function ProfileTabsRanger() {
+    return (
+        <ProfileStack.Navigator
+        screenOptions={{headerRight: () => <Image source={Logo} style={styles.logo} resizeMode="contain" />}}>
+            <ProfileStack.Screen name="MainProfile" 
+                component={Account} 
+                options = {{
+                    header: () => null
+                }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="ResetPassword" component={Reset} options={{ title: '' }}></ProfileStack.Screen>
+            <ProfileStack.Screen name="ConfirmEmail" 
+                component={ConfirmEmail} 
+                options={{ 
+                    title: 'Confirm New Email',
+                    header: () => null
+                }}></ProfileStack.Screen>
+        </ProfileStack.Navigator>
+
+    )
+
+}
+
+function ProfileTabsCoach() {
     return (
         <ProfileStack.Navigator
         screenOptions={{headerRight: () => <Image source={Logo} style={styles.logo} resizeMode="contain" />}}>
@@ -138,7 +160,6 @@ function ProfileTabs() {
     )
 
 }
-
 
 function HomeTabsRanger() {
     return (
@@ -192,7 +213,7 @@ function HomeTabsRanger() {
             ></Tabs.Screen>
             <Tabs.Screen 
                 name="ProfileRanger" 
-                component={ProfileTabs}
+                component={ProfileTabsRanger}
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
@@ -262,7 +283,7 @@ function HomeTabsCoach() {
             ></Tabs.Screen>
             <Tabs.Screen 
                 name="ProfileCoach" 
-                component={ProfileTabs}
+                component={ProfileTabsCoach}
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
