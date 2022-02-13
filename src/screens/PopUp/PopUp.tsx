@@ -1,25 +1,62 @@
 import { StyleSheet, Modal, Pressable, KeyboardAvoidingView } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import CustomInput2 from '../../component/customInput2';
 import Custombutton from '../../component/CustomButton/Custombutton'
+import { Auth, Hub } from 'aws-amplify'
+import { DataStore } from '@aws-amplify/datastore'
+import { User as UserModel } from "../../models"
+import { RangerMetrics as Ranger } from "../../models"
 
 import { Text, View } from 'react-native';
+import { ConsoleLogger } from '@aws-amplify/core';
 //import { RootTabScreenProps } from '../../types';
 
 export default function PopUpModule({ }) {
   const [modalOpen, setModalOpen] = useState(true);
   const [bodyWeight, setBodyWeight] = useState('');
-  const [selectedRow1, setSelectedRow1] = useState(null);
-  const [selectedRow2, setSelectedRow2] = useState(null);
-  const [selectedRow3, setSelectedRow3] = useState(null);
-  const [selectedRow4, setSelectedRow4] = useState(null);
-  const [backgroundColor, setBackgroundColor] = useState('white')
-  let count = 1;
+  const [selectedRow1, setSelectedRow1] = useState(undefined);
+  const [selectedRow2, setSelectedRow2] = useState(undefined);
+  const [selectedRow3, setSelectedRow3] = useState(undefined);
+  const [selectedRow4, setSelectedRow4] = useState(undefined);
+  const [userID, setID] = useState('');
+  const [user, setUser] = useState(undefined);
 
-  const emptyStar = <FontAwesome name='star-o' size={28} />
-  const halfStar =  <FontAwesome name='star-half-full' size={28} />
-  const fullStar = <FontAwesome name='star' size={28} />
+  useEffect(() => {
+      // Create listener that will stop observing the model once the sync process is done
+      const removeListener = Hub.listen("datastore", async (capsule) => {
+        const {
+          payload: { event, data },
+        } = capsule;
+   
+        console.log("DataStore event", event, data);
+   
+        if (event === "ready") {
+          const users = await DataStore.query(UserModel).then(setUsers);
+        }
+      });
+   
+      // Start the DataStore, this kicks-off the sync process.
+      DataStore.start();
+   
+      return () => {
+        removeListener();
+      };
+    }, []);
+
+    //get authenticated user 1 time
+    const getUser = async () => {
+        const authUser = await Auth.currentAuthenticatedUser();
+        if (authUser){
+            setID(authUser.attributes.sub)
+            setUser(authUser)
+        }
+    }
+    useEffect (() => {
+        getUser();
+    }, []);
+
+
 
   
   function PopUpButton({ onPress, value, text, name }) {
@@ -60,9 +97,58 @@ export default function PopUpModule({ }) {
 
   }
 
-  const save = () => {
-    setModalOpen(false)
-    //do DB things
+  const save = async () => {
+    
+    const getWeight = () => {
+      var weight = 0;
+      if (bodyWeight === '') {
+        weight = 0;
+      }
+      else {
+        weight = parseFloat(bodyWeight);
+      }
+      return weight;
+    }
+    
+    let newWeight = getWeight();
+    let newSelectedRow1 = '';
+    let newSelectedRow2 = '';
+    let newSelectedRow3 = '';
+    let newSelectedRow4 = '';
+    if (selectedRow1 !== undefined) {
+      newSelectedRow1 = selectedRow1
+      
+    }
+    if (selectedRow2 !== undefined) {
+      newSelectedRow2 = selectedRow2
+    }
+    if (selectedRow3 !== undefined) {
+      newSelectedRow3 = selectedRow3
+    }
+    if (selectedRow4 !== undefined) {
+      newSelectedRow4 = selectedRow4
+      
+    }
+    console.log('weight' + newWeight);
+    console.log('sleep' + newSelectedRow1);
+    console.log('willingness' + newSelectedRow2);
+    console.log('appetite' + newSelectedRow3);
+    console.log('soreness' + newSelectedRow4);
+    //const dbUser = await DataStore.query(Ranger, userID);
+
+    //save to DynamoDB
+    await DataStore.save(
+        new Ranger({
+          weight: newWeight,
+          sleep: newSelectedRow1,
+          willingness: newSelectedRow2,
+          appetite: newSelectedRow3,
+          soreness: newSelectedRow4,
+          userID: userID,
+
+        })
+    )
+    setModalOpen(false) 
 
   }
 

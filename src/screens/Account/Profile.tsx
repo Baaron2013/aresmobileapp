@@ -17,9 +17,6 @@ const Profile = () => {
     const [currentEmail, setEmail] = useState('');
     const [userID, setID] = useState(undefined);
     const [user, setUser] = useState(undefined);
-    const [dbName, setDBName] = useState('');
-
-    const [users, setUsers] = useState<UserModel[]>([]);
  
     useEffect(() => {
       // Create listener that will stop observing the model once the sync process is done

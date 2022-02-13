@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import { View, TouchableOpacity,Text, StyleSheet, Image, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { Auth, formRow } from 'aws-amplify'
+import { Auth, Hub } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DrawerActions } from '@react-navigation/native'
 import Popup from '../PopUp/PopUp'
-import { Dimensions } from 'react-native';
+import { DataStore } from '@aws-amplify/datastore'
+import { User as UserModel } from "../../models"
 
 const HomeRanger = () => {
-
-
     const navigation = useNavigation();
 
-    
 
     return (
     <>

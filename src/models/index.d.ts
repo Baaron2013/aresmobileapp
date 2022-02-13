@@ -4,6 +4,18 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+export declare class RangerMetrics {
+  readonly id: string;
+  readonly weight?: number;
+  readonly sleep?: string;
+  readonly willingness?: string;
+  readonly appetite?: string;
+  readonly soreness?: string;
+  readonly userID: string;
+  constructor(init: ModelInit<RangerMetrics>);
+  static copyOf(source: RangerMetrics, mutator: (draft: MutableModel<RangerMetrics>) => MutableModel<RangerMetrics> | void): RangerMetrics;
+}
+
 export declare class Message {
   readonly id: string;
   readonly content?: string;
