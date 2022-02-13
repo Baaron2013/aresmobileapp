@@ -181,6 +181,20 @@ export type ChatRoom = {
   ChatRoomUsers?: ModelChatRoomUserConnection,
 };
 
+export type Contact = {
+  __typename: "Contact",
+  id?: string,
+  newMessages?: number,
+  _version?: number,
+  _deleted?: boolean | null,
+  _lastChangedAt?: number,
+  createdAt?: string,
+  updatedAt?: string,
+  lastMessage?: Message,
+  Messages?: ModelMessageConnection,
+  ChatRoomUsers?: ModelChatRoomUserConnection,
+};
+
 export type UpdateUserInput = {
   id: string,
   name?: string | null,

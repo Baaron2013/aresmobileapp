@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Logo from '../../assets/images/ares-login-logo.png'
 import Messages from '../screens/Messages';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
-
+import Contacts from '../screens/Contacts';
 
 
 
@@ -21,6 +21,8 @@ const MessageNavigation = () =>  {
                 }}></MessageStack.Screen>
             <MessageStack.Screen name="ChatRoom" component={ChatRoomScreen}
                 options={{ title: '' }}></MessageStack.Screen>
+            <MessageStack.Screen name="Contacts" component={Contacts}
+                options={{ title: 'Select Contact' }}></MessageStack.Screen>
         </MessageStack.Navigator>
 
     )
