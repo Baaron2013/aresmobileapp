@@ -7,21 +7,19 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
-import ChatRoomItem from '../../component/ChatRoomItem';
+import ContactListItem from '../../component/ContactListItem';
 import { SearchBar } from 'react-native-elements';
 import { ApplicationProvider,  Avatar, Input } from '@ui-kitten/components'
 
-import NewMessageButton from '../NewMessageButton';
+import contactData from '../../../assets/dummy-data/ChatRooms';
 
-
-import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 /* import Logo from '../../../assets/images/ares-login-logo.png' */
 
-const chatRoom0 = chatRoomsData[0];
-const chatRoom1 = chatRoomsData[1];
-const chatRoom2 = chatRoomsData[2];
-const chatRoom3 = chatRoomsData[3];
-const chatRoom4 = chatRoomsData[4];
+const chatRoom0 = contactData[0];
+const chatRoom1 = contactData[1];
+const chatRoom2 = contactData[2];
+const chatRoom3 = contactData[3];
+const chatRoom4 = contactData[4];
 
 //type SearchBarComponentProps = {};
 
@@ -37,7 +35,7 @@ const chatRoom4 = chatRoomsData[4];
     />
   );
 }; */
-const Messages = () => {
+const Contacts = () => {
 
 
     const navigation = useNavigation(); 
@@ -47,10 +45,9 @@ const Messages = () => {
         <View style={styles.page}> 
         <FlatList
             ListHeaderComponent={renderHeader}
-            data={chatRoomsData}
-            renderItem={({item}) => <ChatRoomItem chatRoom={item} />}
+            data={contactData}
+            renderItem={({item}) => <ContactListItem contactList={item} />}
         />
-        <NewMessageButton/>
     </View>
     )
 }
@@ -109,4 +106,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Messages
+export default Contacts

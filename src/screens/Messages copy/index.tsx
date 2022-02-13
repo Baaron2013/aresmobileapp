@@ -11,7 +11,7 @@ import ChatRoomItem from '../../component/ChatRoomItem';
 import { SearchBar } from 'react-native-elements';
 import { ApplicationProvider,  Avatar, Input } from '@ui-kitten/components'
 
-import NewMessageButton from '../NewMessageButton';
+import NewMessageButton from '../../component/NewMessageButton';
 
 
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
@@ -37,7 +37,7 @@ const chatRoom4 = chatRoomsData[4];
     />
   );
 }; */
-const Messages = () => {
+const messages = () => {
 
 
     const navigation = useNavigation(); 
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Messages
+export default messages
