@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity,Text, StyleSheet, Image, Pressable, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
+import { View, TouchableOpacity,Text, StyleSheet, Image, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Auth, formRow } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
@@ -17,10 +17,9 @@ const HomeRanger = () => {
 
     return (
     <>
-        <ScrollView>
-        <KeyboardAvoidingView
-        behavior="padding"
-        style={styles.container}>
+        <SafeAreaView>
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
+        <ScrollView contentContainerStyle={{height: '100%'}}>
         <View style={styles.popup}>
             <Popup />
         </View>
@@ -105,13 +104,20 @@ const HomeRanger = () => {
                 </TouchableOpacity>
 
             </View>
+            </ScrollView>
             </KeyboardAvoidingView>
-            </ScrollView></>
+            
+            </SafeAreaView></>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1
+    },
+    keyboardViewContainer: {
+        width: '100%', 
+        //alignItems: 'center',
         flex: 1
     },
     root: {
@@ -146,6 +152,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 42,
         backgroundColor: '#BFDBF7',
+        marginLeft: 3
     },
 
     button2: {
@@ -155,6 +162,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 42,
         backgroundColor: '#E1E5F2',
+        marginLeft: 3
+        
     },
 
     button3:{
