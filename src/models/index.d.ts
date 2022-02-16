@@ -16,15 +16,6 @@ export declare class RangerMetrics {
   static copyOf(source: RangerMetrics, mutator: (draft: MutableModel<RangerMetrics>) => MutableModel<RangerMetrics> | void): RangerMetrics;
 }
 
-export declare class Message {
-  readonly id: string;
-  readonly content?: string;
-  readonly userID: string;
-  readonly chatroomID: string;
-  constructor(init: ModelInit<Message>);
-  static copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
-}
-
 export declare class User {
   readonly id: string;
   readonly name: string;
@@ -32,26 +23,6 @@ export declare class User {
   readonly type: string;
   readonly imageUri?: string;
   readonly status?: string;
-  readonly Messages?: (Message | null)[];
-  readonly chatrooms?: (ChatRoomUser | null)[];
   constructor(init: ModelInit<User>);
   static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
-}
-
-export declare class ChatRoomUser {
-  readonly id: string;
-  readonly chatroom: ChatRoom;
-  readonly user: User;
-  constructor(init: ModelInit<ChatRoomUser>);
-  static copyOf(source: ChatRoomUser, mutator: (draft: MutableModel<ChatRoomUser>) => MutableModel<ChatRoomUser> | void): ChatRoomUser;
-}
-
-export declare class ChatRoom {
-  readonly id: string;
-  readonly newMessages: number;
-  readonly lastMessage?: Message;
-  readonly Messages?: (Message | null)[];
-  readonly ChatRoomUsers?: (ChatRoomUser | null)[];
-  constructor(init: ModelInit<ChatRoom>);
-  static copyOf(source: ChatRoom, mutator: (draft: MutableModel<ChatRoom>) => MutableModel<ChatRoom> | void): ChatRoom;
 }

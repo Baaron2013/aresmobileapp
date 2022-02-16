@@ -4,12 +4,9 @@ import { schema } from './schema';
 
 
 
-const { RangerMetrics, Message, User, ChatRoomUser, ChatRoom } = initSchema(schema);
+const { RangerMetrics, User } = initSchema(schema);
 
 export {
   RangerMetrics,
-  Message,
-  User,
-  ChatRoomUser,
-  ChatRoom
+  User
 };

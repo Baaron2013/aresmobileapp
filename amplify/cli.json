@@ -1,14 +1,14 @@
 {
-  "features": {
-    "graphqltransformer": {
-      "enableiterativegsiupdates": true,
-      "showfieldauthnotification": false,
-      "useexperimentalpipelinedtransformer": false,
-      "transformerversion": 2,
-      "securityEnhancementNotification": false
-    },
-    "project": {
-      "overrides": true
+    "features": {
+        "graphqltransformer": {
+            "enableiterativegsiupdates": true,
+            "showfieldauthnotification": false,
+            "useexperimentalpipelinedtransformer": false,
+            "transformerversion": 2,
+            "securityEnhancementNotification": false
+        },
+        "project": {
+            "overrides": true
+        }
     }
-  }
 }
