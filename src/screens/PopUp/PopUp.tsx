@@ -1,4 +1,4 @@
-import { StyleSheet, Modal, Pressable, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Modal, Pressable, KeyboardAvoidingView, Platform} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import { MaterialIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import CustomInput2 from '../../component/customInput2';
@@ -334,7 +334,8 @@ const styles = StyleSheet.create({
   row:{
     flexDirection: 'row',
     alignContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    
   },
   button: {
     width: 65,
@@ -343,6 +344,8 @@ const styles = StyleSheet.create({
   spacingIcons: {
     alignContent: 'center',
     paddingHorizontal: 15,
+    paddingVertical: Platform.OS === 'ios' ? 15 : 0,
+    marginLeft: Platform.OS === 'ios' ? 15 : 0,
   },
   spacingMetrics: {
     alignContent: 'center',
@@ -366,7 +369,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 15,
     marginTop: 120,
-    marginBottom: Platform.OS === 'android' ? 55 : 100,
+    marginBottom: Platform.OS === 'android' ? 55 : 110,
     borderWidth: 2,
     borderColor: '#f2f2f2',
     borderRadius: 30,

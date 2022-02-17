@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         backgroundColor: 'white',
-        paddingLeft: 290,
+        alignItems: 'flex-end',
+        paddingRight: 15,  
         paddingTop: 10,
     },
     header: {

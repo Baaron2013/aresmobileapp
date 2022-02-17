@@ -67,9 +67,9 @@ const HomeRanger = () => {
 
                 <View style={styles.line3}>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate('Programs') } }
+                        onPress={() => { navigation.navigate('Combatives') } }
                         style={styles.button1}>
-                        <Text>Programs</Text>
+                        <Text>Combatives</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -96,9 +96,9 @@ const HomeRanger = () => {
 
                 </View>
                 <TouchableOpacity
-                    onPress={() => { navigation.navigate('Combatives') } }
+                    onPress={() => { navigation.navigate('Programs') } }
                     style={styles.button3}>
-                    <Text>Combatives</Text>
+                    <Text>Programs</Text>
                 </TouchableOpacity>
 
             </View>
@@ -150,7 +150,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 42,
         backgroundColor: '#BFDBF7',
-        marginLeft: 3
+        
+        marginLeft: Platform.OS === 'ios' ? 15 : 0,
+        marginRight: Platform.OS === 'ios' ? 15 : 0,
     },
 
     button2: {
@@ -160,7 +162,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 42,
         backgroundColor: '#E1E5F2',
-        marginLeft: 3
+        marginLeft: Platform.OS === 'ios' ? 15 : 0,
+        marginRight: Platform.OS === 'ios' ? 15 : 0,
         
     },
 
@@ -174,10 +177,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#1F7A8C',
         marginBottom: 15,
 
+
     },
 
     line1:{
         flexDirection: 'row',
+
     },
     line2:{
         flexDirection: 'row',

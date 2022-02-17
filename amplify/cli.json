@@ -4,7 +4,7 @@
             "enableiterativegsiupdates": true,
             "showfieldauthnotification": false,
             "useexperimentalpipelinedtransformer": false,
-            "transformerversion": 2,
+            "transformerversion": 1,
             "securityEnhancementNotification": false
         },
         "project": {
