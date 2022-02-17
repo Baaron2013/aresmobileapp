@@ -32,7 +32,7 @@ export default function PopUpModule({ }) {
         console.log("DataStore event", event, data);
    
         if (event === "ready") {
-          const users = await DataStore.query(UserModel).then(setUsers);
+          const users = await DataStore.query(UserModel).then(setUser);
         }
       });
    

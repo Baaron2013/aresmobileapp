@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
         borderRadius: 42,
         backgroundColor: '#BFDBF7',
         
-        marginLeft: Platform.OS === 'ios' ? 15 : 0,
-        marginRight: Platform.OS === 'ios' ? 15 : 0,
+        marginLeft: Platform.OS === 'ios' ? 15 : 2,
+        marginRight: Platform.OS === 'ios' ? 15 : 2,
     },
 
     button2: {
@@ -162,8 +162,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 42,
         backgroundColor: '#E1E5F2',
-        marginLeft: Platform.OS === 'ios' ? 15 : 0,
-        marginRight: Platform.OS === 'ios' ? 15 : 0,
+        marginLeft: Platform.OS === 'ios' ? 15 : 2,
+        marginRight: Platform.OS === 'ios' ? 15 : 2,
         
     },
 
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         height: 75,
         justifyContent: 'space-around',
         alignItems: 'center',
-        padding: 30,
+        padding: 25,
         borderRadius: 42,
         backgroundColor: '#1F7A8C',
         marginBottom: 15,
