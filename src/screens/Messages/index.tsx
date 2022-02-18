@@ -44,14 +44,9 @@ const chatRoom4 = chatRoomsData[4];
     />
   );
 }; */
-<<<<<<< Updated upstream
 const Messages = () => {
 
 
-=======
-const messages = () => {
-  
->>>>>>> Stashed changes
     const navigation = useNavigation(); 
 
     return (

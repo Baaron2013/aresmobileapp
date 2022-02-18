@@ -12,22 +12,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use T
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 import workoutData from '../../../assets/dummy-data/Workouts';
 
-<<<<<<< Updated upstream
 const Plans = () => {
-=======
-/* import Logo from '../../../assets/images/ares-login-logo.png' */
-
-const workout0 = workoutData[0];
-/* const chatRoom1 = chatRoomsData[1];
-const chatRoom2 = chatRoomsData[2];
-const chatRoom3 = chatRoomsData[3];
-const chatRoom4 = chatRoomsData[4];
- */
-const plans = () => {
->>>>>>> Stashed changes
 
 
     const navigation = useNavigation(); 
+
+    const workout0 = workoutData[0]
 
     return (
         /* <View style={styles.root}>

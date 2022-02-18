@@ -7,7 +7,7 @@ import { Auth, withSSRContext } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Dropdown } from 'react-native-element-dropdown';
+//import { Dropdown } from 'react-native-element-dropdown';
 
 {/* name of function - edited */}
 const data = [
