@@ -25,6 +25,13 @@ const chatRoom4 = chatRoomsData[4];
 
 //type SearchBarComponentProps = {};
 
+/* const handleSearch = text => {
+  const formattedQuery = text.toLowerCase()
+  const data = filter(this.state.fullData, user => {
+    return this.contains(user, formattedQuery)
+  })
+  this.setState({ data, query: text })
+} */
 
 /* const renderHeader = () => {
   return (
@@ -37,12 +44,16 @@ const chatRoom4 = chatRoomsData[4];
     />
   );
 }; */
+<<<<<<< Updated upstream
 const Messages = () => {
 
 
+=======
+const messages = () => {
+  
+>>>>>>> Stashed changes
     const navigation = useNavigation(); 
 
-    
     return (
         <View style={styles.page}> 
         <FlatList
@@ -74,14 +85,15 @@ function renderHeader() {
           autoCapitalize="none"
           autoCorrect={false}
           clearButtonMode="always"
-          value={"Search..."}
-          //onChangeText={queryText => handleSearch(queryText)}
+          value={"Search...rew"}
+          onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
           style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
         />
       </View>
     );
   }
+
 
 
 const styles = StyleSheet.create({
@@ -94,7 +106,7 @@ const styles = StyleSheet.create({
         width: '70%',
         height: 70,
         marginBottom: 30,
-        marginTop: 20,
+        marginTop: -10,
     },
     banner: {
         backgroundColor: '#022b3a',
