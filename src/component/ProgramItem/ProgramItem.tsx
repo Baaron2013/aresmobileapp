@@ -9,56 +9,77 @@ import { SimpleLineIcons, Feather, MaterialCommunityIcons, Ionicons } from '@exp
 import { color } from 'react-native-reanimated';
 import {Picker} from '@react-native-picker/picker';
 import Checkbox from 'expo-checkbox';
+import { navItem } from 'aws-amplify';
 
 
 //import CheckBox from "@react-native-community/checkbox";
-
+const data = [
+    { id: 1, txt: 'first check', isChecked: false },
+    { id: 2, txt: 'second check', isChecked: false },
+    { id: 3, txt: 'third check', isChecked: false },
+    { id: 4, txt: 'fourth check', isChecked: false },
+    { id: 5, txt: 'fifth check', isChecked: false },
+    { id: 6, txt: 'sixth check', isChecked: false },
+    { id: 7, txt: 'seventh check', isChecked: false },
+  ];
+  
 
 export default function ProgramItem({chatRoom}){
+    const [state, setState] = React.useState({
+        hooks: true,
+        hooks2: false
+      })
+
+      function handleChange(evt) {
+        const value =
+          evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
+        setState({
+          ...state,
+          [chatRoom.target.name]: value
+        });
+      }  
     
     const user = chatRoom.users[1];
-
+    
     const navigation = useNavigation();
-
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
-    const [isSelected, setSelection] = useState(false);
+    const [ agree , setAgree] = useState(false)
     //const [selectedLanguage, setSelectedLanguage] = useState();
 
     const [selectedValue, setSelectedValue] = useState("java");
-
+    const [isChecked, setIsChecked] = useState(true);
     
-    /* const onPress = () => {
-        
-        navigation.navigate('ChatRoom');
-    } */
-
+    
+    
+    
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={{fontSize: 20, fontWeight: '500'}}>Exercise:                     Sets X Reps / Weights</Text>
             </View>
             <View style={styles.leftContainer}>
-                {/* <View style={styles.topWorkout}> */}
+     
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
-                        {/* <Text >AAA</Text> */}
+       
                         <View style={styles.selecterContainer}>
-                            {/* <Text>A</Text> */}
+ 
                             {<Picker
                                 selectedValue={selectedValue}
-                                //textStyle={[styles.pickerText]}
+         
                                 
                                 style={styles.selecterRed}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+                                onValueChange={(itemValue, itemIndex) => selectedValue(itemValue)}>
                                 <Picker.Item label="Movemen Pre-Mobillity" value="workout1" />
                                 <Picker.Item label="Workout2" value="workout2" />
                             </Picker>}
                         </View>
                         <Checkbox
                             disabled={false}
-                            value={toggleCheckBox}
+                            value={agree}
                             style={styles.checkCompleted}
-                            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                            //onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
                         />
                     </View>
                         <AntDesign onPress={() => Alert.alert("Open Video")}
@@ -72,7 +93,7 @@ export default function ProgramItem({chatRoom}){
                 </View>
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
-                        {/* <Text>AAAA</Text> */}
+
                         <View style={styles.selecterContainer}>
                         {<Picker
                             selectedValue={selectedValue}
@@ -89,12 +110,17 @@ export default function ProgramItem({chatRoom}){
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>or</Text>
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Individualized Zone Training Plan x 30+ min</Text>
                     </View>
-                    <Checkbox
-                            disabled={false}
-                            value={toggleCheckBox}
+                    
+                        <Checkbox
+                            
+                            
                             style={styles.checkCompleted}
-                            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                            value={isChecked}
+                            //onValueChange={(event) => handleChange}
+                            onValueChange={()=>setIsChecked(!isChecked)}
+                            //onChange={() => handleOnChange(index)}
                         />
+                        
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -114,6 +140,13 @@ export default function ProgramItem({chatRoom}){
                             </Picker>}
                         </View>
                         </View>
+                        <Checkbox
+                            style={styles.checkCompleted}
+                            value={isChecked}
+                            //onValueChange={(event) => handleChange}
+                            onValueChange={()=>setIsChecked(!isChecked)}
+                            //onChange={() => handleOnChange(index)}
+                        />
                         <AntDesign onPress={() => Alert.alert("Open Video")}
                             name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                         <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -126,17 +159,17 @@ export default function ProgramItem({chatRoom}){
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
                         <Text style={{color:'#9f272e'}}>HLR Toes To Bar</Text>
-                        <Checkbox
-                            disabled={false}
-                            value={toggleCheckBox}
-                            style={styles.checkCompleted}
-                            onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                        />
                     </View>
                     <View style={styles.descriptionBlue}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>6-12</Text>
                     </View>
-                    
+                    <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={()=>undefined}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -149,6 +182,13 @@ export default function ProgramItem({chatRoom}){
                     <View style={styles.descriptionBlue}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>6</Text>
                     </View>
+                    <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -161,6 +201,13 @@ export default function ProgramItem({chatRoom}){
                     <View style={styles.descriptionBlue}>
                         <Text style={{ fontSize: 10 }}>6</Text>
                     </View>
+                    <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -171,9 +218,9 @@ export default function ProgramItem({chatRoom}){
                 <View style={styles.workRowWhite}>
 
                     <View style={styles.worksideMed}>
-                        {/* <Text >AAA</Text> */}
+
                         <View style={styles.selecterContainer}>
-                            {/* <Text>A</Text> */}
+
                             {<Picker
                                 selectedValue={selectedValue}
                                 style={styles.selecterBlack}
@@ -183,6 +230,13 @@ export default function ProgramItem({chatRoom}){
                             </Picker>}
                         </View>
                         </View>
+                        <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                         <AntDesign onPress={() => Alert.alert("Open Video")}
                             name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                         <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -198,7 +252,7 @@ export default function ProgramItem({chatRoom}){
                 </View>
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
-                        {/* <Text>AAAA</Text> */}
+
                         <View style={styles.selecterContainer}>
                         {<Picker
                             selectedValue={selectedValue}
@@ -216,6 +270,13 @@ export default function ProgramItem({chatRoom}){
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>3 / 75</Text>
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>3 / 85</Text>
                     </View>
+                    <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -226,9 +287,9 @@ export default function ProgramItem({chatRoom}){
                 <View style={styles.workRowBlue}>
 
                     <View style={styles.worksideMed}>
-                        {/* <Text >BBBB</Text> */}
+
                         <View style={styles.selecterContainer}>
-                            {/* <Text>A</Text> */}
+
                             {<Picker
                                 selectedValue={selectedValue}
                                 style={styles.selecterRed}
@@ -237,6 +298,13 @@ export default function ProgramItem({chatRoom}){
                                 <Picker.Item label="Workout2" value="workout2" />
                             </Picker>}
                         </View>
+                        <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                         <AntDesign onPress={() => Alert.alert("Open Video")}
                             name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                         <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -249,7 +317,6 @@ export default function ProgramItem({chatRoom}){
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
                     <View style={styles.selecterContainer}>
-                            {/* <Text>A</Text> */}
                             {<Picker
                                 selectedValue={selectedValue}
                                 style={styles.selecterBlack}
@@ -262,6 +329,13 @@ export default function ProgramItem({chatRoom}){
                     <View style={styles.description}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>30 / 150+</Text>
                     </View>
+                    <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -283,6 +357,13 @@ export default function ProgramItem({chatRoom}){
                     <View style={styles.description}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>25</Text>
                     </View>
+                    <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -303,6 +384,13 @@ export default function ProgramItem({chatRoom}){
                                 <Picker.Item label="Workout2" value="workout2" />
                             </Picker>}
                         </View>
+                        <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                         <AntDesign onPress={() => Alert.alert("Open Video")}
                             name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                         <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -325,6 +413,13 @@ export default function ProgramItem({chatRoom}){
                     <View style={styles.description}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas.</Text>
                     </View>
+                    <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -332,13 +427,7 @@ export default function ProgramItem({chatRoom}){
                 </View>
                 
             </View>
-            {/* <View style={styles.rightContainer}>
-                <View style={styles.row}>
-                    <Text style={styles.name}>{user.name}</Text>
-                    <Text style={styles.text}>{chatRoom.lastMessage.createdAt}</Text>
-                </View>
-                <Text numberOfLines={1} style={styles.text}>{chatRoom.lastMessage.content}</Text>
-            </View> */}
+            
         </View>
         
     

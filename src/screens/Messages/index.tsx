@@ -80,7 +80,7 @@ function renderHeader() {
           autoCapitalize="none"
           autoCorrect={false}
           clearButtonMode="always"
-          value={"Search...rew"}
+          value={"Search..."}
           onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
           style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}

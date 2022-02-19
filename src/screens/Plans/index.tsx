@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAr
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth } from 'aws-amplify'
+import { Auth, autoShowTooltip } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import ChatRoomItem from '../../component/ChatRoomItem';
 import ProgramItem from '../../component/ProgramItem'
@@ -11,6 +11,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use T
 
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 import workoutData from '../../../assets/dummy-data/Workouts';
+import { listChatRooms } from '../../graphql/queries'
 
 const Plans = () => {
 
@@ -23,14 +24,17 @@ const Plans = () => {
         /* <View style={styles.root}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.banner}></View> */
-         <View style={styles.page}>   
+         <View style={styles.page}> 
+         
+         <Text style={styles.mainheadingweektitle}>Tango --- Power Endurance</Text> 
             <FlatList
                 ListHeaderComponent={renderHeader}
                 data={workoutData}
                 renderItem={({item}) => <ProgramItem chatRoom={item} />}
             />
-            <View>
-                <Text style={{fontSize: 25, color: 'green',}}>Training Log</Text>
+            {/* </View>  */}
+            <View style={styles.log}>
+                <Text style={{fontSize: 25, color: 'green', marginLeft: 10}}>Training Log</Text>
                 <SafeAreaView>
                     <TextInput
                         //numberOfLines={(4)}
@@ -38,12 +42,15 @@ const Plans = () => {
                         //onChangeText={onChangeNumber}
                         //value={number}
                         multiline={true}
+                        numberOfLines={10}
                         placeholder="Enter your workout log here..."
-                        keyboardType="numeric"
+                        
                     />
                 </SafeAreaView>
             </View>
+            
         </View>
+        
         
     )
 }
@@ -71,22 +78,26 @@ function renderHeader() {
             <TouchableOpacity
                 onPress={buttonClickedHandler}
                 style={styles.roundProgramButton1}>
-                <Text style={{color:'#990816', fontSize: 20}}>1</Text>
+                <Text style={styles.roundProgamButtonText}>Day</Text>
+                <Text style={styles.roundProgamButtonText}>1</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={buttonClickedHandler}
                 style={styles.roundProgramButton2}>
-                <Text style={{color:'#990816', fontSize: 20}}>2</Text>
+                <Text style={styles.roundProgamButtonText}>Day</Text>
+                <Text style={styles.roundProgamButtonText}>2</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={buttonClickedHandler}
                 style={styles.roundProgramButton3}>
-                <Text style={{color:'#990816', fontSize: 20}}>3</Text>
+               <Text style={styles.roundProgamButtonText}>Day</Text>
+                <Text style={styles.roundProgamButtonText}>3</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={buttonClickedHandler}
                 style={styles.roundProgramButton4}>
-                <Text style={{color:'#990816', fontSize: 20}}>4</Text>
+                <Text style={styles.roundProgamButtonText}>Day</Text>
+                <Text style={styles.roundProgamButtonText}>4</Text>
             </TouchableOpacity>
         
       </View>
@@ -112,6 +123,47 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 20,
         marginBottom: 70,
+    },
+    log: {
+        //flex: 0
+        //position: 'absolute', left: 0, right: 0, bottom: 0,
+        alignSelf: 'auto',
+        position: 'relative', 
+
+        
+        /* flexDirection: 'column', // inner items will be added vertically
+        flexGrow: 1,            // all the available vertical space will be occupied by it
+        justifyContent: 'space-between' // will create the gutter between body and footer */
+    },
+    input: {
+        height: 100,
+        margin: 12,
+        borderWidth: 2,
+        borderColor: 'green',
+        padding: 10,
+        justifyContent: 'flex-start',
+        textAlignVertical: 'top',
+        
+    },
+    mainheadingweektitle: {
+        color: '#9E0202',
+        fontSize: 20,
+        fontWeight: '700',
+        textShadowColor: 'black',
+        textShadowOffset: {width: -0.5, height: 0.5},
+        textShadowRadius: 4,
+        left: 10,
+        marginBottom: 4,
+        marginTop: 2,
+
+    },
+    roundProgamButtonText: {
+        color: '#9E0202',
+        fontSize: 20,
+        fontWeight: '700',
+        textShadowColor: 'black',
+        textShadowOffset: {width: -0.5, height: 0.5},
+        textShadowRadius: 4,
     },
     roundProgramButton1: {
         width: 70,
@@ -163,14 +215,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flex: 1
     },
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 2,
-        borderColor: 'green',
-        padding: 10,
-        
-    }
+    
 })
 
 
