@@ -5,11 +5,13 @@ import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList} from 'r
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth } from 'aws-amplify'
+import { Auth, DataStore} from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import ChatRoomItem from '../../component/ChatRoomItem';
 import { SearchBar } from 'react-native-elements';
 import { ApplicationProvider,  Avatar, Input } from '@ui-kitten/components'
+import {Chatroom, ChatroomUser} from '../../../src/models'
+import {useState, useEffect} from 'react';
 
 import NewMessageButton from '../NewMessageButton';
 
@@ -17,21 +19,10 @@ import NewMessageButton from '../NewMessageButton';
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 /* import Logo from '../../../assets/images/ares-login-logo.png' */
 
-const chatRoom0 = chatRoomsData[0];
-const chatRoom1 = chatRoomsData[1];
-const chatRoom2 = chatRoomsData[2];
-const chatRoom3 = chatRoomsData[3];
-const chatRoom4 = chatRoomsData[4];
+
 
 //type SearchBarComponentProps = {};
 
-/* const handleSearch = text => {
-  const formattedQuery = text.toLowerCase()
-  const data = filter(this.state.fullData, user => {
-    return this.contains(user, formattedQuery)
-  })
-  this.setState({ data, query: text })
-} */
 
 /* const renderHeader = () => {
   return (
@@ -46,14 +37,27 @@ const chatRoom4 = chatRoomsData[4];
 }; */
 const Messages = () => {
 
+    const [chatRooms, setChatRooms] = useState<Chatroom[]>([]);
 
+    useEffect(() => {
+        const fetchChatRooms = async () => {
+            const userData = await Auth.currentAuthenticatedUser();
+            const chatRooms = (await DataStore.query(ChatroomUser))
+            .filter(chatRoomUser => chatRoomUser.user.id == userData.attributes.sub)
+            .map(chatRoomUser => chatRoomUser.chatroom);
+            //console.log(chatRooms);
+            setChatRooms(chatRooms);
+        };
+        fetchChatRooms();
+    }, []);
     const navigation = useNavigation(); 
 
+    
     return (
         <View style={styles.page}> 
         <FlatList
             ListHeaderComponent={renderHeader}
-            data={chatRoomsData}
+            data={chatRooms}
             renderItem={({item}) => <ChatRoomItem chatRoom={item} />}
         />
         <NewMessageButton/>
@@ -81,14 +85,13 @@ function renderHeader() {
           autoCorrect={false}
           clearButtonMode="always"
           value={"Search..."}
-          onChangeText={queryText => handleSearch(queryText)}
+          //onChangeText={queryText => handleSearch(queryText)}
           placeholder="Search"
           style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
         />
       </View>
     );
   }
-
 
 
 const styles = StyleSheet.create({
@@ -101,7 +104,7 @@ const styles = StyleSheet.create({
         width: '70%',
         height: 70,
         marginBottom: 30,
-        marginTop: -10,
+        marginTop: 20,
     },
     banner: {
         backgroundColor: '#022b3a',

@@ -1,5 +1,6 @@
 /* import React from 'react' */
 import * as React from 'react';
+import {useState, useEffect} from 'react';
 
 import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList} from 'react-native'
 import CustomInput from '../../component/CustomInput'
@@ -10,7 +11,8 @@ import Logo from '../../../assets/images/ares-login-logo.png'
 import ContactListItem from '../../component/ContactListItem';
 import { SearchBar } from 'react-native-elements';
 import { ApplicationProvider,  Avatar, Input } from '@ui-kitten/components'
-
+import {DataStore} from '@aws-amplify/datastore';
+import {User} from '../../../src/models';
 import contactData from '../../../assets/dummy-data/ChatRooms';
 
 /* import Logo from '../../../assets/images/ares-login-logo.png' */
@@ -36,6 +38,12 @@ const chatRoom4 = contactData[4];
   );
 }; */
 const Contacts = () => {
+  const [contacts, setContacts] = useState<User[]>([]);
+
+  //fetching users from database and displaying them on contacts screen
+  useEffect(() =>{
+    DataStore.query(User).then(setContacts);
+  }, [])
 
 
     const navigation = useNavigation(); 
@@ -45,8 +53,8 @@ const Contacts = () => {
         <View style={styles.page}> 
         <FlatList
             ListHeaderComponent={renderHeader}
-            data={contactData}
-            renderItem={({item}) => <ContactListItem contactList={item} />}
+            data={contacts}
+            renderItem={({item}) => <ContactListItem contact={item} />}
         />
     </View>
     )
