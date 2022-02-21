@@ -1,20 +1,42 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {useState, useEffect} from 'react';
+import {DataStore, Auth} from'aws-amplify';
+import {User} from '../../../src/models';
 const blue = '#3777f0';
 const grey = 'lightgrey';
 
-const myID = 'u1'; //hardcoded for now
+//const myID = 'u1'; //hardcoded for now
 
 const Message = ( {message}) => {
+    const [user, setUser] = useState<User|undefined>();
+    const [isMe, setIsMe] = useState<boolean>(false);
 
-    const isMe = message.user.id == myID;
+    useEffect(()=>{
+        DataStore.query(User, message.userID).then(setUser);
+    }, [])
+
+    useEffect(()=> {
+        const checkIfMe = async () =>{
+            const authUser = await Auth.currentAuthenticatedUser();
+            if (!user){
+                return;
+            }
+            setIsMe(user.id == authUser.attributes.sub);
+        }
+        checkIfMe();
+    }, [user])
+    
+    if(!user){
+        return <ActivityIndicator />
+    }
+
 
     return (
         <View style={[
             styles.container, isMe? styles.rightContainer: styles.leftContainer ]}
         >
-            <Text style={{color : isMe ? 'black' : 'white'}}>Message</Text>
+            <Text style={{color : isMe ? 'black' : 'white'}}>{message.content}</Text>
         </View>
     )
 }
