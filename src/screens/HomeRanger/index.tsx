@@ -19,7 +19,7 @@ const HomeRanger = () => {
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
         <ScrollView contentContainerStyle={{height: '100%'}}>
         <View style={styles.popup}>
-            <Popup />
+            {/* <Popup /> */}
         </View>
         <View><Pressable style={styles.icon}
             onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>

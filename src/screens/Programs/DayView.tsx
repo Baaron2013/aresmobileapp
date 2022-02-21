@@ -13,7 +13,7 @@ import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 import workoutData from '../../../assets/dummy-data/Workouts';
 import { listChatRooms } from '../../graphql/queries'
 
-const Plans = () => {
+const PlansWeekView = () => {
 
 
     const navigation = useNavigation(); 
@@ -219,4 +219,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Plans
+export default PlansWeekView

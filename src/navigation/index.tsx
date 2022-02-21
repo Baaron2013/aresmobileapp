@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from '../screens/SignInScreen';
 import HomeRangerNavigation from '../screens/HomeRanger/HomeRNavigation';
 import HomeCoachNavigation from '../screens/HomeCoach/HomeCoachNavigation';
-import Plans from '../screens/Plans';
+import Programs from '../screens/Programs/ProgramsNavigator';
 import Messages from '../navigation/MessagingNavigation';
 import Profile from '../screens/Account/Profile';
 import Account from '../screens/Account/ProfileNavigator';
@@ -188,8 +188,8 @@ function HomeTabsRanger() {
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
-                name="Plans" 
-                component={Plans}
+                name="Programs" 
+                component={Programs}
                 options={{
                     tabBarLabel: 'Programs',
                     tabBarIcon: ({ color, size }) => (
@@ -257,8 +257,8 @@ function HomeTabsCoach() {
                   }}
             ></Tabs.Screen>
             <Tabs.Screen 
-                name="Plans" 
-                component={Plans}
+                name="Programs" 
+                component={Programs}
                 options={{
                     tabBarLabel: 'Programs',
                     tabBarIcon: ({ color, size }) => (
