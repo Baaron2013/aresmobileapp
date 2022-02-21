@@ -7,6 +7,8 @@ import Navigation from '../../navigation';
 import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons } from '@expo/vector-icons';
 import {useState, useEffect} from 'react';
 import {DataStore, Auth} from 'aws-amplify';
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Contact from '../../../assets/images/account.png'
 
 
 export default function ChatRoomItem({chatRoom}){
@@ -49,9 +51,11 @@ export default function ChatRoomItem({chatRoom}){
         return <ActivityIndicator />
     }
 
+
     return (
+
     <Pressable onPress={onPress} style={styles.container}>
-        <Image source={{uri: user.imageUri}} style={styles.image}/>
+        <Image source={Contact} style={styles.image}  />
         
 
             {/* Trying to make the button more pressable instead of the container */}

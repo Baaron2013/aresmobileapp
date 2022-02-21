@@ -19,7 +19,7 @@ const Account = () => {
     const [user, setUser] = useState(null);
     
 
-    const getDBUser = async () => {
+/*     const getDBUser = async () => {
         const authUser = await Auth.currentAuthenticatedUser();
         const dbUsers = await DataStore.query(UserModel, c => c.id("eq", authUser.attributes.sub));
         console.log(dbUsers);
@@ -29,7 +29,7 @@ const Account = () => {
     }
     useEffect (() => {
         getDBUser();
-    }, []);
+    }, []); */
     
         return (
             <><View>
@@ -43,6 +43,7 @@ const Account = () => {
                     <CustomInput
                         defaultValue={weight}
                         //value={newName}
+                        placeholder = 'Weight'
                         setValue={setNewWeight} />
                 </View></>
             

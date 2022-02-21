@@ -103,14 +103,6 @@ export default function ProgramItem({chatRoom}){
                             <Picker.Item label="Workout2" value="workout2" />
                         </Picker>}
                         </View>
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10,fontWeight: 'bold' }}>x2-4, warmup w 2x5 - L drill, 15 sec rest/rep </Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Go for time or apply zone methodology (80/20-yellow box). If you have time add low impact zone 1</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>or</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Individualized Zone Training Plan x 30+ min</Text>
-                    </View>
-                    
                         <Checkbox
                             
                             
@@ -120,6 +112,15 @@ export default function ProgramItem({chatRoom}){
                             onValueChange={()=>setIsChecked(!isChecked)}
                             //onChange={() => handleOnChange(index)}
                         />
+                    </View>
+                    <View style={styles.description}>
+                        <Text style={{ fontSize: 10,fontWeight: 'bold' }}>x2-4, warmup w 2x5 - L drill, 15 sec rest/rep </Text>
+                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Go for time or apply zone methodology (80/20-yellow box). If you have time add low impact zone 1</Text>
+                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>or</Text>
+                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Individualized Zone Training Plan x 30+ min</Text>
+                    </View>
+                    
+                        
                         
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
@@ -139,7 +140,6 @@ export default function ProgramItem({chatRoom}){
                                 <Picker.Item label="PLACE HOLDER - DO NOT DELETE" value="workout2" />
                             </Picker>}
                         </View>
-                        </View>
                         <Checkbox
                             style={styles.checkCompleted}
                             value={isChecked}
@@ -147,6 +147,8 @@ export default function ProgramItem({chatRoom}){
                             onValueChange={()=>setIsChecked(!isChecked)}
                             //onChange={() => handleOnChange(index)}
                         />
+                        </View>
+
                         <AntDesign onPress={() => Alert.alert("Open Video")}
                             name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                         <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -159,17 +161,18 @@ export default function ProgramItem({chatRoom}){
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
                         <Text style={{color:'#9f272e'}}>HLR Toes To Bar</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>6-12</Text>
-                    </View>
-                    <Checkbox
+                        <Checkbox
                             disabled={false}
                             value={agree}
                             style={styles.checkCompleted}
                             onValueChange={()=>undefined}
                             color={agree ? "#4630EB": undefined}
                         />
+                    </View>
+                    <View style={styles.descriptionBlue}>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>6-12</Text>
+                    </View>
+
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -178,17 +181,18 @@ export default function ProgramItem({chatRoom}){
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
                         <Text style={{color:'#9f272e'}}>Situp-Tic Tac Toe</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>6</Text>
-                    </View>
-                    <Checkbox
+                        <Checkbox
                             disabled={false}
                             value={agree}
                             style={styles.checkCompleted}
-                            onValueChange={() => setAgree(!agree)}
+                            onValueChange={()=>undefined}
                             color={agree ? "#4630EB": undefined}
                         />
+                    </View>
+                    <View style={styles.descriptionBlue}>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>6-12</Text>
+                    </View>
+
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -197,17 +201,18 @@ export default function ProgramItem({chatRoom}){
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
                         <Text style={{color:'#9f272e'}}>Standing Med Ball Rotations</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 }}>6</Text>
-                    </View>
-                    <Checkbox
+                        <Checkbox
                             disabled={false}
                             value={agree}
                             style={styles.checkCompleted}
                             onValueChange={() => setAgree(!agree)}
                             color={agree ? "#4630EB": undefined}
                         />
+                    </View>
+                    <View style={styles.descriptionBlue}>
+                        <Text style={{ fontSize: 10 }}>6</Text>
+                    </View>
+
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -229,7 +234,6 @@ export default function ProgramItem({chatRoom}){
                                 <Picker.Item label="Workout2" value="workout2" />
                             </Picker>}
                         </View>
-                        </View>
                         <Checkbox
                             disabled={false}
                             value={agree}
@@ -237,6 +241,8 @@ export default function ProgramItem({chatRoom}){
                             onValueChange={() => setAgree(!agree)}
                             color={agree ? "#4630EB": undefined}
                         />
+                        </View>
+
                         <AntDesign onPress={() => Alert.alert("Open Video")}
                             name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                         <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -262,6 +268,13 @@ export default function ProgramItem({chatRoom}){
                             <Picker.Item label="Workout2" value="workout2" />
                         </Picker>}
                         </View>
+                        <Checkbox
+                            disabled={false}
+                            value={agree}
+                            style={styles.checkCompleted}
+                            onValueChange={() => setAgree(!agree)}
+                            color={agree ? "#4630EB": undefined}
+                        />
                     </View>
                     <View style={styles.description}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>5 / 45</Text>
@@ -270,13 +283,7 @@ export default function ProgramItem({chatRoom}){
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>3 / 75</Text>
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>3 / 85</Text>
                     </View>
-                    <Checkbox
-                            disabled={false}
-                            value={agree}
-                            style={styles.checkCompleted}
-                            onValueChange={() => setAgree(!agree)}
-                            color={agree ? "#4630EB": undefined}
-                        />
+
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -305,14 +312,15 @@ export default function ProgramItem({chatRoom}){
                             onValueChange={() => setAgree(!agree)}
                             color={agree ? "#4630EB": undefined}
                         />
-                        <AntDesign onPress={() => Alert.alert("Open Video")}
-                            name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
-                        <AntDesign onPress={() => Alert.alert("Open Book")}
-                            name="book" size={25} color="#595959" style={styles.readIcon} />
+
                     </View>
                     <View style={styles.description}>
                         <Text style={{fontSize:10 ,fontWeight: 'bold'}}>2-3x thru</Text>
                     </View>
+                    <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" style={styles.readIcon} />
                 </View>
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
@@ -325,17 +333,18 @@ export default function ProgramItem({chatRoom}){
                                 <Picker.Item label="Workout2" value="workout2" />
                             </Picker>}
                         </View>
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>30 / 150+</Text>
-                    </View>
-                    <Checkbox
+                        <Checkbox
                             disabled={false}
                             value={agree}
                             style={styles.checkCompleted}
                             onValueChange={() => setAgree(!agree)}
                             color={agree ? "#4630EB": undefined}
                         />
+                    </View>
+                    <View style={styles.description}>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>30 / 150+</Text>
+                    </View>
+ 
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -353,17 +362,18 @@ export default function ProgramItem({chatRoom}){
                                 <Picker.Item label="Workout2" value="workout2" />
                             </Picker>}
                         </View>
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>25</Text>
-                    </View>
-                    <Checkbox
+                        <Checkbox
                             disabled={false}
                             value={agree}
                             style={styles.checkCompleted}
                             onValueChange={() => setAgree(!agree)}
                             color={agree ? "#4630EB": undefined}
                         />
+                    </View>
+                    <View style={styles.description}>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>25</Text>
+                    </View>
+
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
@@ -391,10 +401,7 @@ export default function ProgramItem({chatRoom}){
                             onValueChange={() => setAgree(!agree)}
                             color={agree ? "#4630EB": undefined}
                         />
-                        <AntDesign onPress={() => Alert.alert("Open Video")}
-                            name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
-                        <AntDesign onPress={() => Alert.alert("Open Book")}
-                            name="book" size={25} color="#595959" style={styles.readIcon} />
+
                     </View>
                     <View style={styles.description}>
                     <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>Do not put the weight down until all reps are completed. Non-stop movement</Text>
@@ -405,21 +412,26 @@ export default function ProgramItem({chatRoom}){
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-rdl (both legs together)</Text>
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-clean and jerk</Text>
                     </View>
+                    <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" style={styles.readIcon} />
                 </View>
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
                         <Text style={{color: 'red'}}>Recovery / Regeneration / Mobility</Text>
-                    </View>    
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas.</Text>
-                    </View>
-                    <Checkbox
+                        <Checkbox
                             disabled={false}
                             value={agree}
                             style={styles.checkCompleted}
                             onValueChange={() => setAgree(!agree)}
                             color={agree ? "#4630EB": undefined}
                         />
+                    </View>    
+                    <View style={styles.description}>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas.</Text>
+                    </View>
+
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
                     <AntDesign onPress={() => Alert.alert("Open Book")}

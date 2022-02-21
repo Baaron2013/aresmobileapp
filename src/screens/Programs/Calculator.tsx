@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         height: 20,
       },
     calcView2: {
-        width: 350,
+        width: '90%',
         height:100,
         borderRadius:30,
         textDecorationColor: '#FFFFFF',
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 25,
         color: 'white',
+        textAlign: 'center'
        },
     title: {
         marginTop: 30,
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
         padding: 10,
       },
     container: {
-        width: 350,
+        width: '90%',
         height:100,
         backgroundColor: 'white',
         padding: 16,
@@ -202,7 +203,7 @@ const styles = StyleSheet.create({
         height: 80,
         justifyContent: 'space-around',
         alignItems: 'center',
-        padding: 30,
+        padding: 20,
         borderRadius: 42,
         backgroundColor: '#1F7A8C',
     },

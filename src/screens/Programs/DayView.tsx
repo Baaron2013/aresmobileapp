@@ -64,15 +64,15 @@ function renderHeader() {
     return (
       <View
         style={{
-          backgroundColor: '#fff',
+          //backgroundColor: '#bfdbf7',
           padding: 5,
           marginVertical: 5,
           borderRadius: 10,
           borderStyle: 'solid',
           borderColor: 'black',
           flex: 1,
-          justifyContent: 'center',
-          flexDirection: 'row'
+          alignContent: 'center',
+          flexDirection: 'row',
         }}
       >
             <TouchableOpacity
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         flex: 1,
+        
     },
     logo: {
         width: '70%',
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
         
     },
     mainheadingweektitle: {
-        color: '#9E0202',
+        color: '#1F7A8C',
         fontSize: 20,
         fontWeight: '700',
         textShadowColor: 'black',
@@ -158,12 +159,9 @@ const styles = StyleSheet.create({
 
     },
     roundProgamButtonText: {
-        color: '#9E0202',
+        color: "white",
         fontSize: 20,
-        fontWeight: '700',
-        textShadowColor: 'black',
-        textShadowOffset: {width: -0.5, height: 0.5},
-        textShadowRadius: 4,
+        fontWeight: 'bold',
     },
     roundProgramButton1: {
         width: 70,
@@ -171,10 +169,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 1,
-        borderWidth: 1,
         borderRadius: 50,
-        backgroundColor: '#abbfe0',
-        margin: 15,
+        backgroundColor: '#1F7A8C',
+        margin: 5,
         
     },
     roundProgramButton2: {
@@ -183,10 +180,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 1,
-        borderWidth: 1,
         borderRadius: 50,
-        backgroundColor: '#678ecf',
-        margin: 15,
+        backgroundColor: '#E1E5F2',
+        margin: 5,
         
     },
     roundProgramButton3: {
@@ -195,10 +191,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 1,
-        borderWidth: 1,
         borderRadius: 50,
-        backgroundColor: '#678ecf',
-        margin: 15,
+        backgroundColor: '#E1E5F2',
+        margin: 5,
     },
     roundProgramButton4: {
         width: 70,
@@ -206,14 +201,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 1,
-        borderWidth: 1,
         borderRadius: 50,
-        backgroundColor: '#678ecf',
-        margin: 15,
+        backgroundColor: '#E1E5F2',
+        margin: 5,
     },
     page: {
         backgroundColor: 'white',
-        flex: 1
+        flex: 1,
     },
     
 })
