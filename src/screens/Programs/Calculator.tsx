@@ -95,7 +95,7 @@ const Programs = () => {
             </View>
 
             <TouchableOpacity
-                    onPress={() => { navigation.navigate('calcResults') } }
+                    onPress={() => { navigation.navigate('WeeklyView') } }
                     style={styles.button3}>
                     <Text style={styles.stext}>Search</Text>
             </TouchableOpacity>

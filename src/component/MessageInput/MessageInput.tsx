@@ -151,6 +151,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         padding: 5,
+        marginBottom: Platform.OS === 'ios' ? 15 : 0
+
     },
     buttonContainer: {
         width: 40,
