@@ -63,7 +63,7 @@ const App = () => {
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={styles.root}>
-              <StatusBar />
+              <StatusBar style="light"/>
               <Navigation />
           </SafeAreaView>
       </ApplicationProvider></>

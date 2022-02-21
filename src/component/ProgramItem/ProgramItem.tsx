@@ -68,7 +68,7 @@ export default function ProgramItem({chatRoom}){
          
                                 
                                 style={styles.selecterRed}
-                                onValueChange={(itemValue, itemIndex) => selectedValue(itemValue)}>
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
                                 <Picker.Item label="Movemen Pre-Mobillity" value="workout1" />
                                 <Picker.Item label="Workout2" value="workout2" />
                             </Picker>}
