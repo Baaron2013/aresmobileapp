@@ -1,6 +1,5 @@
 /* import React from 'react' */
 import * as React from 'react';
-import {useState, useEffect} from 'react';
 
 import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList} from 'react-native'
 import CustomInput from '../../component/CustomInput'
@@ -8,20 +7,21 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
-import ContactListItem from '../../component/ContactListItem';
+import ChatRoomItem from '../../component/ChatRoomItem';
 import { SearchBar } from 'react-native-elements';
 import { ApplicationProvider,  Avatar, Input } from '@ui-kitten/components'
-import {DataStore} from '@aws-amplify/datastore';
-import {User} from '../../../src/models';
-import contactData from '../../../assets/dummy-data/ChatRooms';
 
+import NewMessageButton from '../../component/NewMessageButton';
+
+
+import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 /* import Logo from '../../../assets/images/ares-login-logo.png' */
 
-const chatRoom0 = contactData[0];
-const chatRoom1 = contactData[1];
-const chatRoom2 = contactData[2];
-const chatRoom3 = contactData[3];
-const chatRoom4 = contactData[4];
+const chatRoom0 = chatRoomsData[0];
+const chatRoom1 = chatRoomsData[1];
+const chatRoom2 = chatRoomsData[2];
+const chatRoom3 = chatRoomsData[3];
+const chatRoom4 = chatRoomsData[4];
 
 //type SearchBarComponentProps = {};
 
@@ -37,13 +37,7 @@ const chatRoom4 = contactData[4];
     />
   );
 }; */
-const Contacts = () => {
-  const [contacts, setContacts] = useState<User[]>([]);
-
-  //fetching users from database and displaying them on contacts screen
-  useEffect(() =>{
-    DataStore.query(User).then(setContacts);
-  }, [])
+const messages = () => {
 
 
     const navigation = useNavigation(); 
@@ -53,9 +47,10 @@ const Contacts = () => {
         <View style={styles.page}> 
         <FlatList
             ListHeaderComponent={renderHeader}
-            data={contacts}
-            renderItem={({item}) => <ContactListItem contact={item} />}
+            data={chatRoomsData}
+            renderItem={({item}) => <ChatRoomItem chatRoom={item} />}
         />
+        <NewMessageButton/>
     </View>
     )
 }
@@ -114,4 +109,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Contacts
+export default messages
