@@ -1,9 +1,9 @@
 import React from 'react-native';
 import { StyleSheet } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Calculator from '../Programs/Calculator';
-import DayView from '../Programs/DayView';
-import WeeklyView from '../Programs/WeeklyView';
+import Calculator from '../screens/Programs/Calculator';
+import DayView from '../screens/Programs/DayView';
+import WeeklyView from '../screens/Programs/WeeklyView';
 
 
 const ProgramNavigation = () =>  {

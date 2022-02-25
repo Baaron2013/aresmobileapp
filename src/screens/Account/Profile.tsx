@@ -21,33 +21,11 @@ const Profile = () => {
     const [currentEmail, setEmail] = useState('');
     const [userID, setID] = useState(undefined);
     const [authUser, setAuthUser] = useState(undefined);
-    const [user, setUser] = useState(undefined);
     const [currentImage, setCurrentImage] = useState<string | null>(null);
     const [newLocalImage, setNewLocalImage] = useState<string | null>(null);
-    useEffect(() => {
-      // Create listener that will stop observing the model once the sync process is done
-      const removeListener = Hub.listen("datastore", async (capsule) => {
-        const {
-          payload: { event, data },
-        } = capsule;
-   
-        console.log("DataStore event", event, data);
-   
-        if (event === "ready") {
-          const users = await DataStore.query(UserModel).then(setUser);
-        }
-      });
-   
-      // Start the DataStore, this kicks-off the sync process.
-      DataStore.start();
-   
-      return () => {
-        removeListener();
-      };
-    }, []);
 
-    //get authenticated user 1 time
     const getUser = async () => {
+        //get authenticated user 1 time
         const authUser = await Auth.currentAuthenticatedUser();
         if (authUser){
             setName(authUser.attributes.name)
@@ -55,9 +33,10 @@ const Profile = () => {
             setID(authUser.attributes.sub)
             setAuthUser(authUser)
         }
+        //get DB user one time to set current profile pic, if it exists
         const user = await DataStore.query(UserModel, authUser.attributes.sub);
         console.log('got user')
-        if (user.imageUri === undefined) {
+        if (user === undefined) {
             console.log(user + 'error finding user' + userID);
             return;
         }
@@ -72,6 +51,7 @@ const Profile = () => {
         getUser();
     }, []);
 
+    //get camera permission from user one time for profile pic upload
     useEffect(() => {
         (async () => {
           if (Platform.OS !== "web") {
@@ -84,7 +64,7 @@ const Profile = () => {
         })();
       }, []);
 
-
+    //image picker to select profile pic
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -94,13 +74,15 @@ const Profile = () => {
           });
       
           console.log(result);
-      
+          
+          //if user does not cancel request, set local image variable with selected image
           if (!result.cancelled) {
               setNewLocalImage(result.uri)
         }
 
     }
 
+    //upload image to S3 Storage
     const uploadImage = async (): Promise<string | null> => {
         if (!newLocalImage) {
           return null;
@@ -128,6 +110,7 @@ const Profile = () => {
             [
             ]
         )
+        //if new image exists, upload the image
         let fileKey;
         if (newLocalImage){
             console.log('upload image started')
@@ -141,9 +124,12 @@ const Profile = () => {
             console.log(dbUser + 'error finding user' + userID);
             return;
         }  
+
+        //if no new name is entered, set it to current name
         if (newName === '') {
             newName = currentName;
         }
+        //if no new email is entered, set it to current name
         if (newEmail === '') {
             newEmail = currentEmail;
         }
@@ -159,7 +145,8 @@ const Profile = () => {
             })
         )
         console.log('saving to dynamo')
-        //setNewLocalImage(null)
+        setNewLocalImage(null)
+        
         //save to Cognito
         await Auth.updateUserAttributes(authUser, {
             'name': newName,
