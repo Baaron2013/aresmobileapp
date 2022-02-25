@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, Alert, Image, Pressable, Platform } from 'react
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth, Hub, Storage } from 'aws-amplify'
-import { DataStore } from '@aws-amplify/datastore'
+import { Auth, Hub, Storage, DataStore } from 'aws-amplify'
 import { User as UserModel } from "../../models"
 import Logo from '../../../assets/images/ares-login-logo.png'
 import Contact from '../../../assets/images/user.png'
+import Thumbnail from '../../../assets/images/progress-download.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as ImagePicker from 'expo-image-picker';
 import "react-native-get-random-values";
@@ -63,7 +63,15 @@ const Profile = () => {
           }
         })();
       }, []);
-
+    
+    const ProgressiveImage = ({ source, style, thumbnailSource}) => {
+        return (
+            <View style={styles.container}>
+                <Image source={thumbnailSource} style={style} />
+                <Image source={source} style={[styles.imageOverlay, style]} />
+            </View>
+        )
+    }
     //image picker to select profile pic
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -145,8 +153,8 @@ const Profile = () => {
             })
         )
         console.log('saving to dynamo')
-        setNewLocalImage(null)
-        
+        //setNewLocalImage(null)
+        setCurrentImage(fileKey)
         //save to Cognito
         await Auth.updateUserAttributes(authUser, {
             'name': newName,
@@ -189,18 +197,19 @@ const Profile = () => {
     }
     
     const renderImage = () => {
+        
         if (newLocalImage) {
             console.log('rendering local image')
-            return <Image source={{uri: newLocalImage}} style={styles.profilePic} />
+            return <ProgressiveImage source={{uri: newLocalImage}} thumbnailSource={{uri: newLocalImage}} style={styles.profilePic} />
             
         }
         if (currentImage) {
             console.log('rendering current image')
             console.log(currentImage)
-            return <Image source={{uri: currentImage}} style={styles.profilePic} />
+            return <ProgressiveImage source={{uri: currentImage}} thumbnailSource={Thumbnail} style={styles.profilePic} />
         }
         console.log('rendering contact image')
-        return <Image source={Contact} style={styles.profilePic} />
+        return <ProgressiveImage source={Contact} thumbnailSource={Contact} style={styles.profilePic} />
     }
         return (
             
@@ -264,6 +273,22 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flex: 1,
     },
+    imageOverlay: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: 0,
+    },
+    container: {
+        backgroundColor: '#e1e4e8',
+        marginTop: 10,
+        marginBottom: 20,
+        height: 100,
+        width: 100,
+        borderRadius: 50,
+
+    },
     header: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -276,8 +301,8 @@ const styles = StyleSheet.create({
 
     },
     profilePic: {
-        marginTop: 10,
-        marginBottom: 10,
+        //marginTop: 10,
+        marginBottom: 20,
         height: 100,
         width: 100,
         borderRadius: 50,

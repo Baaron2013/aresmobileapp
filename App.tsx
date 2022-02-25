@@ -61,11 +61,13 @@ if (Platform.OS === 'android') {
     };
 }
 
-
+const getUsers = async () => {
+  
+}
 
 const App = () => {
-    const [loggedInUser, setLoggedInUser] = useState<UserModel[]>([]);
-useEffect(() => {
+    const [loggedInUsers, setLoggedInUsers] = useState<UserModel[]>([]);
+    useEffect(() => {
     // Create listener that will stop observing the model once the sync process is done
     const removeListener = Hub.listen("datastore", async (capsule) => {
       const {
@@ -75,7 +77,7 @@ useEffect(() => {
       console.log("DataStore event", event, data);
  
       if (event === "ready") {
-        const users = await DataStore.query(UserModel).then(setLoggedInUser);
+        const users = await DataStore.query(UserModel).then(setLoggedInUsers);
       }
     });
  
