@@ -1,7 +1,8 @@
 // import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import Navigation from "./src/navigation";
-import { StyleSheet, SafeAreaView, Platform, InteractionManager, StatusBar } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, InteractionManager } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { Amplify} from '@aws-amplify/core';
 import config from "./src/aws-exports";
 import * as eva from '@eva-design/eva';
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: '#022b3a',
-    paddingTop: Platform.OS === 'android' ? 0 : 0
+    paddingTop: Platform.OS === 'android' ? 25 : 0
 
   }
 })
