@@ -2,6 +2,165 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateChatroom = /* GraphQL */ `
+  subscription OnCreateChatroom {
+    onCreateChatroom {
+      id
+      newMessages
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      LastMessage {
+        id
+        content
+        userID
+        chatroomID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Messages {
+        items {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      ChatroomUsers {
+        items {
+          id
+          chatroomID
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateChatroom = /* GraphQL */ `
+  subscription OnUpdateChatroom {
+    onUpdateChatroom {
+      id
+      newMessages
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      LastMessage {
+        id
+        content
+        userID
+        chatroomID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Messages {
+        items {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      ChatroomUsers {
+        items {
+          id
+          chatroomID
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteChatroom = /* GraphQL */ `
+  subscription OnDeleteChatroom {
+    onDeleteChatroom {
+      id
+      newMessages
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      LastMessage {
+        id
+        content
+        userID
+        chatroomID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Messages {
+        items {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      ChatroomUsers {
+        items {
+          id
+          chatroomID
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const onCreateMessage = /* GraphQL */ `
   subscription OnCreateMessage {
     onCreateMessage {
@@ -39,6 +198,60 @@ export const onDeleteMessage = /* GraphQL */ `
       content
       userID
       chatroomID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateRangerMetrics = /* GraphQL */ `
+  subscription OnCreateRangerMetrics {
+    onCreateRangerMetrics {
+      id
+      weight
+      sleep
+      willingness
+      appetite
+      soreness
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRangerMetrics = /* GraphQL */ `
+  subscription OnUpdateRangerMetrics {
+    onUpdateRangerMetrics {
+      id
+      weight
+      sleep
+      willingness
+      appetite
+      soreness
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRangerMetrics = /* GraphQL */ `
+  subscription OnDeleteRangerMetrics {
+    onDeleteRangerMetrics {
+      id
+      weight
+      sleep
+      willingness
+      appetite
+      soreness
+      userID
       _version
       _deleted
       _lastChangedAt
@@ -185,168 +398,9 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
-export const onCreateChatRoom = /* GraphQL */ `
-  subscription OnCreateChatRoom {
-    onCreateChatRoom {
-      id
-      newMessages
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      lastMessage {
-        id
-        content
-        userID
-        chatroomID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      Messages {
-        items {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      ChatRoomUsers {
-        items {
-          id
-          chatroomID
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onUpdateChatRoom = /* GraphQL */ `
-  subscription OnUpdateChatRoom {
-    onUpdateChatRoom {
-      id
-      newMessages
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      lastMessage {
-        id
-        content
-        userID
-        chatroomID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      Messages {
-        items {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      ChatRoomUsers {
-        items {
-          id
-          chatroomID
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onDeleteChatRoom = /* GraphQL */ `
-  subscription OnDeleteChatRoom {
-    onDeleteChatRoom {
-      id
-      newMessages
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      lastMessage {
-        id
-        content
-        userID
-        chatroomID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      Messages {
-        items {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      ChatRoomUsers {
-        items {
-          id
-          chatroomID
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onCreateChatRoomUser = /* GraphQL */ `
-  subscription OnCreateChatRoomUser {
-    onCreateChatRoomUser {
+export const onCreateChatroomUser = /* GraphQL */ `
+  subscription OnCreateChatroomUser {
+    onCreateChatroomUser {
       id
       chatroomID
       userID
@@ -355,6 +409,34 @@ export const onCreateChatRoomUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      chatroom {
+        id
+        newMessages
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        LastMessage {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatroomUsers {
+          nextToken
+          startedAt
+        }
+      }
       user {
         id
         name
@@ -376,6 +458,20 @@ export const onCreateChatRoomUser = /* GraphQL */ `
           startedAt
         }
       }
+    }
+  }
+`;
+export const onUpdateChatroomUser = /* GraphQL */ `
+  subscription OnUpdateChatroomUser {
+    onUpdateChatroomUser {
+      id
+      chatroomID
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       chatroom {
         id
         newMessages
@@ -384,7 +480,7 @@ export const onCreateChatRoomUser = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        lastMessage {
+        LastMessage {
           id
           content
           userID
@@ -399,25 +495,11 @@ export const onCreateChatRoomUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        ChatRoomUsers {
+        ChatroomUsers {
           nextToken
           startedAt
         }
       }
-    }
-  }
-`;
-export const onUpdateChatRoomUser = /* GraphQL */ `
-  subscription OnUpdateChatRoomUser {
-    onUpdateChatRoomUser {
-      id
-      chatroomID
-      userID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       user {
         id
         name
@@ -439,6 +521,20 @@ export const onUpdateChatRoomUser = /* GraphQL */ `
           startedAt
         }
       }
+    }
+  }
+`;
+export const onDeleteChatroomUser = /* GraphQL */ `
+  subscription OnDeleteChatroomUser {
+    onDeleteChatroomUser {
+      id
+      chatroomID
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       chatroom {
         id
         newMessages
@@ -447,7 +543,7 @@ export const onUpdateChatRoomUser = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        lastMessage {
+        LastMessage {
           id
           content
           userID
@@ -462,25 +558,11 @@ export const onUpdateChatRoomUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        ChatRoomUsers {
+        ChatroomUsers {
           nextToken
           startedAt
         }
       }
-    }
-  }
-`;
-export const onDeleteChatRoomUser = /* GraphQL */ `
-  subscription OnDeleteChatRoomUser {
-    onDeleteChatRoomUser {
-      id
-      chatroomID
-      userID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       user {
         id
         name
@@ -498,34 +580,6 @@ export const onDeleteChatRoomUser = /* GraphQL */ `
           startedAt
         }
         chatrooms {
-          nextToken
-          startedAt
-        }
-      }
-      chatroom {
-        id
-        newMessages
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        lastMessage {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRoomUsers {
           nextToken
           startedAt
         }

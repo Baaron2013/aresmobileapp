@@ -7,7 +7,7 @@ import { Auth, Hub, Storage, DataStore } from 'aws-amplify'
 import { User as UserModel } from "../../models"
 import Logo from '../../../assets/images/ares-login-logo.png'
 import Contact from '../../../assets/images/user.png'
-import Thumbnail from '../../../assets/images/progress-download.png'
+import Thumbnail from '../../../assets/images/download.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as ImagePicker from 'expo-image-picker';
 import "react-native-get-random-values";
@@ -153,8 +153,8 @@ const Profile = () => {
             })
         )
         console.log('saving to dynamo')
-        //setNewLocalImage(null)
-        setCurrentImage(fileKey)
+        setNewLocalImage(null)
+
         //save to Cognito
         await Auth.updateUserAttributes(authUser, {
             'name': newName,
@@ -176,6 +176,7 @@ const Profile = () => {
             setName(newName);
             setEmail(newEmail);
             console.log('name before edits: ' + newName);
+            navigation.navigate('Profile');
 
         }
     }
