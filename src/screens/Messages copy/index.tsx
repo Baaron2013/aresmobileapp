@@ -37,7 +37,7 @@ const chatRoom4 = chatRoomsData[4];
     />
   );
 }; */
-const Messages = () => {
+const messages = () => {
 
 
     const navigation = useNavigation(); 

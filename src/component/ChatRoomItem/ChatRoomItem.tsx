@@ -7,6 +7,7 @@ import Navigation from '../../navigation';
 import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons } from '@expo/vector-icons';
 import {useState, useEffect} from 'react';
 import {DataStore, Auth} from 'aws-amplify';
+import Contact from '../../../assets/images/user.png'
 
 
 export default function ChatRoomItem({chatRoom}){
@@ -51,7 +52,7 @@ export default function ChatRoomItem({chatRoom}){
 
     return (
     <Pressable onPress={onPress} style={styles.container}>
-        <Image source={{uri: user.imageUri}} style={styles.image}/>
+        <Image source={user.imageUri === null ? Contact : {uri: user.imageUri}} style={styles.image}/>
         
 
             {/* Trying to make the button more pressable instead of the container */}

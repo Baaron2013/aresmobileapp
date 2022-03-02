@@ -114,11 +114,10 @@ const styles = StyleSheet.create({
     },
     selecterGreen: { 
         position: 'absolute',
-        fontSize: 10,
         margin: 6,
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         height: 30,
-        width: 175,
+        width:150,
         color: '#197519' //green
     },
     selecterBlack: { 

@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet, TextInput,Press
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth, withSSRContext } from 'aws-amplify'
+import { Auth, navItem, withSSRContext } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-element-dropdown';
-
+import Plans from './WeeklyView';
 {/* name of function - edited */}
 const data = [
     { label: 'ELITE', value: '1' },
@@ -95,7 +95,11 @@ const Programs = () => {
             </View>
 
             <TouchableOpacity
-                    onPress={() => { navigation.navigate('calcResults') } }
+                    onPress={() => { navigation.navigate('WeeklyView', {
+                        paramKey: 'test',
+                        weight: 10,
+                        programType: value,
+                      }); } }
                     style={styles.button3}>
                     <Text style={styles.stext}>Search</Text>
             </TouchableOpacity>
@@ -131,7 +135,7 @@ const styles = StyleSheet.create({
         height: 20,
       },
     calcView2: {
-        width: 350,
+        width: '90%',
         height:100,
         borderRadius:30,
         textDecorationColor: '#FFFFFF',
@@ -151,6 +155,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 25,
         color: 'white',
+        textAlign: 'center'
        },
     title: {
         marginTop: 30,
@@ -165,7 +170,7 @@ const styles = StyleSheet.create({
         padding: 10,
       },
     container: {
-        width: 350,
+        width: '90%',
         height:100,
         backgroundColor: 'white',
         padding: 16,
@@ -202,7 +207,7 @@ const styles = StyleSheet.create({
         height: 80,
         justifyContent: 'space-around',
         alignItems: 'center',
-        padding: 30,
+        padding: 20,
         borderRadius: 42,
         backgroundColor: '#1F7A8C',
     },
