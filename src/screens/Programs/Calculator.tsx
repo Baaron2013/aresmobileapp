@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet, TextInput,Press
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth, withSSRContext } from 'aws-amplify'
+import { Auth, navItem, withSSRContext } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-element-dropdown';
-
+import Plans from './WeeklyView';
 {/* name of function - edited */}
 const data = [
     { label: 'ELITE', value: '1' },
@@ -95,7 +95,11 @@ const Programs = () => {
             </View>
 
             <TouchableOpacity
-                    onPress={() => { navigation.navigate('WeeklyView') } }
+                    onPress={() => { navigation.navigate('WeeklyView', {
+                        paramKey: 'test',
+                        weight: 10,
+                        programType: value,
+                      }); } }
                     style={styles.button3}>
                     <Text style={styles.stext}>Search</Text>
             </TouchableOpacity>
