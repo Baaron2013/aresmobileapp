@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     
     container: {
         flexDirection: 'column',
-        padding: 5,
+        padding: 15,
         //padding: 1,
         //paddingBottom: 10,
         backgroundColor: 'white',
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         //justifyContent: 'center',
         backgroundColor: 'transparent',
-        height: 400,
+        height: 250,
         //margin: 20,
     },
     leftContainerSmaller: {
@@ -104,7 +104,9 @@ const styles = StyleSheet.create({
         backgroundColor:'transparent',
         alignContent: 'center',
         height: 200,
-        width: 100,
+        width: 150,
+        paddingLeft: 8
+        
     },
     selecterContainerBlue: {
         backgroundColor:'#879EB3',
@@ -114,10 +116,10 @@ const styles = StyleSheet.create({
     },
     selecterGreen: { 
         position: 'absolute',
-        margin: 6,
+        //margin: 6,
         backgroundColor: 'transparent',
         height: 30,
-        width:150,
+        width: 150,
         color: '#197519' //green
     },
     selecterBlack: { 
@@ -150,8 +152,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingTop:10,
         paddingBottom: 10,
-        //paddingLeft: 10,
-        paddingRight: 10,
         flex:1,
         flexDirection: 'row',
         alignContent: 'center',
@@ -176,7 +176,16 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'row'
+    },
+    subheader1: {
+        fontSize: 20, 
+        fontWeight: '500'
+    },
+    subheader2: {
+        fontSize: 20, 
+        fontWeight: '500',
+        marginLeft: 72
     },
     /* workside1: {
         flex: 1,
@@ -226,7 +235,17 @@ const styles = StyleSheet.create({
     },
     logContainer: {
         backgroundColor: 'green'
-    }
+    },
+    completed: {
+        flexDirection: 'row',
+        paddingLeft: 8,
+        paddingTop: 10,
+    },
+    timesCompleted: {
+        paddingLeft: 8,
+        paddingBottom: 10
+    },
+
 
     
 

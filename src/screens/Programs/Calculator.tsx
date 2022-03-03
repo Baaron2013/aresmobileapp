@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet, TextInput,Pressable, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
@@ -24,7 +24,8 @@ const Programs = () => {
     const [text, onChangeText] = React.useState("Useless Text");
     const [number, onChangeNumber] = React.useState(null);
 
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState();
+    const [label, setLabel] = useState();
     const [isFocus, setIsFocus] = useState(false);
 
     const renderLabel = () => {
@@ -37,7 +38,13 @@ const Programs = () => {
       }
       return null;
     };
+    const onUpdate = (item) => {
+        setLabel(item.label)
+        setValue(item.value);
+        console.log('label ' + item.value)
+        setIsFocus(false);
 
+    }
     return (
         <View style={styles.root}>
             {/* inserts header label - edited*/}
@@ -87,22 +94,20 @@ const Programs = () => {
                     value={value}
                     onFocus={() => setIsFocus(true)}
                     onBlur={() => setIsFocus(false)}
-                    onChange={item => {
-                        setValue(item.value);
-                        setIsFocus(false);
-                    }}
+                    onChange={onUpdate}
                 />
             </View>
-
+            
             <TouchableOpacity
-                    onPress={() => { navigation.navigate('WeeklyView', {
-                        paramKey: 'test',
-                        weight: 10,
-                        programType: value,
-                      }); } }
+                    onPress={() => { 
+                        navigation.navigate('WeeklyView', {
+                            planType: label,
+                            programType: value,
+                        }); console.log('label' + label)}}
                     style={styles.button3}>
                     <Text style={styles.stext}>Search</Text>
             </TouchableOpacity>
+            
             
             
         </View>

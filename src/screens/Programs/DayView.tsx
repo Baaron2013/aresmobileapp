@@ -13,12 +13,17 @@ import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 import workoutData from '../../../assets/dummy-data/Workouts';
 import { listChatRooms } from '../../graphql/queries'
 
-const Plans = () => {
+const Plans = ( props ) => {
 
 
-    const navigation = useNavigation(); 
+    //const navigation = useNavigation(); 
 
-    const workout0 = workoutData[0]
+    //const workout0 = workoutData[0]
+
+    const planType = props.route.params.plan;
+    const week = props.route.params.week;
+    console.log('plan: ' + planType)
+    console.log('week: ' + week)
 
     return (
         /* <View style={styles.root}>
@@ -30,7 +35,7 @@ const Plans = () => {
             <FlatList
                 ListHeaderComponent={renderHeader}
                 data={workoutData}
-                renderItem={({item}) => <ProgramItem chatRoom={item} />}
+                renderItem={({item}) => <ProgramItem workout={item} plan={planType} weekNumber={week} />}
             />
             {/* </View>  */}
             <View style={styles.log}>

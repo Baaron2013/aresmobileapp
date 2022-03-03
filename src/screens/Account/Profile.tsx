@@ -5,13 +5,12 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth, Hub, Storage, DataStore } from 'aws-amplify'
 import { User as UserModel } from "../../models"
-import Logo from '../../../assets/images/ares-login-logo.png'
 import Contact from '../../../assets/images/user.png'
-import Thumbnail from '../../../assets/images/download.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as ImagePicker from 'expo-image-picker';
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+import {S3Image} from 'aws-amplify-react-native'
 
 const Profile = () => {
     const navigation = useNavigation();
@@ -23,6 +22,7 @@ const Profile = () => {
     const [authUser, setAuthUser] = useState(undefined);
     const [currentImage, setCurrentImage] = useState<string | null>(null);
     const [newLocalImage, setNewLocalImage] = useState<string | null>(null);
+    const [user, setUser] = useState(null);
 
     const getUser = async () => {
         //get authenticated user 1 time
@@ -41,7 +41,8 @@ const Profile = () => {
             return;
         }
         else {
-            console.log(user)
+            console.log(user);
+            setUser(user);
             setCurrentImage(user.imageUri)
         }
         
@@ -50,6 +51,7 @@ const Profile = () => {
     useEffect (() => {
         getUser();
     }, []);
+
 
     //get camera permission from user one time for profile pic upload
     useEffect(() => {
@@ -64,21 +66,12 @@ const Profile = () => {
         })();
       }, []);
     
-    const ProgressiveImage = ({ source, style, thumbnailSource}) => {
-        return (
-            <View style={styles.container}>
-                <Image source={thumbnailSource} style={style} />
-                <Image source={source} style={[styles.imageOverlay, style]} />
-            </View>
-        )
-    }
     //image picker to select profile pic
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
+            allowsEditing: false,
+            quality: 0,
           });
       
           console.log(result);
@@ -98,11 +91,13 @@ const Profile = () => {
         try {
           const response = await fetch(newLocalImage);
           const blob = await response.blob();
-          const fileKey = `${uuidv4()}.jpg`;
+          const urlParts = newLocalImage.split('.');
+          const extension = urlParts[urlParts.length - 1];
+          const fileKey = `${uuidv4()}.${extension}`;
           await Storage.put(fileKey, blob, {
               contentType: 'image/jpeg'
           });
-          return `https://aresmobileapp-file-storage173749-dev.s3.us-east-1.amazonaws.com/public/${fileKey}`;
+          return fileKey;
         } catch (err) {
           console.log("Error uploading file:", err);
           return null;
@@ -132,7 +127,6 @@ const Profile = () => {
             console.log(dbUser + 'error finding user' + userID);
             return;
         }  
-
         //if no new name is entered, set it to current name
         if (newName === '') {
             newName = currentName;
@@ -153,7 +147,6 @@ const Profile = () => {
             })
         )
         console.log('saving to dynamo')
-        setNewLocalImage(null)
 
         //save to Cognito
         await Auth.updateUserAttributes(authUser, {
@@ -177,6 +170,9 @@ const Profile = () => {
             setEmail(newEmail);
             console.log('name before edits: ' + newName);
             navigation.navigate('Profile');
+            setNewLocalImage(null)
+            navigation.navigate("Profile")
+            setCurrentImage(fileKey)
 
         }
     }
@@ -198,19 +194,26 @@ const Profile = () => {
     }
     
     const renderImage = () => {
+        if (user) {
+            if (newLocalImage) {
+                console.log('rendering local image')
+                return <Image source={{uri: newLocalImage}} style={styles.profilePic} />
+                
+            }
+            if (user.imageUri.startsWith('http')) {
+                console.log('rendering current https image')
+                return <Image source={{uri: currentImage}} style={styles.profilePic} />
+            }
+            if (!user.imageUri.startsWith('http')) {
+                console.log('rendering current s3 image')
+                return <S3Image imgKey={currentImage} style={styles.profilePic} />
+            }
+            console.log('rendering contact image')
+            return <Image source={Contact} style={styles.profilePic} />
+
+        }
         
-        if (newLocalImage) {
-            console.log('rendering local image')
-            return <ProgressiveImage source={{uri: newLocalImage}} thumbnailSource={{uri: newLocalImage}} style={styles.profilePic} />
-            
-        }
-        if (currentImage) {
-            console.log('rendering current image')
-            console.log(currentImage)
-            return <ProgressiveImage source={{uri: currentImage}} thumbnailSource={Thumbnail} style={styles.profilePic} />
-        }
-        console.log('rendering contact image')
-        return <ProgressiveImage source={Contact} thumbnailSource={Contact} style={styles.profilePic} />
+
     }
         return (
             
@@ -274,13 +277,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flex: 1,
     },
-    imageOverlay: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        top: 0,
-    },
     container: {
         backgroundColor: '#e1e4e8',
         marginTop: 10,
@@ -302,7 +298,7 @@ const styles = StyleSheet.create({
 
     },
     profilePic: {
-        //marginTop: 10,
+        marginTop: 10,
         marginBottom: 20,
         height: 100,
         width: 100,
@@ -312,8 +308,8 @@ const styles = StyleSheet.create({
     editIcon: {
         borderRadius: 50,
         borderWidth: 1,
-        borderColor: 'black',
-        backgroundColor: 'white',
+        borderColor: 'white',
+        backgroundColor: '#BFDBF7',
         height: 25,
         width: 25,
         padding: 1,

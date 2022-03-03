@@ -10,6 +10,9 @@ import { color } from 'react-native-reanimated';
 import {Picker} from '@react-native-picker/picker';
 import Checkbox from 'expo-checkbox';
 import { navItem } from 'aws-amplify';
+import { StyleService } from '@ui-kitten/components';
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useEffect } from 'react';
 
 
 //import CheckBox from "@react-native-community/checkbox";
@@ -24,37 +27,60 @@ const data = [
   ];
   
 
-export default function ProgramItem({chatRoom}){
-    const [state, setState] = React.useState({
-        hooks: true,
-        hooks2: false
-      })
+export default function ProgramItem({workout}, plan, weekNumber){
 
-      function handleChange(evt) {
-        const value =
-          evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
-        setState({
-          ...state,
-          [chatRoom.target.name]: value
-        });
-      }  
-    
-    const user = chatRoom.users[1];
-    
-    const navigation = useNavigation();
     const [ agree , setAgree] = useState(false)
-    //const [selectedLanguage, setSelectedLanguage] = useState();
 
     const [selectedValue, setSelectedValue] = useState("java");
     const [isChecked, setIsChecked] = useState(true);
-    
-    
-    
-    
+
+    const [workoutName, setWorkoutName] = useState('')
+    const [workoutDay, setWorkoutDay] = useState('')
+    const [ numberOfTimes, setNumberOfTimes] = useState(0)
+
+
+    const planType = plan
+    const week = weekNumber
+
+    const onUpdate = (value) => {
+        setWorkoutDay(workout.id)
+        console.log(value)
+        
+        Alert.alert(
+            "Exercise Completed!",
+            "Keep up the good work. Your progress has been updated.",
+            [
+                {text: "OK"} 
+            ]
+        )
+        console.log(
+            'exercise name: ' + value
+        )
+        console.log(
+            'exercise day: ' + workoutDay
+        )
+        setNumberOfTimes(numberOfTimes + 1)
+        console.log(
+            '# of times: ' + numberOfTimes
+        )
+        console.log(
+            'plan type ' + planType
+        )
+        console.log(
+            'week ' + week
+        )
+
+
+    }
+    useEffect(() => {
+        setWorkoutDay(workout.id)
+        setNumberOfTimes(numberOfTimes)
+    }, [workoutName])
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={{fontSize: 20, fontWeight: '500'}}>Exercise:                     Sets X Reps / Weights</Text>
+                <Text style={styles.subheader1}>Exercise:</Text>
+                <Text style={styles.subheader2}>Sets X Reps / {"\n"}Weights</Text>
             </View>
             <View style={styles.leftContainer}>
      
@@ -62,25 +88,9 @@ export default function ProgramItem({chatRoom}){
                     <View style={styles.worksideMed}>
        
                         <View style={styles.selecterContainer}>
- 
-                            {<Picker
-                                selectedValue={selectedValue}
-         
-                                
-                                style={styles.selecterRed}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-                                <Picker.Item label="Movemen Pre-Mobillity" value="workout1" />
-                                <Picker.Item label="Workout2" value="workout2" />
-                            </Picker>}
+                            <Text style={{color:'#9f272e', fontSize: 15}}>{workout.mobility[0].name}</Text>
                         </View>
-                        <Checkbox
-                            disabled={false}
-                            value={agree}
-                            style={styles.checkCompleted}
-                            //onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                            onValueChange={() => setAgree(!agree)}
-                            color={agree ? "#4630EB": undefined}
-                        />
+
                     </View>
                         <AntDesign onPress={() => Alert.alert("Open Video")}
                             name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
@@ -88,9 +98,28 @@ export default function ProgramItem({chatRoom}){
                             name="book" size={25} color="#595959" style={styles.readIcon} />
                     
                     <View style={styles.description}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Myofascial Release (any system), Dynamic Warmup (video), Mobilize 1-2 areas of greatest restriction</Text>
+                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.mobility[0].description}</Text>
+                    </View>
+
+                </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5}}>Mark workout as completed  </Text>
+                        <Pressable
+                            onPress={() => {onUpdate(workout.mobility[0].name)}}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
                     </View>
                 </View>
+               
+                
+
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
 
@@ -99,8 +128,9 @@ export default function ProgramItem({chatRoom}){
                             selectedValue={selectedValue}
                             style={styles.selecterGreen}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-                            <Picker.Item label="Cold Blood - Mardio" value="workout1" />
-                            <Picker.Item label="Workout2" value="workout2" />
+                            <Picker.Item label={workout.conditioning[0].name} value={workout.conditioning[0].name} />
+                            <Picker.Item label={workout.conditioning[1].name} value={workout.conditioning[1].name} />
+                            <Picker.Item label={workout.conditioning[2].name} value={workout.conditioning[2].name} />
                         </Picker>}
                         </View>
                         <Checkbox
@@ -114,10 +144,7 @@ export default function ProgramItem({chatRoom}){
                         />
                     </View>
                     <View style={styles.description}>
-                        <Text style={{ fontSize: 10,fontWeight: 'bold' }}>x2-4, warmup w 2x5 - L drill, 15 sec rest/rep </Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Go for time or apply zone methodology (80/20-yellow box). If you have time add low impact zone 1</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>or</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Individualized Zone Training Plan x 30+ min</Text>
+                        <Text style={{ fontSize: 10,fontWeight: 'bold' }}>{workout.conditioning[0].description}</Text>
                     </View>
                     
                         
@@ -180,7 +207,7 @@ export default function ProgramItem({chatRoom}){
                 </View>
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
-                        <Text style={{color:'#9f272e'}}>Situp-Tic Tac Toe</Text>
+                        <Text style={{color:'#8b0000'}}>Situp-Tic Tac Toe</Text>
                         <Checkbox
                             disabled={false}
                             value={agree}
@@ -419,7 +446,7 @@ export default function ProgramItem({chatRoom}){
                 </View>
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
-                        <Text style={{color: 'red'}}>Recovery / Regeneration / Mobility</Text>
+                        <Text style={{color:'#9f272e'}}>{workout.mobility[1].name}</Text>
                         <Checkbox
                             disabled={false}
                             value={agree}
@@ -429,7 +456,7 @@ export default function ProgramItem({chatRoom}){
                         />
                     </View>    
                     <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas.</Text>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>{workout.mobility[1].description}</Text>
                     </View>
 
                     <AntDesign onPress={() => Alert.alert("Open Video")}

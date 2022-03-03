@@ -15,12 +15,16 @@ import { listChatRooms } from '../../graphql/queries';
 
 import WeekListItem from '../../component/WeekListItem/WeekListItem'
 
-const Plans = ({route}) => {
+const Plans = ( props ) => {
 
     const navigation = useNavigation(); 
     //console.log(route.params.paramKey);
     //console.log(route.params.weight);
     //console.log(route.params.programType);
+
+    
+    const planType = props.route.params.planType;
+    console.log('plan ' + planType)
 
     return (
         <SafeAreaView>
@@ -30,14 +34,16 @@ const Plans = ({route}) => {
                     <WeekListItem 
                         programName={'Tango'} 
                         dayPicker={'DayView'} 
+                        planName= {planType}
                         description={'POWER / POWER ENDURANCE via Kettlebells / Dumbells ---Improve Ruck --- ENDURANCE FOCUS'} />   
                     <WeekListItem 
                         programName={'Sierra'} 
                         dayPicker={'DayView'} 
+                        plan= {planType}
                         description={'Train like an Olympic Lifter w Ranger Mentality --- Daily skill development prior to main Olympic lift for technical mastery. Power/strength focus.'}/>
 
                     <View>
-                    {route.params.programType == 2 ? <WeekListItem programName={'Third Plan Option'}
+                    {props.route.params.programType == 2 ? <WeekListItem programName={'Third Plan Option'}
                      dayPicker={'DayView'}
                      description={'Random description, something about a more lethal fighting force'}/>: null } 
                     </View> 
