@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     workout:{
         backgroundColor: '#D2E5F8',
         width: 160,
-        height: 125,
+        height: 110,
         marginLeft:35,
         borderRadius: 34,
         paddingLeft: 15,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     weight:{
         backgroundColor: '#D2E5F8',
         width: 160,
-        height: 125,
+        height: 110,
         marginLeft:25,
         borderRadius: 34,
         paddingLeft: 15,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     soreness:{
         backgroundColor: '#D2E5F8',
         width: 345,
-        height: 150,
+        height: 165,
         marginLeft:35,
         borderRadius: 34,
         marginTop:20,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     sleep:{
         backgroundColor: '#D2E5F8',
         width: 345,
-        height: 150,
+        height: 165,
         marginLeft:35,
         borderRadius: 34,
         marginTop:20,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
     titles: {
-        fontSize: 20,
+        fontSize: 19,
         fontWeight: '800',
         color: '#1F7A8C',
         
