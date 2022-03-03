@@ -120,7 +120,7 @@ const Account = () => {
                 <View style={styles.container}>
                     
                     <View style={styles.mylog}>
-                        <ScrollView>
+                        <ScrollView nestedScrollEnabled={true}>
                             <Text style={styles.titles}>My Logs</Text>
 
                             <Text style={styles.logTitle}> Tango > ELITE > week 1 > day 3 </Text>
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     },
     soreness:{
         backgroundColor: '#D2E5F8',
-        width: 345,
+        width: Platform.OS === 'ios' ? 345 : 340,
         height: 240,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
         borderRadius: 34,
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     },
     sleep:{
         backgroundColor: '#D2E5F8',
-        width: 345,
+        width: Platform.OS === 'ios' ? 345 : 340,
         height: 240,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
         borderRadius: 34,
@@ -219,13 +219,14 @@ const styles = StyleSheet.create({
     },
     mylog:{
         backgroundColor: '#D2E5F8',
-        width: 345,
+        width: Platform.OS === 'ios' ? 345 : 340,
         height: 170,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
         borderRadius: 34,
         marginTop: Platform.OS === 'ios' ? 20 : 0, 
         paddingLeft: 15,
         paddingTop: 15,
+        marginBottom: 15,
     },
     titles: {
         fontSize: 19,
