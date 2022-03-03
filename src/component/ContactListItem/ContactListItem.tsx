@@ -7,6 +7,8 @@ import Navigation from '../../navigation';
 import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons } from '@expo/vector-icons';
 import {DataStore, Auth} from 'aws-amplify';
 import { Chatroom, ChatroomUser} from '../../models';
+import Contact from '../../../assets/images/user.png'
+import {S3Image} from 'aws-amplify-react-native'
 
 export default function ContactListItem({contact}){
     
@@ -37,9 +39,22 @@ export default function ContactListItem({contact}){
         navigation.navigate('ChatRoom', {id: newChatRoom.id});
     }
 
+    const renderImage = () => {
+        if (contact) {
+            if (contact.imageUri) {
+                console.log('rendering current s3 image')
+                return <S3Image imgKey={contact.imageUri} style={styles.image} />
+            }
+            console.log('rendering contact image')
+            return <Image source={Contact} style={styles.image} />
+
+        }
+        
+
+    }
     return (
     <Pressable onPress={onPress} style={styles.container}>
-        <Image source={{uri: contact.imageUri}} style={styles.image}/>
+        {renderImage()}
         
 
         <View style={styles.rightContainer}>

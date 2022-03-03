@@ -12,6 +12,88 @@ const WeekListItem = (props:any) => {
 
     const navigation = useNavigation(); 
 
+    const renderButtons = () => {
+        if (props.numOfWeeks === 8) {
+            return (
+        <><TouchableOpacity
+                onPress={() => {
+                    navigation.navigate(props.dayPicker, {
+                        level: props.levelName,
+                        week: 1
+                    });
+                } }
+                style={styles.roundWeekButton1}>
+                <Text style={styles.roundWeekButtonText}>1</Text>
+            </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                onPress={() => { navigation.navigate(props.dayPicker); } }
+                style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>2</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>3</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>4</Text>
+                </TouchableOpacity><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>5</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>6</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>7</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>8</Text>
+                </TouchableOpacity></>
+            )} else {
+                return (
+            <><TouchableOpacity
+                onPress={() => {
+                    navigation.navigate(props.dayPicker, {
+                        level: props.levelName,
+                        week: 1
+                    });
+                } }
+                style={styles.roundWeekButton1}>
+                <Text style={styles.roundWeekButtonText}>1</Text>
+            </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                onPress={() => { navigation.navigate(props.dayPicker); } }
+                style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>2</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>3</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>4</Text>
+                </TouchableOpacity><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>5</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>6</Text>
+                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
+                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>7</Text>
+                </TouchableOpacity></>
+                )}
+
+
+    }
+
     
     return (
         <View style={styles.root}> 
@@ -26,70 +108,7 @@ const WeekListItem = (props:any) => {
             </View>
             <View style={styles.item}>
                 <View style={styles.row}>
-                    <TouchableOpacity
-                        onPress={() => { 
-                            navigation.navigate(props.dayPicker, {
-                                plan: props.planName,
-                                week: 1, 
-                            }); }  }
-                        style={styles.roundWeekButton1}>
-                        <Text style={styles.roundWeekButtonText}>1</Text>
-                    </TouchableOpacity>
-
-                    <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-
-                    <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
-                        style={styles.roundWeekButton1}>
-                        <Text style={styles.roundWeekButtonText}>2</Text>
-                    </TouchableOpacity>
-
-                    <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-
-                    <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
-                        style={styles.roundWeekButton2}>
-                        <Text style={styles.roundWeekButtonText}>3</Text>
-                    </TouchableOpacity>
-                    
-                    <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-
-                    <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
-                        style={styles.roundWeekButton2}>
-                        <Text style={styles.roundWeekButtonText}>4</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
-                        style={styles.roundWeekButton2}>
-                        <Text style={styles.roundWeekButtonText}>5</Text>
-                    </TouchableOpacity>
-
-                    <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-
-                    <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
-                        style={styles.roundWeekButton2}>
-                        <Text style={styles.roundWeekButtonText}>6</Text>
-                    </TouchableOpacity>
-
-                    <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-
-                    <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
-                        style={styles.roundWeekButton2}>
-                        <Text style={styles.roundWeekButtonText}>7</Text>
-                    </TouchableOpacity>
-                    
-                    <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-
-                    <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
-                        style={styles.roundWeekButton2}>
-                        <Text style={styles.roundWeekButtonText}>8</Text>
-                    </TouchableOpacity>
-
+                    {renderButtons()}
                 </View>
             </View>
             
@@ -164,8 +183,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         // alignSelf: 'flex-start',
-        alignContent: 'center',
-        justifyContent: 'center'
+        //alignContent: 'center',
+        //justifyContent: 'center'
     },
     roundWeekButton1:{
         backgroundColor: "#1F7A8C",
