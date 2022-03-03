@@ -1,19 +1,19 @@
 import React from 'react'
 import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView, ScrollView} from 'react-native'
-import CustomInput from '../../component/CustomInput'
-import Custombutton from '../../component/CustomButton/Custombutton'
+import CustomInput from '../../../component/CustomInput'
+import Custombutton from '../../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth, autoShowTooltip } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
-import ChatRoomItem from '../../component/ChatRoomItem';
-import ProgramItem from '../../component/ProgramItem'
+import ChatRoomItem from '../../../component/ChatRoomItem';
+import ProgramItem from '../../../component/ProgramItem'
 import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use TouchOpac from 'react-native'
 
-import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
-import workoutData from '../../../assets/dummy-data/Workouts';
-import { listChatRooms } from '../../graphql/queries';
+import chatRoomsData from '../../../../assets/dummy-data/ChatRooms';
+import workoutData from '../../../../assets/dummy-data/Workouts';
+import { listChatRooms } from '../../../graphql/queries';
 
-import WeekListItem from '../../component/WeekListItem/WeekListItem'
+import WeekListItem from '../../../component/WeekListItem/WeekListItem'
 
 const Plans = ( props ) => {
 
@@ -23,8 +23,8 @@ const Plans = ( props ) => {
     //console.log(route.params.programType);
 
     
-    const planType = props.route.params.planType;
-    console.log('plan ' + planType)
+    const levelName = props.route.params.levelName;
+    console.log('plan ' + levelName)
 
     return (
         <SafeAreaView>
@@ -34,17 +34,20 @@ const Plans = ( props ) => {
                     <WeekListItem 
                         programName={'Tango'} 
                         dayPicker={'DayView'} 
-                        planName= {planType}
+                        levelName= {levelName}
+                        numOfWeeks={8}
                         description={'POWER / POWER ENDURANCE via Kettlebells / Dumbells ---Improve Ruck --- ENDURANCE FOCUS'} />   
                     <WeekListItem 
                         programName={'Sierra'} 
                         dayPicker={'DayView'} 
-                        plan= {planType}
+                        levelName= {levelName}
+                        numOfWeeks={7}
                         description={'Train like an Olympic Lifter w Ranger Mentality --- Daily skill development prior to main Olympic lift for technical mastery. Power/strength focus.'}/>
 
                     <View>
-                    {props.route.params.programType == 2 ? <WeekListItem programName={'Third Plan Option'}
+                    {props.route.params.levelValue == 2 ? <WeekListItem programName={'Third Plan Option'}
                      dayPicker={'DayView'}
+                     level= {levelName}
                      description={'Random description, something about a more lethal fighting force'}/>: null } 
                     </View> 
                     

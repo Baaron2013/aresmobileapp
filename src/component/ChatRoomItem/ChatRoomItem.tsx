@@ -8,6 +8,8 @@ import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons 
 import {useState, useEffect} from 'react';
 import {DataStore, Auth} from 'aws-amplify';
 import Contact from '../../../assets/images/user.png'
+import {S3Image} from 'aws-amplify-react-native'
+
 
 
 export default function ChatRoomItem({chatRoom}){
@@ -50,9 +52,23 @@ export default function ChatRoomItem({chatRoom}){
         return <ActivityIndicator />
     }
 
+    const renderImage = () => {
+        if (user) {
+            if (user.imageUri) {
+                console.log('rendering current s3 image')
+                return <S3Image imgKey={user.imageUri} style={styles.image} />
+            }
+            console.log('rendering contact image')
+            return <Image source={Contact} style={styles.image} />
+
+        }
+        
+
+    }
+
     return (
     <Pressable onPress={onPress} style={styles.container}>
-        <Image source={user.imageUri === null ? Contact : {uri: user.imageUri}} style={styles.image}/>
+        {renderImage()}
         
 
             {/* Trying to make the button more pressable instead of the container */}

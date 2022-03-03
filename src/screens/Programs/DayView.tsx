@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView} from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
@@ -6,24 +6,136 @@ import { useNavigation } from '@react-navigation/native'
 import { Auth, autoShowTooltip } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import ChatRoomItem from '../../component/ChatRoomItem';
-import ProgramItem from '../../component/ProgramItem'
+import ProgramItemTangoDay1 from '../../component/ProgramItem/ProgramItemTangoDay1'
+import ProgramItemTangoDay2 from '../../component/ProgramItem/ProgramItemTangoDay2'
+import ProgramItemTangoDay3 from '../../component/ProgramItem/ProgramItemTangoDay3'
+import ProgramItemTangoDay4 from '../../component/ProgramItem/ProgramItemTangoDay4'
 import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use TouchOpac from 'react-native'
 
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 import workoutData from '../../../assets/dummy-data/Workouts';
 import { listChatRooms } from '../../graphql/queries'
 
-const Plans = ( props ) => {
+const Plans = (  ) => {
 
+    const [selected, setSelected] = useState('1');
+function DayButton({ onPress, value, dayText, numberText, style, styleText }) {
 
-    //const navigation = useNavigation(); 
+        return (
+          <Pressable
+            onPress={() => onPress(numberText)}
+            style={[style, {backgroundColor: value === numberText ? '#1F7A8C' : '#E1E5F2' }]}
+            >
+            <Text style={styleText}> {dayText} </Text>
+            <Text style={styleText}> {numberText} </Text>
+          </Pressable>
+        );
+}
 
-    //const workout0 = workoutData[0]
+const buttonClickHandler = (value) => {
+        console.log("Button has been pressed." + value);
+        setSelected(value)
+        
+        
+    
+} 
 
-    const planType = props.route.params.plan;
-    const week = props.route.params.week;
-    console.log('plan: ' + planType)
-    console.log('week: ' + week)
+const buttonClickedHandler = () => {
+    console.log('Button Clicked!');
+    //do something
+}
+
+function renderHeader() {
+    return (
+      <View
+        style={{
+          //backgroundColor: '#bfdbf7',
+          padding: 5,
+          marginVertical: 5,
+          borderRadius: 10,
+          borderStyle: 'solid',
+          borderColor: 'black',
+          flex: 1,
+          alignContent: 'center',
+          flexDirection: 'row',
+        }}
+      >
+            <DayButton
+                onPress={buttonClickHandler}
+                style={styles.roundProgramButton1}
+                styleText={styles.roundProgamButtonText}
+                dayText={'Day'}
+                numberText={'1'}
+                value={selected}>
+            </DayButton>
+            <DayButton
+                onPress={buttonClickHandler}
+                style={styles.roundProgramButton1}
+                styleText={styles.roundProgamButtonText}
+                dayText={'Day'}
+                numberText={'2'}
+                value={selected}>
+            </DayButton>
+            <DayButton
+                onPress={buttonClickHandler}
+                style={styles.roundProgramButton1}
+                styleText={styles.roundProgamButtonText}
+                dayText={'Day'}
+                numberText={'3'}
+                value={selected}>
+            </DayButton>
+            <DayButton
+                onPress={buttonClickHandler}
+                style={styles.roundProgramButton1}
+                styleText={styles.roundProgamButtonText}
+                dayText={'Day'}
+                numberText={'4'}
+                value={selected}>
+            </DayButton>
+        
+      </View>
+    );
+  }
+
+  const renderPrograms = () => {
+      if (selected === '1'){
+        return (
+            <FlatList
+                ListHeaderComponent={renderHeader}
+                data={workoutData}
+                renderItem={({item}) => <ProgramItemTangoDay1 workout={item} />}
+            />
+        )
+      }
+      if (selected === '2'){
+        return (
+            <FlatList
+                ListHeaderComponent={renderHeader}
+                data={workoutData}
+                renderItem={({item}) => <ProgramItemTangoDay2 workout={item} />}
+            />
+        )
+      }
+      if (selected === '3'){
+        return (
+            <FlatList
+                ListHeaderComponent={renderHeader}
+                data={workoutData}
+                renderItem={({item}) => <ProgramItemTangoDay3 workout={item} />}
+            />
+        )
+      }
+      if (selected === '4'){
+        return (
+            <FlatList
+                ListHeaderComponent={renderHeader}
+                data={workoutData}
+                renderItem={({item}) => <ProgramItemTangoDay4 workout={item} />}
+            />
+        )
+      }
+  }
+
 
     return (
         /* <View style={styles.root}>
@@ -32,11 +144,7 @@ const Plans = ( props ) => {
          <View style={styles.page}> 
          
          <Text style={styles.mainheadingweektitle}>Tango --- Power Endurance</Text> 
-            <FlatList
-                ListHeaderComponent={renderHeader}
-                data={workoutData}
-                renderItem={({item}) => <ProgramItem workout={item} plan={planType} weekNumber={week} />}
-            />
+            {renderPrograms()}
             {/* </View>  */}
             <View style={styles.log}>
                 <Text style={{fontSize: 25, color: 'green', marginLeft: 10}}>Training Log</Text>
@@ -60,54 +168,7 @@ const Plans = ( props ) => {
     )
 }
 
-const buttonClickedHandler = () => {
-    console.log('Button Clicked!');
-    //do something
-}
 
-function renderHeader() {
-    return (
-      <View
-        style={{
-          //backgroundColor: '#bfdbf7',
-          padding: 5,
-          marginVertical: 5,
-          borderRadius: 10,
-          borderStyle: 'solid',
-          borderColor: 'black',
-          flex: 1,
-          alignContent: 'center',
-          flexDirection: 'row',
-        }}
-      >
-            <TouchableOpacity
-                onPress={buttonClickedHandler}
-                style={styles.roundProgramButton1}>
-                <Text style={styles.roundProgamButtonText}>Day</Text>
-                <Text style={styles.roundProgamButtonText}>1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={buttonClickedHandler}
-                style={styles.roundProgramButton2}>
-                <Text style={styles.roundProgamButtonText}>Day</Text>
-                <Text style={styles.roundProgamButtonText}>2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={buttonClickedHandler}
-                style={styles.roundProgramButton3}>
-               <Text style={styles.roundProgamButtonText}>Day</Text>
-                <Text style={styles.roundProgamButtonText}>3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={buttonClickedHandler}
-                style={styles.roundProgramButton4}>
-                <Text style={styles.roundProgamButtonText}>Day</Text>
-                <Text style={styles.roundProgamButtonText}>4</Text>
-            </TouchableOpacity>
-        
-      </View>
-    );
-  }
 
 
 

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from '../screens/Programs/Calculator';
 import DayView from '../screens/Programs/DayView';
-import WeeklyView from '../screens/Programs/WeeklyView';
+import WeeklyView from '../screens/Programs/Elite/WeeklyViewElite';
 
 
 const ProgramNavigation = () =>  {

@@ -8,7 +8,7 @@ import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-element-dropdown';
-import Plans from './WeeklyView';
+import Plans from './Elite/WeeklyViewElite';
 {/* name of function - edited */}
 const data = [
     { label: 'ELITE', value: '1' },
@@ -101,8 +101,8 @@ const Programs = () => {
             <TouchableOpacity
                     onPress={() => { 
                         navigation.navigate('WeeklyView', {
-                            planType: label,
-                            programType: value,
+                            levelName: label,
+                            levelValue: value,
                         }); console.log('label' + label)}}
                     style={styles.button3}>
                     <Text style={styles.stext}>Search</Text>
