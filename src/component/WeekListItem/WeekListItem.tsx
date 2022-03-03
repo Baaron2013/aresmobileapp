@@ -27,7 +27,11 @@ const WeekListItem = (props:any) => {
             <View style={styles.item}>
                 <View style={styles.row}>
                     <TouchableOpacity
-                        onPress={() => { navigation.navigate(props.dayPicker) }  }
+                        onPress={() => { 
+                            navigation.navigate(props.dayPicker, {
+                                plan: props.planName,
+                                week: 1, 
+                            }); }  }
                         style={styles.roundWeekButton1}>
                         <Text style={styles.roundWeekButtonText}>1</Text>
                     </TouchableOpacity>
