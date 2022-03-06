@@ -2,6 +2,138 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createWorkouts = /* GraphQL */ `
+  mutation CreateWorkouts(
+    $input: CreateWorkoutsInput!
+    $condition: ModelWorkoutsConditionInput
+  ) {
+    createWorkouts(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      day
+      numOfCompletions
+      workoutName
+      weekCompleted
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWorkouts = /* GraphQL */ `
+  mutation UpdateWorkouts(
+    $input: UpdateWorkoutsInput!
+    $condition: ModelWorkoutsConditionInput
+  ) {
+    updateWorkouts(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      day
+      numOfCompletions
+      workoutName
+      weekCompleted
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWorkouts = /* GraphQL */ `
+  mutation DeleteWorkouts(
+    $input: DeleteWorkoutsInput!
+    $condition: ModelWorkoutsConditionInput
+  ) {
+    deleteWorkouts(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      day
+      numOfCompletions
+      workoutName
+      weekCompleted
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCalculatorResults = /* GraphQL */ `
+  mutation CreateCalculatorResults(
+    $input: CreateCalculatorResultsInput!
+    $condition: ModelCalculatorResultsConditionInput
+  ) {
+    createCalculatorResults(input: $input, condition: $condition) {
+      id
+      clean
+      bench
+      squat
+      level
+      userID
+      levelID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCalculatorResults = /* GraphQL */ `
+  mutation UpdateCalculatorResults(
+    $input: UpdateCalculatorResultsInput!
+    $condition: ModelCalculatorResultsConditionInput
+  ) {
+    updateCalculatorResults(input: $input, condition: $condition) {
+      id
+      clean
+      bench
+      squat
+      level
+      userID
+      levelID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCalculatorResults = /* GraphQL */ `
+  mutation DeleteCalculatorResults(
+    $input: DeleteCalculatorResultsInput!
+    $condition: ModelCalculatorResultsConditionInput
+  ) {
+    deleteCalculatorResults(input: $input, condition: $condition) {
+      id
+      clean
+      bench
+      squat
+      level
+      userID
+      levelID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createChatroom = /* GraphQL */ `
   mutation CreateChatroom(
     $input: CreateChatroomInput!

@@ -4,6 +4,32 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+export declare class Workouts {
+  readonly id: string;
+  readonly program?: string;
+  readonly level?: string;
+  readonly week?: string;
+  readonly day?: string;
+  readonly numOfCompletions?: string;
+  readonly workoutName?: string;
+  readonly weekCompleted?: boolean;
+  readonly userID: string;
+  constructor(init: ModelInit<Workouts>);
+  static copyOf(source: Workouts, mutator: (draft: MutableModel<Workouts>) => MutableModel<Workouts> | void): Workouts;
+}
+
+export declare class CalculatorResults {
+  readonly id: string;
+  readonly clean?: number;
+  readonly bench?: number;
+  readonly squat?: number;
+  readonly level?: string;
+  readonly userID: string;
+  readonly levelID?: number;
+  constructor(init: ModelInit<CalculatorResults>);
+  static copyOf(source: CalculatorResults, mutator: (draft: MutableModel<CalculatorResults>) => MutableModel<CalculatorResults> | void): CalculatorResults;
+}
+
 export declare class Chatroom {
   readonly id: string;
   readonly newMessages: number;

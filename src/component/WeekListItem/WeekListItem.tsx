@@ -17,39 +17,36 @@ const WeekListItem = (props:any) => {
             return (
         <><TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(props.dayPicker, {
-                        level: props.levelName,
-                        week: 1
-                    });
+                    navigation.navigate(props.dayPicker1);
                 } }
                 style={styles.roundWeekButton1}>
                 <Text style={styles.roundWeekButtonText}>1</Text>
             </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                onPress={() => { navigation.navigate(props.dayPicker); } }
+                onPress={() => { navigation.navigate(props.dayPicker2); } }
                 style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker3); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker4); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
                 </TouchableOpacity><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker5); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker6); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>6</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker7); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>7</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker8); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>8</Text>
                 </TouchableOpacity></>
@@ -57,7 +54,7 @@ const WeekListItem = (props:any) => {
                 return (
             <><TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(props.dayPicker, {
+                    navigation.navigate(props.dayPicker1, {
                         level: props.levelName,
                         week: 1
                     });
@@ -65,27 +62,27 @@ const WeekListItem = (props:any) => {
                 style={styles.roundWeekButton1}>
                 <Text style={styles.roundWeekButtonText}>1</Text>
             </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                onPress={() => { navigation.navigate(props.dayPicker); } }
+                onPress={() => { navigation.navigate(props.dayPicker2); } }
                 style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker3); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker4); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
                 </TouchableOpacity><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker5); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker6); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>6</Text>
                 </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker); } }
+                    onPress={() => { navigation.navigate(props.dayPicker7); } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>7</Text>
                 </TouchableOpacity></>

@@ -2,6 +2,168 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getWorkouts = /* GraphQL */ `
+  query GetWorkouts($id: ID!) {
+    getWorkouts(id: $id) {
+      id
+      program
+      level
+      week
+      day
+      numOfCompletions
+      workoutName
+      weekCompleted
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listWorkoutss = /* GraphQL */ `
+  query ListWorkoutss(
+    $filter: ModelWorkoutsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWorkoutss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        program
+        level
+        week
+        day
+        numOfCompletions
+        workoutName
+        weekCompleted
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncWorkouts = /* GraphQL */ `
+  query SyncWorkouts(
+    $filter: ModelWorkoutsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncWorkouts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        program
+        level
+        week
+        day
+        numOfCompletions
+        workoutName
+        weekCompleted
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getCalculatorResults = /* GraphQL */ `
+  query GetCalculatorResults($id: ID!) {
+    getCalculatorResults(id: $id) {
+      id
+      clean
+      bench
+      squat
+      level
+      userID
+      levelID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCalculatorResultss = /* GraphQL */ `
+  query ListCalculatorResultss(
+    $filter: ModelCalculatorResultsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCalculatorResultss(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        clean
+        bench
+        squat
+        level
+        userID
+        levelID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncCalculatorResults = /* GraphQL */ `
+  query SyncCalculatorResults(
+    $filter: ModelCalculatorResultsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCalculatorResults(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        clean
+        bench
+        squat
+        level
+        userID
+        levelID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getChatroom = /* GraphQL */ `
   query GetChatroom($id: ID!) {
     getChatroom(id: $id) {

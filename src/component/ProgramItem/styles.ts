@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         //justifyContent: 'center',
         backgroundColor: 'transparent',
-        height: 250,
+        //height: 250,
         //margin: 20,
     },
     leftContainerSmaller: {
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         //justifyContent: 'center',
         backgroundColor: '#879EB3',
-        height: 350,
+        //height: 350,
         //margin: 20,
     },
     
@@ -69,21 +69,10 @@ const styles = StyleSheet.create({
         alignContent: 'center',
        
       },
-    videoIcon: {
-        left: 20,
-        position: 'absolute',
-        alignItems: 'center',
-        top: 60,
-        elevation: 5,
-        color: 'black'
-    },
-    readIcon: {
-        left: 60,
-        position: 'absolute',
-        alignItems: 'center',
-        top: 60,
-        elevation: 5,
-        color: 'black'
+    icons: {
+        flex: 1, 
+        flexDirection: 'row',
+        paddingLeft: 8
     },
     checkCompleted: {
         left: 100,
@@ -92,50 +81,57 @@ const styles = StyleSheet.create({
         top: 55,
     },
     selecterRed: { 
-        position: 'absolute',
-        margin: 6,
+        //position: 'absolute',
+        //margin: 6,
         backgroundColor: 'transparent',
-        height: 30,
-        width:150,
+        //height: 30,
+        //width:150,
+        flex: 1,
         color: 'red',
 
     },
     selecterContainer: {
         backgroundColor:'transparent',
-        alignContent: 'center',
-        height: 200,
-        width: 150,
-        paddingLeft: 8
+        //alignContent: 'center',
+        //height: 200,
+        //width: 150,
+        paddingLeft: 8,
+        flex: 1,
+        paddingBottom: 10
         
     },
     selecterContainerBlue: {
         backgroundColor:'#879EB3',
-        alignContent: 'center',
-        height: 200,
-        width: 100,
+        //alignContent: 'center',
+        //height: 200,
+        //width: 100,
+        flex: 1
+        
     },
     selecterGreen: { 
-        position: 'absolute',
+        //position: 'absolute',
         //margin: 6,
         backgroundColor: 'transparent',
-        height: 30,
-        width: 150,
-        color: '#197519' //green
+        //height: 30,
+        //width: 150,
+        color: '#197519', //green
+        flex: 1,
     },
     selecterBlack: { 
-        position: 'absolute',
-        margin: 6,
+        //position: 'absolute',
+        //margin: 6,
         backgroundColor: 'transparent',
-        height: 30,
-        width:150,
-        color: 'black'
+        //height: 30,
+        //width:150,
+        color: 'black',
+        flex: 1
     },
     selecter: { 
-        position: 'absolute',
-        margin: 6,
+        //position: 'absolute',
+        //margin: 6,
         backgroundColor: 'white',
-        height: 20,
-        width:200,
+        //height: 20,
+        //width:200,
         color: 'black'
         
     },
@@ -199,6 +195,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         flexDirection: 'column',
         alignContent: 'center',
+        paddingLeft: 8
         
     },
     worksideMed: {
@@ -228,7 +225,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         flexDirection: 'row',
         alignContent: 'center',
-        height: 100,
+        //height: 100,
         /* paddingTop:50,
         paddingBottom: 50, */
         padding:10
@@ -239,11 +236,11 @@ const styles = StyleSheet.create({
     completed: {
         flexDirection: 'row',
         paddingLeft: 8,
-        paddingTop: 10,
+        paddingTop: 20,
     },
     timesCompleted: {
         paddingLeft: 8,
-        paddingBottom: 10
+        paddingBottom: 15
     },
 
 

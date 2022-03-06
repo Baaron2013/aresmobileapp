@@ -10,8 +10,7 @@ export default [{
     description: 'Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas',
     options: [null],
     weight: null
-  }],
-  core: [{
+  }, {
     name: '.',
     description: '2-3x thru',
     weight: null
@@ -19,7 +18,8 @@ export default [{
     name: 'PLACEHOLDER -DO NOT DELETE',
     description: '2-3x thru',
     weight: null
-  }, {
+  }],
+  core: [{
     name: 'HLR Toes To Bar',
     description: '6-12',
     weight: null
@@ -55,7 +55,9 @@ export default [{
   }],
   standard: [{
     name: '1 Arm DB Snatch',
-    description: '2x thru \n3 \n2 \n1 \nfinish w 2x3',
+    description: '2x thru',
+    reps: ['3', '2', '1', 'finish w 2x3'],
+    percentages: [.58, .73, .82, .58],
     weight: null
   },{
     name: 'KB Snatch (go heavy or double listed reps)',

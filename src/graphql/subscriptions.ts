@@ -2,6 +2,120 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateWorkouts = /* GraphQL */ `
+  subscription OnCreateWorkouts {
+    onCreateWorkouts {
+      id
+      program
+      level
+      week
+      day
+      numOfCompletions
+      workoutName
+      weekCompleted
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateWorkouts = /* GraphQL */ `
+  subscription OnUpdateWorkouts {
+    onUpdateWorkouts {
+      id
+      program
+      level
+      week
+      day
+      numOfCompletions
+      workoutName
+      weekCompleted
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteWorkouts = /* GraphQL */ `
+  subscription OnDeleteWorkouts {
+    onDeleteWorkouts {
+      id
+      program
+      level
+      week
+      day
+      numOfCompletions
+      workoutName
+      weekCompleted
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCalculatorResults = /* GraphQL */ `
+  subscription OnCreateCalculatorResults {
+    onCreateCalculatorResults {
+      id
+      clean
+      bench
+      squat
+      level
+      userID
+      levelID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCalculatorResults = /* GraphQL */ `
+  subscription OnUpdateCalculatorResults {
+    onUpdateCalculatorResults {
+      id
+      clean
+      bench
+      squat
+      level
+      userID
+      levelID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCalculatorResults = /* GraphQL */ `
+  subscription OnDeleteCalculatorResults {
+    onDeleteCalculatorResults {
+      id
+      clean
+      bench
+      squat
+      level
+      userID
+      levelID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateChatroom = /* GraphQL */ `
   subscription OnCreateChatroom {
     onCreateChatroom {

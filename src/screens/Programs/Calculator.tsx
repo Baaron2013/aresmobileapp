@@ -1,42 +1,119 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet, TextInput,Pressable, Image } from 'react-native'
-import CustomInput from '../../component/CustomInput'
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
-import { Auth, navItem, withSSRContext } from 'aws-amplify'
+import { Auth, navItem, withSSRContext, DataStore } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dropdown } from 'react-native-element-dropdown';
 import Plans from './Elite/WeeklyViewElite';
+import { User as UserModel } from "../../models"
+import { CalculatorResults as Calculator } from "../../models"
+
 {/* name of function - edited */}
 const data = [
-    { label: 'ELITE', value: '1' },
-    { label: 'Short on Time (low volume)', value: '2' },
-    { label: 'Rehabilitation', value: '3' },
-    { label: 'Matt Block', value: '4' },
-    { label: 'PT Improvement Plans', value: '5' },
+    { label: 'ELITE', value: 1 },
+    { label: 'Short on Time (low volume)', value: 2 },
+    { label: 'Rehabilitation', value: 3 },
+    { label: 'Matt Block', value: 4 },
+    { label: 'PT Improvement Plans', value: 5 },
 ];
+
+const Custominput = ({value, setValue, placeholder, secureTextEntry, defaultValue, text}) => {
+    return (
+            <View>
+            <TextInput
+                defaultValue={defaultValue}
+                value={value}
+                onChangeText={setValue}
+                placeholder={placeholder} 
+                secureTextEntry={secureTextEntry}
+                style={styles.input}
+                keyboardType="numeric"
+            />
+            </View>
+    )
+}
 const Programs = () => {
 
 
     const navigation = useNavigation(); 
-    const [text, onChangeText] = React.useState("Useless Text");
-    const [number, onChangeNumber] = React.useState(null);
+    const [currentClean, setCurrentClean] = useState(0);
+    const [currentBench, setCurrentBench] = useState(0);
+    const [currentSquat, setCurrentSquat] = useState(0);
+
+    const [newClean, setNewClean] = useState(0);
+    const [newBench, setNewBench] = useState(0);
+    const [newSquat, setNewSquat] = useState(0);
+
+    const cleanPlaceholder = ''
+    const benchPlaceholder = ''
+    const squatPlaceholder = ''
 
     const [value, setValue] = useState();
     const [label, setLabel] = useState();
     const [isFocus, setIsFocus] = useState(false);
+    const [userID, setID] = useState(undefined);
+    const [authUser, setAuthUser] = useState(undefined);
+    const [user, setUser] = useState(null);
+
+    const getUser = async () => {
+        //get authenticated user 1 time
+        const authUser = await Auth.currentAuthenticatedUser();
+        if (authUser){
+            setID(authUser.attributes.sub)
+            setAuthUser(authUser)
+        }
+        //get DB user one time to set current profile pic, if it exists
+        const newUsers = await DataStore.query(Calculator, c => c.userID ('eq', authUser.attributes.sub));
+        console.log('got user')
+        if (newUsers === undefined) {
+            return;
+        } else {
+            const newUser = newUsers[0]
+            setUser(newUser);
+            setCurrentClean(newUser.clean)
+            setCurrentBench(newUser.bench)
+            setCurrentSquat(newUser.squat)
+            setLabel(newUser.level)
+            setValue(newUser.levelID)
+        }
+        
+    }
+
+    useEffect (() => {
+        getUser();
+    }, []);
+
+    useEffect (() => {
+        console.log('new bench ' + newBench)
+        console.log('new clean ' + newClean)
+        console.log('new squat ' + newSquat)
+    }, [newBench, newClean, newSquat]);
+
+    const udpateUser = async () => {
+        console.log('updating user!')
+        const newUsers = await DataStore.query(Calculator, c => c.userID ('eq', userID));
+        if (newUsers === undefined) {
+            return;
+        } else {
+            const newUser = newUsers[0]
+            console.log('setting user')
+            setUser(newUser)
+            console.log('user set!')
+        }
+
+        
+    }
+
 
     const renderLabel = () => {
-      if (value || isFocus) {
         return (
-          <Text style={[styles.label, isFocus && { color: 'blue' }]}>
+          <Text style={[styles.label, { color: 'black' }]}>
             Program Type
           </Text>
         );
-      }
-      return null;
     };
     const onUpdate = (item) => {
         setLabel(item.label)
@@ -45,8 +122,109 @@ const Programs = () => {
         setIsFocus(false);
 
     }
+
+    const onSearch = async () => {
+        console.log('Current Stats: Clean: ' + currentClean + 'Bench: ' + currentBench + 'Squat: ' + currentSquat)
+        if ((currentClean === 0 && newClean === 0)|| (currentBench === 0 && newBench === 0)|| (currentSquat === 0 && newSquat === 0)) {
+            console.log('new clean: ' + newClean + 'new bench: ' + newBench + 'new squat: ' + newSquat)
+            Alert.alert(
+                " ",
+                "You must have a value entered for Clean, Bench, and Squat",
+                [
+                    {text: "OK"} 
+                ]
+            )
+            return;
+        }
+        if (!value) {
+            Alert.alert(
+                " ",
+                "Please pick a program type.",
+                [
+                    {text: "OK"} 
+                ]
+            )
+            return;
+        }
+            console.log(value)
+            if (!user) {
+                console.log('new clean: ' + newClean + 'new bench: ' + newBench + 'new squat: ' + newSquat)
+                console.log('saving new post')
+                await DataStore.save(
+                    new Calculator ({
+                        clean: Number(newClean),
+                        bench: Number(newBench),
+                        squat: Number(newSquat),
+                        level: label,
+                        levelID: Number(value),
+                        userID: userID
+
+                })
+            )
+            
+            setCurrentBench(Number(newBench))
+            setCurrentClean(Number(newClean))
+            setCurrentSquat(Number(newSquat))
+            udpateUser();
+            console.log('updated user!')
+
+            }
+            if (user) {
+
+                    console.log('updating calculator!')
+                    console.log('new values to be updated: clean: ' + currentClean + 'bench ' + currentBench + 'squat ' + currentSquat)
+                    console.log('new values newclean: ' + newClean + 'newbench ' + newBench + 'newsquat ' + newSquat)
+                    const updateUser = Calculator.copyOf(user, updated => {
+                    updated.clean = newClean === 0 ? currentClean : Number(newClean);
+                    updated.bench = newBench === 0 ? currentBench : Number(newBench);
+                    updated.squat = newSquat === 0 ? currentSquat : Number(newSquat);
+                    updated.level = label;
+                    updated.levelID = Number(value);
+
+                })
+                try {
+                    await DataStore.save(updateUser)
+                } catch (e) {
+                    console.log('error' + e)
+                }
+                
+                console.log('user updated in dynamo!')
+                if (newClean !== 0) {
+                    setCurrentClean(newClean)
+                }
+                if (newBench !== 0) {
+                    setCurrentBench(newBench)
+                }
+                if (newSquat !== 0) {
+                    setCurrentSquat(newSquat)
+                }
+                
+                
+
+            }
+            console.log('selected value: ' + value)
+            if (value === 1) {
+                    navigation.navigate('EliteWeek')
+                    console.log('label' + label); console.log('bench: ' + newBench + ' clean: ' + newClean + ' squat: ' + newSquat)
+                    //save to DynamoDB
+                    
+                    
+            }
+            if (value === 2) {
+                navigation.navigate('ShortWeek')
+                console.log('label' + label); console.log('bench: ' + newBench + ' clean: ' + newClean + ' squat: ' + newSquat)
+        }
+        setNewClean(0);
+        setNewBench(0)
+        setNewSquat(0)
+        
+    }
+    console.log('Values wiped. new clean: ' + newClean + 'new bench: ' + newBench + 'new squat: ' + newSquat)
+    console.log('current values: clean: ' + currentClean + 'bench ' + currentBench + 'squat ' + currentSquat)
     return (
+        
         <View style={styles.root}>
+            
             {/* inserts header label - edited*/}
             <View style={styles.backButton}>   
             </View>
@@ -56,25 +234,36 @@ const Programs = () => {
 
             <View style={styles.calcView2}>
             <View style={styles.inputFields}>
-                <TextInput style={styles.input}
-                    underlineColorAndroid = "transparent"
-                    placeholder = "Clean"
-                    placeholderTextColor = 'gray'
-                    autoCapitalize = "none"/>
-            
-                <TextInput style={styles.input}
-                    underlineColorAndroid = "transparent"
-                    placeholder = "Bench"
-                    placeholderTextColor = 'gray'
-                    autoCapitalize = "none"/>
+                <Custominput 
+                    setValue={setNewClean}
+                    //value={newClean.toString()}
+                    placeholder = {currentClean !== 0 ? currentClean.toString() : cleanPlaceholder}
 
-                <TextInput style={styles.input}
-                    underlineColorAndroid = "transparent"
-                    placeholder = "Squat"
-                    placeholderTextColor = 'gray'
-                    autoCapitalize = "none"/>
+                    >
+                </Custominput>
+                
+            
+                <Custominput
+                    setValue={setNewBench}
+                    //value={newBench.toString()}
+                    placeholder = {currentBench !== 0 ? currentBench.toString() : benchPlaceholder}
+                    >
+                </Custominput>
+                <Custominput 
+                    setValue={setNewSquat}
+                    //value={newSquat.toString()}
+                    placeholder = {currentSquat !== 0 ? currentSquat.toString() : squatPlaceholder}
+                >
+                </Custominput>    
             </View>
-            </View>  
+            <View style={styles.labels}>
+                <Text style={styles.labelText}>Clean</Text>
+                <Text style={styles.labelText}>Bench</Text>
+                <Text style={styles.labelText}>Squat</Text>
+            </View>
+            </View>
+
+            
 
 
             <View style={styles.container}>
@@ -90,7 +279,7 @@ const Programs = () => {
                     maxHeight={300}
                     labelField="label"
                     valueField="value"
-                    placeholder={!isFocus ? 'Select program type' : '...'}
+                    placeholder={value !== 0 ? label : !isFocus ? 'Select program type' : '...'}
                     value={value}
                     onFocus={() => setIsFocus(true)}
                     onBlur={() => setIsFocus(false)}
@@ -99,11 +288,7 @@ const Programs = () => {
             </View>
             
             <TouchableOpacity
-                    onPress={() => { 
-                        navigation.navigate('WeeklyView', {
-                            levelName: label,
-                            levelValue: value,
-                        }); console.log('label' + label)}}
+                    onPress={onSearch}
                     style={styles.button3}>
                     <Text style={styles.stext}>Search</Text>
             </TouchableOpacity>
@@ -130,6 +315,15 @@ const styles = StyleSheet.create({
         marginTop: 15,
         flex: 1, 
         flexDirection: "row"
+    },
+    labels: {
+        marginTop: 25,
+        flex: 1, 
+        flexDirection: "row",
+        marginRight: 45
+    },
+    labelText: {
+        paddingLeft: 46,
     },
     backButton: {
         marginRight: 350,
@@ -173,6 +367,8 @@ const styles = StyleSheet.create({
         margin: 12,
         borderWidth: 1,
         padding: 10,
+        width: 60,
+
       },
     container: {
         width: '90%',

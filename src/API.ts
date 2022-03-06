@@ -2,30 +2,47 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateChatroomInput = {
+export type CreateWorkoutsInput = {
   id?: string | null,
-  newMessages: number,
+  program?: string | null,
+  level?: string | null,
+  week?: string | null,
+  day?: string | null,
+  numOfCompletions?: string | null,
+  workoutName?: string | null,
+  weekCompleted?: boolean | null,
+  userID: string,
   _version?: number | null,
-  chatroomLastMessageId?: string | null,
 };
 
-export type ModelChatroomConditionInput = {
-  newMessages?: ModelIntInput | null,
-  and?: Array< ModelChatroomConditionInput | null > | null,
-  or?: Array< ModelChatroomConditionInput | null > | null,
-  not?: ModelChatroomConditionInput | null,
+export type ModelWorkoutsConditionInput = {
+  program?: ModelStringInput | null,
+  level?: ModelStringInput | null,
+  week?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  numOfCompletions?: ModelStringInput | null,
+  workoutName?: ModelStringInput | null,
+  weekCompleted?: ModelBooleanInput | null,
+  userID?: ModelIDInput | null,
+  and?: Array< ModelWorkoutsConditionInput | null > | null,
+  or?: Array< ModelWorkoutsConditionInput | null > | null,
+  not?: ModelWorkoutsConditionInput | null,
 };
 
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export enum ModelAttributeTypes {
@@ -41,6 +58,156 @@ export enum ModelAttributeTypes {
   _null = "_null",
 }
 
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type Workouts = {
+  __typename: "Workouts",
+  id?: string,
+  program?: string | null,
+  level?: string | null,
+  week?: string | null,
+  day?: string | null,
+  numOfCompletions?: string | null,
+  workoutName?: string | null,
+  weekCompleted?: boolean | null,
+  userID?: string,
+  _version?: number,
+  _deleted?: boolean | null,
+  _lastChangedAt?: number,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateWorkoutsInput = {
+  id: string,
+  program?: string | null,
+  level?: string | null,
+  week?: string | null,
+  day?: string | null,
+  numOfCompletions?: string | null,
+  workoutName?: string | null,
+  weekCompleted?: boolean | null,
+  userID?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteWorkoutsInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateCalculatorResultsInput = {
+  id?: string | null,
+  clean?: number | null,
+  bench?: number | null,
+  squat?: number | null,
+  level?: string | null,
+  userID: string,
+  levelID?: number | null,
+  _version?: number | null,
+};
+
+export type ModelCalculatorResultsConditionInput = {
+  clean?: ModelIntInput | null,
+  bench?: ModelIntInput | null,
+  squat?: ModelIntInput | null,
+  level?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  levelID?: ModelIntInput | null,
+  and?: Array< ModelCalculatorResultsConditionInput | null > | null,
+  or?: Array< ModelCalculatorResultsConditionInput | null > | null,
+  not?: ModelCalculatorResultsConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type CalculatorResults = {
+  __typename: "CalculatorResults",
+  id?: string,
+  clean?: number | null,
+  bench?: number | null,
+  squat?: number | null,
+  level?: string | null,
+  userID?: string,
+  levelID?: number | null,
+  _version?: number,
+  _deleted?: boolean | null,
+  _lastChangedAt?: number,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateCalculatorResultsInput = {
+  id: string,
+  clean?: number | null,
+  bench?: number | null,
+  squat?: number | null,
+  level?: string | null,
+  userID?: string | null,
+  levelID?: number | null,
+  _version?: number | null,
+};
+
+export type DeleteCalculatorResultsInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateChatroomInput = {
+  id?: string | null,
+  newMessages: number,
+  _version?: number | null,
+  chatroomLastMessageId?: string | null,
+};
+
+export type ModelChatroomConditionInput = {
+  newMessages?: ModelIntInput | null,
+  and?: Array< ModelChatroomConditionInput | null > | null,
+  or?: Array< ModelChatroomConditionInput | null > | null,
+  not?: ModelChatroomConditionInput | null,
+};
 
 export type Chatroom = {
   __typename: "Chatroom",
@@ -141,48 +308,6 @@ export type ModelMessageConditionInput = {
   and?: Array< ModelMessageConditionInput | null > | null,
   or?: Array< ModelMessageConditionInput | null > | null,
   not?: ModelMessageConditionInput | null,
-};
-
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
 };
 
 export type UpdateMessageInput = {
@@ -316,6 +441,48 @@ export type DeleteChatroomUserInput = {
   _version?: number | null,
 };
 
+export type ModelWorkoutsFilterInput = {
+  id?: ModelIDInput | null,
+  program?: ModelStringInput | null,
+  level?: ModelStringInput | null,
+  week?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  numOfCompletions?: ModelStringInput | null,
+  workoutName?: ModelStringInput | null,
+  weekCompleted?: ModelBooleanInput | null,
+  userID?: ModelIDInput | null,
+  and?: Array< ModelWorkoutsFilterInput | null > | null,
+  or?: Array< ModelWorkoutsFilterInput | null > | null,
+  not?: ModelWorkoutsFilterInput | null,
+};
+
+export type ModelWorkoutsConnection = {
+  __typename: "ModelWorkoutsConnection",
+  items?:  Array<Workouts | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelCalculatorResultsFilterInput = {
+  id?: ModelIDInput | null,
+  clean?: ModelIntInput | null,
+  bench?: ModelIntInput | null,
+  squat?: ModelIntInput | null,
+  level?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  levelID?: ModelIntInput | null,
+  and?: Array< ModelCalculatorResultsFilterInput | null > | null,
+  or?: Array< ModelCalculatorResultsFilterInput | null > | null,
+  not?: ModelCalculatorResultsFilterInput | null,
+};
+
+export type ModelCalculatorResultsConnection = {
+  __typename: "ModelCalculatorResultsConnection",
+  items?:  Array<CalculatorResults | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
 export type ModelChatroomFilterInput = {
   id?: ModelIDInput | null,
   newMessages?: ModelIntInput | null,
@@ -387,6 +554,150 @@ export type ModelChatroomUserFilterInput = {
   and?: Array< ModelChatroomUserFilterInput | null > | null,
   or?: Array< ModelChatroomUserFilterInput | null > | null,
   not?: ModelChatroomUserFilterInput | null,
+};
+
+export type CreateWorkoutsMutationVariables = {
+  input?: CreateWorkoutsInput,
+  condition?: ModelWorkoutsConditionInput | null,
+};
+
+export type CreateWorkoutsMutation = {
+  createWorkouts?:  {
+    __typename: "Workouts",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    numOfCompletions?: string | null,
+    workoutName?: string | null,
+    weekCompleted?: boolean | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateWorkoutsMutationVariables = {
+  input?: UpdateWorkoutsInput,
+  condition?: ModelWorkoutsConditionInput | null,
+};
+
+export type UpdateWorkoutsMutation = {
+  updateWorkouts?:  {
+    __typename: "Workouts",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    numOfCompletions?: string | null,
+    workoutName?: string | null,
+    weekCompleted?: boolean | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteWorkoutsMutationVariables = {
+  input?: DeleteWorkoutsInput,
+  condition?: ModelWorkoutsConditionInput | null,
+};
+
+export type DeleteWorkoutsMutation = {
+  deleteWorkouts?:  {
+    __typename: "Workouts",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    numOfCompletions?: string | null,
+    workoutName?: string | null,
+    weekCompleted?: boolean | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateCalculatorResultsMutationVariables = {
+  input?: CreateCalculatorResultsInput,
+  condition?: ModelCalculatorResultsConditionInput | null,
+};
+
+export type CreateCalculatorResultsMutation = {
+  createCalculatorResults?:  {
+    __typename: "CalculatorResults",
+    id: string,
+    clean?: number | null,
+    bench?: number | null,
+    squat?: number | null,
+    level?: string | null,
+    userID: string,
+    levelID?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCalculatorResultsMutationVariables = {
+  input?: UpdateCalculatorResultsInput,
+  condition?: ModelCalculatorResultsConditionInput | null,
+};
+
+export type UpdateCalculatorResultsMutation = {
+  updateCalculatorResults?:  {
+    __typename: "CalculatorResults",
+    id: string,
+    clean?: number | null,
+    bench?: number | null,
+    squat?: number | null,
+    level?: string | null,
+    userID: string,
+    levelID?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCalculatorResultsMutationVariables = {
+  input?: DeleteCalculatorResultsInput,
+  condition?: ModelCalculatorResultsConditionInput | null,
+};
+
+export type DeleteCalculatorResultsMutation = {
+  deleteCalculatorResults?:  {
+    __typename: "CalculatorResults",
+    id: string,
+    clean?: number | null,
+    bench?: number | null,
+    squat?: number | null,
+    level?: string | null,
+    userID: string,
+    levelID?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateChatroomMutationVariables = {
@@ -1097,6 +1408,174 @@ export type DeleteChatroomUserMutation = {
   } | null,
 };
 
+export type GetWorkoutsQueryVariables = {
+  id?: string,
+};
+
+export type GetWorkoutsQuery = {
+  getWorkouts?:  {
+    __typename: "Workouts",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    numOfCompletions?: string | null,
+    workoutName?: string | null,
+    weekCompleted?: boolean | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListWorkoutssQueryVariables = {
+  filter?: ModelWorkoutsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListWorkoutssQuery = {
+  listWorkoutss?:  {
+    __typename: "ModelWorkoutsConnection",
+    items:  Array< {
+      __typename: "Workouts",
+      id: string,
+      program?: string | null,
+      level?: string | null,
+      week?: string | null,
+      day?: string | null,
+      numOfCompletions?: string | null,
+      workoutName?: string | null,
+      weekCompleted?: boolean | null,
+      userID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncWorkoutsQueryVariables = {
+  filter?: ModelWorkoutsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncWorkoutsQuery = {
+  syncWorkouts?:  {
+    __typename: "ModelWorkoutsConnection",
+    items:  Array< {
+      __typename: "Workouts",
+      id: string,
+      program?: string | null,
+      level?: string | null,
+      week?: string | null,
+      day?: string | null,
+      numOfCompletions?: string | null,
+      workoutName?: string | null,
+      weekCompleted?: boolean | null,
+      userID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetCalculatorResultsQueryVariables = {
+  id?: string,
+};
+
+export type GetCalculatorResultsQuery = {
+  getCalculatorResults?:  {
+    __typename: "CalculatorResults",
+    id: string,
+    clean?: number | null,
+    bench?: number | null,
+    squat?: number | null,
+    level?: string | null,
+    userID: string,
+    levelID?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListCalculatorResultssQueryVariables = {
+  filter?: ModelCalculatorResultsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCalculatorResultssQuery = {
+  listCalculatorResultss?:  {
+    __typename: "ModelCalculatorResultsConnection",
+    items:  Array< {
+      __typename: "CalculatorResults",
+      id: string,
+      clean?: number | null,
+      bench?: number | null,
+      squat?: number | null,
+      level?: string | null,
+      userID: string,
+      levelID?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncCalculatorResultsQueryVariables = {
+  filter?: ModelCalculatorResultsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncCalculatorResultsQuery = {
+  syncCalculatorResults?:  {
+    __typename: "ModelCalculatorResultsConnection",
+    items:  Array< {
+      __typename: "CalculatorResults",
+      id: string,
+      clean?: number | null,
+      bench?: number | null,
+      squat?: number | null,
+      level?: string | null,
+      userID: string,
+      levelID?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
 export type GetChatroomQueryVariables = {
   id?: string,
 };
@@ -1583,6 +2062,120 @@ export type SyncChatroomUsersQuery = {
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
+  } | null,
+};
+
+export type OnCreateWorkoutsSubscription = {
+  onCreateWorkouts?:  {
+    __typename: "Workouts",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    numOfCompletions?: string | null,
+    workoutName?: string | null,
+    weekCompleted?: boolean | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateWorkoutsSubscription = {
+  onUpdateWorkouts?:  {
+    __typename: "Workouts",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    numOfCompletions?: string | null,
+    workoutName?: string | null,
+    weekCompleted?: boolean | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteWorkoutsSubscription = {
+  onDeleteWorkouts?:  {
+    __typename: "Workouts",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    numOfCompletions?: string | null,
+    workoutName?: string | null,
+    weekCompleted?: boolean | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateCalculatorResultsSubscription = {
+  onCreateCalculatorResults?:  {
+    __typename: "CalculatorResults",
+    id: string,
+    clean?: number | null,
+    bench?: number | null,
+    squat?: number | null,
+    level?: string | null,
+    userID: string,
+    levelID?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateCalculatorResultsSubscription = {
+  onUpdateCalculatorResults?:  {
+    __typename: "CalculatorResults",
+    id: string,
+    clean?: number | null,
+    bench?: number | null,
+    squat?: number | null,
+    level?: string | null,
+    userID: string,
+    levelID?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteCalculatorResultsSubscription = {
+  onDeleteCalculatorResults?:  {
+    __typename: "CalculatorResults",
+    id: string,
+    clean?: number | null,
+    bench?: number | null,
+    squat?: number | null,
+    level?: string | null,
+    userID: string,
+    levelID?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
