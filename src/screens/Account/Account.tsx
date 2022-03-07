@@ -28,10 +28,18 @@ const Account = () => {
         const fetchMetrics = async () => {
             const userData = await Auth.currentAuthenticatedUser();
             setUser(userData);
-            const metrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
-            console.log(metrics);
-            metrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
-            setMetrics(metrics);
+            const userMetrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
+            console.log(userMetrics);
+            userMetrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
+            //set only first 7 values of array
+            const slicedMetrics = userMetrics.slice(0, 8);
+            setMetrics(slicedMetrics);
+            for(let p =0; p < metrics.length; p++){
+                if(metrics[p].weight){
+                    setWeight(metrics[p].weight);
+                    return;
+                }
+            }
         };
         fetchMetrics();
     }, []);

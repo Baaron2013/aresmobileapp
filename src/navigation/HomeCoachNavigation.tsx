@@ -12,7 +12,7 @@ import HomeCoach from '../screens/HomeCoach'
 import CombatConditioning from '../screens/CombatConditioning'
 import Brain from '../screens/Brain'
 import Combatives from '../screens/Combatives'
-
+import CoachHome from '../screens/CoachHome'
 
 const homeStack = createNativeStackNavigator();
 
