@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     
     container: {
         flexDirection: 'column',
-        padding: 15,
+        padding: 5,
         //padding: 1,
         //paddingBottom: 10,
         backgroundColor: 'white',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         //justifyContent: 'center',
-        backgroundColor: '#879EB3',
+        backgroundColor: '#B4C7E7',
         //height: 350,
         //margin: 20,
     },
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     },
     descriptionBlue: {
         flex: 1,
-        backgroundColor: '#879EB3',
+        backgroundColor: '#B4C7E7',
         flexDirection: 'column',
         //height: 100,
         alignContent: 'center',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         
     },
     selecterContainerBlue: {
-        backgroundColor:'#879EB3',
+        backgroundColor:'#B4C7E7',
         //alignContent: 'center',
         //height: 200,
         //width: 100,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         //height: 30,
         //width: 150,
-        color: '#197519', //green
+        color: 'green', //green
         flex: 1,
         marginLeft: -10
     },
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     },
     workRowBlue: {
         flex: 1,
-        backgroundColor: '#879EB3',
+        backgroundColor: '#b4C7E7',
         flexDirection: 'row',
         alignContent: 'center',
         paddingTop:10,
@@ -192,12 +192,13 @@ const styles = StyleSheet.create({
     },
     subheader1: {
         fontSize: 20, 
-        fontWeight: '500'
+        fontWeight: 'bold',
+        marginLeft: 8
     },
     subheader2: {
         fontSize: 20, 
-        fontWeight: '500',
-        marginLeft: 72
+        fontWeight: 'bold',
+        marginLeft: 75
     },
     /* workside1: {
         flex: 1,

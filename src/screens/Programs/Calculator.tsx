@@ -175,9 +175,9 @@ const Programs = () => {
                     console.log('new values to be updated: clean: ' + currentClean + 'bench ' + currentBench + 'squat ' + currentSquat)
                     console.log('new values newclean: ' + newClean + 'newbench ' + newBench + 'newsquat ' + newSquat)
                     const updateUser = Calculator.copyOf(user, updated => {
-                    updated.clean = newClean === 0 ? currentClean : Number(newClean);
-                    updated.bench = newBench === 0 ? currentBench : Number(newBench);
-                    updated.squat = newSquat === 0 ? currentSquat : Number(newSquat);
+                    updated.clean = newClean === 0 ? Number(currentClean) : Number(newClean);
+                    updated.bench = newBench === 0 ? Number(currentBench) : Number(newBench);
+                    updated.squat = newSquat === 0 ? Number(currentSquat) : Number(newSquat);
                     updated.level = label;
                     updated.levelID = Number(value);
 

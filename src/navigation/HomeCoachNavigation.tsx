@@ -20,7 +20,7 @@ function homeNavigation() {
     return (
         <homeStack.Navigator>
             <homeStack.Screen name="Home" 
-                component={HomeCoach} 
+                component={CoachHome} 
                 options = {{
                     header: () => null
                 }}></homeStack.Screen>

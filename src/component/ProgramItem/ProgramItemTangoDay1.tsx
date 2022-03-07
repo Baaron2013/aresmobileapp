@@ -466,7 +466,7 @@ export default function ProgramItemTangoDay1({workout}){
     
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
+            <View style={styles.workRowWhite}>
                 <Text style={styles.subheader1}>Exercise:</Text>
                 <Text style={styles.subheader2}>Sets X Reps / {"\n"}Weights</Text>
             </View>
@@ -476,7 +476,7 @@ export default function ProgramItemTangoDay1({workout}){
                     <View style={styles.worksideMed}>
        
                         <View style={styles.selecterContainer}>
-                            <Text style={{color:'#9f272e', fontSize: 15}}>{workout.mobility[0].name}</Text>
+                            <Text style={{color:'red', fontSize: 15}}>{workout.mobility[0].name}</Text>
                             
                         </View>
 
@@ -485,10 +485,6 @@ export default function ProgramItemTangoDay1({workout}){
                     <View style={styles.description}>
                         <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.mobility[0].description}</Text>
                     </View>
-                    
-                    
-                    
-                    
 
                 </View>
                 <View style={styles.icons}>
@@ -594,7 +590,7 @@ export default function ProgramItemTangoDay1({workout}){
 
                     
                     <View style={styles.descriptionBlue}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.mobility[2].description}</Text>
+                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.mobility[2].description}</Text>
                     </View>
                       
                 </View>
@@ -636,7 +632,7 @@ export default function ProgramItemTangoDay1({workout}){
 
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
-                        <Text style={{color:'#8b0000'}}>{workout.core[1].name}</Text>
+                        <Text style={{color:'#9f272e'}}>{workout.core[1].name}</Text>
                     </View>
                     <View style={styles.descriptionBlue}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[1].description}</Text>
@@ -909,7 +905,7 @@ export default function ProgramItemTangoDay1({workout}){
 
                     </View>
                     <View style={styles.description}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.mobility[2].description}</Text>
+                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.mobility[2].description}</Text>
                     </View>
                 </View>
                 <View style={styles.workRowBlue}>
@@ -927,10 +923,10 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
                     <View style={styles.description}>
                         {
-                            squat ? <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[8].description}
-                            {' '} / {' '} {(Math.floor((squat * 1.25  * workout.standard[6].percentage)/5))*5}</Text> :
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.standard[8].description}
-                            {' '} / {' '}</Text>
+                            (squat  && (selectedValue6 !== workout.standard[6].name)) ? <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[8].description}</Text> : 
+                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[8].description}
+                            {' '} / {' '} {(Math.floor((squat * 1.25  * workout.standard[6].percentage)/5))*5}</Text> 
+                            
                         }
                     
                     </View>
@@ -947,7 +943,7 @@ export default function ProgramItemTangoDay1({workout}){
                         <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
                         <Pressable
                             onPress={() => {
-                                printPickerData(selectedValue4, workout.standard[2].name);
+                                printPickerData(selectedValue6, workout.standard[6].name);
                                 //let newNumOfTimes = numberOfTimes + 1;
                                 //setNumberOfTimes(newNumOfTimes);
                             }}
@@ -959,16 +955,14 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
                     <View style={styles.timesCompleted}>
                         {
-                            selectedValue4 === workout.standard[2].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[2].name, standard3) :
-                            selectedValue4 === workout.standard[3].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[3].name, standard4) :
-                            selectedValue4 === workout.standard[4].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[4].name, standard5) :
-                            selectedValue4 === workout.standard[5].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[5].name, standard6) :
-                            selectedValue4 === undefined && (standard3 !== '0') ? 
-                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard3}</Text>:
+                            selectedValue6 === workout.standard[6].name ?
+                                renderNumOfTimes(selectedValue6, workout.standard[6].name, standard7) :
+                            selectedValue6 === workout.standard[7].name ?
+                                renderNumOfTimes(selectedValue6, workout.standard[7].name, standard8) :
+                            selectedValue6 === workout.standard[8].name ?
+                                renderNumOfTimes(selectedValue6, workout.standard[8].name, standard9) :
+                            selectedValue6 === undefined && (standard7 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard7}</Text>:
                             <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
                             
                         } 
@@ -982,19 +976,54 @@ export default function ProgramItemTangoDay1({workout}){
                                 selectedValue={selectedValue7}
                                 style={styles.selecterBlackPicker}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue7(itemValue)}>
-                                <Picker.Item label="1 Arm Cable Row" value="workout1" />
-                                <Picker.Item label="Workout2" value="workout2" />
+                                <Picker.Item label={workout.standard[9].name} value={workout.standard[9].name} />
+                                <Picker.Item label={workout.standard[10].name} value={workout.standard[10].name} />
+                                <Picker.Item label={workout.standard[11].name} value={workout.standard[11].name} />
+                                <Picker.Item label={workout.standard[12].name} value={workout.standard[12].name} />
                             </Picker>}
                         </View>
                     </View>
                     <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>25</Text>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[9].description}</Text>
                     </View>
-
+                </View> 
+                <View style={styles.icons}>
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
                         name="book" size={25} color="#595959" />
+                    </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
+                        <Pressable
+                            onPress={() => {
+                                printPickerData(selectedValue7, workout.standard[9].name);
+                                //let newNumOfTimes = numberOfTimes + 1;
+                                //setNumberOfTimes(newNumOfTimes);
+                            }}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                        {
+                            selectedValue7 === workout.standard[9].name ?
+                                renderNumOfTimes(selectedValue7, workout.standard[9].name, standard10) :
+                            selectedValue7 === workout.standard[10].name ?
+                                renderNumOfTimes(selectedValue7, workout.standard[10].name, standard11) :
+                            selectedValue7 === workout.standard[11].name ?
+                                renderNumOfTimes(selectedValue7, workout.standard[11].name, standard12) :
+                            selectedValue7 === workout.standard[12].name ?
+                                renderNumOfTimes(selectedValue7, workout.standard[12].name, standard13) :
+                            selectedValue7 === undefined && (standard10 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard10}</Text>:
+                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        } 
+                    </View>
                 </View> 
             </View>
             <View style={styles.leftContainer}>
@@ -1007,39 +1036,88 @@ export default function ProgramItemTangoDay1({workout}){
                                 selectedValue={selectedValue8}
                                 style={styles.selecterBlack}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue8(itemValue)}>
-                                <Picker.Item label="DB Complex 1" value="workout1" />
-                                <Picker.Item label="Workout2" value="workout2" />
+                                <Picker.Item label={workout.standard[13].name} value={workout.standard[13].name} />
+                                <Picker.Item label={workout.standard[14].name} value={workout.standard[14].name} />
                             </Picker>}
                         </View>
 
                     </View>
                     <View style={styles.description}>
-                    <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>Do not put the weight down until all reps are completed. Non-stop movement</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>x7, x4, x2, x12</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-upright row</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-military press</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-clean grip snatch</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-rdl (both legs together)</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-clean and jerk</Text>
+                    <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.standard[13].description}</Text>
                     </View>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                            name="videocamera" size={25} color="#595959"  />
-                        <AntDesign onPress={() => Alert.alert("Open Book")}
-                            name="book" size={25} color="#595959"  />
+
                 </View>
+                <View style={styles.icons}>
+                    <AntDesign onPress={() => Alert.alert("Open Video")}
+                        name="videocamera" size={25} color="#595959" />
+                    <AntDesign onPress={() => Alert.alert("Open Book")}
+                        name="book" size={25} color="#595959" />
+                    </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
+                        <Pressable
+                            onPress={() => {
+                                printPickerData(selectedValue8, workout.standard[13].name);
+                                //let newNumOfTimes = numberOfTimes + 1;
+                                //setNumberOfTimes(newNumOfTimes);
+                            }}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                        {
+                            selectedValue8 === workout.standard[13].name ?
+                                renderNumOfTimes(selectedValue8, workout.standard[13].name, standard14) :
+                            selectedValue8 === workout.standard[14].name ?
+                                renderNumOfTimes(selectedValue8, workout.standard[14].name, standard15) :
+                            selectedValue8 === undefined && (standard14 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard14}</Text>:
+                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        } 
+                    </View>
+                </View> 
+
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
-                        <Text style={{color:'#9f272e'}}>{workout.mobility[1].name}</Text>
+                        <View style={styles.selecterContainer}>
+                            <Text style={{color:'#9f272e'}}>{workout.mobility[1].name}</Text>
+                        </View>
+                        
                     </View>    
                     <View style={styles.description}>
                         <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>{workout.mobility[1].description}</Text>
                     </View>
-
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959"  />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959"  />
                 </View>
+                <View style={styles.icons}>
+                    <AntDesign onPress={() => Alert.alert("Open Video")}
+                        name="videocamera" size={25} color="#595959" />
+                    <AntDesign onPress={() => Alert.alert("Open Book")}
+                        name="book" size={25} color="#595959" />
+                    </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
+                        <Pressable
+                            onPress={() => {
+                                printData(workout.mobility[1].name);
+                                //let newNumOfTimes = numberOfTimes + 1;
+                                //setNumberOfTimes(newNumOfTimes);
+                            }}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {mobility2 !== '0'  ? mobility2: numberOfTimes.toString() }</Text>
+                    </View>
+                </View> 
                 
             </View>
             

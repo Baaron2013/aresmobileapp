@@ -21,7 +21,7 @@ const Combatives = () => {
                 
             </View>
             {/* body of page - edited */}
-            <Text>Combatives Page</Text> 
+            <Text>Combatives</Text> 
         </View>
     )
 }

@@ -47,19 +47,19 @@ const buttonClickedHandler = () => {
 
 function renderHeader() {
     return (
-      <View
-        style={{
-          //backgroundColor: '#bfdbf7',
-          padding: 5,
-          marginVertical: 5,
-          borderRadius: 10,
-          borderStyle: 'solid',
-          borderColor: 'black',
-          flex: 1,
-          alignContent: 'center',
-          flexDirection: 'row',
-        }}
-      >
+      <><View
+            style={{
+                //backgroundColor: '#bfdbf7',
+                padding: 5,
+                marginVertical: 5,
+                borderRadius: 10,
+                borderStyle: 'solid',
+                borderColor: 'black',
+                flex: 1,
+                alignContent: 'center',
+                flexDirection: 'row'
+            }}
+        >
             <DayButton
                 onPress={buttonClickHandler}
                 style={styles.roundProgramButton1}
@@ -92,8 +92,15 @@ function renderHeader() {
                 numberText={'4'}
                 value={selected}>
             </DayButton>
-        
-      </View>
+
+        </View>
+        <View style={{padding: 12,}}>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>Legend:</Text>
+            <Text style={{backgroundColor: '#b4c7e7', alignSelf: 'flex-start'}}>Circuit the Shaded Area</Text>
+            <Text style={{color: 'red'}}>Mobility (red)</Text>
+            <Text style={{color: 'green'}}>Conditioning (green)</Text>
+            <Text style={{color: '#9f272e'}}>Core (dark red)</Text>
+        </View></>
     );
   }
 
