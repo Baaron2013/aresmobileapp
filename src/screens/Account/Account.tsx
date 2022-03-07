@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Pressable, Image, ScrollView, StatusBar} from 'react-native'
+import { View, Text, StyleSheet, Pressable, Image, ScrollView, StatusBar, Platform} from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { NavigationHelpersContext, useNavigation } from '@react-navigation/native'
@@ -22,7 +22,7 @@ const Account = () => {
     const [user, setUser] = useState(null);
     
     const data = {
-        labels: ["S", "M", "T", "W", "T", "F", "S"],
+        labels: ["1", "2", "3", "4", "5", "6", "7"],
         datasets: [
           {
             data: [3, 2, 1, 2, 1, 3, 1]
@@ -57,21 +57,22 @@ const Account = () => {
     
         return (
             <ScrollView>
-            <><View>
+            <><View style={styles.root}>
+            <View>
                 <Pressable style={styles.icon}
                     onPress={() => navigation.navigate('Profile')}>
                     <RNIcon name="cog" color={'black'} size={25} />
                 </Pressable>
-            </View><View style={styles.root}>
-                <View style={[styles.line1]}>
+            </View>
+                <View style={styles.line1}>
                     <View style={styles.workout}>
                         <Text style={styles.titles}>Workouts</Text>
-                        <Text style={styles.text}>(completed this week)</Text>
+                        <Text style={styles.text}>(last 7 days)</Text>
                         <Text style={styles.numbers}>5</Text>
 
                     </View>
 
-                    <View style={styles.weight}>
+                    <View style={styles.workout}>
                         <Text style={styles.titles}>Weight</Text>
                         <Text style={styles.text}>(lbs)</Text>
                         <Text style={styles.numbers}>158.6</Text>
@@ -123,13 +124,13 @@ const Account = () => {
                         <ScrollView nestedScrollEnabled={true}>
                             <Text style={styles.titles}>My Logs</Text>
 
-                            <Text style={styles.logTitle}> Tango > ELITE > week 1 > day 3 </Text>
+                            <Text style={styles.logTitle}> Tango {'>'} ELITE {'>'} week 1 {'>'} day 3 </Text>
                             <Text style = {styles.logText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
 
-                            <Text style={styles.logTitle}> Tango > ELITE > week 1 > day 2 </Text>
+                            <Text style={styles.logTitle}> Tango {'>'} ELITE {'>'} week 1 {'>'} day 2 </Text>
                             <Text style = {styles.logText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
 
-                            <Text style={styles.logTitle}> Tango > ELITE > week 1 > day 1 </Text>
+                            <Text style={styles.logTitle}> Tango {'>'} ELITE {'>'} week 1 {'>'} day 1 </Text>
                             <Text style = {styles.logText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
                         </ScrollView>
                     </View>
@@ -177,31 +178,36 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 20,
         alignContent: 'center',
-        marginRight: 20,
+        marginRight: 10,
+        flex: 1
     },
     workout:{
         backgroundColor: '#D2E5F8',
-        width: 160,
-        height: 110,
+        //width: 160,
+        //height: 110,
         marginLeft: Platform.OS === 'ios' ? 35 : 10,        
         borderRadius: 34,
         paddingLeft: 15,
         paddingTop: 15,
+        paddingBottom: 10,
+        flex: 1
     },
     weight:{
         backgroundColor: '#D2E5F8',
-        width: 160,
-        height: 110,
-        marginLeft: Platform.OS === 'ios' ? 25 : 20,        
+        //width: 160,
+        //height: 110,
+        //marginLeft: Platform.OS === 'ios' ? 35 : 5,        
         borderRadius: 34,
         paddingLeft: 15,
         paddingTop: 15,
+        flex: 1
     },
     soreness:{
         backgroundColor: '#D2E5F8',
-        width: Platform.OS === 'ios' ? 345 : 340,
-        height: 240,
+        //width: Platform.OS === 'ios' ? 345 : 340,
+        //height: 240,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
+        marginRight: Platform.OS === 'ios' ? 35 : 10, 
         borderRadius: 34,
         marginTop:20,
         paddingLeft: 15,
@@ -209,9 +215,10 @@ const styles = StyleSheet.create({
     },
     sleep:{
         backgroundColor: '#D2E5F8',
-        width: Platform.OS === 'ios' ? 345 : 340,
-        height: 240,
+        //width: Platform.OS === 'ios' ? 345 : 340,
+        //height: 240,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
+        marginRight: Platform.OS === 'ios' ? 35 : 10, 
         borderRadius: 34,
         marginTop:20,
         paddingLeft: 15,
@@ -219,24 +226,26 @@ const styles = StyleSheet.create({
     },
     mylog:{
         backgroundColor: '#D2E5F8',
-        width: Platform.OS === 'ios' ? 345 : 340,
+        //width: Platform.OS === 'ios' ? 345 : 340,
         height: 170,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
+        marginRight: Platform.OS === 'ios' ? 35 : 10, 
         borderRadius: 34,
         marginTop: Platform.OS === 'ios' ? 20 : 0, 
         paddingLeft: 15,
         paddingTop: 15,
         marginBottom: 15,
+        paddingBottom:10
     },
     titles: {
         fontSize: 19,
-        fontWeight: '800',
+        fontWeight: 'bold',
         color: '#1F7A8C',
         
     },
     numbers: {
         fontSize: 20,
-        fontWeight: '800',
+        fontWeight: 'bold',
         color: '#1F7A8C',
         paddingTop: 15,
         

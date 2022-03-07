@@ -16,6 +16,7 @@ import { CalculatorResults as Calculator} from "../../models"
 
 
 export default function ProgramItemTangoDay1({workout}){
+    console.log('starting day view')
 
     const [selectedValue1, setSelectedValue1] = useState();
     const [selectedValue2, setSelectedValue2] = useState();
@@ -25,11 +26,6 @@ export default function ProgramItemTangoDay1({workout}){
     const [selectedValue6, setSelectedValue6] = useState();
     const [selectedValue7, setSelectedValue7] = useState();
     const [selectedValue8, setSelectedValue8] = useState();
-    const [selectedValue9, setSelectedValue9] = useState();
-    const [selectedValue10, setSelectedValue10] = useState();
-    const [selectedValue11, setSelectedValue11] = useState();
-    const [selectedValue12, setSelectedValue12] = useState();
-    const [selectedValue13, setSelectedValue13] = useState();
     const [ numberOfTimes, setNumberOfTimes] = useState('0')
     const [userID, setID] = useState(undefined);
     const [mobility1, setMobility1] = useState<string>('0');
@@ -50,6 +46,15 @@ export default function ProgramItemTangoDay1({workout}){
     const [standard4, setStandard4] = useState<string>('0');
     const [standard5, setStandard5] = useState<string>('0');
     const [standard6, setStandard6] = useState<string>('0');
+    const [standard7, setStandard7] = useState<string>('0');
+    const [standard8, setStandard8] = useState<string>('0');
+    const [standard9, setStandard9] = useState<string>('0');
+    const [standard10, setStandard10] = useState<string>('0');
+    const [standard11, setStandard11] = useState<string>('0');
+    const [standard12, setStandard12] = useState<string>('0');
+    const [standard13, setStandard13] = useState<string>('0');
+    const [standard14, setStandard14] = useState<string>('0');
+    const [standard15, setStandard15] = useState<string>('0');
     const [clean, setClean] = useState<number | undefined>(0)
     const [bench, setBench] = useState<number | undefined>(0)
     const [squat, setSquat] = useState<number | undefined>(0)
@@ -168,6 +173,51 @@ export default function ProgramItemTangoDay1({workout}){
         if (newStandard6.length !== 0) {
             setStandard6(newStandard6.length.toString())
         }
+        const newStandard7 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[6].name).day('eq', '1'));
+        if (newStandard7.length !== 0) {
+            setStandard7(newStandard7.length.toString())
+        }
+        const newStandard8 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[7].name).day('eq', '1'));
+        if (newStandard8.length !== 0) {
+            setStandard8(newStandard8.length.toString())
+        }
+        const newStandard9 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[8].name).day('eq', '1'));
+        if (newStandard9.length !== 0) {
+            setStandard9(newStandard9.length.toString())
+        }
+        const newStandard10 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[9].name).day('eq', '1'));
+        if (newStandard10.length !== 0) {
+            setStandard10(newStandard10.length.toString())
+        }
+        const newStandard11 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[10].name).day('eq', '1'));
+        if (newStandard11.length !== 0) {
+            setStandard11(newStandard11.length.toString())
+        }
+        const newStandard12 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[11].name).day('eq', '1'));
+        if (newStandard12.length !== 0) {
+            setStandard12(newStandard12.length.toString())
+        }
+        const newStandard13 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[12].name).day('eq', '1'));
+        if (newStandard13.length !== 0) {
+            setStandard13(newStandard13.length.toString())
+        }
+        const newStandard14 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[13].name).day('eq', '1'));
+        if (newStandard14.length !== 0) {
+            setStandard14(newStandard14.length.toString())
+        }
+        const newStandard15 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.standard[14].name).day('eq', '1'));
+        if (newStandard15.length !== 0) {
+            setStandard15(newStandard15.length.toString())
+        }
 
         console.log('got user')
 
@@ -275,6 +325,51 @@ export default function ProgramItemTangoDay1({workout}){
         if (newStandard6.length !== 0) {
             setStandard6(newStandard6.length.toString())
         }
+        const newStandard7 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[6].name).day('eq', '1'));
+        if (newStandard7.length !== 0) {
+            setStandard7(newStandard7.length.toString())
+        }
+        const newStandard8 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[7].name).day('eq', '1'));
+        if (newStandard8.length !== 0) {
+            setStandard8(newStandard8.length.toString())
+        }
+        const newStandard9 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[8].name).day('eq', '1'));
+        if (newStandard9.length !== 0) {
+            setStandard9(newStandard9.length.toString())
+        }
+        const newStandard10 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[9].name).day('eq', '1'));
+        if (newStandard10.length !== 0) {
+            setStandard10(newStandard10.length.toString())
+        }
+        const newStandard11 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[10].name).day('eq', '1'));
+        if (newStandard11.length !== 0) {
+            setStandard11(newStandard11.length.toString())
+        }
+        const newStandard12 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[11].name).day('eq', '1'));
+        if (newStandard12.length !== 0) {
+            setStandard12(newStandard12.length.toString())
+        }
+        const newStandard13 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[12].name).day('eq', '1'));
+        if (newStandard13.length !== 0) {
+            setStandard13(newStandard13.length.toString())
+        }
+        const newStandard14 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[13].name).day('eq', '1'));
+        if (newStandard14.length !== 0) {
+            setStandard14(newStandard14.length.toString())
+        }
+        const newStandard15 = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
+        .workoutName('eq', workout.standard[14].name).day('eq', '1'));
+        if (newStandard15.length !== 0) {
+            setStandard15(newStandard15.length.toString())
+        }
 
         console.log('got user')
     }
@@ -360,7 +455,11 @@ export default function ProgramItemTangoDay1({workout}){
         console.log('conditioning3 ' + conditioning3)
         console.log(selectedValue)
         if (selectedValue === name && numOfTimes !== '0') {
+            console.log('returning DB value')
             return <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numOfTimes}</Text>
+        }
+        else {       
+            return <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
         }
         
     }
@@ -463,7 +562,7 @@ export default function ProgramItemTangoDay1({workout}){
                         
                     </View>
                     <View style={styles.timesCompleted}>
-                        {
+                       {
                             selectedValue1 === workout.conditioning[0].name ?
                                 renderNumOfTimes(selectedValue1, workout.conditioning[0].name, conditioning1) :
                             selectedValue1 === workout.conditioning[1].name ?
@@ -499,31 +598,6 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
                       
                 </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printPickerData(selectedValue2, workout.mobility[2].name);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                            {/* {renderNumOfTimes()} */}
-                    </View>
-                </View> 
                   
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
@@ -556,7 +630,7 @@ export default function ProgramItemTangoDay1({workout}){
                         
                     </View>
                     <View style={styles.timesCompleted}>
-                            {/* {renderNumOfTimes()} */}
+                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core1 !== '0'  ? core1: numberOfTimes.toString() }</Text>
                     </View>
                 </View> 
 
@@ -591,7 +665,7 @@ export default function ProgramItemTangoDay1({workout}){
                         
                     </View>
                     <View style={styles.timesCompleted}>
-                            {/* {renderNumOfTimes()} */}
+                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core2 !== '0'  ? core2: numberOfTimes.toString() }</Text>
                     </View>
                 </View> 
                 <View style={styles.workRowBlue}>
@@ -614,7 +688,7 @@ export default function ProgramItemTangoDay1({workout}){
                         <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
                         <Pressable
                             onPress={() => {
-                                printData(workout.core[1].name);
+                                printData(workout.core[2].name);
                                 //let newNumOfTimes = numberOfTimes + 1;
                                 //setNumberOfTimes(newNumOfTimes);
                             }}
@@ -625,7 +699,7 @@ export default function ProgramItemTangoDay1({workout}){
                         
                     </View>
                     <View style={styles.timesCompleted}>
-                            {/* {renderNumOfTimes()} */}
+                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core3 !== '0'  ? core3: numberOfTimes.toString() }</Text>
                     </View>
                 </View> 
             </View>
@@ -658,17 +732,13 @@ export default function ProgramItemTangoDay1({workout}){
                                             workout.standard[0].percentages.map((item, index2) => {
                                                 if (clean && index1 === index2){
                                                     return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
-                                                        {Math.floor(((clean * .65) /2) * item)}</Text>
+                                                        {(Math.floor((((clean * .65) /2) * item)/5))*5}</Text>
                                                 }
                                             })
                                             
                                         }
                                         </Text>
-                                    }
-                                    
-                                        
-                                    
-                                    
+                                    }      
                                 }
                             })
                         }
@@ -685,7 +755,7 @@ export default function ProgramItemTangoDay1({workout}){
                         <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
                         <Pressable
                             onPress={() => {
-                                printData(workout.core[1].name);
+                                printPickerData(selectedValue3, workout.standard[0].name);
                                 //let newNumOfTimes = numberOfTimes + 1;
                                 //setNumberOfTimes(newNumOfTimes);
                             }}
@@ -696,7 +766,16 @@ export default function ProgramItemTangoDay1({workout}){
                         
                     </View>
                     <View style={styles.timesCompleted}>
-                            {/* {renderNumOfTimes()} */}
+                        {
+                            selectedValue3 === workout.standard[0].name ?
+                                renderNumOfTimes(selectedValue3, workout.standard[0].name, standard1) :
+                            selectedValue3 === workout.standard[1].name ?
+                                renderNumOfTimes(selectedValue3, workout.standard[1].name, standard2) :
+                            selectedValue3 === undefined && (standard1 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard1}</Text>:
+                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        }
                     </View>
                 </View> 
 
@@ -708,25 +787,108 @@ export default function ProgramItemTangoDay1({workout}){
                             selectedValue={selectedValue4}
                             style={styles.selecterBlack}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue4(itemValue)}>
-                            <Picker.Item label="Step Up" value="workout1" />
-                            <Picker.Item label="Workout2" value="workout2" />
-                            <Picker.Item label="Workout2" value="workout2" />
-                            <Picker.Item label="Workout2" value="workout2" />
+                            <Picker.Item label={workout.standard[2].name} value={workout.standard[2].name} />
+                            <Picker.Item label={workout.standard[3].name} value={workout.standard[3].name} />
+                            <Picker.Item label={workout.standard[4].name} value={workout.standard[4].name} />
+                            <Picker.Item label={workout.standard[5].name} value={workout.standard[5].name} />
                         </Picker>}
                         </View>
                     </View>
                     <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>5 / 45</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>5 / 55</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>3 / 65</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>3 / 75</Text>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>3 / 85</Text>
-                    </View>
-
+                        {
+                            workout.standard[2].reps.map((item, index1) => {
+                                if (squat) {
+                                    if (selectedValue4 === workout.standard[5].name) {
+                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item}</Text>
+                                    } if (selectedValue4 === workout.standard[4].name) {
+                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '} / {' '}
+                                            {
+                                                workout.standard[4].percentages.map((item, index2) => {
+                                                    if (clean && index1 === index2){
+                                                        return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
+                                                            {(Math.floor((squat * .18  * item)/5))*5}</Text>
+                                                    }
+                                                })
+                                                
+                                            }
+                                            </Text>
+                                    
+                                    }
+                                    if (selectedValue4 === workout.standard[3].name) {
+                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '} / {' '}
+                                            {
+                                                workout.standard[3].percentages.map((item, index2) => {
+                                                    if (clean && index1 === index2){
+                                                        return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
+                                                            {(Math.floor((squat * .18  * item)/5))*5}</Text>
+                                                    }
+                                                })
+                                                
+                                            }
+                                            </Text>
+                                    
+                                    }
+                                    if (selectedValue4 === workout.standard[2].name || selectedValue4 === undefined) {
+                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '} / {' '}
+                                            {
+                                                workout.standard[2].percentages.map((item, index2) => {
+                                                    if (clean && index1 === index2){
+                                                        return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
+                                                            {(Math.floor((squat * .18  * item)/5))*5}</Text>
+                                                    }
+                                                })
+                                                
+                                            }
+                                            </Text>
+                                    
+                                    }
+                            
+                                            
+                                             
+                                    
+                                }
+                                
+                            })
+                        }
+                    </View> 
+                </View> 
+                <View style={styles.icons}>
                     <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
+                        name="videocamera" size={25} color="#595959" />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" style={styles.readIcon} />
+                        name="book" size={25} color="#595959" />
+                    </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
+                        <Pressable
+                            onPress={() => {
+                                printPickerData(selectedValue4, workout.standard[2].name);
+                                //let newNumOfTimes = numberOfTimes + 1;
+                                //setNumberOfTimes(newNumOfTimes);
+                            }}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                        {
+                            selectedValue4 === workout.standard[2].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[2].name, standard3) :
+                            selectedValue4 === workout.standard[3].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[3].name, standard4) :
+                            selectedValue4 === workout.standard[4].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[4].name, standard5) :
+                            selectedValue4 === workout.standard[5].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[5].name, standard6) :
+                            selectedValue4 === undefined && (standard3 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard3}</Text>:
+                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        } 
+                    </View>
                 </View> 
             </View>
             <View style={styles.leftContainerSmaller}>
@@ -740,19 +902,15 @@ export default function ProgramItemTangoDay1({workout}){
                                 selectedValue={selectedValue5}
                                 style={styles.selecterRed}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue5(itemValue)}>
-                                <Picker.Item label="PLACE HOLDER - DO NOT DELETE" value="workout1" />
-                                <Picker.Item label="Workout2" value="workout2" />
+                                <Picker.Item label={workout.mobility[2].name} value={workout.mobility[2].name} />
+                                <Picker.Item label={workout.mobility[3].name} value={workout.mobility[3].name} />
                             </Picker>}
                         </View>
 
                     </View>
                     <View style={styles.description}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>2-3x thru</Text>
+                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.mobility[2].description}</Text>
                     </View>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                            name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
-                        <AntDesign onPress={() => Alert.alert("Open Book")}
-                            name="book" size={25} color="#595959" style={styles.readIcon} />
                 </View>
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
@@ -771,9 +929,9 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
  
                     <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
+                        name="videocamera" size={25} color="#595959" />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" style={styles.readIcon} />
+                        name="book" size={25} color="#595959" />
                 </View>
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
@@ -793,9 +951,9 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
 
                     <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
+                        name="videocamera" size={25} color="#595959" />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" style={styles.readIcon} />
+                        name="book" size={25} color="#595959" />
                 </View> 
             </View>
             <View style={styles.leftContainer}>
@@ -824,9 +982,9 @@ export default function ProgramItemTangoDay1({workout}){
                             <Text style={{fontSize:10 ,fontWeight: 'bold'}}>-clean and jerk</Text>
                     </View>
                     <AntDesign onPress={() => Alert.alert("Open Video")}
-                            name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
+                            name="videocamera" size={25} color="#595959"  />
                         <AntDesign onPress={() => Alert.alert("Open Book")}
-                            name="book" size={25} color="#595959" style={styles.readIcon} />
+                            name="book" size={25} color="#595959"  />
                 </View>
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
@@ -837,9 +995,9 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
 
                     <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" style={styles.videoIcon} />
+                        name="videocamera" size={25} color="#595959"  />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" style={styles.readIcon} />
+                        name="book" size={25} color="#595959"  />
                 </View>
                 
             </View>
