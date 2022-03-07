@@ -5,7 +5,7 @@ import Custombutton from '../../component/CustomButton/Custombutton'
 import { NavigationHelpersContext, useNavigation } from '@react-navigation/native'
 import { Auth, Hub } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
-import { User as UserModel } from "../../models"
+import { User as UserModel, RangerMetrics } from "../../models"
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 // IF THIS COMES UP AGAIN COMMENT IT OUT import { styles } from 'react-native-element-dropdown/src/TextInput/styles'
@@ -20,16 +20,97 @@ const Account = () => {
     const [currentEmail, setEmail] = useState('');
     const [userID, setID] = useState(undefined);
     const [user, setUser] = useState(null);
+
+    const [metrics, setMetrics] = useState<RangerMetrics[]>([]);
+
+    //retrieving metrics for current user and sorting them by most recent to least recent (first object in array most recent)
+    useEffect(() => {
+        const fetchMetrics = async () => {
+            const userData = await Auth.currentAuthenticatedUser();
+            setUser(userData);
+            const metrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
+            console.log(metrics);
+            metrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
+            setMetrics(metrics);
+        };
+        fetchMetrics();
+    }, []);
+    //
+
+    const sleepArray = [];
+    const sorenessArray = [];
+
+    //set values in sleepArray
+    for(let i = metrics.length - 1; i >=0; i--){
+        if(metrics[i].sleep == "<6"){
+            sleepArray.push(4);
+
+        }else if (metrics[i].sleep == "6-8"){
+            sleepArray.push(6)
+
+        }else if (metrics[i].sleep == "8+"){
+            sleepArray.push(8)
+
+        }else {
+            sleepArray.push(null);
+        }
+        
+    }
+
+    //set values in sorenessArray
+    for(let j = metrics.length - 1; j >=0; j--){
+        if(metrics[j].soreness == "None"){
+            sorenessArray.push(0);
+
+        }else if (metrics[j].soreness == "Mild"){
+            sorenessArray.push(4)
+
+        }else if (metrics[j].soreness == "Moderate"){
+            sleepArray.push(8)
+
+        }else {
+            sorenessArray.push(null);
+        }
+    }
     
+<<<<<<< HEAD
     const data = {
+=======
+
+    if(sleepArray.length < 7){
+     var i = 7 - sleepArray.length;
+     while(i > 0){
+         sleepArray.push(null);
+         i--;
+     }
+    }
+
+    if(sorenessArray.length < 7){
+        var i = 7 - sorenessArray.length;
+        while(i > 0){
+            sorenessArray.push(null);
+            i--;
+        }
+       }
+       console.log(metrics[0]);
+    const sleepData = {
+>>>>>>> origin/master
         labels: ["1", "2", "3", "4", "5", "6", "7"],
         datasets: [
           {
-            data: [3, 2, 1, 2, 1, 3, 1]
+            data: sleepArray
         }
         ]
     };
 
+    const sorenessData = {
+        labels: ["1", "2", "3", "4", "5", "6", "7"],
+        datasets: [
+          {
+            data: sorenessArray
+        }
+        ]
+    };
 
     const chartConfig = {
         backgroundGradientFrom: "transparent",
@@ -75,7 +156,7 @@ const Account = () => {
                     <View style={styles.workout}>
                         <Text style={styles.titles}>Weight</Text>
                         <Text style={styles.text}>(lbs)</Text>
-                        <Text style={styles.numbers}>158.6</Text>
+                        <Text style={styles.numbers}>{metrics[0].weight}</Text>
                     </View>
                 </View>
                     
@@ -84,7 +165,7 @@ const Account = () => {
                     <Text style={styles.text}>last seven days</Text>
                     <View style = {styles.graphContainer}>
                         <BarChart
-                                data={data}
+                                data={sorenessData}
                                 width={360}
                                 height={160}
                                 fromZero= {true}
@@ -104,7 +185,7 @@ const Account = () => {
                     <Text style={styles.text}>last seven days</Text>
                     <View style = {styles.graphContainer}>
                         <BarChart
-                                data={data}
+                                data={sleepData}
                                 width={360}
                                 height={160}
                                 fromZero= {true}

@@ -61,7 +61,7 @@ export default function ChatRoomScreen() {
         //fetchedMessages.reverse();
         
         fetchedMessages.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
-        console.log(fetchedMessages);
+        //console.log(fetchedMessages);
         setMessages(fetchedMessages);
         
         
