@@ -14,7 +14,7 @@ import { BarChart } from "react-native-chart-kit";
 
 const Account = () => {
     const navigation = useNavigation();
-    const [weight, setWeight] = useState<number | undefined> (undefined);
+    const [weight, setWeight] = useState('');
     const [newWeight, setNewWeight] = useState('');
     const [currentName, setName] = useState('');
     const [currentEmail, setEmail] = useState('');
@@ -126,8 +126,6 @@ const Account = () => {
     useEffect (() => {
         getDBUser();
     }, []); */
-
-    //console.log(metrics[0].weight);
     
         return (
             <ScrollView>
