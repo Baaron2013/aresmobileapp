@@ -14,7 +14,7 @@ import { BarChart } from "react-native-chart-kit";
 
 const Account = () => {
     const navigation = useNavigation();
-    const [weight, setWeight] = useState('');
+    const [weight, setWeight] = useState<number | undefined> (undefined);
     const [newWeight, setNewWeight] = useState('');
     const [currentName, setName] = useState('');
     const [currentEmail, setEmail] = useState('');
@@ -32,6 +32,12 @@ const Account = () => {
             console.log(metrics);
             metrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
             setMetrics(metrics);
+            for(let p =0; p < metrics.length; p++){
+                if(metrics[p].weight){
+                    setWeight(metrics[p].weight);
+                    return;
+                }
+            }
         };
         fetchMetrics();
     }, []);
@@ -73,28 +79,7 @@ const Account = () => {
         }
     }
     
-<<<<<<< HEAD
-    const data = {
-=======
-
-    if(sleepArray.length < 7){
-     var i = 7 - sleepArray.length;
-     while(i > 0){
-         sleepArray.push(null);
-         i--;
-     }
-    }
-
-    if(sorenessArray.length < 7){
-        var i = 7 - sorenessArray.length;
-        while(i > 0){
-            sorenessArray.push(null);
-            i--;
-        }
-       }
-       console.log(metrics[0]);
     const sleepData = {
->>>>>>> origin/master
         labels: ["1", "2", "3", "4", "5", "6", "7"],
         datasets: [
           {
@@ -135,6 +120,8 @@ const Account = () => {
     useEffect (() => {
         getDBUser();
     }, []); */
+
+    //console.log(metrics[0].weight);
     
         return (
             <ScrollView>
@@ -156,7 +143,7 @@ const Account = () => {
                     <View style={styles.workout}>
                         <Text style={styles.titles}>Weight</Text>
                         <Text style={styles.text}>(lbs)</Text>
-                        <Text style={styles.numbers}>{metrics[0].weight}</Text>
+                        <Text style={styles.numbers}>{weight}</Text>
                     </View>
                 </View>
                     
