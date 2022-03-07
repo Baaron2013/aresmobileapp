@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
         //width:150,
         flex: 1,
         color: 'red',
+        marginLeft: -10
 
     },
     selecterContainer: {
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
         //width: 150,
         color: '#197519', //green
         flex: 1,
+        marginLeft: -10
     },
     selecterBlack: { 
         //position: 'absolute',
@@ -124,7 +126,20 @@ const styles = StyleSheet.create({
         //height: 30,
         //width:150,
         color: 'black',
-        flex: 1
+        flex: 1,
+        marginLeft: -10
+        
+    },
+    selecterBlackPicker: { 
+        //position: 'absolute',
+        //margin: 6,
+        backgroundColor: 'transparent',
+        //height: 30,
+        //width:150,
+        color: 'black',
+        flex: 1,
+        marginLeft: -15
+        
     },
     selecter: { 
         //position: 'absolute',
@@ -160,8 +175,9 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         paddingTop:10,
         paddingBottom: 10,
+        paddingLeft: 8
         //paddingLeft: 10,
-        paddingRight: 10,
+        //paddingRight: 10,
         //height: 150,
         /* paddingTop:50,
         paddingBottom: 50, */
@@ -195,7 +211,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         flexDirection: 'column',
         alignContent: 'center',
-        paddingLeft: 8
+        //paddingLeft: 8
         
     },
     worksideMed: {

@@ -917,29 +917,70 @@ export default function ProgramItemTangoDay1({workout}){
                     <View style={styles.selecterContainer}>
                             {<Picker
                                 selectedValue={selectedValue6}
-                                style={styles.selecterBlack}
+                                style={styles.selecterBlackPicker}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue6(itemValue)}>
-                                <Picker.Item label="Pit Shark Squat" value="workout1" />
-                                <Picker.Item label="Workout2" value="workout2" />
+                                <Picker.Item label={workout.standard[6].name} value={workout.standard[6].name} />
+                                <Picker.Item label={workout.standard[7].name} value={workout.standard[7].name} />
+                                <Picker.Item label={workout.standard[8].name} value={workout.standard[8].name} />
                             </Picker>}
                         </View>
                     </View>
                     <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>30 / 150+</Text>
+                        {
+                            squat ? <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[8].description}
+                            {' '} / {' '} {(Math.floor((squat * 1.25  * workout.standard[6].percentage)/5))*5}</Text> :
+                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.standard[8].description}
+                            {' '} / {' '}</Text>
+                        }
+                    
                     </View>
  
+                </View>
+                <View style={styles.icons}>
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" />
                     <AntDesign onPress={() => Alert.alert("Open Book")}
                         name="book" size={25} color="#595959" />
-                </View>
+                    </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
+                        <Pressable
+                            onPress={() => {
+                                printPickerData(selectedValue4, workout.standard[2].name);
+                                //let newNumOfTimes = numberOfTimes + 1;
+                                //setNumberOfTimes(newNumOfTimes);
+                            }}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                        {
+                            selectedValue4 === workout.standard[2].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[2].name, standard3) :
+                            selectedValue4 === workout.standard[3].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[3].name, standard4) :
+                            selectedValue4 === workout.standard[4].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[4].name, standard5) :
+                            selectedValue4 === workout.standard[5].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[5].name, standard6) :
+                            selectedValue4 === undefined && (standard3 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard3}</Text>:
+                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        } 
+                    </View>
+                </View> 
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
                     <View style={styles.selecterContainer}>
                             {/* <Text>A</Text> */}
                             {<Picker
                                 selectedValue={selectedValue7}
-                                style={styles.selecterBlack}
+                                style={styles.selecterBlackPicker}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue7(itemValue)}>
                                 <Picker.Item label="1 Arm Cable Row" value="workout1" />
                                 <Picker.Item label="Workout2" value="workout2" />
