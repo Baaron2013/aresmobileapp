@@ -30,16 +30,11 @@ const Account = () => {
             setUser(userData);
             const userMetrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
             console.log(userMetrics);
-            userMetrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
+            userMetrics.sort(function(a, b){return b._lastChangedAt - a._lastChangedAt});
             //set only first 7 values of array
             const slicedMetrics = userMetrics.slice(0, 8);
             setMetrics(slicedMetrics);
-            for(let p =0; p < metrics.length; p++){
-                if(metrics[p].weight){
-                    setWeight(metrics[p].weight);
-                    return;
-                }
-            }
+            setWeight(slicedMetrics[0].weight)
         };
         fetchMetrics();
     }, []);
@@ -160,7 +155,7 @@ const Account = () => {
                     <View style={styles.workout}>
                         <Text style={styles.titles}>Weight</Text>
                         <Text style={styles.text}>(lbs)</Text>
-                        <Text style={styles.numbers}>{metrics[0].weight}</Text>
+                        <Text style={styles.numbers}>{weight}</Text>
                     </View>
                 </View>
                     
