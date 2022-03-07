@@ -21,8 +21,8 @@ const HomeCoach = () => {
         </View><View style={styles.root}>
                 <Image source={Logo} style={styles.logo} resizeMode="contain" />
                 <View style={styles.banner}></View>
-
-                <View style={styles.line1}>
+                
+                {/* <View style={styles.line1}>
 
                     <TouchableOpacity
                         onPress={() => { navigation.navigate('Philosophy') } }
@@ -87,7 +87,7 @@ const HomeCoach = () => {
                     onPress={() => { navigation.navigate('Combatives') } }
                     style={styles.button3}>
                     <Text>Combatives</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View></>
     )

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Pressable, Image, SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+<<<<<<< Updated upstream:src/navigation/HomeRNavigation.tsx
 import Philosophy from '../screens/Philosophy'
 import InjuryPrevention from '../screens/InjuryPrevention'
 import Core from '../screens/Core'
@@ -12,6 +13,18 @@ import HomeRanger from '../screens/HomeRanger'
 import CombatConditioning from '../screens/CombatConditioning'
 import Brain from '../screens/Brain'
 import Combatives from '../screens/Combatives'
+=======
+import Philosophy from '../Philosophy'
+import InjuryPrevention from '../InjuryPrevention'
+import Core from '../Core'
+import Techniques from '../Techniques'
+import Programs from '../Programs/ProgramsNavigator'
+import Nutrition from '../Nutrition'
+import HomeRanger from '../HomeRanger'
+import CombatConditioning from '../CombatConditioning'
+import Brain from '../Brain'
+import Combatives from '../CoachHome'
+>>>>>>> Stashed changes:src/screens/HomeRanger/HomeRNavigation.tsx
 
 
 const homeStack = createNativeStackNavigator();
