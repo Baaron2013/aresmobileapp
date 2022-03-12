@@ -1,1 +1,1 @@
-export {default } from './ProgramItemTangoDay1';
+export {default } from './TangoWeek1/ProgramItemTangoDay1';

@@ -84,6 +84,76 @@ export const syncWorkouts = /* GraphQL */ `
     }
   }
 `;
+export const getWeeksCompleted = /* GraphQL */ `
+  query GetWeeksCompleted($id: ID!) {
+    getWeeksCompleted(id: $id) {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listWeeksCompleteds = /* GraphQL */ `
+  query ListWeeksCompleteds(
+    $filter: ModelWeeksCompletedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWeeksCompleteds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        program
+        level
+        week
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncWeeksCompleteds = /* GraphQL */ `
+  query SyncWeeksCompleteds(
+    $filter: ModelWeeksCompletedFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncWeeksCompleteds(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        program
+        level
+        week
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getCalculatorResults = /* GraphQL */ `
   query GetCalculatorResults($id: ID!) {
     getCalculatorResults(id: $id) {

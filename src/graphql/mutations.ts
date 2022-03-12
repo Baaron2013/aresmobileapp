@@ -71,6 +71,63 @@ export const deleteWorkouts = /* GraphQL */ `
     }
   }
 `;
+export const createWeeksCompleted = /* GraphQL */ `
+  mutation CreateWeeksCompleted(
+    $input: CreateWeeksCompletedInput!
+    $condition: ModelWeeksCompletedConditionInput
+  ) {
+    createWeeksCompleted(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWeeksCompleted = /* GraphQL */ `
+  mutation UpdateWeeksCompleted(
+    $input: UpdateWeeksCompletedInput!
+    $condition: ModelWeeksCompletedConditionInput
+  ) {
+    updateWeeksCompleted(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWeeksCompleted = /* GraphQL */ `
+  mutation DeleteWeeksCompleted(
+    $input: DeleteWeeksCompletedInput!
+    $condition: ModelWeeksCompletedConditionInput
+  ) {
+    deleteWeeksCompleted(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createCalculatorResults = /* GraphQL */ `
   mutation CreateCalculatorResults(
     $input: CreateCalculatorResultsInput!

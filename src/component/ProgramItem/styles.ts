@@ -91,6 +91,28 @@ const styles = StyleSheet.create({
         marginLeft: -10
 
     },
+    selecterRedPicker: { 
+        //position: 'absolute',
+        //margin: 6,
+        backgroundColor: 'transparent',
+        //height: 30,
+        //width:150,
+        flex: 1,
+        color: 'red',
+        marginLeft: -5
+
+    },
+    selecterCore: { 
+        //position: 'absolute',
+        //margin: 6,
+        backgroundColor: 'transparent',
+        //height: 30,
+        //width:150,
+        flex: 1,
+        color: '#8b0000',
+        marginLeft: -10
+
+    },
     selecterContainer: {
         backgroundColor:'transparent',
         //alignContent: 'center',
@@ -258,6 +280,10 @@ const styles = StyleSheet.create({
     timesCompleted: {
         paddingLeft: 8,
         paddingBottom: 15
+    },
+    weeksCompleted: {
+        paddingBottom: 15,
+        marginLeft: 95
     },
 
 

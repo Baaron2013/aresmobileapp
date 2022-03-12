@@ -62,6 +62,54 @@ export const onDeleteWorkouts = /* GraphQL */ `
     }
   }
 `;
+export const onCreateWeeksCompleted = /* GraphQL */ `
+  subscription OnCreateWeeksCompleted {
+    onCreateWeeksCompleted {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateWeeksCompleted = /* GraphQL */ `
+  subscription OnUpdateWeeksCompleted {
+    onUpdateWeeksCompleted {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteWeeksCompleted = /* GraphQL */ `
+  subscription OnDeleteWeeksCompleted {
+    onDeleteWeeksCompleted {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateCalculatorResults = /* GraphQL */ `
   subscription OnCreateCalculatorResults {
     onCreateCalculatorResults {

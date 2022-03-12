@@ -6,14 +6,15 @@ import { useNavigation } from '@react-navigation/native'
 import { Auth, autoShowTooltip } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import ChatRoomItem from '../../../component/ChatRoomItem';
-import ProgramItemTangoDay1 from '../../../component/ProgramItem/ProgramItemTangoDay1'
-import ProgramItemTangoDay2 from '../../../component/ProgramItem/ProgramItemTangoDay2'
-import ProgramItemTangoDay3 from '../../../component/ProgramItem/ProgramItemTangoDay3'
-import ProgramItemTangoDay4 from '../../../component/ProgramItem/ProgramItemTangoDay4'
+import ProgramItemTangoDay1 from '../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay1'
+import ProgramItemTangoDay2 from '../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay2'
+import ProgramItemTangoDay3 from '../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay3'
+import ProgramItemTangoDay4 from '../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay4'
 import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use TouchOpac from 'react-native'
 
 import chatRoomsData from '../../../../assets/dummy-data/ChatRooms';
-import workoutData from '../../../../assets/dummy-data/Workouts';
+import WorkoutDataDay1 from '../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay1';
+import WorkoutDataDay2 from '../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay2';
 import { listChatRooms } from '../../../graphql/queries'
 
 const Plans = (  ) => {
@@ -109,7 +110,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
+                data={WorkoutDataDay1}
                 renderItem={({item}) => <ProgramItemTangoDay1 workout={item} />}
             />
         )
@@ -118,7 +119,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
+                data={WorkoutDataDay2}
                 renderItem={({item}) => <ProgramItemTangoDay2 workout={item} />}
             />
         )
@@ -127,7 +128,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
+                data={WorkoutDataDay1}
                 renderItem={({item}) => <ProgramItemTangoDay3 workout={item} />}
             />
         )
@@ -136,7 +137,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
+                data={WorkoutDataDay1}
                 renderItem={({item}) => <ProgramItemTangoDay4 workout={item} />}
             />
         )

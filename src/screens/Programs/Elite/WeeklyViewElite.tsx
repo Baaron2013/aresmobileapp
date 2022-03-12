@@ -10,7 +10,7 @@ import ProgramItem from '../../../component/ProgramItem'
 import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use TouchOpac from 'react-native'
 
 import chatRoomsData from '../../../../assets/dummy-data/ChatRooms';
-import workoutData from '../../../../assets/dummy-data/Workouts';
+import workoutData from '../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay1';
 import { listChatRooms } from '../../../graphql/queries';
 
 import WeekListItem from '../../../component/WeekListItem/WeekListItem'
@@ -31,6 +31,7 @@ const Plans = ( props ) => {
                     {/* <Text style={styles.heading}>| Tango</Text>  */}
                     <WeekListItem 
                         programName={'Tango'} 
+                        level={'Elite'}
                         dayPicker1={'EliteDayViewWeek1'} 
                         dayPicker2={'EliteDayViewWeek2'}
                         dayPicker3={'EliteDayViewWeek2'} 

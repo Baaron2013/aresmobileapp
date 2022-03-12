@@ -1,63 +1,257 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, Image, View, StyleSheet, Pressable, Button, Alert} from 'react-native';
 import { User } from '../../models';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useIsFocused } from '@react-navigation/core';
 import Navigation from '../../navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Entypo } from '@expo/vector-icons';
 import PlansWeekView from '../../screens/PlansWeekView'
+import { DataStore, Auth } from 'aws-amplify';
+import { WeeksCompleted as WeeksCompleted} from "../../models"
 
 
 const WeekListItem = (props:any) => {
+    const [userID, setID] = useState(undefined);
+    const [weeksCompleted, setWeeksCompleted] = useState<WeeksCompleted[]>([])
+    const [week1, setWeek1] = useState(false)
+    const [week2, setWeek2] = useState(false)
+    const [week3, setWeek3] = useState(false)
+    const [week4, setWeek4] = useState(false)
+    const [week5, setWeek5] = useState(false)
+    const [week6, setWeek6] = useState(false)
+    const [week7, setWeek7] = useState(false)
+    const [week8, setWeek8] = useState(false)
+
+    const isFocused = useIsFocused();
+
+    const getUser = async () => {
+        //get authenticated user 1 time
+        const authUser = await Auth.currentAuthenticatedUser();
+        if (authUser){
+            setID(authUser.attributes.sub)
+        }
+        //get DB user one time to set current profile pic, if it exists
+        console.log('getting user')
+        
+        console.log('got user')
+            console.log('found user!')
+            const newWeeks = await DataStore.query(WeeksCompleted, c => c.userID ('eq', authUser.attributes.sub));
+        
+        console.log('got weeks' + newWeeks)
+        if (newWeeks.length > 0) {
+            console.log('got completed weeks')
+            for(let i = 0; i < newWeeks.length; i++){
+                console.log('finding weeks')
+
+    
+                if (newWeeks[i].week === '1' && newWeeks[i].level === props.level) {
+                    console.log('found week 1')
+                    setWeek1(true)
+                }
+                if (newWeeks[i].week === '2') {
+                    console.log('found week 2')
+                    setWeek2(true)
+                }
+                if (newWeeks[i].week === '3') {
+                    console.log('found week 1')
+                    setWeek3(true)
+                }
+                if (newWeeks[i].week === '4') {
+                    console.log('found week 1')
+                    setWeek4(true)
+                }
+                if (newWeeks[i].week === '5') {
+                    console.log('found week 1')
+                    setWeek5(true)
+                }
+                if (newWeeks[i].week === '6') {
+                    console.log('found week 1')
+                    setWeek6(true)
+                }
+                if (newWeeks[i].week === '7') {
+                    console.log('found week 1')
+                    setWeek7(true)
+                }
+                if (newWeeks[i].week === '8') {
+                    console.log('found week 1')
+                    setWeek8(true)
+                }
+                
+            }
+        } else{
+            console.log('no results')
+        }
+        
+
+        
+    }
+
+/*     useEffect (() => {
+        getUser();
+    }, []);  */
+
+    useEffect (() => {
+        getUser();
+    }, [isFocused]); 
+
 
     const navigation = useNavigation(); 
-
     const renderButtons = () => {
+        
+        console.log(week1)
         if (props.numOfWeeks === 8) {
             return (
-        <><TouchableOpacity
-                onPress={() => {
+        <>  
+
+            {
+                week1 === true ?
+                <TouchableOpacity
+                    onPress={() => {
                     navigation.navigate(props.dayPicker1);
-                } }
-                style={styles.roundWeekButton1}>
-                <Text style={styles.roundWeekButtonText}>1</Text>
-            </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                onPress={() => { navigation.navigate(props.dayPicker2); } }
-                style={styles.roundWeekButton1}>
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>1</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>1</Text>
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week2 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker3); } }
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>2</Text>
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week3 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>3</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker4); } }
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week4 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>4</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
-                </TouchableOpacity><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker5); } }
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week5 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>5</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker6); } }
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week6 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>6</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>6</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker7); } }
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week7 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>7</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>7</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker8); } }
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week8 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>8</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>8</Text>
-                </TouchableOpacity></>
+                </TouchableOpacity>
+            }
+                </>
             )} else {
                 return (
             <><TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(props.dayPicker1, {
-                        level: props.levelName,
-                        week: 1
-                    });
+                    navigation.navigate(props.dayPicker1);
                 } }
                 style={styles.roundWeekButton1}>
                 <Text style={styles.roundWeekButtonText}>1</Text>
@@ -91,7 +285,7 @@ const WeekListItem = (props:any) => {
 
     }
 
-    
+
     return (
         <View style={styles.root}> 
             <View>
@@ -190,8 +384,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 1,
-        margin: 6,
+        //padding: 1,
+        margin: 4,
     },
     roundWeekButton2:{
         backgroundColor: '#E1E5F2',
@@ -200,8 +394,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 1,
-        margin: 6,
+        //padding: 5,
+        margin: 4,
     },
     roundWeekButtonText:{
         color: "white",
