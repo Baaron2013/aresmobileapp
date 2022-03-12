@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable, Image, ScrollView, StatusBar, Platfo
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { NavigationHelpersContext, useNavigation } from '@react-navigation/native'
-import { Auth, Hub } from 'aws-amplify'
+import { Auth, Hub, SortDirection } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { User as UserModel, RangerMetrics } from "../../models"
 import Logo from '../../../assets/images/ares-login-logo.png'
@@ -28,23 +28,31 @@ const Account = () => {
         const fetchMetrics = async () => {
             const userData = await Auth.currentAuthenticatedUser();
             setUser(userData);
-            const userMetrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
+            var userMetrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
             console.log(userMetrics);
-            userMetrics.sort(function(a, b){return b._lastChangedAt - a._lastChangedAt});
-            //set only first 7 values of array
-            const slicedMetrics = userMetrics.slice(0, 8);
-            setMetrics(slicedMetrics);
-            setWeight(slicedMetrics[0].weight)
+            userMetrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
+            if(userMetrics.length > 7){
+                userMetrics = userMetrics.slice(0, 7)
+            }       
+            setMetrics(userMetrics);
+    
+            for(let p =0; p < userMetrics.length; p++){
+                if(userMetrics[p].weight){
+                    setWeight(userMetrics[p].weight);
+                    return;
+                }
+            }
         };
         fetchMetrics();
     }, []);
     //
+    console.log(weight)
+    var sleepArray = [];
+    var sorenessArray = [];
 
-    const sleepArray = [];
-    const sorenessArray = [];
-
+    //console.log(metrics);
     //set values in sleepArray
-    for(let i = metrics.length - 1; i >=0; i--){
+    for(let i = metrics.length -1 ; i >=0; i--){
         if(metrics[i].sleep == "<6"){
             sleepArray.push(4);
 
@@ -55,13 +63,13 @@ const Account = () => {
             sleepArray.push(8)
 
         }else {
-            sleepArray.push(null);
+            sleepArray.push(0);
         }
         
     }
-
+    console.log(sleepArray)
     //set values in sorenessArray
-    for(let j = metrics.length - 1; j >=0; j--){
+    for(let j = metrics.length -1; j >=0; j--){
         if(metrics[j].soreness == "None"){
             sorenessArray.push(0);
 
@@ -69,30 +77,14 @@ const Account = () => {
             sorenessArray.push(4)
 
         }else if (metrics[j].soreness == "Moderate"){
-            sleepArray.push(8)
+            sorenessArray.push(8)
 
         }else {
-            sorenessArray.push(null);
+            sorenessArray.push(0);
         }
     }
     
-
-    if(sleepArray.length < 7){
-     var i = 7 - sleepArray.length;
-     while(i > 0){
-         sleepArray.push(null);
-         i--;
-     }
-    }
-
-    if(sorenessArray.length < 7){
-        var i = 7 - sorenessArray.length;
-        while(i > 0){
-            sorenessArray.push(null);
-            i--;
-        }
-       }
-       console.log(metrics[0]);
+    
     const sleepData = {
         labels: ["1", "2", "3", "4", "5", "6", "7"],
         datasets: [
