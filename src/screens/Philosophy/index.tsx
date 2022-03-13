@@ -7,22 +7,24 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import img1 from '../../../assets/SplashPageImages/Philosophy/philosphyimage1.jpg'
+import img2 from '../../../assets/SplashPageImages/Philosophy/philosphyimage2.jpg'
+import img3 from '../../../assets/SplashPageImages/Philosophy/philosphyimage3.jpg'
+import img4half from '../../../assets/SplashPageImages/Philosophy/philosphyimage4-1.jpg'
+import img4half2 from '../../../assets/SplashPageImages/Philosophy/philosphyimage4-2.jpg'
+import img5 from '../../../assets/SplashPageImages/Philosophy/philosphyimage5.jpg'
+import { ScrollView } from 'react-native-gesture-handler'
+import SplashPagePhilosophy from '../../component/SplashPageItem/SplashPagePhilosphy'
 
-{/* name of function - edited */}
 const Philosophy = () => {
-
-
-    const navigation = useNavigation(); 
-
-    return (
-        <View style={styles.root}>
+    return(
+<View style={styles.root}>
             {/* inserts header label - edited*/}
             <View style={styles.backButton}>
-                
+    
             </View>
-            {/* body of page - edited */}
-            <Text>Philosophy Page</Text> 
-        </View>
+            <SplashPagePhilosophy/> 
+       </View>
     )
 }
 
@@ -50,5 +52,4 @@ const styles = StyleSheet.create({
     },
 })
 
-{/* name of function - edited */}
 export default Philosophy

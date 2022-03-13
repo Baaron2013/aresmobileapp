@@ -7,10 +7,10 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SplashPageCombatives from '../../component/SplashPageItem/SplashPageCombatives'
 
 {/* name of function - edited */}
 const Combatives = () => {
-
 
     const navigation = useNavigation(); 
 
@@ -18,10 +18,9 @@ const Combatives = () => {
         <View style={styles.root}>
             {/* inserts header label - edited*/}
             <View style={styles.backButton}>
-                
+    
             </View>
-            {/* body of page - edited */}
-            <Text>Combatives</Text> 
+            <SplashPageCombatives/> 
         </View>
     )
 }

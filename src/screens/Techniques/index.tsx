@@ -7,6 +7,8 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SplashPageTechniques from '../../component/SplashPageItem/SplashPageTechniques'
+
 
 {/* name of function - edited */}
 const Techniques = () => {
@@ -16,12 +18,7 @@ const Techniques = () => {
 
     return (
         <View style={styles.root}>
-            {/* inserts header label - edited*/}
-            <View style={styles.backButton}>
-                
-            </View>
-            {/* body of page - edited */}
-            <Text>Techniques Page</Text> 
+            <SplashPageTechniques/>
         </View>
     )
 }
