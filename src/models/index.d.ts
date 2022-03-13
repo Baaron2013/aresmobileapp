@@ -28,6 +28,18 @@ export declare class WeeksCompleted {
   static copyOf(source: WeeksCompleted, mutator: (draft: MutableModel<WeeksCompleted>) => MutableModel<WeeksCompleted> | void): WeeksCompleted;
 }
 
+export declare class TrainingLogs {
+  readonly id: string;
+  readonly program?: string;
+  readonly level?: string;
+  readonly week?: string;
+  readonly day?: string;
+  readonly description?: string;
+  readonly userID: string;
+  constructor(init: ModelInit<TrainingLogs>);
+  static copyOf(source: TrainingLogs, mutator: (draft: MutableModel<TrainingLogs>) => MutableModel<TrainingLogs> | void): TrainingLogs;
+}
+
 export declare class CalculatorResults {
   readonly id: string;
   readonly clean?: number;

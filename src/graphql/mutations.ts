@@ -128,6 +128,69 @@ export const deleteWeeksCompleted = /* GraphQL */ `
     }
   }
 `;
+export const createTrainingLogs = /* GraphQL */ `
+  mutation CreateTrainingLogs(
+    $input: CreateTrainingLogsInput!
+    $condition: ModelTrainingLogsConditionInput
+  ) {
+    createTrainingLogs(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      day
+      description
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTrainingLogs = /* GraphQL */ `
+  mutation UpdateTrainingLogs(
+    $input: UpdateTrainingLogsInput!
+    $condition: ModelTrainingLogsConditionInput
+  ) {
+    updateTrainingLogs(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      day
+      description
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTrainingLogs = /* GraphQL */ `
+  mutation DeleteTrainingLogs(
+    $input: DeleteTrainingLogsInput!
+    $condition: ModelTrainingLogsConditionInput
+  ) {
+    deleteTrainingLogs(input: $input, condition: $condition) {
+      id
+      program
+      level
+      week
+      day
+      description
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createCalculatorResults = /* GraphQL */ `
   mutation CreateCalculatorResults(
     $input: CreateCalculatorResultsInput!

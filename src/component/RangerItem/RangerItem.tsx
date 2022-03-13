@@ -21,40 +21,7 @@ export default function RangerItem({chatRoom}){
 
     const navigation = useNavigation();
 
-    //const user = chatRoom.users[1];
 
-    /* useEffect (() => {
-        const fetchUsers = async () => {
-            const fetchedUsers = (await DataStore.query(ChatroomUser))
-            .filter(chatRoomUser => chatRoomUser.chatroom.id == chatRoom.id)
-            .map(chatRoomUser => chatRoomUser.user);
-
-            //setUsers(fetchedUsers);
-
-            const authUser = await Auth.currentAuthenticatedUser();
-            setUser(fetchedUsers.find(user => user.id != authUser.attributes.sub) || null);
-
-            
-        };
-        fetchUsers();
-    }, [])
-
-    useEffect (() => {
-        if(!chatRoom.chatroomLastMessageId){
-            return;
-        }
-        DataStore.query(Message, chatRoom.chatroomLastMessageId).then(setLastMessage);
-        console.log(lastMessage);
-    }, [])
-
-    const onPress = () => {
-        
-        navigation.navigate('ChatRoom', {id: chatRoom.id});
-    }
-
-    if (!user){
-        return <ActivityIndicator />
-    } */
     const onPress = () => {
         
         navigation.navigate('ChatRoom');

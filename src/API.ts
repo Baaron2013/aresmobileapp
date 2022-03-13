@@ -175,6 +175,61 @@ export type DeleteWeeksCompletedInput = {
   _version?: number | null,
 };
 
+export type CreateTrainingLogsInput = {
+  id?: string | null,
+  program?: string | null,
+  level?: string | null,
+  week?: string | null,
+  day?: string | null,
+  description?: string | null,
+  userID: string,
+  _version?: number | null,
+};
+
+export type ModelTrainingLogsConditionInput = {
+  program?: ModelStringInput | null,
+  level?: ModelStringInput | null,
+  week?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  and?: Array< ModelTrainingLogsConditionInput | null > | null,
+  or?: Array< ModelTrainingLogsConditionInput | null > | null,
+  not?: ModelTrainingLogsConditionInput | null,
+};
+
+export type TrainingLogs = {
+  __typename: "TrainingLogs",
+  id?: string,
+  program?: string | null,
+  level?: string | null,
+  week?: string | null,
+  day?: string | null,
+  description?: string | null,
+  userID?: string,
+  _version?: number,
+  _deleted?: boolean | null,
+  _lastChangedAt?: number,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateTrainingLogsInput = {
+  id: string,
+  program?: string | null,
+  level?: string | null,
+  week?: string | null,
+  day?: string | null,
+  description?: string | null,
+  userID?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteTrainingLogsInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type CreateCalculatorResultsInput = {
   id?: string | null,
   clean?: number | null,
@@ -528,6 +583,26 @@ export type ModelWeeksCompletedConnection = {
   startedAt?: number | null,
 };
 
+export type ModelTrainingLogsFilterInput = {
+  id?: ModelIDInput | null,
+  program?: ModelStringInput | null,
+  level?: ModelStringInput | null,
+  week?: ModelStringInput | null,
+  day?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  userID?: ModelIDInput | null,
+  and?: Array< ModelTrainingLogsFilterInput | null > | null,
+  or?: Array< ModelTrainingLogsFilterInput | null > | null,
+  not?: ModelTrainingLogsFilterInput | null,
+};
+
+export type ModelTrainingLogsConnection = {
+  __typename: "ModelTrainingLogsConnection",
+  items?:  Array<TrainingLogs | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
 export type ModelCalculatorResultsFilterInput = {
   id?: ModelIDInput | null,
   clean?: ModelIntInput | null,
@@ -750,6 +825,75 @@ export type DeleteWeeksCompletedMutation = {
     program?: string | null,
     level?: string | null,
     week?: string | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateTrainingLogsMutationVariables = {
+  input?: CreateTrainingLogsInput,
+  condition?: ModelTrainingLogsConditionInput | null,
+};
+
+export type CreateTrainingLogsMutation = {
+  createTrainingLogs?:  {
+    __typename: "TrainingLogs",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    description?: string | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateTrainingLogsMutationVariables = {
+  input?: UpdateTrainingLogsInput,
+  condition?: ModelTrainingLogsConditionInput | null,
+};
+
+export type UpdateTrainingLogsMutation = {
+  updateTrainingLogs?:  {
+    __typename: "TrainingLogs",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    description?: string | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteTrainingLogsMutationVariables = {
+  input?: DeleteTrainingLogsInput,
+  condition?: ModelTrainingLogsConditionInput | null,
+};
+
+export type DeleteTrainingLogsMutation = {
+  deleteTrainingLogs?:  {
+    __typename: "TrainingLogs",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    description?: string | null,
     userID: string,
     _version: number,
     _deleted?: boolean | null,
@@ -1698,6 +1842,87 @@ export type SyncWeeksCompletedsQuery = {
   } | null,
 };
 
+export type GetTrainingLogsQueryVariables = {
+  id?: string,
+};
+
+export type GetTrainingLogsQuery = {
+  getTrainingLogs?:  {
+    __typename: "TrainingLogs",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    description?: string | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListTrainingLogssQueryVariables = {
+  filter?: ModelTrainingLogsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListTrainingLogssQuery = {
+  listTrainingLogss?:  {
+    __typename: "ModelTrainingLogsConnection",
+    items:  Array< {
+      __typename: "TrainingLogs",
+      id: string,
+      program?: string | null,
+      level?: string | null,
+      week?: string | null,
+      day?: string | null,
+      description?: string | null,
+      userID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncTrainingLogsQueryVariables = {
+  filter?: ModelTrainingLogsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncTrainingLogsQuery = {
+  syncTrainingLogs?:  {
+    __typename: "ModelTrainingLogsConnection",
+    items:  Array< {
+      __typename: "TrainingLogs",
+      id: string,
+      program?: string | null,
+      level?: string | null,
+      week?: string | null,
+      day?: string | null,
+      description?: string | null,
+      userID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
 export type GetCalculatorResultsQueryVariables = {
   id?: string,
 };
@@ -2367,6 +2592,60 @@ export type OnDeleteWeeksCompletedSubscription = {
     program?: string | null,
     level?: string | null,
     week?: string | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateTrainingLogsSubscription = {
+  onCreateTrainingLogs?:  {
+    __typename: "TrainingLogs",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    description?: string | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateTrainingLogsSubscription = {
+  onUpdateTrainingLogs?:  {
+    __typename: "TrainingLogs",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    description?: string | null,
+    userID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteTrainingLogsSubscription = {
+  onDeleteTrainingLogs?:  {
+    __typename: "TrainingLogs",
+    id: string,
+    program?: string | null,
+    level?: string | null,
+    week?: string | null,
+    day?: string | null,
+    description?: string | null,
     userID: string,
     _version: number,
     _deleted?: boolean | null,

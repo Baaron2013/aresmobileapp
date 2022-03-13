@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Pressable, Image, ScrollView, StatusBar, Platform} from 'react-native'
+import { View, Text, StyleSheet, Pressable, FlatList, ScrollView, StatusBar, Platform} from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
-import { NavigationHelpersContext, useNavigation } from '@react-navigation/native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { Auth, Hub, SortDirection } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { User as UserModel, RangerMetrics } from "../../models"
@@ -10,6 +10,8 @@ import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 // IF THIS COMES UP AGAIN COMMENT IT OUT import { styles } from 'react-native-element-dropdown/src/TextInput/styles'
 import { BarChart } from "react-native-chart-kit";
+import LogItem from '../../component/LogItem/LogItem'
+import { TrainingLogs as Logs } from '../../models'
 
 
 const Account = () => {
@@ -20,14 +22,23 @@ const Account = () => {
     const [currentEmail, setEmail] = useState('');
     const [userID, setID] = useState(undefined);
     const [user, setUser] = useState(null);
+    const [logs, setLogs] = useState<Logs[]>([])
 
     const [metrics, setMetrics] = useState<RangerMetrics[]>([]);
+
+    const isFocused = useIsFocused();
 
     //retrieving metrics for current user and sorting them by most recent to least recent (first object in array most recent)
     useEffect(() => {
         const fetchMetrics = async () => {
             const userData = await Auth.currentAuthenticatedUser();
             setUser(userData);
+            setID(userData.attributes.sub)
+
+            const newLogs = await DataStore.query(Logs, user => user.userID("eq", userData.attributes.sub))
+            setLogs(newLogs)
+            console.log('newLogs :' + newLogs)
+
             var userMetrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
             console.log(userMetrics);
             userMetrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
@@ -42,9 +53,16 @@ const Account = () => {
                     return;
                 }
             }
+            
         };
         fetchMetrics();
     }, []);
+
+    useEffect(() => {
+        if (userID){
+            DataStore.query(Logs, user => user.userID("eq", userID)).then(setLogs)
+        }
+    }, [isFocused])
     //
     console.log(weight)
     var sleepArray = [];
@@ -189,21 +207,18 @@ const Account = () => {
                             />
                     </View>
                 </View>
+                
 
                 <View style={styles.container}>
                     
                     <View style={styles.mylog}>
                         <ScrollView nestedScrollEnabled={true}>
-                            <Text style={styles.titles}>My Logs</Text>
-
-                            <Text style={styles.logTitle}> Tango {'>'} ELITE {'>'} week 1 {'>'} day 3 </Text>
-                            <Text style = {styles.logText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
-
-                            <Text style={styles.logTitle}> Tango {'>'} ELITE {'>'} week 1 {'>'} day 2 </Text>
-                            <Text style = {styles.logText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
-
-                            <Text style={styles.logTitle}> Tango {'>'} ELITE {'>'} week 1 {'>'} day 1 </Text>
-                            <Text style = {styles.logText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</Text>
+                        <Text style={styles.titles}>My Logs</Text>
+                        <FlatList
+                            //ListHeaderComponent={renderHeader()}
+                            data={logs}
+                            renderItem={({ item }) => <LogItem logs={item} />} 
+                />
                         </ScrollView>
                     </View>
                 </View>
@@ -298,7 +313,7 @@ const styles = StyleSheet.create({
     },
     mylog:{
         backgroundColor: '#D2E5F8',
-        //width: Platform.OS === 'ios' ? 345 : 340,
+        width: Platform.OS === 'ios' ? 345 : 320,
         height: 170,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
         marginRight: Platform.OS === 'ios' ? 35 : 10, 

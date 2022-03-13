@@ -110,6 +110,60 @@ export const onDeleteWeeksCompleted = /* GraphQL */ `
     }
   }
 `;
+export const onCreateTrainingLogs = /* GraphQL */ `
+  subscription OnCreateTrainingLogs {
+    onCreateTrainingLogs {
+      id
+      program
+      level
+      week
+      day
+      description
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateTrainingLogs = /* GraphQL */ `
+  subscription OnUpdateTrainingLogs {
+    onUpdateTrainingLogs {
+      id
+      program
+      level
+      week
+      day
+      description
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteTrainingLogs = /* GraphQL */ `
+  subscription OnDeleteTrainingLogs {
+    onDeleteTrainingLogs {
+      id
+      program
+      level
+      week
+      day
+      description
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateCalculatorResults = /* GraphQL */ `
   subscription OnCreateCalculatorResults {
     onCreateCalculatorResults {
