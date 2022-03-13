@@ -7,6 +7,7 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SplashPageBrain from '../../component/SplashPageItem/SplashPageBrain'
 
 {/* name of function - edited */}
 const Brain = () => {
@@ -21,7 +22,7 @@ const Brain = () => {
                 
             </View>
             {/* body of page - edited */}
-            <Text>Brain Page</Text> 
+            <SplashPageBrain/> 
         </View>
     )
 }

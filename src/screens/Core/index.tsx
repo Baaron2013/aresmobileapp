@@ -7,21 +7,19 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SplashPageCore from '../../component/SplashPageItem/SplashPageCore'
 
-{/* name of function - edited */}
 const Core = () => {
-
-
+    
     const navigation = useNavigation(); 
 
     return (
         <View style={styles.root}>
             {/* inserts header label - edited*/}
             <View style={styles.backButton}>
-                
+    
             </View>
-            {/* body of page - edited */}
-            <Text>Core Page</Text> 
+            <SplashPageCore/>
         </View>
     )
 }
@@ -50,5 +48,4 @@ const styles = StyleSheet.create({
     },
 })
 
-{/* name of function - edited */}
 export default Core
