@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "aresmobileapp",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-01-30T05:40:04.638Z"
+}

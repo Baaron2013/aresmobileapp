@@ -7,10 +7,10 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import SplashPageCombatConditioning from '../../component/SplashPageItem/SplashPageCombatConditioning'
 
 {/* name of function - edited */}
 const CombatConditioning = () => {
-
 
     const navigation = useNavigation(); 
 
@@ -20,8 +20,7 @@ const CombatConditioning = () => {
             <View style={styles.backButton}>
                 
             </View>
-            {/* body of page - edited */}
-            <Text>Combat Conditioning Page</Text> 
+            <SplashPageCombatConditioning/> 
         </View>
     )
 }

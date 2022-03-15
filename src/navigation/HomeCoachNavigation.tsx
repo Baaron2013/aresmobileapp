@@ -16,7 +16,7 @@ import CoachHome from '../screens/CoachHome'
 
 const homeStack = createNativeStackNavigator();
 
-function homeNavigation() {
+function HomeNavigation() {
     return (
         <homeStack.Navigator>
             <homeStack.Screen name="Home" 
@@ -59,4 +59,4 @@ function homeNavigation() {
 
 }
 
-export default homeNavigation
+export default HomeNavigation

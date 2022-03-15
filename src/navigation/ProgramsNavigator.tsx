@@ -2,10 +2,10 @@ import React from 'react-native';
 import { StyleSheet } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from '../screens/Programs/Calculator';
-import EliteDayViewWeek1 from '../screens/Programs/Elite/DayViewWeek1';
-import EliteDayViewWeek2 from '../screens/Programs/Elite/DayViewWeek2';
-import ShortDayViewWeek1 from '../screens/Programs/ShortOnTime/DayViewWeek1';
-import ShortDayViewWeek2 from '../screens/Programs/ShortOnTime/DayViewWeek2';
+import EliteDayViewWeek1 from '../screens/Programs/Elite/Tango/DayViewWeek1';
+import EliteDayViewWeek2 from '../screens/Programs/Elite/Tango/DayViewWeek2';
+import ShortDayViewWeek1 from '../screens/Programs/ShortOnTime/Tango/DayViewWeek1';
+import ShortDayViewWeek2 from '../screens/Programs/ShortOnTime/Tango/DayViewWeek2';
 import EliteWeek from '../screens/Programs/Elite/WeeklyViewElite';
 import ShortWeek from '../screens/Programs/ShortOnTime/WeeklyViewShort';
 

@@ -8,6 +8,8 @@ import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons 
 import {useState, useEffect} from 'react';
 import {DataStore, Auth} from 'aws-amplify';
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
+import {S3Image} from 'aws-amplify-react-native'
+import Contact from '../../../assets/images/user.png'
 const chatRoom0 = chatRoomsData[0];
 const chatRoom1 = chatRoomsData[1];
 const chatRoom2 = chatRoomsData[2];
@@ -19,40 +21,7 @@ export default function RangerItem({chatRoom}){
 
     const navigation = useNavigation();
 
-    const user = chatRoom.users[1];
 
-    /* useEffect (() => {
-        const fetchUsers = async () => {
-            const fetchedUsers = (await DataStore.query(ChatroomUser))
-            .filter(chatRoomUser => chatRoomUser.chatroom.id == chatRoom.id)
-            .map(chatRoomUser => chatRoomUser.user);
-
-            //setUsers(fetchedUsers);
-
-            const authUser = await Auth.currentAuthenticatedUser();
-            setUser(fetchedUsers.find(user => user.id != authUser.attributes.sub) || null);
-
-            
-        };
-        fetchUsers();
-    }, [])
-
-    useEffect (() => {
-        if(!chatRoom.chatroomLastMessageId){
-            return;
-        }
-        DataStore.query(Message, chatRoom.chatroomLastMessageId).then(setLastMessage);
-        console.log(lastMessage);
-    }, [])
-
-    const onPress = () => {
-        
-        navigation.navigate('ChatRoom', {id: chatRoom.id});
-    }
-
-    if (!user){
-        return <ActivityIndicator />
-    } */
     const onPress = () => {
         
         navigation.navigate('ChatRoom');
@@ -60,12 +29,17 @@ export default function RangerItem({chatRoom}){
 
     return (
         <Pressable onPress={onPress} style={styles.container}>
-            <Image source={{uri: user.imageUri}} style={styles.image}/>
+            {
+                chatRoom.imageUri !== null ?
+                <S3Image imgKey={chatRoom.imageUri} style={styles.image} /> :
+                <Image source={Contact} style={styles.image} />
+                
+            }
             {chatRoom.newMessages && <View style={styles.badgeContainer}>              
             </View>}
             <View style={styles.rightContainer}>
                 <View style={styles.row}>
-                    <Text style={styles.name}>{user.name}</Text>
+                    <Text style={styles.name}>{chatRoom.name}</Text>
                     
                 </View>    
                 

@@ -7,24 +7,22 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import img1 from '../../../assets/SplashPageImages/InjuryPrevention/injuryimage.jpeg'
+import img2 from '../../../assets/SplashPageImages/InjuryPrevention/injuryimage2.jpeg'
+import { ScrollView } from 'react-native-gesture-handler'
+import SplashPageInjuryPrevention from '../../component/SplashPageItem/SplashPageInjuryPrevention'
 
-{/* name of function - edited */}
 const InjuryPrevention = () => {
-
-
-    const navigation = useNavigation(); 
-
-    return (
+    return(
         <View style={styles.root}>
             {/* inserts header label - edited*/}
             <View style={styles.backButton}>
-                
+    
             </View>
-            {/* body of page - edited */}
-            <Text>Injury Prevention Page</Text> 
-        </View>
-    )
-}
+            <SplashPageInjuryPrevention/> 
+       </View>
+        )
+    }
 
 const styles = StyleSheet.create({
     root: {
@@ -50,5 +48,4 @@ const styles = StyleSheet.create({
     },
 })
 
-{/* name of function - edited */}
 export default InjuryPrevention

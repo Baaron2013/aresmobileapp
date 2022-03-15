@@ -13,6 +13,8 @@ import AreYouDehydrated from '../../component/Hydration/AreYouDehydrated'
 import BuildingAPerformancePlate from '../../component/Performance Nutrition/BuildingAPerformancePlate'
 import Macronutrients from '../../component/Performance Nutrition/Macronutrients'
 //import { styles } from 'react-native-element-dropdown/src/TextInput/styles'
+import SplashPageNutrition from '../../component/SplashPageItem/SplashPageNutrition'
+
 
 const Stack = createNativeStackNavigator()
 {/* name of function - edited */}
@@ -21,15 +23,15 @@ const Nutrition = () => {
 
     //const navigation = useNavigation(); 
 
-    return (
+    // return (
         //<View style={styles.root}>
-        <NavigationContainer independent={true}>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="TheScienceOfHydration"
-                    component={TheScienceOfHydration}
-                    options={{ title: 'The Science of Hydration'}}
-                />
+        // <NavigationContainer independent={true}>
+        //     <Stack.Navigator>
+        //         <Stack.Screen
+        //             name="TheScienceOfHydration"
+        //             component={TheScienceOfHydration}
+        //             options={{ title: 'The Science of Hydration'}}
+        //         />
 
                 
                 {/* <Stack.Screen
@@ -48,9 +50,13 @@ const Nutrition = () => {
                     options={{ title: 'Macronutrients'}} //Title can be changed to Nutrition
                                                         // to avoid redundency
                     />  */}                   
-            </Stack.Navigator>
-        </NavigationContainer>
-        
+          //  </Stack.Navigator>
+        //</NavigationContainer>
+    //)
+    return(
+        <View style={styles.root}>
+            <SplashPageNutrition/>
+        </View>
     )
 }
 

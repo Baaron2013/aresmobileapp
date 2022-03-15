@@ -84,6 +84,152 @@ export const syncWorkouts = /* GraphQL */ `
     }
   }
 `;
+export const getWeeksCompleted = /* GraphQL */ `
+  query GetWeeksCompleted($id: ID!) {
+    getWeeksCompleted(id: $id) {
+      id
+      program
+      level
+      week
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listWeeksCompleteds = /* GraphQL */ `
+  query ListWeeksCompleteds(
+    $filter: ModelWeeksCompletedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWeeksCompleteds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        program
+        level
+        week
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncWeeksCompleteds = /* GraphQL */ `
+  query SyncWeeksCompleteds(
+    $filter: ModelWeeksCompletedFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncWeeksCompleteds(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        program
+        level
+        week
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getTrainingLogs = /* GraphQL */ `
+  query GetTrainingLogs($id: ID!) {
+    getTrainingLogs(id: $id) {
+      id
+      program
+      level
+      week
+      day
+      description
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTrainingLogss = /* GraphQL */ `
+  query ListTrainingLogss(
+    $filter: ModelTrainingLogsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTrainingLogss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        program
+        level
+        week
+        day
+        description
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncTrainingLogs = /* GraphQL */ `
+  query SyncTrainingLogs(
+    $filter: ModelTrainingLogsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncTrainingLogs(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        program
+        level
+        week
+        day
+        description
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getCalculatorResults = /* GraphQL */ `
   query GetCalculatorResults($id: ID!) {
     getCalculatorResults(id: $id) {

@@ -4,7 +4,7 @@ import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth, Hub, Storage, DataStore } from 'aws-amplify'
-import { User as UserModel } from "../../models"
+import { User, User as UserModel } from "../../models"
 import Contact from '../../../assets/images/user.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as ImagePicker from 'expo-image-picker';
@@ -20,9 +20,9 @@ const Profile = () => {
     const [currentEmail, setEmail] = useState('');
     const [userID, setID] = useState(undefined);
     const [authUser, setAuthUser] = useState(undefined);
-    const [currentImage, setCurrentImage] = useState<string | null>(null);
+    const [currentImage, setCurrentImage] = useState<string | undefined>(undefined);
     const [newLocalImage, setNewLocalImage] = useState<string | null>(null);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<UserModel | null>(null);
 
     const getUser = async () => {
         //get authenticated user 1 time
@@ -200,11 +200,7 @@ const Profile = () => {
                 return <Image source={{uri: newLocalImage}} style={styles.profilePic} />
                 
             }
-            if (user.imageUri.startsWith('http')) {
-                console.log('rendering current https image')
-                return <Image source={{uri: currentImage}} style={styles.profilePic} />
-            }
-            if (!user.imageUri.startsWith('http')) {
+            if (currentImage) {
                 console.log('rendering current s3 image')
                 return <S3Image imgKey={currentImage} style={styles.profilePic} />
             }
