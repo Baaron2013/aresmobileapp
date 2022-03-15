@@ -10,7 +10,7 @@ import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as ImagePicker from 'expo-image-picker';
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-import {S3Image} from 'aws-amplify-react-native'
+import {S3Image} from 'aws-amplify-react-native';
 
 const Profile = () => {
     const navigation = useNavigation();

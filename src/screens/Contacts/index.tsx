@@ -10,10 +10,11 @@ import { Auth } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import ContactListItem from '../../component/ContactListItem';
 import { SearchBar } from 'react-native-elements';
-import { ApplicationProvider,  Avatar, Input } from '@ui-kitten/components'
+import { ApplicationProvider,  Avatar, Input, List } from '@ui-kitten/components'
 import {DataStore} from '@aws-amplify/datastore';
 import {User} from '../../../src/models';
 import contactData from '../../../assets/dummy-data/ChatRooms';
+
 
 /* import Logo from '../../../assets/images/ares-login-logo.png' */
 
@@ -42,9 +43,33 @@ const Contacts = () => {
 
   //fetching users from database and displaying them on contacts screen
   useEffect(() =>{
-    DataStore.query(User).then(setContacts);
+
+    fetchContacts();
+
   }, [])
 
+  const fetchContacts = async () =>{
+        
+        const authUser = await Auth.currentAuthenticatedUser();
+        //DataStore.query(User).then(setContacts);
+        const myContacts = await DataStore.query(User);
+
+      for(let k=0; k < myContacts.length; k++ ){
+          if(myContacts[k].id == authUser.attributes.sub){
+            var currentUser = myContacts[k];
+          }
+      }
+
+        const filteredContacts = myContacts.filter(item => item !== currentUser )
+        console.log(myContacts);
+        filteredContacts.sort(function(a, b) {
+          if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+          if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+          return 0;
+         })
+         .map((item, i) => <List key={i} data={item} />);
+        setContacts(filteredContacts);
+  }
 
     const navigation = useNavigation(); 
 

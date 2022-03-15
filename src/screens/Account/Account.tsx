@@ -45,29 +45,27 @@ const Account = () => {
         };
         fetchMetrics();
     }, []);
-    //
-    console.log(weight)
-    var sleepArray = [];
+    
+    //console.log(weight)
+    var sleepArray = [0,0,0];
     var sorenessArray = [];
 
     //console.log(metrics);
     //set values in sleepArray
     for(let i = metrics.length -1 ; i >=0; i--){
         if(metrics[i].sleep == "<6"){
-            sleepArray.push(4);
+            sleepArray[0]++;
 
         }else if (metrics[i].sleep == "6-8"){
-            sleepArray.push(6)
+            sleepArray[1]++;
 
         }else if (metrics[i].sleep == "8+"){
-            sleepArray.push(8)
+            sleepArray[2]++;
 
-        }else {
-            sleepArray.push(0);
         }
         
     }
-    console.log(sleepArray)
+    //console.log(sleepArray)
     //set values in sorenessArray
     for(let j = metrics.length -1; j >=0; j--){
         if(metrics[j].soreness == "None"){
@@ -86,7 +84,7 @@ const Account = () => {
     
     
     const sleepData = {
-        labels: ["1", "2", "3", "4", "5", "6", "7"],
+        labels: ["<6", "6-8", "8+"],
         datasets: [
           {
             data: sleepArray
