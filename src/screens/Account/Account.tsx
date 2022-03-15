@@ -59,6 +59,7 @@ const Account = () => {
     }, []);
 
     var sleepArray = [0,0,0];
+    var sorenessArray = [0, 0, 0];
     useEffect(() => {
         if (userID){
             DataStore.query(Logs, user => user.userID("eq", userID)).then(setLogs)
@@ -66,8 +67,6 @@ const Account = () => {
     }, [isFocused])
     //
     console.log(weight)
-    
-    var sorenessArray = [];
 
     //console.log(metrics);
     //set values in sleepArray
@@ -88,16 +87,14 @@ const Account = () => {
     //set values in sorenessArray
     for(let j = metrics.length -1; j >=0; j--){
         if(metrics[j].soreness == "None"){
-            sorenessArray.push(0);
+            sorenessArray[0]++;
 
         }else if (metrics[j].soreness == "Mild"){
-            sorenessArray.push(4)
+            sorenessArray[1]++;
 
         }else if (metrics[j].soreness == "Moderate"){
-            sorenessArray.push(8)
+            sorenessArray[2]++;
 
-        }else {
-            sorenessArray.push(0);
         }
     }
     
@@ -112,7 +109,7 @@ const Account = () => {
     };
 
     const sorenessData = {
-        labels: ["1", "2", "3", "4", "5", "6", "7"],
+        labels: ["None", "Mild", "Moderate"],
         datasets: [
           {
             data: sorenessArray
