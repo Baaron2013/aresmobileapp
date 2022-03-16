@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable, FlatList, ScrollView, StatusBar, Pla
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useIsFocused, useNavigation } from '@react-navigation/native'
-import { Auth, Hub, SortDirection } from 'aws-amplify'
+import { a, Auth, Hub, SortDirection } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { User as UserModel, RangerMetrics } from "../../models"
 import Logo from '../../../assets/images/ares-login-logo.png'
@@ -12,17 +12,16 @@ import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { BarChart } from "react-native-chart-kit";
 import LogItem from '../../component/LogItem/LogItem'
 import { TrainingLogs as Logs } from '../../models'
+import { Workouts } from '../../models'
 
 
 const Account = () => {
     const navigation = useNavigation();
-    const [weight, setWeight] = useState('');
-    const [newWeight, setNewWeight] = useState('');
-    const [currentName, setName] = useState('');
-    const [currentEmail, setEmail] = useState('');
+    const [weight, setWeight] = useState<number | undefined>(0);
     const [userID, setID] = useState(undefined);
     const [user, setUser] = useState(null);
     const [logs, setLogs] = useState<Logs[]>([])
+    const [workouts, setWorkouts] = useState(0)
 
     const [metrics, setMetrics] = useState<RangerMetrics[]>([]);
 
@@ -35,24 +34,62 @@ const Account = () => {
             setUser(userData);
             setID(userData.attributes.sub)
 
-            const newLogs = await DataStore.query(Logs, user => user.userID("eq", userData.attributes.sub))
+
+            let today = new Date();
+            today.setDate(today.getDate() - 7)
+            console.log(today)
+            const date = Math.round(new Date(today).getTime()).toString();
+            console.log(date)
+
+            const newWorkouts = await DataStore.query(Workouts, user => user.userID("eq", userData.attributes.sub))
+            console.log(newWorkouts.length)
+            const filteredWorkouts = newWorkouts.filter((item) => {
+                if (parseInt(item._lastChangedAt) >= parseInt(date)){
+                    return item
+                }
+            })
+            console.log('new workouts! ' + filteredWorkouts.length)
+            setWorkouts(filteredWorkouts.length)
+
+            var newLogs = await DataStore.query(Logs, user => user.userID("eq", userData.attributes.sub))
+            
+            console.log('newLogs :' + newLogs + newLogs.length)
+            newLogs.sort((a, b) => {
+                return ((a.program > b.program) ? 1: -1)
+            }).sort((c, d) => {
+                return ((c.level > d.level) ? 1: -1)
+            }).sort((e, f) => {
+                return ((e.week > f.week) ? 1: -1)
+            }).sort((g, h) =>{
+                return ((g.day > h.day) ? 1: -1)
+            })
+            if (newLogs.length > 7) {
+                newLogs = newLogs.slice(0,7)
+            }
             setLogs(newLogs)
-            console.log('newLogs :' + newLogs)
 
             var userMetrics = await DataStore.query(RangerMetrics, user => user.userID("eq", userData.attributes.sub));
             console.log(userMetrics);
-            userMetrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
-            if(userMetrics.length > 7){
-                userMetrics = userMetrics.slice(0, 7)
-            }       
-            setMetrics(userMetrics);
-    
-            for(let p =0; p < userMetrics.length; p++){
-                if(userMetrics[p].weight){
-                    setWeight(userMetrics[p].weight);
-                    return;
+            var filteredMetrics = userMetrics.filter((item) => {
+                if (parseInt(item._lastChangedAt) >= parseInt(date)){
+                    return item
                 }
+            })
+            //userMetrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
+            console.log(filteredMetrics.length)
+            if(filteredMetrics.length > 7){
+                filteredMetrics = filteredMetrics.slice(0, 7)
             }
+            filteredMetrics = filteredMetrics.sort((a,b) => {
+                return b._lastChangedAt - a._lastChangedAt
+            })
+            console.log(filteredMetrics)   
+            setMetrics(filteredMetrics);
+            console.log(filteredMetrics[0])
+            setWeight(filteredMetrics[0].weight)
+            
+    
+            
             
         };
         fetchMetrics();
@@ -60,10 +97,50 @@ const Account = () => {
 
     var sleepArray = [0,0,0];
     var sorenessArray = [0, 0, 0];
-    useEffect(() => {
-        if (userID){
-            DataStore.query(Logs, user => user.userID("eq", userID)).then(setLogs)
+    var trainingArray = [0, 0, 0];
+    var appetiteArray = [0, 0, 0];
+
+    const updateWorkouts = async () => {
+        if (userID) {
+            var newLogs = await DataStore.query(Logs, user => user.userID("eq", userID))
+            
+            console.log('newLogs :' + newLogs + newLogs.length)
+            newLogs.sort((a, b) => {
+                return ((a.program > b.program) ? 1: -1)
+            }).sort((c, d) => {
+                return ((c.level > d.level) ? 1: -1)
+            }).sort((e, f) => {
+                return ((e.week > f.week) ? 1: -1)
+            }).sort((g, h) =>{
+                return ((g.day > h.day) ? 1: -1)
+            })
+            if (newLogs.length > 7) {
+                newLogs = newLogs.slice(0,7)
+            }
+            setLogs(newLogs)
+
+            let today = new Date();
+            today.setDate(today.getDate() - 7)
+            console.log(today)
+            const date = Math.round(new Date(today).getTime()).toString();
+            console.log(date)
+
+        
+            const newWorkouts = await DataStore.query(Workouts, user => user.userID("eq", userID))
+            console.log(newWorkouts.length)
+            const filteredWorkouts = newWorkouts.filter((item) => {
+            if (parseInt(item._lastChangedAt) >= parseInt(date)){
+                return item
+            }
+            })
+            console.log('new workouts! ' + filteredWorkouts.length)
+            setWorkouts(filteredWorkouts.length)
         }
+        
+    }
+
+    useEffect(() => {
+        updateWorkouts();
     }, [isFocused])
     //
     console.log(weight)
@@ -97,6 +174,32 @@ const Account = () => {
 
         }
     }
+
+    for(let k = metrics.length -1; k >=0; k--){
+        if(metrics[k].willingness == "Low"){
+            trainingArray[0]++;
+
+        }else if (metrics[k].willingness == "Average"){
+            trainingArray[1]++;
+
+        }else if (metrics[k].willingness == "High"){
+            trainingArray[2]++;
+
+        }
+    }
+
+    for(let m = metrics.length -1; m >=0; m--){
+        if(metrics[m].appetite == "Poor"){
+            appetiteArray[0]++;
+
+        }else if (metrics[m].appetite == "Normal"){
+            appetiteArray[1]++;
+
+        }else if (metrics[m].appetite == "Good"){
+            appetiteArray[2]++;
+
+        }
+    }
     
     
     const sleepData = {
@@ -117,6 +220,24 @@ const Account = () => {
         ]
     };
 
+    const trainingData = {
+        labels: ["Low", "Average", "High"],
+        datasets: [
+          {
+            data: trainingArray
+        }
+        ]
+    };
+
+    const appetiteData = {
+        labels: ["Poor", "Normal", "Good"],
+        datasets: [
+          {
+            data: appetiteArray
+        }
+        ]
+    };
+
     const chartConfig = {
         backgroundGradientFrom: "transparent",
         backgroundGradientFromOpacity: 0,
@@ -124,9 +245,10 @@ const Account = () => {
         backgroundGradientToOpacity: 0,
         color: () => `#1F7A8C`,
         strokeWidth: 2, // optional, default 3
-        barPercentage: 0.2,
+        barPercentage: 1,
         fillShadowGradient: '#1F7A8C',
         fillShadowGradientOpacity: 1,
+        
       };
     
 /*     const getDBUser = async () => {
@@ -154,35 +276,16 @@ const Account = () => {
                     <View style={styles.workout}>
                         <Text style={styles.titles}>Workouts</Text>
                         <Text style={styles.text}>(last 7 days)</Text>
-                        <Text style={styles.numbers}>5</Text>
+                        <Text style={styles.numbers}>{workouts}</Text>
 
                     </View>
 
                     <View style={styles.workout}>
                         <Text style={styles.titles}>Weight</Text>
-                        <Text style={styles.text}>(lbs)</Text>
-                        <Text style={styles.numbers}>{weight}</Text>
+                        <Text style={styles.text}>(last entered)</Text>
+                        <Text style={styles.numbers}>{weight} {' '} 
+                        <Text style={styles.text}>lbs</Text></Text>
                     </View>
-                </View>
-                    
-                <View style={styles.soreness}>
-                    <Text style={styles.titles}>Soreness Tracker</Text>
-                    <Text style={styles.text}>last seven days</Text>
-                    <View style = {styles.graphContainer}>
-                        <BarChart
-                                data={sorenessData}
-                                width={360}
-                                height={160}
-                                fromZero= {true}
-                                chartConfig={chartConfig}
-                                showBarTops={false}
-                                withHorizontalLabels={false}
-                                yAxisInterval={1}
-                                withInnerLines={false}  
-                                style={{ marginVertical: 8}}
-                            />
-                        </View>
-
                 </View>
 
                 <View style={styles.sleep}>
@@ -200,21 +303,88 @@ const Account = () => {
                                 yAxisInterval={1}
                                 withInnerLines={false}  
                                 style={{ marginVertical: 8}}
+                                showValuesOnTopOfBars={true}
+                                
                             />
                     </View>
                 </View>
-                
 
+                <View style={styles.sleep}>
+                    <Text style={styles.titles}>Training Willingness Tracker</Text>
+                    <Text style={styles.text}>last seven days</Text>
+                    <View style = {styles.graphContainer}>
+                        <BarChart
+                                data={trainingData}
+                                width={360}
+                                height={170}
+                                fromZero= {true}
+                                chartConfig={chartConfig}
+                                showBarTops={false}
+                                withHorizontalLabels={false}
+                                yAxisInterval={1}
+                                withInnerLines={false}  
+                                style={{ marginVertical: 8}}
+                                showValuesOnTopOfBars={true}
+                                
+                            />
+                    </View>
+                </View>
+
+                <View style={styles.sleep}>
+                    <Text style={styles.titles}>Appetite Tracker</Text>
+                    <Text style={styles.text}>last seven days</Text>
+                    <View style = {styles.graphContainer}>
+                        <BarChart
+                                data={appetiteData}
+                                width={360}
+                                height={170}
+                                fromZero= {true}
+                                chartConfig={chartConfig}
+                                showBarTops={false}
+                                withHorizontalLabels={false}
+                                yAxisInterval={1}
+                                withInnerLines={false}  
+                                style={{ marginVertical: 8}}
+                                showValuesOnTopOfBars={true}
+                                
+                            />
+                    </View>
+                </View>
+
+                <View style={styles.soreness}>
+                    <Text style={styles.titles}>Soreness Tracker</Text>
+                    <Text style={styles.text}>last seven days</Text>
+                    <View style = {styles.graphContainer}>
+                        <BarChart
+                                data={sorenessData}
+                                width={360}
+                                height={170}
+                                fromZero= {true}
+                                chartConfig={chartConfig}
+                                showBarTops={false}
+                                withHorizontalLabels={false}
+                                yAxisInterval={1}
+                                withInnerLines={false}  
+                                style={{ marginVertical: 8}}
+                                showValuesOnTopOfBars={true}
+                            />
+                        </View>
+
+                </View>
+                
                 <View style={styles.container}>
                     
                     <View style={styles.mylog}>
                         <ScrollView nestedScrollEnabled={true}>
                         <Text style={styles.titles}>My Logs</Text>
+                        <Text style={styles.text}>(last 7 entries)</Text>
+                        <ScrollView horizontal={true} style={{ width: "100%" }}>
                         <FlatList
                             //ListHeaderComponent={renderHeader()}
                             data={logs}
-                            renderItem={({ item }) => <LogItem logs={item} />} 
-                />
+                            renderItem={({ item }) => <LogItem logs={item} />}
+                        />
+                        </ScrollView>
                         </ScrollView>
                     </View>
                 </View>
@@ -310,7 +480,7 @@ const styles = StyleSheet.create({
     mylog:{
         backgroundColor: '#D2E5F8',
         width: Platform.OS === 'ios' ? 345 : 320,
-        height: 170,
+        height: 250,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
         marginRight: Platform.OS === 'ios' ? 35 : 10, 
         borderRadius: 34,
@@ -357,7 +527,7 @@ const styles = StyleSheet.create({
         // height: 130,
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: -50,
+        marginLeft: -45,
     },
 
 })
