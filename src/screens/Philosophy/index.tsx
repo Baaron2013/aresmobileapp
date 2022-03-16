@@ -18,13 +18,8 @@ import SplashPagePhilosophy from '../../component/SplashPageItem/SplashPagePhilo
 
 const Philosophy = () => {
     return(
-<View style={styles.root}>
-            {/* inserts header label - edited*/}
-            <View style={styles.backButton}>
-    
-            </View>
             <SplashPagePhilosophy/> 
-       </View>
+       
     )
 }
 

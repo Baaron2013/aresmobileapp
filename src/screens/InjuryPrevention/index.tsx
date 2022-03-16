@@ -14,13 +14,8 @@ import SplashPageInjuryPrevention from '../../component/SplashPageItem/SplashPag
 
 const InjuryPrevention = () => {
     return(
-        <View style={styles.root}>
-            {/* inserts header label - edited*/}
-            <View style={styles.backButton}>
-    
-            </View>
             <SplashPageInjuryPrevention/> 
-       </View>
+       
         )
     }
 

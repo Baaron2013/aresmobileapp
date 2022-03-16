@@ -40,7 +40,7 @@ const SplashPageNutrition = () => {
                     
                 <View style={styles.row}> 
                     <View style={styles.imageContainer}>
-                        <Image style={styles.image3} source={img3} />
+                        <Image style={styles.image3} source={img3}/>
                     </View>  
 
                     <Text style={styles.equal}>=</Text>         
@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         flex: 1,
+        paddingLeft: 5,
+        paddingRight: 5
     },
     backButton: {
         marginRight: 350,
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
     image2: {
         resizeMode: 'contain',
         height: 300,
-        width: 350,
+        width: 330,
     },
     image3: {
         resizeMode: 'contain',
@@ -140,12 +142,12 @@ const styles = StyleSheet.create({
     image5: {
         resizeMode: 'contain',
         height: 200,
-        width: 370,
+        width: 340,
     },
     image6: {
         resizeMode: 'contain',
         height: 130,
-        width: 370,
+        width: 340,
     },
     row: {
         flexDirection: 'row'

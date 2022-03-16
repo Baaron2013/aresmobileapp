@@ -54,9 +54,9 @@ const Nutrition = () => {
         //</NavigationContainer>
     //)
     return(
-        <View style={styles.root}>
+        
             <SplashPageNutrition/>
-        </View>
+        
     )
 }
 

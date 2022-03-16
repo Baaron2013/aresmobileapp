@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         flex: 1,
+        paddingLeft: 5,
+        paddingRight: 5
     },
     backButton: {
         marginRight: 350,
@@ -101,10 +103,10 @@ const styles = StyleSheet.create({
      },
     redTextContainer: {
         justifyContent: 'center',
-        margin: 10,
+        //margin: 10,
         borderWidth: 2,
         borderRadius: 15,
-        width: 332,
+        //width: 332,
         padding: 5,
         marginBottom: 10,
     },

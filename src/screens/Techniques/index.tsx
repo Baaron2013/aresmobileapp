@@ -17,9 +17,9 @@ const Techniques = () => {
     const navigation = useNavigation(); 
 
     return (
-        <View style={styles.root}>
+    
             <SplashPageTechniques/>
-        </View>
+        
     )
 }
 

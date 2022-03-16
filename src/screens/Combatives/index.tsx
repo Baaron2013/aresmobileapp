@@ -15,13 +15,9 @@ const Combatives = () => {
     const navigation = useNavigation(); 
 
     return (
-        <View style={styles.root}>
-            {/* inserts header label - edited*/}
-            <View style={styles.backButton}>
-    
-            </View>
+        
             <SplashPageCombatives/> 
-        </View>
+        
     )
 }
 

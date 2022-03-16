@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         flex: 1,
+        paddingLeft: 5,
+        paddingRight: 5
     },
     backButton: {
         marginRight: 350,

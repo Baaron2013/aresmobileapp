@@ -14,13 +14,9 @@ const Core = () => {
     const navigation = useNavigation(); 
 
     return (
-        <View style={styles.root}>
-            {/* inserts header label - edited*/}
-            <View style={styles.backButton}>
-    
-            </View>
+        
             <SplashPageCore/>
-        </View>
+        
     )
 }
 

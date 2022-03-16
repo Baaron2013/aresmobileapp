@@ -16,14 +16,10 @@ const Brain = () => {
     const navigation = useNavigation(); 
 
     return (
-        <View style={styles.root}>
-            {/* inserts header label - edited*/}
-            <View style={styles.backButton}>
-                
-            </View>
-            {/* body of page - edited */}
+        
+            
             <SplashPageBrain/> 
-        </View>
+        
     )
 }
 
