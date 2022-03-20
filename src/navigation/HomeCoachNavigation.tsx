@@ -13,6 +13,7 @@ import CombatConditioning from '../screens/CombatConditioning'
 import Brain from '../screens/Brain'
 import Combatives from '../screens/Combatives'
 import CoachHome from '../screens/CoachHome'
+import RangerRoomScreen from '../screens/RangerRoomScreen'
 
 const homeStack = createNativeStackNavigator();
 
@@ -53,6 +54,9 @@ function HomeNavigation() {
             <homeStack.Screen name="Combatives" component={Combatives} options = {{
                     header: () => null
                 }}></homeStack.Screen>
+            <homeStack.Screen name="RangerRoomScreen" component={RangerRoomScreen} options = {{
+                    header: () => null
+                }}></homeStack.Screen>    
         </homeStack.Navigator>
 
     )

@@ -13,6 +13,9 @@ import Contact from '../../../assets/images/user.png'
 const chatRoom0 = chatRoomsData[0];
 const chatRoom1 = chatRoomsData[1];
 const chatRoom2 = chatRoomsData[2];
+import RangerRoom from '../RangerRoom'
+import RangeringNavigation from '../../navigation/RangeringNavigation';
+import RangerRoomScreen from '../../screens/RangerRoomScreen';
 
 export default function RangerItem({chatRoom}){
     //const [users, setUsers] = useState<User[]>([]); //all users in this chatroom
@@ -20,11 +23,12 @@ export default function RangerItem({chatRoom}){
     const [lastMessage, setLastMessage] = useState<Message | undefined>();
 
     const navigation = useNavigation();
-
+    
 
     const onPress = () => {
         
-        navigation.navigate('ChatRoom');
+        /* RangeringNavigation.navigate('RangerRoom'); */
+        navigation.navigate('RangerRoomScreen')
     }
 
     return (

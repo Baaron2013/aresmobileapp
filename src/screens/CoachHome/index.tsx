@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, SafeAreaView, ScrollView, FlatList, ActivityIndicator, Platform} from 'react-native'
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, SafeAreaView, ScrollView, FlatList, ActivityIndicator, Platform, Button} from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation, useIsFocused } from '@react-navigation/native'
@@ -13,14 +13,16 @@ import RangerItem from '../../component/RangerItem'
 import {DataStore, Predicates} from '@aws-amplify/datastore';
 import {User} from '../../models';
 import Popup from '../PopUp/PopUp'
+import RangerRoomScreen from '../RangerRoomScreen'
 {/* name of function - edited */}
-
+import RangeringNavigation from '../../navigation/RangeringNavigation'
 const CoachHome = () => {
 
 
     const navigation = useNavigation(); 
+  
     const isFocused = useIsFocused();
-
+    const RangeringNavigation = useNavigation();
     const [contacts, setContacts] = useState<User[]>([]);
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredContacts, setFilteredContacts] = useState<User[]>([])
@@ -46,6 +48,12 @@ const CoachHome = () => {
           );
           setFilteredContacts(newContacts)
       }, [searchTerm])
+
+      const onPress = () => {
+        
+        /* RangeringNavigation.navigate('RangerRoom'); */
+        /* navigation.navigate('RangerRoomScreen') */
+    }
   
 
     return (
@@ -69,6 +77,12 @@ const CoachHome = () => {
                 style={styles.searchText}
                 placeholderTextColor="white" />
             </View>
+              {/* <Button
+                onPress={onPress}
+                title="Clickable Placeholder for Ranger Items"
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
+              /> */}
             {
               isLoading === false ?
               <FlatList
