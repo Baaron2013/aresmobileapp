@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from '../screens/Programs/Calculator';
 import EliteDayViewWeek1 from '../screens/Programs/Elite/Tango/DayViewWeek1';
+import SierraEliteDayViewWeek1 from '../screens/Programs/Elite/Sierra/DayViewWeek1';
 import EliteDayViewWeek2 from '../screens/Programs/Elite/Tango/DayViewWeek2';
 import ShortDayViewWeek1 from '../screens/Programs/ShortOnTime/Tango/DayViewWeek1';
 import ShortDayViewWeek2 from '../screens/Programs/ShortOnTime/Tango/DayViewWeek2';
@@ -26,6 +27,8 @@ const ProgramNavigation = () =>  {
             <programStack.Screen name="EliteDayViewWeek1" component={EliteDayViewWeek1}
                 options={{ title: '' }}></programStack.Screen>
             <programStack.Screen name="EliteDayViewWeek2" component={EliteDayViewWeek2}
+                options={{ title: '' }}></programStack.Screen>
+            <programStack.Screen name="SierraEliteDayViewWeek1" component={SierraEliteDayViewWeek1}
                 options={{ title: '' }}></programStack.Screen>
                         <programStack.Screen name="ShortDayViewWeek1" component={ShortDayViewWeek1}
                 options={{ title: '' }}></programStack.Screen>

@@ -32,7 +32,7 @@ const Plans = ( props ) => {
                         description={'POWER / POWER ENDURANCE via Kettlebells / Dumbells ---Improve Ruck --- ENDURANCE FOCUS'} />   
                     <WeekListItem 
                         programName={'Sierra'} 
-                        dayPicker1={'DayView'} 
+                        dayPicker1={'SierraEliteDayViewWeek1'} 
                         numOfWeeks={7}
                         description={'Train like an Olympic Lifter w Ranger Mentality --- Daily skill development prior to main Olympic lift for technical mastery. Power/strength focus.'}/>
                     
