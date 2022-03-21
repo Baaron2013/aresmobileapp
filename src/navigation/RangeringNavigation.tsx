@@ -1,3 +1,7 @@
+/* 
+IGNORE 
+
+
 import React from 'react-native';
 import { ColorSchemeName, View, Text, TextInput, StyleSheet, Pressable, Image, SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
@@ -7,25 +11,17 @@ import Logo from '../../assets/images/ares-login-logo.png'
 import Messages from '../screens/Messages';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
 import Contacts from '../screens/Contacts';
-import RangerRoomScreen from '../screens/RangerRoomScreen';
+import HomeCoach from '../screens/HomeCoach'
 
 
-const MessageNavigation = () =>  {
-    const MessageStack = createNativeStackNavigator();
+
+const RangeringNavigation = () =>  {
+    const RangerStack = createNativeStackNavigator();
     return (
-        <MessageStack.Navigator>
-            <MessageStack.Screen name="Messages" 
-                component={Messages} 
-                options = {{
-                    header: () => null
-                }}></MessageStack.Screen>
-            <MessageStack.Screen name="ChatRoom" component={ChatRoomScreen}
-                options={{ title: '' }}></MessageStack.Screen>
-            <MessageStack.Screen name="Contacts" component={Contacts}
-                options={{ title: 'Select Contact' }}></MessageStack.Screen>
-            <MessageStack.Screen name="Ranger" component={RangerRoomScreen}
-                options={{ title: 'Your Ranger' }}></MessageStack.Screen>    
-        </MessageStack.Navigator>
+        <RangerStack.Navigator>
+            <RangerStack.Screen name="RangerRoom" component={RangerRoomScreen}
+                options={{ title: '' }}></RangerStack.Screen>
+        </RangerStack.Navigator>
 
     )
 }
@@ -56,4 +52,4 @@ const styles = StyleSheet.create ({
 
 })
 
-export default MessageNavigation;
+export default RangeringNavigation; */
