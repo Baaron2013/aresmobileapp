@@ -280,7 +280,7 @@ const Account = () => {
 
                     </View>
 
-                    <View style={styles.workout}>
+                    <View style={styles.weight}>
                         <Text style={styles.titles}>Weight</Text>
                         <Text style={styles.text}>(last entered)</Text>
                         <Text style={styles.numbers}>{weight} {' '} 
@@ -449,7 +449,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#D2E5F8',
         //width: 160,
         //height: 110,
-        //marginLeft: Platform.OS === 'ios' ? 35 : 5,        
+        marginLeft: Platform.OS === 'ios' ? 15 : 5, 
+        marginRight: Platform.OS === 'ios' ? 25 : 0,        
         borderRadius: 34,
         paddingLeft: 15,
         paddingTop: 15,

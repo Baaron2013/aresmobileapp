@@ -26,16 +26,38 @@ export default function ProgramItemTangoDay1({workout}){
     const [selectedValue6, setSelectedValue6] = useState();
     const [selectedValue7, setSelectedValue7] = useState();
     const [selectedValue8, setSelectedValue8] = useState();
+    const [selectedValue9, setSelectedValue9] = useState();
+    const [selectedValue10, setSelectedValue10] = useState();
+    const [selectedValue11, setSelectedValue11] = useState();
+
     const [ numberOfTimes, setNumberOfTimes] = useState('0')
     const [userID, setID] = useState(undefined);
     const [mobility1, setMobility1] = useState<string>('0');
     const [mobility2, setMobility2] = useState<string>('0');
+    const [mobility3, setMobility3] = useState<string>('0');
+    const [mobility4, setMobility4] = useState<string>('0');
+    const [mobility5, setMobility5] = useState<string>('0');
+    const [mobility6, setMobility6] = useState<string>('0');
+
     const [core1, setCore1] = useState<string>('0');
     const [core2, setCore2] = useState<string>('0');
     const [core3, setCore3] = useState<string>('0');
+    const [core4, setCore4] = useState<string>('0');
+    const [core5, setCore5] = useState<string>('0');
+    const [core6, setCore6] = useState<string>('0');
+    const [core7, setCore7] = useState<string>('0');
+    const [core8, setCore8] = useState<string>('0');
+    const [core9, setCore9] = useState<string>('0');
+    const [core10, setCore10] = useState<string>('0');
+    const [core11, setCore11] = useState<string>('0');
+    
     const [conditioning1, setConditioning1] = useState<string>('0');
     const [conditioning2, setConditioning2] = useState<string>('0');
     const [conditioning3, setConditioning3] = useState<string>('0');
+    const [conditioning4, setConditioning4] = useState<string>('0');
+    const [conditioning5, setConditioning5] = useState<string>('0');
+    const [conditioning6, setConditioning6] = useState<string>('0');
+
     const [standard1, setStandard1] = useState<string>('0');
     const [standard2, setStandard2] = useState<string>('0');
     const [standard3, setStandard3] = useState<string>('0');
@@ -50,7 +72,7 @@ export default function ProgramItemTangoDay1({workout}){
     const [standard12, setStandard12] = useState<string>('0');
     const [standard13, setStandard13] = useState<string>('0');
     const [standard14, setStandard14] = useState<string>('0');
-    const [standard15, setStandard15] = useState<string>('0');
+
     const [clean, setClean] = useState<number | undefined>(0)
     const [bench, setBench] = useState<number | undefined>(0)
     const [squat, setSquat] = useState<number | undefined>(0)
@@ -79,125 +101,199 @@ export default function ProgramItemTangoDay1({workout}){
             setSquat(newResults.squat)
         }
         const newMobility1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.mobility[0].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.mobility[0].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newMobility1.length !== 0) {
             setMobility1(newMobility1.length.toString())
         }
         const newMobility2 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.mobility[1].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.mobility[1].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newMobility2.length !== 0) {
             setMobility2(newMobility2.length.toString())
         }
+        const newMobility3 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.mobility[2].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newMobility3.length !== 0) {
+            setMobility3(newMobility3.length.toString())
+        }
+        const newMobility4 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.mobility[3].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newMobility4.length !== 0) {
+            setMobility4(newMobility4.length.toString())
+        }
+        const newMobility5 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.mobility[4].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newMobility5.length !== 0) {
+            setMobility5(newMobility5.length.toString())
+        }
+        const newMobility6 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.mobility[5].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newMobility6.length !== 0) {
+            setMobility6(newMobility6.length.toString())
+        }
+
+
         const newCore1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[0].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.core[0].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newCore1.length !== 0) {
             setCore1(newCore1.length.toString())
         }
         const newCore2 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[1].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.core[1].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newCore2.length !== 0) {
             setCore2(newCore2.length.toString())
         }
         const newCore3 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[2].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.core[2].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newCore3.length !== 0) {
             setCore3(newCore3.length.toString())
         }
+        const newCore4 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[3].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore4.length !== 0) {
+            setCore4(newCore4.length.toString())
+        }
+        const newCore5 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[4].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore5.length !== 0) {
+            setCore5(newCore5.length.toString())
+        }
+        const newCore6 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[5].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore6.length !== 0) {
+            setCore6(newCore6.length.toString())
+        }
+        const newCore7 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[6].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore7.length !== 0) {
+            setCore7(newCore7.length.toString())
+        }
+        const newCore8 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[7].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore8.length !== 0) {
+            setCore8(newCore8.length.toString())
+        }
+        const newCore9 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[8].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore9.length !== 0) {
+            setCore9(newCore9.length.toString())
+        }
+        const newCore10 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[9].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore10.length !== 0) {
+            setCore10(newCore10.length.toString())
+        }
+        const newCore11 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.core[10].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newCore11.length !== 0) {
+            setCore11(newCore11.length.toString())
+        }
+
+
+
         const newConditioning1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.conditioning[0].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.conditioning[0].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newConditioning1.length !== 0) {
             console.log('new conditioning1 ' + newConditioning1)
             setConditioning1(newConditioning1.length.toString())
         }
         const newConditioning2 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.conditioning[1].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.conditioning[1].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newConditioning2.length !== 0) {
             setConditioning2(newConditioning2.length.toString())
         }
         const newConditioning3 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.conditioning[2].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.conditioning[2].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newConditioning3.length !== 0) {
             setConditioning3(newConditioning3.length.toString())
         }
+        const newConditioning4 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.conditioning[3].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newConditioning4.length !== 0) {
+            setConditioning4(newConditioning4.length.toString())
+        }
+        const newConditioning5 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.conditioning[4].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newConditioning5.length !== 0) {
+            setConditioning5(newConditioning5.length.toString())
+        }
+        const newConditioning6 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
+        .workoutName('eq', workout.conditioning[5].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
+        if (newConditioning6.length !== 0) {
+            setConditioning6(newConditioning6.length.toString())
+        }
+
         const newStandard1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[0].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[0].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard1.length !== 0) {
             setStandard1(newStandard1.length.toString())
         }
         const newStandard2 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[1].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[1].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard2.length !== 0) {
             setStandard2(newStandard2.length.toString())
         }
         const newStandard3 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[2].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[2].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard3.length !== 0) {
             setStandard3(newStandard3.length.toString())
         }
         const newStandard4 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[3].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[3].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard4.length !== 0) {
             setStandard4(newStandard4.length.toString())
         }
         const newStandard5 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[4].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[4].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard5.length !== 0) {
             setStandard5(newStandard5.length.toString())
         }
         const newStandard6 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[5].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[5].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard6.length !== 0) {
             setStandard6(newStandard6.length.toString())
         }
         const newStandard7 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[6].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[6].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard7.length !== 0) {
             setStandard7(newStandard7.length.toString())
         }
         const newStandard8 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[7].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[7].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard8.length !== 0) {
             setStandard8(newStandard8.length.toString())
         }
         const newStandard9 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[8].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[8].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard9.length !== 0) {
             setStandard9(newStandard9.length.toString())
         }
         const newStandard10 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[9].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[9].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard10.length !== 0) {
             setStandard10(newStandard10.length.toString())
         }
         const newStandard11 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[10].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[10].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard11.length !== 0) {
             setStandard11(newStandard11.length.toString())
         }
         const newStandard12 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[11].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[11].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard12.length !== 0) {
             setStandard12(newStandard12.length.toString())
         }
         const newStandard13 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[12].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[12].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard13.length !== 0) {
             setStandard13(newStandard13.length.toString())
         }
         const newStandard14 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[13].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[13].name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard14.length !== 0) {
             setStandard14(newStandard14.length.toString())
         }
-        const newStandard15 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[14].name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
-        if (newStandard15.length !== 0) {
-            setStandard15(newStandard15.length.toString())
-        }
 
         console.log('got user')
-
-        
     }
 
     useEffect (() => {
@@ -209,7 +305,7 @@ export default function ProgramItemTangoDay1({workout}){
         //get DB user one time to set current profile pic, if it exists
         console.log('getting user')
         const newValue = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
-        .workoutName('eq', name).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', name).day('eq', '1').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newValue.length !== 0) {
             //console.log(newMobility1[0])
             //let newWorkout = newMobility1[0].numOfCompletions
@@ -316,7 +412,7 @@ export default function ProgramItemTangoDay1({workout}){
                 <Text style={styles.subheader2}>Sets X Reps / {"\n"}Weights</Text>
             </View>
             <View style={styles.leftContainer}>
-     
+     {/* starting mobility 0 */}
                 <View style={styles.workRowWhite}>
                     <View style={styles.worksideMed}>
        
@@ -355,7 +451,7 @@ export default function ProgramItemTangoDay1({workout}){
                         <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {mobility1 !== '0'  ? mobility1: numberOfTimes.toString() }</Text>
                     </View>
                 </View>
-               
+               {/* end mobility 0 */}
                 
 
                 <View style={styles.workRowWhite}>
@@ -369,6 +465,9 @@ export default function ProgramItemTangoDay1({workout}){
                             <Picker.Item label={workout.conditioning[0].name} value={workout.conditioning[0].name}/>
                             <Picker.Item label={workout.conditioning[1].name} value={workout.conditioning[1].name} />
                             <Picker.Item label={workout.conditioning[2].name} value={workout.conditioning[2].name} />
+                            <Picker.Item label={workout.conditioning[3].name} value={workout.conditioning[3].name}/>
+                            <Picker.Item label={workout.conditioning[4].name} value={workout.conditioning[4].name} />
+                            <Picker.Item label={workout.conditioning[5].name} value={workout.conditioning[5].name} />
                         </Picker>}
                         </View>
 
@@ -398,6 +497,12 @@ export default function ProgramItemTangoDay1({workout}){
                                 printPickerData(selectedValue1, workout.conditioning[0].name, setConditioning2) :
                                 selectedValue1 === workout.conditioning[2].name ? 
                                 printPickerData(selectedValue1, workout.conditioning[0].name, setConditioning3) :
+                                selectedValue1 === workout.conditioning[3].name ? 
+                                printPickerData(selectedValue1, workout.conditioning[0].name, setConditioning4) :
+                                selectedValue1 === workout.conditioning[4].name ? 
+                                printPickerData(selectedValue1, workout.conditioning[0].name, setConditioning5) :
+                                selectedValue1 === workout.conditioning[5].name ? 
+                                printPickerData(selectedValue1, workout.conditioning[0].name, setConditioning6) :
                                 printPickerData(selectedValue1, workout.conditioning[0].name, setConditioning1)
                                 //let newNumOfTimes = numberOfTimes + 1;
                                 //setNumberOfTimes(newNumOfTimes);
@@ -416,6 +521,12 @@ export default function ProgramItemTangoDay1({workout}){
                                 renderNumOfTimes(selectedValue1, workout.conditioning[1].name, conditioning2) :
                             selectedValue1 === workout.conditioning[2].name ?
                                 renderNumOfTimes(selectedValue1, workout.conditioning[2].name, conditioning3) :
+                            selectedValue1 === workout.conditioning[3].name ?
+                                renderNumOfTimes(selectedValue1, workout.conditioning[3].name, conditioning4) :
+                            selectedValue1 === workout.conditioning[4].name ?
+                                renderNumOfTimes(selectedValue1, workout.conditioning[4].name, conditioning5) :
+                            selectedValue1 === workout.conditioning[5].name ?
+                                renderNumOfTimes(selectedValue1, workout.conditioning[5].name, conditioning6) :
                             selectedValue1 === undefined && (conditioning1 !== '0') ? 
                                 <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {conditioning1}</Text>:
                             <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
@@ -430,10 +541,10 @@ export default function ProgramItemTangoDay1({workout}){
                         <View style={styles.selecterContainerBlue}>
                             {<Picker
                                 selectedValue={selectedValue2}
-                                style={styles.selecterRed}
+                                style={styles.selecterCore}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue2(itemValue)}>
-                                <Picker.Item label={workout.mobility[2].name} value={workout.mobility[2].name} />
-                                <Picker.Item label={workout.mobility[3].name} value={workout.mobility[3].name} />
+                                <Picker.Item label={workout.core[0].name} value={workout.core[0].name} />
+                                <Picker.Item label={workout.core[1].name} value={workout.core[1].name} />
                             </Picker>}
                         </View>
                         
@@ -441,86 +552,17 @@ export default function ProgramItemTangoDay1({workout}){
 
                     
                     <View style={styles.descriptionBlue}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.mobility[2].description}</Text>
+                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.core[0].description}</Text>
                     </View>
                       
                 </View>
                   
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
-                        <Text style={{color:'#9f272e'}}>{workout.core[0].name}</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[0].description}</Text>
-                    </View>
-
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.core[0].name, setCore1);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core1 !== '0'  ? core1: numberOfTimes.toString() }</Text>
-                    </View>
-                </View> 
-
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
-                        <Text style={{color:'#8b0000'}}>{workout.core[1].name}</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[1].description}</Text>
-                    </View>
-
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.core[1].name, setCore2);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core2 !== '0'  ? core2: numberOfTimes.toString() }</Text>
-                    </View>
-                </View> 
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
                         <Text style={{color:'#9f272e'}}>{workout.core[2].name}</Text>
                     </View>
                     <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 }}>{workout.core[2].description}</Text>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[2].description}</Text>
                     </View>
 
                 </View>
@@ -549,6 +591,133 @@ export default function ProgramItemTangoDay1({workout}){
                         <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core3 !== '0'  ? core3: numberOfTimes.toString() }</Text>
                     </View>
                 </View> 
+
+                <View style={styles.workRowBlue}>
+                    <View style={styles.worksideSmall}>
+                    {<Picker
+                                selectedValue={selectedValue3}
+                                style={styles.selecterCore}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue3(itemValue)}>
+                                <Picker.Item label={workout.core[3].name} value={workout.core[3].name} />
+                                <Picker.Item label={workout.core[4].name} value={workout.core[4].name} />
+                                <Picker.Item label={workout.core[5].name} value={workout.core[5].name} />
+                            </Picker>}
+                    </View>
+                    <View style={styles.descriptionBlue}>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[3].description}</Text>
+                    </View>
+
+                </View>
+                <View style={styles.icons}>
+                    <AntDesign onPress={() => Alert.alert("Open Video")}
+                        name="videocamera" size={25} color="#595959" />
+                    <AntDesign onPress={() => Alert.alert("Open Book")}
+                        name="book" size={25} color="#595959" />
+                    </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
+                        
+                        
+                        <Pressable
+                            onPress={() => {
+                                selectedValue3 === workout.core[3].name ? 
+                                printPickerData(selectedValue3, workout.core[3].name, setCore4) :
+                                selectedValue3 === workout.core[4].name ? 
+                                printPickerData(selectedValue3, workout.core[3].name, setCore5) :
+                                selectedValue3 === workout.core[5].name ? 
+                                printPickerData(selectedValue3, workout.core[3].name, setCore6) :
+                                
+                                printPickerData(selectedValue3, workout.core[3].name, setCore4)
+                                //let newNumOfTimes = numberOfTimes + 1;
+                                //setNumberOfTimes(newNumOfTimes);
+                            }}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                       {
+                            selectedValue3 === workout.core[3].name ?
+                                renderNumOfTimes(selectedValue3, workout.core[3].name, core4) :
+                            selectedValue3 === workout.core[4].name ?
+                                renderNumOfTimes(selectedValue3, workout.core[4].name, core5) :
+                            selectedValue3 === workout.core[5].name ?
+                                renderNumOfTimes(selectedValue3, workout.core[5].name, core6) :
+                           
+                            selectedValue3 === undefined && (core4 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core4}</Text>:
+                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        }
+                    </View>
+
+                </View> 
+                <View style={styles.workRowBlue}>
+                    <View style={styles.worksideSmall}>
+                    {<Picker
+                                selectedValue={selectedValue4}
+                                style={styles.selecterCore}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue4(itemValue)}>
+                                <Picker.Item label={workout.core[6].name} value={workout.core[6].name} />
+                                <Picker.Item label={workout.core[7].name} value={workout.core[7].name} />
+                                <Picker.Item label={workout.core[8].name} value={workout.core[8].name} />
+                            </Picker>}
+                    </View>
+                    <View style={styles.descriptionBlue}>
+                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[6].description}</Text>
+                    </View>
+
+                </View>
+                <View style={styles.icons}>
+                    <AntDesign onPress={() => Alert.alert("Open Video")}
+                        name="videocamera" size={25} color="#595959" />
+                    <AntDesign onPress={() => Alert.alert("Open Book")}
+                        name="book" size={25} color="#595959" />
+                    </View>
+                <View>
+                    <View style={styles.completed}>
+                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
+                        
+                        
+                        <Pressable
+                            onPress={() => {
+                                selectedValue4 === workout.core[6].name ? 
+                                printPickerData(selectedValue4, workout.core[6].name, setCore7) :
+                                selectedValue4 === workout.core[7].name ? 
+                                printPickerData(selectedValue4, workout.core[6].name, setCore8) :
+                                selectedValue4 === workout.core[8].name ? 
+                                printPickerData(selectedValue4, workout.core[6].name, setCore9) :
+                                
+                                printPickerData(selectedValue4, workout.core[6].name, setCore7)
+                                //let newNumOfTimes = numberOfTimes + 1;
+                                //setNumberOfTimes(newNumOfTimes);
+                            }}
+                            >
+                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
+                        </Pressable>
+                        
+                        
+                    </View>
+                    <View style={styles.timesCompleted}>
+                       {
+                            selectedValue4 === workout.core[6].name ?
+                                renderNumOfTimes(selectedValue4, workout.core[6].name, core7) :
+                            selectedValue4 === workout.core[7].name ?
+                                renderNumOfTimes(selectedValue4, workout.core[7].name, core8) :
+                            selectedValue4 === workout.core[8].name ?
+                                renderNumOfTimes(selectedValue4, workout.core[8].name, core9) :
+                           
+                            selectedValue4 === undefined && (core7 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core7}</Text>:
+                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        }
+                    </View>
+
+                </View>
             </View>
             <View style={styles.leftContainer}>
                 <View style={styles.workRowWhite}>
@@ -558,33 +727,62 @@ export default function ProgramItemTangoDay1({workout}){
                         <View style={styles.selecterContainer}>
 
                             {<Picker
-                                selectedValue={selectedValue3}
-                                style={styles.selecterBlack}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue3(itemValue)}>
-                                <Picker.Item label={workout.standard[0].name} value={workout.standard[0].name} />
-                                <Picker.Item label={workout.standard[1].name} value={workout.standard[1].name} />
+                                selectedValue={selectedValue5}
+                                style={styles.selecterRed}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue5(itemValue)}>
+                                <Picker.Item label={workout.mobility[1].name} value={workout.mobility[1].name} />
+                                <Picker.Item label={workout.mobility[2].name} value={workout.mobility[2].name} />
+                                <Picker.Item label={workout.mobility[3].name} value={workout.mobility[3].name} />
+                                <Picker.Item label={workout.mobility[4].name} value={workout.mobility[4].name} />
                             </Picker>}
                         </View>
                         </View>
                     
                     <View style={styles.description}>
-                        {
-                            workout.standard[0].reps.map((item, index1) => {
-                                if (selectedValue3 === workout.standard[1].name) {
-                                    return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item}</Text>
-                                } else {
-                                    if (clean){
-                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '} / {' '}
+                    <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.mobility[1].description}</Text>
+                     {
+                            workout.mobility[1].reps.map((item, index1) => {
+                                if (selectedValue5 === workout.mobility[1].name) {
+                                    return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '}
+                                    / 
                                         {
-                                            workout.standard[0].percentages.map((item, index2) => {
+                                            workout.mobility[1].percentages.map((item, index2) => {
                                                 if (clean && index1 === index2){
                                                     return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
-                                                        {(Math.floor((((clean * .65) /2) * item)/5))*5}</Text>
+                                                        {(Math.floor((clean * .64 * item)/5)*5)}</Text>
                                                 }
                                             })
                                             
-                                        }
-                                        </Text>
+                                        }</Text>
+                                }
+                                if (selectedValue5 === workout.mobility[2].name) {
+                                    return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '}
+                                    / 
+                                        {
+                                            workout.mobility[2].percentages.map((item, index2) => {
+                                                if (clean && index1 === index2){
+                                                    return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
+                                                        {(Math.floor((clean * .64 * item)/5)*5)}</Text>
+                                                }
+                                            })
+                                            
+                                        }</Text>
+                                } 
+                                if (selectedValue5 === workout.mobility[3].name || selectedValue5 === workout.mobility[4].name) {
+                                    return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item}</Text>
+                                }if (selectedValue5 === undefined) {
+                                    if (clean){
+                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '}
+                                    / 
+                                        {
+                                            workout.mobility[1].percentages.map((item, index2) => {
+                                                if (clean && index1 === index2){
+                                                    return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
+                                                        {(Math.floor((clean * .64 * item)/5)*5)}</Text>
+                                                }
+                                            })
+                                            
+                                        }</Text>
                                     }      
                                 }
                             })
@@ -602,11 +800,15 @@ export default function ProgramItemTangoDay1({workout}){
                         <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
                         <Pressable
                             onPress={() => {
-                                selectedValue3 === workout.standard[0].name ?
-                                printPickerData(selectedValue3, workout.standard[0].name, setStandard1) :
-                                selectedValue3 === workout.standard[1].name ?
-                                printPickerData(selectedValue3, workout.standard[0].name, setStandard2) :
-                                printPickerData(selectedValue3, workout.standard[0].name, setStandard1) 
+                                selectedValue5 === workout.mobility[1].name ?
+                                printPickerData(selectedValue5, workout.mobility[1].name, setMobility2) : //+1
+                                selectedValue5 === workout.mobility[2].name ?
+                                printPickerData(selectedValue5, workout.mobility[1].name, setMobility3) :
+                                selectedValue5 === workout.mobility[3].name ?
+                                printPickerData(selectedValue5, workout.mobility[1].name, setMobility4) :
+                                selectedValue5 === workout.mobility[4].name ?
+                                printPickerData(selectedValue5, workout.mobility[1].name, setMobility5) :
+                                printPickerData(selectedValue5, workout.mobility[1].name, setMobility2) 
                                 //let newNumOfTimes = numberOfTimes + 1;
                                 //setNumberOfTimes(newNumOfTimes);
                             }}
@@ -618,91 +820,86 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
                     <View style={styles.timesCompleted}>
                         {
-                            selectedValue3 === workout.standard[0].name ?
-                                renderNumOfTimes(selectedValue3, workout.standard[0].name, standard1) :
-                            selectedValue3 === workout.standard[1].name ?
-                                renderNumOfTimes(selectedValue3, workout.standard[1].name, standard2) :
-                            selectedValue3 === undefined && (standard1 !== '0') ? 
-                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard1}</Text>:
+                            selectedValue5 === workout.mobility[1].name ?
+                                renderNumOfTimes(selectedValue5, workout.mobility[1].name, mobility2) :
+                            selectedValue5 === workout.mobility[2].name ?
+                                renderNumOfTimes(selectedValue5, workout.mobility[2].name, mobility3) :
+                            selectedValue5 === workout.mobility[3].name ?
+                                renderNumOfTimes(selectedValue5, workout.mobility[3].name, mobility4) :
+                            selectedValue5 === workout.mobility[4].name ?
+                                renderNumOfTimes(selectedValue5, workout.mobility[4].name, mobility5) :
+                            selectedValue5 === undefined && (mobility2 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {mobility2}</Text>:
                             <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
                             
                         }
                     </View>
                 </View> 
 
+
+
+
+
                 <View style={styles.workRowWhite}>
+
                     <View style={styles.worksideMed}>
 
                         <View style={styles.selecterContainer}>
-                        {<Picker
-                            selectedValue={selectedValue4}
-                            style={styles.selecterBlack}
-                            onValueChange={(itemValue, itemIndex) => setSelectedValue4(itemValue)}>
-                            <Picker.Item label={workout.standard[2].name} value={workout.standard[2].name} />
-                            <Picker.Item label={workout.standard[3].name} value={workout.standard[3].name} />
-                            <Picker.Item label={workout.standard[4].name} value={workout.standard[4].name} />
-                            <Picker.Item label={workout.standard[5].name} value={workout.standard[5].name} />
-                        </Picker>}
+
+                            {<Picker
+                                selectedValue={selectedValue6}
+                                style={styles.selecterBlack}
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue6(itemValue)}>
+                                <Picker.Item label={workout.standard[0].name} value={workout.standard[0].name} />
+                                <Picker.Item label={workout.standard[1].name} value={workout.standard[1].name} />
+                                <Picker.Item label={workout.standard[2].name} value={workout.standard[2].name} />
+                                <Picker.Item label={workout.standard[3].name} value={workout.standard[3].name} />
+                                <Picker.Item label={workout.standard[4].name} value={workout.standard[4].name} />
+                            </Picker>}
                         </View>
-                    </View>
+                        </View>
+                    
                     <View style={styles.description}>
-                        {
-                            workout.standard[2].reps.map((item, index1) => {
-                                if (squat) {
-                                    if (selectedValue4 === workout.standard[5].name) {
-                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item}</Text>
-                                    } if (selectedValue4 === workout.standard[4].name) {
-                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '} / {' '}
-                                            {
-                                                workout.standard[4].percentages.map((item, index2) => {
-                                                    if (clean && index1 === index2){
-                                                        return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
-                                                            {(Math.floor((squat * .18  * item)/5))*5}</Text>
-                                                    }
-                                                })
-                                                
-                                            }
-                                            </Text>
-                                    
-                                    }
-                                    if (selectedValue4 === workout.standard[3].name) {
-                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '} / {' '}
-                                            {
-                                                workout.standard[3].percentages.map((item, index2) => {
-                                                    if (clean && index1 === index2){
-                                                        return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
-                                                            {(Math.floor((squat * .18  * item)/5))*5}</Text>
-                                                    }
-                                                })
-                                                
-                                            }
-                                            </Text>
-                                    
-                                    }
-                                    if (selectedValue4 === workout.standard[2].name || selectedValue4 === undefined) {
-                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '} / {' '}
-                                            {
-                                                workout.standard[2].percentages.map((item, index2) => {
-                                                    if (clean && index1 === index2){
-                                                        return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
-                                                            {(Math.floor((squat * .18  * item)/5))*5}</Text>
-                                                    }
-                                                })
-                                                
-                                            }
-                                            </Text>
-                                    
-                                    }
-                            
+                    <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{workout.standard[1].description}</Text>
+                     {
+                            workout.standard[0].reps.map((item, index1) => {
+                                if (selectedValue6 === workout.standard[0].name ||
+                                    selectedValue6 === workout.standard[1].name ||
+                                    selectedValue6 === workout.standard[2].name) {
+                                    return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '}
+                                    / 
+                                        {
+                                            workout.standard[0].percentages.map((item, index2) => {
+                                                if (clean && index1 === index2){
+                                                    return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
+                                                        {(Math.floor((clean * .63 * item)/5)*5)}</Text>
+                                                }
+                                            })
                                             
-                                             
-                                    
+                                        }</Text>
                                 }
-                                
+
+                                if (selectedValue6 === workout.standard[3].name || selectedValue6 === workout.standard[4].name) {
+                                    return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item}</Text>
+                                }if (selectedValue6 === undefined) {
+                                    if (clean){
+                                        return <Text key={index1} style={{fontSize:10 ,fontWeight: 'bold'}}>{item} {' '}
+                                    / 
+                                        {
+                                            workout.standard[0].percentages.map((item, index2) => {
+                                                if (clean && index1 === index2){
+                                                    return <Text key={index2} style={{fontSize:10 ,fontWeight: 'bold'}}>
+                                                        {(Math.floor((clean * .63 * item)/5)*5)}</Text>
+                                                }
+                                            })
+                                            
+                                        }</Text>
+                                    }      
+                                }
                             })
                         }
-                    </View> 
-                </View> 
+                    </View>
+                </View>
                 <View style={styles.icons}>
                     <AntDesign onPress={() => Alert.alert("Open Video")}
                         name="videocamera" size={25} color="#595959" />
@@ -714,15 +911,17 @@ export default function ProgramItemTangoDay1({workout}){
                         <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
                         <Pressable
                             onPress={() => {
-                                selectedValue4 === workout.standard[2].name ?
-                                printPickerData(selectedValue4, workout.standard[2].name, setStandard3) :
-                                selectedValue4 === workout.standard[3].name ?
-                                printPickerData(selectedValue4, workout.standard[2].name, setStandard4) :
-                                selectedValue4 === workout.standard[4].name ?
-                                printPickerData(selectedValue4, workout.standard[2].name, setStandard5) :
-                                selectedValue4 === workout.standard[5].name ?
-                                printPickerData(selectedValue4, workout.standard[2].name, setStandard6) :
-                                printPickerData(selectedValue4, workout.standard[2].name, setStandard3)
+                                selectedValue6 === workout.standard[0].name ?
+                                printPickerData(selectedValue6, workout.standard[0].name, setStandard1) :
+                                selectedValue6 === workout.standard[1].name ?
+                                printPickerData(selectedValue6, workout.standard[0].name, setStandard2) : //+1
+                                selectedValue6 === workout.standard[2].name ?
+                                printPickerData(selectedValue6, workout.standard[0].name, setStandard3) :
+                                selectedValue6 === workout.standard[3].name ?
+                                printPickerData(selectedValue6, workout.standard[0].name, setStandard4) :
+                                selectedValue6 === workout.standard[4].name ?
+                                printPickerData(selectedValue6, workout.standard[0].name, setStandard5) :
+                                printPickerData(selectedValue6, workout.standard[0].name, setStandard2) 
                                 //let newNumOfTimes = numberOfTimes + 1;
                                 //setNumberOfTimes(newNumOfTimes);
                             }}
@@ -734,21 +933,24 @@ export default function ProgramItemTangoDay1({workout}){
                     </View>
                     <View style={styles.timesCompleted}>
                         {
-                            selectedValue4 === workout.standard[2].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[2].name, standard3) :
-                            selectedValue4 === workout.standard[3].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[3].name, standard4) :
-                            selectedValue4 === workout.standard[4].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[4].name, standard5) :
-                            selectedValue4 === workout.standard[5].name ?
-                                renderNumOfTimes(selectedValue4, workout.standard[5].name, standard6) :
-                            selectedValue4 === undefined && (standard3 !== '0') ? 
-                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard3}</Text>:
+                            selectedValue5 === workout.standard[0].name ?
+                            renderNumOfTimes(selectedValue5, workout.standard[0].name, standard1) :
+                            selectedValue5 === workout.standard[1].name ?
+                                renderNumOfTimes(selectedValue5, workout.standard[1].name, standard2) :
+                            selectedValue5 === workout.standard[2].name ?
+                                renderNumOfTimes(selectedValue5, workout.standard[2].name, standard3) :
+                            selectedValue5 === workout.standard[3].name ?
+                                renderNumOfTimes(selectedValue5, workout.standard[3].name, standard4) :
+                            selectedValue5 === workout.standard[4].name ?
+                                renderNumOfTimes(selectedValue5, workout.standard[4].name, standard5) :
+                            selectedValue5 === undefined && (standard1 !== '0') ? 
+                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard1}</Text>:
                             <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
                             
-                        } 
+                        }
                     </View>
                 </View> 
+
             </View>
             <View style={styles.leftContainerSmaller}>
                 <View style={styles.workRowBlue}>
@@ -758,18 +960,27 @@ export default function ProgramItemTangoDay1({workout}){
                         <View style={styles.selecterContainer}>
 
                             {<Picker
-                                selectedValue={selectedValue5}
+                                selectedValue={selectedValue11}
                                 style={styles.selecterRed}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue5(itemValue)}>
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue11(itemValue)}>
                                 <Picker.Item label={workout.mobility[2].name} value={workout.mobility[2].name} />
                                 <Picker.Item label={workout.mobility[3].name} value={workout.mobility[3].name} />
                             </Picker>}
                         </View>
 
                     </View>
-                    <View style={styles.description}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.mobility[2].description}</Text>
-                    </View>
+                    {/* <View style={styles.description}>
+                        {
+                            selectedValue11 === workout.standard[5].name ?
+                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[5].description}
+                        {' '} / {' '} {(Math.floor((clean * .88 * workout.standard[5].percentages)/5)*5)}</Text> :
+                        selectedValue11 === workout.standard[6].name ?
+                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[5].description}
+                    {' '} / {' '} {(Math.floor((clean * .88 * workout.standard[6].percentages)/5)*5)}</Text> :
+                        }
+                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[5].description}
+                        {' '} / {' '} {(Math.floor((clean * .88 * workout.standard[5].percentages)/5)*5)}</Text>
+                    </View> */}
                 </View>
                 <View style={styles.workRowBlue}>
                     <View style={styles.worksideSmall}>
@@ -777,7 +988,7 @@ export default function ProgramItemTangoDay1({workout}){
                             {<Picker
                                 selectedValue={selectedValue6}
                                 style={styles.selecterBlackPicker}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue6(itemValue)}>
+                                onValueChange={(itemValue, itemIndex) => setSelectedValue11(itemValue)}>
                                 <Picker.Item label={workout.standard[6].name} value={workout.standard[6].name} />
                                 <Picker.Item label={workout.standard[7].name} value={workout.standard[7].name} />
                                 <Picker.Item label={workout.standard[8].name} value={workout.standard[8].name} />
@@ -914,7 +1125,7 @@ export default function ProgramItemTangoDay1({workout}){
                                 style={styles.selecterBlack}
                                 onValueChange={(itemValue, itemIndex) => setSelectedValue8(itemValue)}>
                                 <Picker.Item label={workout.standard[13].name} value={workout.standard[13].name} />
-                                <Picker.Item label={workout.standard[14].name} value={workout.standard[14].name} />
+                                <Picker.Item label={workout.standard[1].name} value={workout.standard[1].name} />
                             </Picker>}
                         </View>
 
@@ -937,8 +1148,8 @@ export default function ProgramItemTangoDay1({workout}){
                             onPress={() => {
                                 selectedValue8 === workout.standard[13].name ?
                                 printPickerData(selectedValue8, workout.standard[13].name, setStandard14) :
-                                selectedValue8 === workout.standard[14].name ?
-                                printPickerData(selectedValue8, workout.standard[13].name, setStandard15) :
+                                selectedValue8 === workout.standard[1].name ?
+                                printPickerData(selectedValue8, workout.standard[13].name, setStandard14) :
                                 printPickerData(selectedValue8, workout.standard[13].name, setStandard14)
                                 //let newNumOfTimes = numberOfTimes + 1;
                                 //setNumberOfTimes(newNumOfTimes);
@@ -953,8 +1164,8 @@ export default function ProgramItemTangoDay1({workout}){
                         {
                             selectedValue8 === workout.standard[13].name ?
                                 renderNumOfTimes(selectedValue8, workout.standard[13].name, standard14) :
-                            selectedValue8 === workout.standard[14].name ?
-                                renderNumOfTimes(selectedValue8, workout.standard[14].name, standard15) :
+                            selectedValue8 === workout.standard[1].name ?
+                                renderNumOfTimes(selectedValue8, workout.standard[1].name, standard1) :
                             selectedValue8 === undefined && (standard14 !== '0') ? 
                                 <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard14}</Text>:
                             <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>

@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView} from 'react-native'
-import ProgramItemTangoDay1 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay1'
-import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay2'
-import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay3'
-import ProgramItemTangoDay4 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay4'
+import ProgramItemTangoDay1 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay1'
+import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay2'
+import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay3'
+import ProgramItemTangoDay4 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay4'
 import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use TouchOpac from 'react-native'
-import WorkoutDataDay1 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay1';
-import WorkoutDataDay2 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay2';
-import WorkoutDataDay3 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay3';
-import WorkoutDataDay4 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay4';
+import workoutData from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay1';
 
 const Plans = (  ) => {
 
@@ -96,7 +93,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={WorkoutDataDay1}
+                data={workoutData}
                 renderItem={({item}) => <ProgramItemTangoDay1 workout={item} />}
             />
         )
@@ -105,7 +102,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={WorkoutDataDay2}
+                data={workoutData}
                 renderItem={({item}) => <ProgramItemTangoDay2 workout={item} />}
             />
         )
@@ -114,7 +111,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={WorkoutDataDay3}
+                data={workoutData}
                 renderItem={({item}) => <ProgramItemTangoDay3 workout={item} />}
             />
         )
@@ -123,7 +120,7 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={WorkoutDataDay4}
+                data={workoutData}
                 renderItem={({item}) => <ProgramItemTangoDay4 workout={item} />}
             />
         )

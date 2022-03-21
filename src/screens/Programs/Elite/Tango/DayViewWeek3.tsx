@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView , FlatList , SafeAreaView, Alert, KeyboardAvoidingView} from 'react-native'
-import ProgramItemTangoDay1 from '../../../WorkOutDisplay'
-import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay2'
-import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay3'
-import ProgramItemTangoDay4 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay4'
+import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView, Alert} from 'react-native'
+import ProgramItemTangoDay1 from '../../../../component/ProgramItem/TangoWeek3/ProgramItemTangoDay1'
+import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek3/ProgramItemTangoDay2'
+import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek3/ProgramItemTangoDay3'
 import Custombutton from '../../../../component/CustomButton/Custombutton'
-import WorkoutDataDay1 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay1';
-import WorkoutDataDay2 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay2';
-import WorkoutDataDay3 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay3';
-import WorkoutDataDay4 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay4';
+import WorkoutDataDay1 from '../../../../../assets/WorkoutData/Elite/TangoWeek3/WorkoutsDay1';
+import WorkoutDataDay2 from '../../../../../assets/WorkoutData/Elite/TangoWeek3/WorkoutsDay2';
+import WorkoutDataDay3 from '../../../../../assets/WorkoutData/Elite/TangoWeek3/WorkoutsDay3';
 import { DataStore, Auth } from 'aws-amplify';
 import {TrainingLogs as Logs} from '../../../../models'
 import CustomInput from '../../../../component/CustomInput'
@@ -21,11 +19,11 @@ const Plans = (  ) => {
     const [log1, setLog1] = useState<Logs>()
     const [log2, setLog2] = useState<Logs>()
     const [log3, setLog3] = useState<Logs>()
-    const [log4, setLog4] = useState<Logs>()
+    
     const [description1, setDescription1] = useState<string | undefined>('')
     const [description2, setDescription2] = useState<string | undefined>('')
     const [description3, setDescription3] = useState<string | undefined>('')
-    const [description4, setDescription4] = useState<string | undefined>('')
+    
     const [newDescription, setNewDescription] = useState<string | undefined>('')
 
     const getUser = async () => {
@@ -39,7 +37,7 @@ const Plans = (  ) => {
         const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '1'));
         const newLog2 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '2'));
         const newLog3 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '3'));
-        const newLog4 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '4'));
+        
         
         if (newLog1[0] !== undefined) {
             setLog1(newLog1[0])
@@ -54,10 +52,6 @@ const Plans = (  ) => {
             setLog3(newLog3[0])
             setDescription3(newLog3[0].description)
         }
-        if (newLog4[0] !== undefined) {
-            setLog4(newLog4[0])
-            setDescription4(newLog4[0].description)
-        }
     }
 
 
@@ -70,9 +64,6 @@ const Plans = (  ) => {
         }
         if (selected === '3') {
             return log3
-        }
-        if (selected === '4') {
-            return log4
         }
         return;
     }
@@ -94,13 +85,11 @@ const Plans = (  ) => {
             <Text style={styleText}> {numberText} </Text>
           </Pressable>
         );
-    }
+}
 
 const buttonClickHandler = (value) => {
         console.log("Button has been pressed." + value);
         setSelected(value)
-        
-        
     
 } 
 
@@ -109,14 +98,14 @@ const save = async () => {
     const dbLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '1'));
     const dbLog2 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '2'));
     const dbLog3 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3'));
-    const dbLog4 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '4'));
+    
     if (newDescription !== ''){
         await DataStore.save(
             new Logs ({
                 userID: userID,
                 program: 'Tango',
                 level: 'Elite',
-                week: '1',
+                week: '3',
                 day: selected,
                 description: newDescription
     
@@ -155,13 +144,7 @@ const save = async () => {
                 })
             )
         }
-        if (selected === '4' && log4) {
-            await DataStore.save(
-                Logs.copyOf(dbLog4[0], updated => {
-                    updated.description = description4
-                })
-            )
-        }
+        
         Alert.alert(
             "Updated!",
             "Your training log has been successfully updated.",
@@ -174,7 +157,7 @@ const save = async () => {
     const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '1'));
     const newLog2 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '2'));
     const newLog3 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3'));
-    const newLog4 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '4'));
+    
         
     if (newLog1[0] !== undefined) {
             setLog1(newLog1[0])
@@ -187,10 +170,6 @@ const save = async () => {
     if (newLog3[0] !== undefined) {
             setLog3(newLog3[0])
             setDescription3(newLog3[0].description)
-    }
-    if (newLog4[0] !== undefined) {
-            setLog4(newLog4[0])
-            setDescription4(newLog4[0].description)
     }
     
     
@@ -208,10 +187,7 @@ function renderHeader() {
                 borderColor: 'black',
                 flex: 1,
                 alignContent: 'center',
-                flexDirection: 'row',
-                justifyContent: 'space-between', //CHANGED
-                paddingLeft: 15, //CHANGED
-                paddingRight: 15, //CHANGED
+                flexDirection: 'row'
             }}
         >
             <DayButton
@@ -238,28 +214,17 @@ function renderHeader() {
                 numberText={'3'}
                 value={selected}>
             </DayButton>
-            <DayButton
-                onPress={buttonClickHandler}
-                style={styles.roundProgramButton1}
-                styleText={styles.roundProgamButtonText}
-                dayText={'Day'}
-                numberText={'4'}
-                value={selected}>
-            </DayButton>
 
         </View>
-        {/*<View style={{padding: 12,}}>
+        <View style={{padding: 12,}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>Legend:</Text>
             <Text style={{backgroundColor: '#b4c7e7', alignSelf: 'flex-start'}}>Circuit the Shaded Area</Text>
             <Text style={{color: 'red'}}>Mobility (red)</Text>
             <Text style={{color: 'green'}}>Conditioning (green)</Text>
             <Text style={{color: '#9f272e'}}>Core (dark red)</Text>
-        </View>       CHANGED        */}
-        </>
+        </View></>
     );
   }
-
-
 
   const renderPrograms = () => {
       if (selected === '1'){
@@ -289,15 +254,6 @@ function renderHeader() {
             />
         )
       }
-      if (selected === '4'){
-        return (
-            <FlatList
-                ListHeaderComponent={renderHeader}
-                data={WorkoutDataDay4}
-                renderItem={({item}) => <ProgramItemTangoDay4 workout={item} />}
-            />
-        )
-      }
   }
 
 
@@ -305,8 +261,7 @@ function renderHeader() {
         /* <View style={styles.root}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.banner}></View> */
-         
-            <View style={styles.page}> 
+         <View style={styles.page}> 
          
          <Text style={styles.mainheadingweektitle}>Tango --- Power Endurance</Text> 
             {renderPrograms()}
@@ -323,20 +278,9 @@ function renderHeader() {
                     </View>
                     
                 </View>
-                
-             
-                
-                
-             
+                <SafeAreaView>
                     {
                         selected === '1' && description1 !== '' ?
-                        <SafeAreaView>
-                            <ScrollView>
-                        <KeyboardAvoidingView
-                        style={{flex:1}}
-                        behavior="padding">
-                        
-                        
                         <TextInput
                         //numberOfLines={(4)}
                         style={styles.input}
@@ -346,11 +290,8 @@ function renderHeader() {
                         numberOfLines={10}
                         placeholder="Enter your workout log here..."
                         
-                        />
-                        </KeyboardAvoidingView>
-                        
-                        </ScrollView> 
-                        </SafeAreaView>:
+                        /> :
+
                         selected === '2' && description2 !== '' ?
                         <TextInput
                         //numberOfLines={(4)}
@@ -364,7 +305,6 @@ function renderHeader() {
                         /> :
 
                         selected === '3' && description3 !== '' ?
-            
                         <TextInput
                         //numberOfLines={(4)}
                         style={styles.input}
@@ -376,17 +316,6 @@ function renderHeader() {
                         
                         /> :
 
-                        selected === '4' && description4 !== '' ?
-                        <TextInput
-                        //numberOfLines={(4)}
-                        defaultValue={description4}
-                        style={styles.input}
-                        onChangeText={setDescription4}
-                        multiline={true}
-                        numberOfLines={10}
-                        placeholder="Enter your workout log here..."
-                        
-                        /> :
 
                         <TextInput
                         //numberOfLines={(4)}
@@ -400,13 +329,11 @@ function renderHeader() {
                         />
 
                     }
-                
-                
-                
+                    
+                </SafeAreaView>
             </View>
             
         </View>
-        
         
         
     )
@@ -419,7 +346,6 @@ function renderHeader() {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        //justifyContent: 'space-between',
         backgroundColor: 'white',
         flex: 1,
         
@@ -468,12 +394,12 @@ const styles = StyleSheet.create({
         color: '#1F7A8C',
         fontSize: 20,
         fontWeight: '700',
-        //textShadowColor: 'black', CHANGED
-        //textShadowOffset: {width: -0.5, height: 0.5}, CHANGED
-        //textShadowRadius: 4, CHANGED
+        textShadowColor: 'black',
+        textShadowOffset: {width: -0.5, height: 0.5},
+        textShadowRadius: 4,
         left: 10,
         marginBottom: 4,
-        marginTop: 15, //CHANGED
+        marginTop: 2,
 
     },
     roundProgamButtonText: {

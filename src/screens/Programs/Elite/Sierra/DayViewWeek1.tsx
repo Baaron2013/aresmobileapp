@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView , FlatList , SafeAreaView, Alert, KeyboardAvoidingView} from 'react-native'
-import ProgramItemTangoDay1 from '../../../WorkOutDisplay'
-import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay2'
-import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay3'
-import ProgramItemTangoDay4 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay4'
+import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView, Alert} from 'react-native'
+import ProgramItemSierraDay1 from '../../../../component/ProgramItem/SierraWeek1/ProgramItemSierraDay1'
+import ProgramItemSierraDay2 from '../../../../component/ProgramItem/SierraWeek1/ProgramItemSierraDay2'
+import ProgramItemSierraDay3 from '../../../../component/ProgramItem/SierraWeek1/ProgramItemSierraDay3'
+import ProgramItemSierraDay4 from '../../../../component/ProgramItem/SierraWeek1/ProgramItemSierraDay4'
 import Custombutton from '../../../../component/CustomButton/Custombutton'
-import WorkoutDataDay1 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay1';
-import WorkoutDataDay2 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay2';
-import WorkoutDataDay3 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay3';
-import WorkoutDataDay4 from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay4';
+import WorkoutDataDay1 from '../../../../../assets/WorkoutData/Elite/SierraWeek1/WorkoutsDay1'; //modify
+import WorkoutDataDay2 from '../../../../../assets/WorkoutData/Elite/SierraWeek1/WorkoutsDay2';
 import { DataStore, Auth } from 'aws-amplify';
 import {TrainingLogs as Logs} from '../../../../models'
 import CustomInput from '../../../../component/CustomInput'
@@ -94,7 +92,7 @@ const Plans = (  ) => {
             <Text style={styleText}> {numberText} </Text>
           </Pressable>
         );
-    }
+}
 
 const buttonClickHandler = (value) => {
         console.log("Button has been pressed." + value);
@@ -208,10 +206,7 @@ function renderHeader() {
                 borderColor: 'black',
                 flex: 1,
                 alignContent: 'center',
-                flexDirection: 'row',
-                justifyContent: 'space-between', //CHANGED
-                paddingLeft: 15, //CHANGED
-                paddingRight: 15, //CHANGED
+                flexDirection: 'row'
             }}
         >
             <DayButton
@@ -248,18 +243,15 @@ function renderHeader() {
             </DayButton>
 
         </View>
-        {/*<View style={{padding: 12,}}>
+        <View style={{padding: 12,}}>
             <Text style={{fontSize: 18, fontWeight: 'bold'}}>Legend:</Text>
             <Text style={{backgroundColor: '#b4c7e7', alignSelf: 'flex-start'}}>Circuit the Shaded Area</Text>
             <Text style={{color: 'red'}}>Mobility (red)</Text>
             <Text style={{color: 'green'}}>Conditioning (green)</Text>
             <Text style={{color: '#9f272e'}}>Core (dark red)</Text>
-        </View>       CHANGED        */}
-        </>
+        </View></>
     );
   }
-
-
 
   const renderPrograms = () => {
       if (selected === '1'){
@@ -267,7 +259,7 @@ function renderHeader() {
             <FlatList
                 ListHeaderComponent={renderHeader}
                 data={WorkoutDataDay1}
-                renderItem={({item}) => <ProgramItemTangoDay1 workout={item} />}
+                renderItem={({item}) => <ProgramItemSierraDay1 workout={item} />}
             />
         )
       }
@@ -276,7 +268,7 @@ function renderHeader() {
             <FlatList
                 ListHeaderComponent={renderHeader}
                 data={WorkoutDataDay2}
-                renderItem={({item}) => <ProgramItemTangoDay2 workout={item} />}
+                renderItem={({item}) => <ProgramItemSierraDay2 workout={item} />}
             />
         )
       }
@@ -284,8 +276,8 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={WorkoutDataDay3}
-                renderItem={({item}) => <ProgramItemTangoDay3 workout={item} />}
+                data={WorkoutDataDay1}
+                renderItem={({item}) => <ProgramItemSierraDay3 workout={item} />}
             />
         )
       }
@@ -293,8 +285,8 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={WorkoutDataDay4}
-                renderItem={({item}) => <ProgramItemTangoDay4 workout={item} />}
+                data={WorkoutDataDay1}
+                renderItem={({item}) => <ProgramItemSierraDay4 workout={item} />}
             />
         )
       }
@@ -305,8 +297,7 @@ function renderHeader() {
         /* <View style={styles.root}>
             <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.banner}></View> */
-         
-            <View style={styles.page}> 
+         <View style={styles.page}> 
          
          <Text style={styles.mainheadingweektitle}>Tango --- Power Endurance</Text> 
             {renderPrograms()}
@@ -323,20 +314,9 @@ function renderHeader() {
                     </View>
                     
                 </View>
-                
-             
-                
-                
-             
+                <SafeAreaView>
                     {
                         selected === '1' && description1 !== '' ?
-                        <SafeAreaView>
-                            <ScrollView>
-                        <KeyboardAvoidingView
-                        style={{flex:1}}
-                        behavior="padding">
-                        
-                        
                         <TextInput
                         //numberOfLines={(4)}
                         style={styles.input}
@@ -346,11 +326,8 @@ function renderHeader() {
                         numberOfLines={10}
                         placeholder="Enter your workout log here..."
                         
-                        />
-                        </KeyboardAvoidingView>
-                        
-                        </ScrollView> 
-                        </SafeAreaView>:
+                        /> :
+
                         selected === '2' && description2 !== '' ?
                         <TextInput
                         //numberOfLines={(4)}
@@ -364,7 +341,6 @@ function renderHeader() {
                         /> :
 
                         selected === '3' && description3 !== '' ?
-            
                         <TextInput
                         //numberOfLines={(4)}
                         style={styles.input}
@@ -400,13 +376,11 @@ function renderHeader() {
                         />
 
                     }
-                
-                
-                
+                    
+                </SafeAreaView>
             </View>
             
         </View>
-        
         
         
     )
@@ -419,7 +393,6 @@ function renderHeader() {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        //justifyContent: 'space-between',
         backgroundColor: 'white',
         flex: 1,
         
@@ -468,12 +441,12 @@ const styles = StyleSheet.create({
         color: '#1F7A8C',
         fontSize: 20,
         fontWeight: '700',
-        //textShadowColor: 'black', CHANGED
-        //textShadowOffset: {width: -0.5, height: 0.5}, CHANGED
-        //textShadowRadius: 4, CHANGED
+        textShadowColor: 'black',
+        textShadowOffset: {width: -0.5, height: 0.5},
+        textShadowRadius: 4,
         left: 10,
         marginBottom: 4,
-        marginTop: 15, //CHANGED
+        marginTop: 2,
 
     },
     roundProgamButtonText: {
