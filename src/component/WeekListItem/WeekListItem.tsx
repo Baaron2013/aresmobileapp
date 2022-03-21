@@ -293,7 +293,7 @@ const WeekListItem = (props:any) => {
                     <Text style={styles.headingTextLine}>{"|"}</Text>
                     <Text style={styles.headingText}>{props.programName}</Text>
                 </View>
-                    <Text style={styles.level}>{"Level: Short on Time/Post School"}</Text>
+                    <Text style={styles.level}>{"Level: "}{props.level}</Text>
                     <Text style={styles.descriptionText}>{props.description}</Text>
                     <Text style={styles.subHeadingText}>{"Week List"}</Text>                
             </View>

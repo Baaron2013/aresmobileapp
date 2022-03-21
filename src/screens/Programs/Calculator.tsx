@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth, navItem, withSSRContext, DataStore } from 'aws-amplify'
@@ -11,6 +11,7 @@ import Plans from './Elite/WeeklyViewElite';
 import { User as UserModel } from "../../models"
 import { CalculatorResults as Calculator } from "../../models"
 
+
 {/* name of function - edited */}
 const data = [
     { label: 'ELITE', value: 1 },
@@ -21,8 +22,8 @@ const data = [
 ];
 
 const Custominput = ({value, setValue, placeholder, secureTextEntry, defaultValue, text}) => {
-    return (
-            <View>
+    return ( 
+        <View>
             <TextInput
                 defaultValue={defaultValue}
                 value={value}
@@ -32,7 +33,7 @@ const Custominput = ({value, setValue, placeholder, secureTextEntry, defaultValu
                 style={styles.input}
                 keyboardType="numeric"
             />
-            </View>
+        </View>
     )
 }
 const Programs = () => {
@@ -213,7 +214,7 @@ const Programs = () => {
             if (value === 2) {
                 navigation.navigate('ShortWeek')
                 console.log('label' + label); console.log('bench: ' + newBench + ' clean: ' + newClean + ' squat: ' + newSquat)
-        }
+            }
         setNewClean(0);
         setNewBench(0)
         setNewSquat(0)
@@ -222,7 +223,7 @@ const Programs = () => {
     console.log('Values wiped. new clean: ' + newClean + 'new bench: ' + newBench + 'new squat: ' + newSquat)
     console.log('current values: clean: ' + currentClean + 'bench ' + currentBench + 'squat ' + currentSquat)
     return (
-        
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.root}>
             
             {/* inserts header label - edited*/}
@@ -296,6 +297,7 @@ const Programs = () => {
             
             
         </View>
+        </TouchableWithoutFeedback>
     )
 }
 

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
    
     leftContainer: {
         flex: 1,
-        flexDirection: 'column',
+        //flexDirection: 'column',
         //justifyContent: 'center',
         backgroundColor: 'transparent',
         //height: 250,
@@ -152,6 +152,10 @@ const styles = StyleSheet.create({
         marginLeft: -10
         
     },
+    inputIOS: { 
+        
+        
+    },
     selecterBlackPicker: { 
         //position: 'absolute',
         //margin: 6,
@@ -240,7 +244,7 @@ const styles = StyleSheet.create({
     worksideMed: {
         flex: 1,
         //backgroundColor: 'white',
-        flexDirection: 'column',
+        //flexDirection: 'column',
         alignContent: 'center',
         backgroundColor: 'transparent',
 

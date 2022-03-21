@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from '../screens/Programs/Calculator';
 import EliteDayViewWeek1 from '../screens/Programs/Elite/Tango/DayViewWeek1';
 import EliteDayViewWeek2 from '../screens/Programs/Elite/Tango/DayViewWeek2';
+import EliteDayViewWeek3 from '../screens/Programs/Elite/Tango/DayViewWeek3';
+import EliteDayViewWeek4 from '../screens/Programs/Elite/Tango/DayViewWeek4';
 import ShortDayViewWeek1 from '../screens/Programs/ShortOnTime/Tango/DayViewWeek1';
 import ShortDayViewWeek2 from '../screens/Programs/ShortOnTime/Tango/DayViewWeek2';
 import EliteWeek from '../screens/Programs/Elite/WeeklyViewElite';
@@ -27,7 +29,11 @@ const ProgramNavigation = () =>  {
                 options={{ title: '' }}></programStack.Screen>
             <programStack.Screen name="EliteDayViewWeek2" component={EliteDayViewWeek2}
                 options={{ title: '' }}></programStack.Screen>
-                        <programStack.Screen name="ShortDayViewWeek1" component={ShortDayViewWeek1}
+            <programStack.Screen name="EliteDayViewWeek3" component={EliteDayViewWeek3}
+                options={{ title: '' }}></programStack.Screen>
+            <programStack.Screen name="EliteDayViewWeek4" component={EliteDayViewWeek4}
+                options={{ title: '' }}></programStack.Screen>
+            <programStack.Screen name="ShortDayViewWeek1" component={ShortDayViewWeek1}
                 options={{ title: '' }}></programStack.Screen>
             <programStack.Screen name="ShortDayViewWeek2" component={ShortDayViewWeek2}
                 options={{ title: '' }}></programStack.Screen>
