@@ -270,7 +270,7 @@ const Profile = () => {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#BFDBF7',
         flex: 1,
     },
     container: {
@@ -286,6 +286,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 0,
+        marginTop: 10
     },
     profile: {
         flexDirection: 'row',

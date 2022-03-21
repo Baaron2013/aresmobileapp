@@ -18,6 +18,6 @@
       }
     },
     "apiName": "aresmobileapp",
-    "gqlSchemaPath": "/tmp/amplify-5c3f7b78-1403-4a8e-8207-5aad71657b7c/amplify/backend/api/aresmobileapp/schema.graphql"
+    "gqlSchemaPath": "/tmp/amplify-fb8174cf-ce6e-4eb3-b345-c03f9102122a/amplify/backend/api/aresmobileapp/schema.graphql"
   }
 }

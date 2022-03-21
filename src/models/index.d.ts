@@ -4,6 +4,47 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+export declare class Chatroom {
+  readonly id: string;
+  readonly newMessages: string;
+  readonly LastMessage?: Message;
+  readonly Messages?: (Message | null)[];
+  readonly ChatroomUsers?: (ChatroomUser | null)[];
+  readonly Chatter: string;
+  constructor(init: ModelInit<Chatroom>);
+  static copyOf(source: Chatroom, mutator: (draft: MutableModel<Chatroom>) => MutableModel<Chatroom> | void): Chatroom;
+}
+
+export declare class Message {
+  readonly id: string;
+  readonly content: string;
+  readonly userID: string;
+  readonly chatroomID: string;
+  constructor(init: ModelInit<Message>);
+  static copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
+}
+
+export declare class ChatroomUser {
+  readonly id: string;
+  readonly chatroom: Chatroom;
+  readonly user: User;
+  constructor(init: ModelInit<ChatroomUser>);
+  static copyOf(source: ChatroomUser, mutator: (draft: MutableModel<ChatroomUser>) => MutableModel<ChatroomUser> | void): ChatroomUser;
+}
+
+export declare class User {
+  readonly id: string;
+  readonly name: string;
+  readonly email: string;
+  readonly type: string;
+  readonly imageUri?: string;
+  readonly status?: string;
+  readonly Messages?: (Message | null)[];
+  readonly chatrooms?: (ChatroomUser | null)[];
+  constructor(init: ModelInit<User>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+}
+
 export declare class Workouts {
   readonly id: string;
   readonly program?: string;
@@ -50,46 +91,6 @@ export declare class CalculatorResults {
   readonly levelID?: number;
   constructor(init: ModelInit<CalculatorResults>);
   static copyOf(source: CalculatorResults, mutator: (draft: MutableModel<CalculatorResults>) => MutableModel<CalculatorResults> | void): CalculatorResults;
-}
-
-export declare class Chatroom {
-  readonly id: string;
-  readonly newMessages: number;
-  readonly LastMessage?: Message;
-  readonly Messages?: (Message | null)[];
-  readonly ChatroomUsers?: (ChatroomUser | null)[];
-  constructor(init: ModelInit<Chatroom>);
-  static copyOf(source: Chatroom, mutator: (draft: MutableModel<Chatroom>) => MutableModel<Chatroom> | void): Chatroom;
-}
-
-export declare class Message {
-  readonly id: string;
-  readonly content: string;
-  readonly userID: string;
-  readonly chatroomID: string;
-  constructor(init: ModelInit<Message>);
-  static copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
-}
-
-export declare class ChatroomUser {
-  readonly id: string;
-  readonly chatroom: Chatroom;
-  readonly user: User;
-  constructor(init: ModelInit<ChatroomUser>);
-  static copyOf(source: ChatroomUser, mutator: (draft: MutableModel<ChatroomUser>) => MutableModel<ChatroomUser> | void): ChatroomUser;
-}
-
-export declare class User {
-  readonly id: string;
-  readonly name: string;
-  readonly email: string;
-  readonly type: string;
-  readonly imageUri?: string;
-  readonly status?: string;
-  readonly Messages?: (Message | null)[];
-  readonly chatrooms?: (ChatroomUser | null)[];
-  constructor(init: ModelInit<User>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
 }
 
 export declare class RangerMetrics {

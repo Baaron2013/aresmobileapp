@@ -2,6 +2,168 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateChatroom = /* GraphQL */ `
+  subscription OnCreateChatroom {
+    onCreateChatroom {
+      id
+      newMessages
+      Chatter
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      LastMessage {
+        id
+        content
+        userID
+        chatroomID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Messages {
+        items {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      ChatroomUsers {
+        items {
+          id
+          chatroomID
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateChatroom = /* GraphQL */ `
+  subscription OnUpdateChatroom {
+    onUpdateChatroom {
+      id
+      newMessages
+      Chatter
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      LastMessage {
+        id
+        content
+        userID
+        chatroomID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Messages {
+        items {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      ChatroomUsers {
+        items {
+          id
+          chatroomID
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteChatroom = /* GraphQL */ `
+  subscription OnDeleteChatroom {
+    onDeleteChatroom {
+      id
+      newMessages
+      Chatter
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      LastMessage {
+        id
+        content
+        userID
+        chatroomID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Messages {
+        items {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      ChatroomUsers {
+        items {
+          id
+          chatroomID
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const onCreateWorkouts = /* GraphQL */ `
   subscription OnCreateWorkouts {
     onCreateWorkouts {
@@ -215,165 +377,6 @@ export const onDeleteCalculatorResults = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-    }
-  }
-`;
-export const onCreateChatroom = /* GraphQL */ `
-  subscription OnCreateChatroom {
-    onCreateChatroom {
-      id
-      newMessages
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      LastMessage {
-        id
-        content
-        userID
-        chatroomID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      Messages {
-        items {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      ChatroomUsers {
-        items {
-          id
-          chatroomID
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onUpdateChatroom = /* GraphQL */ `
-  subscription OnUpdateChatroom {
-    onUpdateChatroom {
-      id
-      newMessages
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      LastMessage {
-        id
-        content
-        userID
-        chatroomID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      Messages {
-        items {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      ChatroomUsers {
-        items {
-          id
-          chatroomID
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onDeleteChatroom = /* GraphQL */ `
-  subscription OnDeleteChatroom {
-    onDeleteChatroom {
-      id
-      newMessages
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      LastMessage {
-        id
-        content
-        userID
-        chatroomID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      Messages {
-        items {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      ChatroomUsers {
-        items {
-          id
-          chatroomID
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
     }
   }
 `;
@@ -628,6 +631,7 @@ export const onCreateChatroomUser = /* GraphQL */ `
       chatroom {
         id
         newMessages
+        Chatter
         _version
         _deleted
         _lastChangedAt
@@ -691,6 +695,7 @@ export const onUpdateChatroomUser = /* GraphQL */ `
       chatroom {
         id
         newMessages
+        Chatter
         _version
         _deleted
         _lastChangedAt
@@ -754,6 +759,7 @@ export const onDeleteChatroomUser = /* GraphQL */ `
       chatroom {
         id
         newMessages
+        Chatter
         _version
         _deleted
         _lastChangedAt

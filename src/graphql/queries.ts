@@ -2,6 +2,148 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getChatroom = /* GraphQL */ `
+  query GetChatroom($id: ID!) {
+    getChatroom(id: $id) {
+      id
+      newMessages
+      Chatter
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      LastMessage {
+        id
+        content
+        userID
+        chatroomID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Messages {
+        items {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+      ChatroomUsers {
+        items {
+          id
+          chatroomID
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const listChatrooms = /* GraphQL */ `
+  query ListChatrooms(
+    $filter: ModelChatroomFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listChatrooms(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        newMessages
+        Chatter
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        LastMessage {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatroomUsers {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncChatrooms = /* GraphQL */ `
+  query SyncChatrooms(
+    $filter: ModelChatroomFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncChatrooms(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        newMessages
+        Chatter
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        LastMessage {
+          id
+          content
+          userID
+          chatroomID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatroomUsers {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getWorkouts = /* GraphQL */ `
   query GetWorkouts($id: ID!) {
     getWorkouts(id: $id) {
@@ -310,145 +452,6 @@ export const syncCalculatorResults = /* GraphQL */ `
     }
   }
 `;
-export const getChatroom = /* GraphQL */ `
-  query GetChatroom($id: ID!) {
-    getChatroom(id: $id) {
-      id
-      newMessages
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      LastMessage {
-        id
-        content
-        userID
-        chatroomID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      Messages {
-        items {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      ChatroomUsers {
-        items {
-          id
-          chatroomID
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const listChatrooms = /* GraphQL */ `
-  query ListChatrooms(
-    $filter: ModelChatroomFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listChatrooms(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        newMessages
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        LastMessage {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatroomUsers {
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncChatrooms = /* GraphQL */ `
-  query SyncChatrooms(
-    $filter: ModelChatroomFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncChatrooms(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        newMessages
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        LastMessage {
-          id
-          content
-          userID
-          chatroomID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatroomUsers {
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getMessage = /* GraphQL */ `
   query GetMessage($id: ID!) {
     getMessage(id: $id) {
@@ -735,6 +738,7 @@ export const syncChatroomUsers = /* GraphQL */ `
         chatroom {
           id
           newMessages
+          Chatter
           _version
           _deleted
           _lastChangedAt

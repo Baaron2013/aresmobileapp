@@ -4,16 +4,16 @@ import { schema } from './schema';
 
 
 
-const { Workouts, WeeksCompleted, TrainingLogs, CalculatorResults, Chatroom, Message, ChatroomUser, User, RangerMetrics } = initSchema(schema);
+const { Chatroom, Message, ChatroomUser, User, Workouts, WeeksCompleted, TrainingLogs, CalculatorResults, RangerMetrics } = initSchema(schema);
 
 export {
-  Workouts,
-  WeeksCompleted,
-  TrainingLogs,
-  CalculatorResults,
   Chatroom,
   Message,
   ChatroomUser,
   User,
+  Workouts,
+  WeeksCompleted,
+  TrainingLogs,
+  CalculatorResults,
   RangerMetrics
 };
