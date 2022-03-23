@@ -4,24 +4,15 @@ export default [{
     name: 'Movement Prep-Mobility',
     description: 'Myofascial Release (any system), Dynamic Warmup (video), Mobilize 1-2 areas of greatest restriction',
   }, {
-    name: '.',
-    description: '3x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '3x thru',
-  }, {
     name: 'Recovery / Regeneration / Mobility',
     description: 'Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas',
+  }, {
+    name: '.',
+    description: '3x thru',
   }],
 
 
   core: [{
-    name: '.',
-    description: '2-3x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '2-3x thru',
-  }, {
     name: 'Landmine Rotations',
     description: '8',
   }, {
@@ -39,6 +30,9 @@ export default [{
   }, {
     name: 'Janda Situp',
     description: '10-20',
+  }, {
+    name: '.',
+    description: '2-3x thru',
   }],
 
 

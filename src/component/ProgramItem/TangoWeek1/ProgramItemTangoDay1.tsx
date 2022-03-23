@@ -355,7 +355,7 @@ export default function ProgramItemTangoDay1 ({workout}){
     const save = async () => {
         if (userID){
             console.log('save log pressed. New Description: ' + newDescription)
-        const dbLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '1'));
+        const dbLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
 
         if (newDescription !== ''){
             await DataStore.save(
@@ -376,17 +376,34 @@ export default function ProgramItemTangoDay1 ({workout}){
                     {text: "OK"} 
                 ]
             )
+        } else {
+            if (log1) {
+                await DataStore.save(
+                    Logs.copyOf(dbLog1[0], updated => {
+                        updated.description = description1
+                    })
+                )
+                console.log('finished saving')
+            }
+
+            Alert.alert(
+                "Updated!",
+                "Your training log has been successfully updated.",
+                [
+                    {text: "OK"} 
+                ]
+            )     
         }
-    
-        const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '1'));
+
+        const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '1').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
             
         if (newLog1[0] !== undefined) {
                 setLog1(newLog1[0])
                 setDescription1(newLog1[0].description)
-        }       
-        }
+        }  
         
     }
+}
 
     return (
     <>
@@ -1190,7 +1207,7 @@ export default function ProgramItemTangoDay1 ({workout}){
 
             </View>
             {/* END WHITE SET */}
-            <KeyboardAvoidingView> 
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
             <View>
             <View style={{flexDirection:'row'}}>
                 <Text style={{fontSize: 25, color: 'green', marginLeft: 10}}>Training Log</Text>
@@ -1203,7 +1220,9 @@ export default function ProgramItemTangoDay1 ({workout}){
                 </View>
                     
             </View>
-            <TextInput
+            {
+                description1 !== '' ?
+                <TextInput
                 //numberOfLines={(4)}
                 style={styles.input}
                 onChangeText={setDescription1}
@@ -1212,7 +1231,18 @@ export default function ProgramItemTangoDay1 ({workout}){
                 //numberOfLines={10}
                 placeholder="Enter your workout log here..."
                         
-            />
+                />:
+                <TextInput
+                        //numberOfLines={(4)}
+                        style={styles.input}
+                        onChangeText={setNewDescription}
+                        //defaultValue={newDescription}
+                        multiline={true}
+                        numberOfLines={10}
+                        placeholder="Enter your workout log here..."
+                        
+                />
+            }
 
         </View>
         </KeyboardAvoidingView> 

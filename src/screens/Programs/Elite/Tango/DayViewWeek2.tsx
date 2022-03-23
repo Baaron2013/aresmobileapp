@@ -140,21 +140,7 @@ function renderHeader() {
          <Text style={styles.mainheadingweektitle}>Tango --- Power Endurance</Text> 
             {renderPrograms()}
             {/* </View>  */}
-            <View style={styles.log}>
-                <Text style={{fontSize: 25, color: 'green', marginLeft: 10}}>Training Log</Text>
-                <SafeAreaView>
-                    <TextInput
-                        //numberOfLines={(4)}
-                        style={styles.input}
-                        //onChangeText={onChangeNumber}
-                        //value={number}
-                        multiline={true}
-                        numberOfLines={10}
-                        placeholder="Enter your workout log here..."
-                        
-                    />
-                </SafeAreaView>
-            </View>
+
             
         </View>
         

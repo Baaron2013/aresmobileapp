@@ -58,10 +58,10 @@ const Account = () => {
                 return ((a.program > b.program) ? 1: -1)
             }).sort((c, d) => {
                 return ((c.level > d.level) ? 1: -1)
+            }).sort((g, h) =>{
+                return ((g.day < h.day) ? 1: -1)
             }).sort((e, f) => {
                 return ((e.week > f.week) ? 1: -1)
-            }).sort((g, h) =>{
-                return ((g.day > h.day) ? 1: -1)
             })
             if (newLogs.length > 7) {
                 newLogs = newLogs.slice(0,7)

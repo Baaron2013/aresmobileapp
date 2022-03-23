@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
-import { View, ActivityIndicator,Text, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
+import { View, ActivityIndicator,Text, TextInput, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
+import Custombutton from '../../../component/CustomButton/Custombutton'
 import { Auth, Hub } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,9 +11,13 @@ import {AntDesign} from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Workouts as WorkoutModel } from "../../../models"
 import { CalculatorResults as Calculator} from "../../../models"
-
+import {TrainingLogs as Logs} from '../../../models'
 
 export default function ProgramItemTangoDay3 ({workout}){
+
+    const [log3, setLog3] = useState<Logs>()
+    const [description3, setDescription3] = useState<string | undefined>('')
+    const [newDescription, setNewDescription] = useState<string | undefined>('')
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -98,6 +103,14 @@ export default function ProgramItemTangoDay3 ({workout}){
             setBench(newCalculator[0].bench)
             setSquat(newCalculator[0].squat)
         }
+
+        const newLog3 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        if (newLog3[0] !== undefined) {
+            setLog3(newLog3[0])
+            setDescription3(newLog3[0].description)
+        }
+
+
         const newMobility1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
         .workoutName('eq', workout.mobility[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
         if (newMobility1.length !== 0) {
@@ -320,11 +333,63 @@ export default function ProgramItemTangoDay3 ({workout}){
         
     }
 
+    const save = async () => {
+        if (userID){
+            console.log('save log pressed. New Description: ' + newDescription)
+        const dbLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+
+        if (newDescription !== ''){
+            await DataStore.save(
+                new Logs ({
+                    userID: userID,
+                    program: 'Tango',
+                    level: 'Elite',
+                    week: '1',
+                    day: '3',
+                    description: newDescription
+        
+            }))
+            setNewDescription('')
+            Alert.alert(
+                "Updated!",
+                "Your training log has been successfully updated.",
+                [
+                    {text: "OK"} 
+                ]
+            )
+        } else {
+            if (log3) {
+                await DataStore.save(
+                    Logs.copyOf(dbLog1[0], updated => {
+                        updated.description = description3
+                    })
+                )
+                console.log('finished saving')
+            }
+
+            Alert.alert(
+                "Updated!",
+                "Your training log has been successfully updated.",
+                [
+                    {text: "OK"} 
+                ]
+            )     
+        }
+
+        const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+            
+        if (newLog1[0] !== undefined) {
+                setLog3(newLog1[0])
+                setDescription3(newLog1[0].description)
+        }  
+        
+    }
+}
+
     return (
     <>
         {isLoading === false ?
         <SafeAreaView>
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
         <ScrollView contentContainerStyle={{height: '100%'}}>
         
         <View style={styles.root}>
@@ -1059,11 +1124,49 @@ export default function ProgramItemTangoDay3 ({workout}){
 
             </View>
             {/* END WHITE SET */}
+            
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
+            <View>
+            <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize: 25, color: 'green', marginLeft: 10}}>Training Log</Text>
+                <View style={{marginLeft: 90, marginTop: -10}}>
+                    <Custombutton 
+                        text="Save Log"
+                        onPress={save}
+                        style={styles.saveButton}
+                        />
+                </View>
+                    
+            </View>
+            {
+                description3 !== '' ?
+                <TextInput
+                //numberOfLines={(4)}
+                style={styles.input}
+                onChangeText={setDescription3}
+                defaultValue={description3}
+                //multiline={true}
+                //numberOfLines={10}
+                placeholder="Enter your workout log here..."
+                        
+                />:
+                <TextInput
+                        //numberOfLines={(4)}
+                        style={styles.input}
+                        onChangeText={setNewDescription}
+                        //defaultValue={newDescription}
+                        multiline={true}
+                        numberOfLines={10}
+                        placeholder="Enter your workout log here..."
+                        
+                />
+            }
 
+        </View>
+        </KeyboardAvoidingView> 
 
         </View>
         </ScrollView>
-        </KeyboardAvoidingView> 
         </SafeAreaView> :
         <View style={{flex: 1, justifyContent: "center"}}>
             <ActivityIndicator size="large" color="#037ffc"/>
@@ -1168,7 +1271,35 @@ const styles = StyleSheet.create({
     },
     blueSet:{
         backgroundColor: "#BFDBF7",
-    }
+    },
+    log: {
+        //flex: 0
+        //position: 'absolute', left: 0, right: 0, bottom: 0,
+        alignSelf: 'auto',
+        position: 'relative', 
+
+        
+        /* flexDirection: 'column', // inner items will be added vertically
+        flexGrow: 1,            // all the available vertical space will be occupied by it
+        justifyContent: 'space-between' // will create the gutter between body and footer */
+    },
+    saveButton: {
+        height: 30,
+        width: 75,
+        padding: 5,
+        marginTop: 15,
+        marginLeft: 10
+    },
+    input: {
+        height: 100,
+        margin: 12,
+        borderWidth: 2,
+        borderColor: 'green',
+        padding: 10,
+        justifyContent: 'flex-start',
+        textAlignVertical: 'top',
+        
+    },
     
 })
 

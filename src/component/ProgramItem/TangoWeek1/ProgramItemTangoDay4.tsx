@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
-import { View, ActivityIndicator,Text, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { View, ActivityIndicator,Text, TextInput, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
+import Custombutton from '../../../component/CustomButton/Custombutton'
 import { Auth, Hub } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,10 +11,14 @@ import {AntDesign} from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Workouts as WorkoutModel } from "../../../models"
 import { CalculatorResults as Calculator} from "../../../models"
+import {TrainingLogs as Logs} from '../../../models'
 import { WeeksCompleted as WeeksCompleted} from "../../../models"
 
-
 export default function ProgramItemTangoDay2 ({workout}){
+
+    const [log4, setLog4] = useState<Logs>()
+    const [description4, setDescription4] = useState<string | undefined>('')
+    const [newDescription, setNewDescription] = useState<string | undefined>('')
 
     const navigation = useNavigation();
 
@@ -166,12 +171,19 @@ export default function ProgramItemTangoDay2 ({workout}){
         }
 
 
-        const newWeeks = await DataStore.query(WeeksCompleted, c => c.userID ('eq', authUser.attributes.sub));
+        const newWeeks = await DataStore.query(WeeksCompleted, c => c.userID ('eq', authUser.attributes.sub).week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
         console.log(newWeeks)
         if (newWeeks) {
             let newResults = newWeeks.length.toString()
             console.log('got calculator')
             setWeeksCompleted(newResults)
+        }
+
+
+        const newLog4 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '4').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        if (newLog4[0] !== undefined) {
+            setLog4(newLog4[0])
+            setDescription4(newLog4[0].description)
         }
 
 
@@ -514,7 +526,7 @@ export default function ProgramItemTangoDay2 ({workout}){
                 {text: "OK"} 
             ]
         )
-        const newWeeks = await DataStore.query(WeeksCompleted, c => c.userID ('eq', userID));
+        const newWeeks = await DataStore.query(WeeksCompleted, c => c.userID ('eq', userID).week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
         console.log(newWeeks)
         if (newWeeks) {
             let newResults = newWeeks.length.toString()
@@ -525,11 +537,63 @@ export default function ProgramItemTangoDay2 ({workout}){
         navigation.navigate('EliteWeek')
     }
 
+    const save = async () => {
+        if (userID){
+            console.log('save log pressed. New Description: ' + newDescription)
+        const dbLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '4').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+
+        if (newDescription !== ''){
+            await DataStore.save(
+                new Logs ({
+                    userID: userID,
+                    program: 'Tango',
+                    level: 'Elite',
+                    week: '1',
+                    day: '4',
+                    description: newDescription
+        
+            }))
+            setNewDescription('')
+            Alert.alert(
+                "Updated!",
+                "Your training log has been successfully updated.",
+                [
+                    {text: "OK"} 
+                ]
+            )
+        } else {
+            if (log4) {
+                await DataStore.save(
+                    Logs.copyOf(dbLog1[0], updated => {
+                        updated.description = description4
+                    })
+                )
+                console.log('finished saving')
+            }
+
+            Alert.alert(
+                "Updated!",
+                "Your training log has been successfully updated.",
+                [
+                    {text: "OK"} 
+                ]
+            )     
+        }
+
+        const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '4').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+            
+        if (newLog1[0] !== undefined) {
+                setLog4(newLog1[0])
+                setDescription4(newLog1[0].description)
+        }  
+        
+    }
+}
+
     return (
     <>
         {isLoading === false ?
         <SafeAreaView>
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
         <ScrollView contentContainerStyle={{height: '100%'}}>
         
         <View style={styles.root}>
@@ -1620,9 +1684,48 @@ export default function ProgramItemTangoDay2 ({workout}){
                 <Text style={{ textAlign:'center', marginBottom:20 ,fontSize: 14, marginRight: 5}}>Number of Times Completed: {weeksCompleted !== '0'  ? weeksCompleted: numberOfTimes.toString() }</Text>
             </View>
 
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
+            <View>
+            <View style={{flexDirection:'row'}}>
+                <Text style={{fontSize: 25, color: 'green', marginLeft: 10}}>Training Log</Text>
+                <View style={{marginLeft: 90, marginTop: -10}}>
+                    <Custombutton 
+                        text="Save Log"
+                        onPress={save}
+                        style={styles.saveButton}
+                        />
+                </View>
+                    
+            </View>
+            {
+                description4 !== '' ?
+                <TextInput
+                //numberOfLines={(4)}
+                style={styles.input}
+                onChangeText={setDescription4}
+                defaultValue={description4}
+                //multiline={true}
+                //numberOfLines={10}
+                placeholder="Enter your workout log here..."
+                        
+                />:
+                <TextInput
+                        //numberOfLines={(4)}
+                        style={styles.input}
+                        onChangeText={setNewDescription}
+                        //defaultValue={newDescription}
+                        multiline={true}
+                        numberOfLines={10}
+                        placeholder="Enter your workout log here..."
+                        
+                />
+            }
+
+        </View>
+        </KeyboardAvoidingView> 
+
         </View>
         </ScrollView>
-        </KeyboardAvoidingView> 
         </SafeAreaView> :
         <View style={{flex: 1, justifyContent: "center"}}>
             <ActivityIndicator size="large" color="#037ffc"/>
@@ -1727,7 +1830,35 @@ const styles = StyleSheet.create({
     },
     blueSet:{
         backgroundColor: "#BFDBF7",
-    }
+    },
+    log: {
+        //flex: 0
+        //position: 'absolute', left: 0, right: 0, bottom: 0,
+        alignSelf: 'auto',
+        position: 'relative', 
+
+        
+        /* flexDirection: 'column', // inner items will be added vertically
+        flexGrow: 1,            // all the available vertical space will be occupied by it
+        justifyContent: 'space-between' // will create the gutter between body and footer */
+    },
+    saveButton: {
+        height: 30,
+        width: 75,
+        padding: 5,
+        marginTop: 15,
+        marginLeft: 10
+    },
+    input: {
+        height: 100,
+        margin: 12,
+        borderWidth: 2,
+        borderColor: 'green',
+        padding: 10,
+        justifyContent: 'flex-start',
+        textAlignVertical: 'top',
+        
+    },
     
 })
 

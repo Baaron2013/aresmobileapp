@@ -28,17 +28,19 @@ const CoachHome = () => {
     const [filteredContacts, setFilteredContacts] = useState<User[]>([])
     const [isLoading, setIsLoading] = useState(true)
     
-      const getUsers = async () => {
-        const users = await DataStore.query(User, (c) => c.type('eq', 'Ranger'))
-        setContacts(users)
-        setFilteredContacts(users)
-        setIsLoading(false)
-      }
-      
-      useEffect(() => {
-        getUsers()
-      },[]);
 
+      useEffect(() =>{
+        const subscription = DataStore.observe(User, (c) => c.type('eq', 'Ranger')).subscribe(user =>{
+            //console.log(msg.model, msg.opType, msg.element);
+            if(user.model == User){
+                setContacts(existingContacts => [user.element,...existingContacts]);
+                setFilteredContacts(existingContacts => [user.element,...existingContacts]);
+                setIsLoading(false)
+            }
+        })
+        return () => subscription.unsubscribe();
+    }, []);
+      
       useEffect(() =>{
         const newContacts = contacts.filter(contact =>
           contact.name.toLowerCase()
@@ -55,38 +57,47 @@ const CoachHome = () => {
   
 
     return (
-      
       <SafeAreaView>
       <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
       <ScrollView contentContainerStyle={{height: '100%'}}>
-      
-      {
-        isLoading ?
-        <ActivityIndicator/> :
-        
-        <><View style={styles.popup}>
-                  <Popup />
-                </View><View style={styles.page}>
-                    <Text style={styles.headerTitle}>Rangers: </Text>
+      <View style={styles.popup}>
+          <Popup />
+      </View>
+        <View style={styles.page}>
+         <Text style={styles.headerTitle}>Rangers: </Text>
+         
+           <View style={styles.search}>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                clearButtonMode="always"
+                value={searchTerm}
+                onChangeText={setSearchTerm}
+                placeholder="Search..."
+                style={styles.searchText}
+                placeholderTextColor="white" />
+            </View>
+              {/* <Button
+                onPress={onPress}
+                title="Clickable Placeholder for Ranger Items"
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
+              /> */}
+            {
+              isLoading === false ?
+              <FlatList
+                //ListHeaderComponent={renderHeader()}
+                data={filteredContacts}
+                renderItem={({ item }) => <RangerItem chatRoom={item} />} /> :
+                <ActivityIndicator />
 
-                    <View style={styles.search}>
-                      <TextInput
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        clearButtonMode="always"
-                        value={searchTerm}
-                        onChangeText={setSearchTerm}
-                        placeholder="Search..."
-                        style={styles.searchText}
-                        placeholderTextColor="white" />
-                    </View>
-                      <FlatList
-                        //ListHeaderComponent={renderHeader()}
-                        data={filteredContacts}
-                        renderItem={({ item }) => <RangerItem chatRoom={item} />} />
-                  </View></>
-      }
-      
+            }
+            
+
+            
+         
+         
+    </View>
     </ScrollView>
     </KeyboardAvoidingView>
     </SafeAreaView>
