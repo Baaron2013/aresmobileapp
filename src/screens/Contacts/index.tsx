@@ -61,7 +61,7 @@ const Contacts = () => {
       }
 
         const filteredContacts = myContacts.filter(item => item !== currentUser )
-        console.log(myContacts);
+        //console.log(myContacts);
         filteredContacts.sort(function(a, b) {
           if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
           if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;

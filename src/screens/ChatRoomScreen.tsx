@@ -30,8 +30,6 @@ export default function ChatRoomScreen() {
 
     useEffect(() =>{
         const subscription = DataStore.observe(MessageModel).subscribe(msg =>{
-            //console.log("=====================================================");
-            //console.log(msg.model, msg.opType, msg.element);
             if(msg.model == MessageModel && msg.opType == 'INSERT'){
                 setMessages(existingMessages => [msg.element,...existingMessages])
             }
@@ -44,10 +42,10 @@ export default function ChatRoomScreen() {
             return;
         }
         const chatRoom = await DataStore.query(Chatroom, route.params.id);
-        //console.log(chatRoom);
         if(!chatRoom){
             console.error("no chat room with this id")
         }else {
+
             setChatRoom(chatRoom);
         }
         

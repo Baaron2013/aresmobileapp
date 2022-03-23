@@ -9,6 +9,8 @@ import {useState, useEffect} from 'react';
 import {DataStore, Auth} from 'aws-amplify';
 import Contact from '../../../assets/images/user.png'
 import {S3Image} from 'aws-amplify-react-native'
+import Moment from 'react-moment';
+import moment from 'moment';
 
 
 
@@ -45,7 +47,7 @@ export default function ChatRoomItem({chatRoom}){
 
     const onPress = () => {
         
-        navigation.navigate('ChatRoom', {id: chatRoom.id});
+        navigation.navigate('ChatRoom', {id: chatRoom.id, title: user?.name});
     }
 
     if (!user){
@@ -65,30 +67,20 @@ export default function ChatRoomItem({chatRoom}){
         
 
     }
-
     return (
     <Pressable onPress={onPress} style={styles.container}>
         {renderImage()}
         
 
             {/* Trying to make the button more pressable instead of the container */}
-            <Pressable
-                style={styles.deleteChat}
-                onPress={() => Alert.alert("Delete This Message")}
-                //title="Learn More"
-                //color="#841584"
-                accessibilityLabel="Learn more about this purple button"
-            />
-            <AntDesign onPress={() => Alert.alert("Delete This Message")}
-            name="delete" size={24} color="#595959" style={styles.icon}/>
 
-        {!!chatRoom.newMessages && <View style={styles.badgeContainer}>
+        {chatRoom.newMessages !="0" && <View style={styles.badgeContainer}>
             <Text style={styles.badgeText}>{chatRoom.newMessages}</Text>
         </View>}
         <View style={styles.rightContainer}>
             <View style={styles.row}>
                 <Text style={styles.name}>{user.name}</Text>
-                <Text style={styles.text}>{lastMessage?._lastChangedAt}</Text>
+                <Text style={styles.text}>{moment(new Date(lastMessage?._lastChangedAt)).format('MM/DD/YYYY hh:MM')}</Text>
             </View>    
             <Text numberOfLines={1} style={styles.text}>{lastMessage?.content}</Text>
         </View>

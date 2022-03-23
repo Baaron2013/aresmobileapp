@@ -16,14 +16,36 @@ export default function ContactListItem({contact}){
     const navigation = useNavigation();
 
     const onPress = async () => {
+        const authUser = await Auth.currentAuthenticatedUser();
+        var foundRoom;
         //if chatroom with users exists, redirect to it
+            const contactChatRooms = (await DataStore.query(ChatroomUser))
+            .filter(chatRoom => chatRoom.user.id == contact.id)
+            .map(chatRoom => chatRoom.chatroom.id);
+            //.filter(chatter=> chatter.user.id == contact.id)
+            //.map(chatRoomUser => chatRoomUser.chatroom);
+            const myChatRooms = (await DataStore.query(ChatroomUser))
+            .filter(chatRoom => chatRoom.user.id == authUser.attributes.sub)
+            .map(chatRoom => chatRoom.chatroom.id);
+
+            for(let i =0; i < contactChatRooms.length; i++){
+                for(let j = 0; j < myChatRooms.length; j++){
+                    if(contactChatRooms[i] == myChatRooms[j]){
+                        console.log("***ROOM FOUND***");
+                        foundRoom = contactChatRooms[i];
+                    }
+                }
+            }
+
+            
+        if(foundRoom){
+            navigation.navigate('ChatRoom', {id: foundRoom});
+        }else{
+                    //create new chatroom with selected contact
+        const newChatRoom = await DataStore.save(new Chatroom({newMessages: "0", Chatter: contact.name}));
 
         
-        //create new chatroom with selected contact
-        const newChatRoom = await DataStore.save(new Chatroom({newMessages: 0}));
-        
         //connect current user with chatroom
-        const authUser = await Auth.currentAuthenticatedUser();
         const dbUser = await DataStore.query(User, authUser.attributes.sub);
         await DataStore.save(new ChatroomUser({
             user: dbUser,
@@ -35,9 +57,11 @@ export default function ContactListItem({contact}){
             user: contact,
             chatroom: newChatRoom
         }))
-        
+        console.log("Created new room ***")
+        console.log(newChatRoom.id);
         navigation.navigate('ChatRoom', {id: newChatRoom.id});
     }
+        }
 
     const renderImage = () => {
         if (contact) {

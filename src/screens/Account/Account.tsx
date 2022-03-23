@@ -143,9 +143,9 @@ const Account = () => {
         updateWorkouts();
     }, [isFocused])
     //
-    console.log(weight)
+    
 
-    //console.log(metrics);
+
     //set values in sleepArray
     for(let i = metrics.length -1 ; i >=0; i--){
         if(metrics[i].sleep == "<6"){
@@ -160,7 +160,7 @@ const Account = () => {
         }
         
     }
-    //console.log(sleepArray)
+    
     //set values in sorenessArray
     for(let j = metrics.length -1; j >=0; j--){
         if(metrics[j].soreness == "None"){
