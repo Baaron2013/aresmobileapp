@@ -28,7 +28,7 @@ const Plans = ( props ) => {
                         dayPicker6={'EliteDayViewWeek2'} 
                         dayPicker7={'EliteDayViewWeek2'} 
                         dayPicker8={'EliteDayViewWeek2'}  
-                        numOfWeeks={8}
+                        numOfWeeks={6}
                         description={'POWER / POWER ENDURANCE via Kettlebells / Dumbells ---Improve Ruck --- ENDURANCE FOCUS'} />   
                     <WeekListItem 
                         programName={'Sierra'} 

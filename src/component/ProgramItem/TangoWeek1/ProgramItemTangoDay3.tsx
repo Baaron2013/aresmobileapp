@@ -1,45 +1,37 @@
-import React, {useState, useEffect} from 'react';
-import {Text, Image, View, StyleSheet, Pressable, Button, Alert, Modal} from 'react-native';
-import styles from '../styles';
-import { useNavigation } from '@react-navigation/core';
-import Navigation from '../../navigation';
-import {AntDesign} from '@expo/vector-icons';
-import { SimpleLineIcons, Feather, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { color } from 'react-native-reanimated';
-import {Picker} from '@react-native-picker/picker';
-import { DataStore, Auth } from 'aws-amplify';
-import { StyleService } from '@ui-kitten/components';
+import React, { useEffect, useState} from 'react'
+import { View, ActivityIndicator,Text, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
+import { Auth, Hub } from 'aws-amplify'
+import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { DrawerActions } from '@react-navigation/native'
+import { DataStore } from '@aws-amplify/datastore'
+import {AntDesign} from '@expo/vector-icons';
+import { Dropdown } from 'react-native-element-dropdown';
 import { Workouts as WorkoutModel } from "../../../models"
 import { CalculatorResults as Calculator} from "../../../models"
-import { WeeksCompleted as WeeksCompleted} from "../../../models"
-import RNPickerSelect from 'react-native-picker-select';
 
 
-export default function ProgramItemTangoDay3({workout}){
-    console.log('starting day view')
-    const [modalVisibile, setModalVisibile] = useState(false)
+export default function ProgramItemTangoDay3 ({workout}){
+
+    const [isLoading, setIsLoading] = useState(true)
 
     const [selectedValue1, setSelectedValue1] = useState();
     const [selectedValue2, setSelectedValue2] = useState();
     const [selectedValue3, setSelectedValue3] = useState();
     const [selectedValue4, setSelectedValue4] = useState();
-    const [selectedValue5, setSelectedValue5] = useState();
-    const [selectedValue6, setSelectedValue6] = useState();
 
     const [ numberOfTimes, setNumberOfTimes] = useState('0')
-    const [userID, setID] = useState(undefined);
+    const [userID, setID] = useState();
 
     const [mobility1, setMobility1] = useState<string>('0');
     const [mobility2, setMobility2] = useState<string>('0');
 
+    const [conditioning1, setConditioning1] = useState<string>('0');
+
     const [core1, setCore1] = useState<string>('0');
     const [core2, setCore2] = useState<string>('0');
     const [core3, setCore3] = useState<string>('0');
-    const [core4, setCore4] = useState<string>('0');
-    const [core5, setCore5] = useState<string>('0');
-
-    const [conditioning1, setConditioning1] = useState<string>('0');
 
     const [standard1, setStandard1] = useState<string>('0');
     const [standard2, setStandard2] = useState<string>('0');
@@ -57,19 +49,37 @@ export default function ProgramItemTangoDay3({workout}){
     const [standard14, setStandard14] = useState<string>('0');
     const [standard15, setStandard15] = useState<string>('0');
     const [standard16, setStandard16] = useState<string>('0');
-    const [standard17, setStandard17] = useState<string>('0');
-    const [standard18, setStandard18] = useState<string>('0');
-
+    
     const [clean, setClean] = useState<number | undefined>(0)
     const [bench, setBench] = useState<number | undefined>(0)
     const [squat, setSquat] = useState<number | undefined>(0)
-    const [weeksCompleted, setWeeksCompleted] = useState<string | undefined>('0')
 
     let programName = 'Tango'
-    let week = '1' //change
+    let week = '1'
     let level = 'Elite'
-    let completions = '1' 
+    let completions = '1'
 
+    const dropdown1 = [
+        { label: workout.standard[0].name, value: workout.standard[0].name},
+        { label: workout.standard[1].name, value: workout.standard[1].name},
+        { label: workout.standard[2].name, value: workout.standard[2].name},
+        { label: workout.standard[3].name, value: workout.standard[3].name},
+        { label: workout.standard[4].name, value: workout.standard[4].name},
+        { label: workout.standard[5].name, value: workout.standard[5].name},
+    ]
+    const dropdown2 = [
+        { label: workout.standard[6].name, value: workout.standard[6].name},
+        { label: workout.standard[7].name, value: workout.standard[7].name},
+    ]
+    const dropdown3 = [
+        { label: workout.standard[8].name, value: workout.standard[8].name},
+        { label: workout.standard[9].name, value: workout.standard[9].name},
+    ]
+    const dropdown4 = [
+        { label: workout.standard[10].name, value: workout.standard[10].name},
+        { label: workout.standard[11].name, value: workout.standard[11].name},
+        { label: workout.standard[12].name, value: workout.standard[12].name},
+    ]
 
     const getUser = async () => {
         //get authenticated user 1 time
@@ -82,21 +92,12 @@ export default function ProgramItemTangoDay3({workout}){
         const newCalculator = await DataStore.query(Calculator, c => c.userID ('eq', authUser.attributes.sub));
         console.log(newCalculator)
         if (newCalculator) {
-            let newResults = newCalculator[0]
+            //let newResults = newCalculator[0]
             console.log('got calculator')
-            setClean(newResults.clean)
-            setBench(newResults.bench)
-            setSquat(newResults.squat)
+            setClean(newCalculator[0].clean)
+            setBench(newCalculator[0].bench)
+            setSquat(newCalculator[0].squat)
         }
-        const newWeeks = await DataStore.query(WeeksCompleted, c => c.userID ('eq', authUser.attributes.sub));
-        console.log(newWeeks)
-        if (newWeeks) {
-            let newResults = newWeeks.length.toString()
-            console.log('got calculator')
-            setWeeksCompleted(newResults)
-        }
-
-        //change 
         const newMobility1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
         .workoutName('eq', workout.mobility[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
         if (newMobility1.length !== 0) {
@@ -107,7 +108,6 @@ export default function ProgramItemTangoDay3({workout}){
         if (newMobility2.length !== 0) {
             setMobility2(newMobility2.length.toString())
         }
-        
 
         const newCore1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
         .workoutName('eq', workout.core[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
@@ -124,25 +124,12 @@ export default function ProgramItemTangoDay3({workout}){
         if (newCore3.length !== 0) {
             setCore3(newCore3.length.toString())
         }
-        const newCore4 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[3].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
-        if (newCore4 .length !== 0) {
-            setCore4(newCore4.length.toString())
-        }
-        const newCore5 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[4].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
-        if (newCore5.length !== 0) {
-            setCore5(newCore5.length.toString())
-        }
-
 
         const newConditioning1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
         .workoutName('eq', workout.conditioning[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
         if (newConditioning1.length !== 0) {
-            console.log('new conditioning1 ' + newConditioning1)
             setConditioning1(newConditioning1.length.toString())
         }
-        
 
         const newStandard1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
         .workoutName('eq', workout.standard[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
@@ -224,16 +211,6 @@ export default function ProgramItemTangoDay3({workout}){
         if (newStandard16.length !== 0) {
             setStandard16(newStandard16.length.toString())
         }
-        const newStandard17 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[16].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
-        if (newStandard17.length !== 0) {
-            setStandard17(newStandard17.length.toString())
-        }
-        const newStandard18 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[17].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
-        if (newStandard18.length !== 0) {
-            setStandard18(newStandard18.length.toString())
-        }
 
         console.log('got user')
 
@@ -241,7 +218,7 @@ export default function ProgramItemTangoDay3({workout}){
     }
 
     useEffect (() => {
-        getUser();
+        getUser().then(()=> {setIsLoading(false)})
     }, []); 
 
     const getDBUser = async (name, setValue) => {
@@ -249,20 +226,17 @@ export default function ProgramItemTangoDay3({workout}){
         //get DB user one time to set current profile pic, if it exists
         console.log('getting user')
         const newValue = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
-        .workoutName('eq', name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite')); //CHANGE DAYYYYYYYY
+        .workoutName('eq', name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
         if (newValue.length !== 0) {
-            //console.log(newMobility1[0])
-            //let newWorkout = newMobility1[0].numOfCompletions
             setValue(newValue.length.toString())
         }
 
         console.log('got user')
     }
-    }
+    } 
 
     
     const printData = async ( name, setValue ) => {
-        //setNumberOfTimes(numberOfTimes + 1)
         console.log('user ID: ' + userID)
         if (userID) {
             console.log('saving new post')
@@ -275,7 +249,7 @@ export default function ProgramItemTangoDay3({workout}){
                     numOfCompletions: completions,
                     workoutName: name,
                     weekCompleted: false,
-                    day: '3', //CHANGE DAYYYYYYYY
+                    day: '3',
 
         }))
         
@@ -293,10 +267,8 @@ export default function ProgramItemTangoDay3({workout}){
     console.log('refereshing DB log')
     getDBUser(name, setValue)
 
-
     }
     const printPickerData = async ( name, firstOption, setValue ) => {
-        //setNumberOfTimes(numberOfTimes + 1)
         console.log('name of picker: ' + name)
         if (name === undefined) {
             name = firstOption
@@ -314,7 +286,7 @@ export default function ProgramItemTangoDay3({workout}){
                     numOfCompletions: completions,
                     workoutName: name,
                     weekCompleted: false,
-                    day: '3', //CHANGE DAYYYYYYYY
+                    day: '3',
 
         }))
         
@@ -334,694 +306,869 @@ export default function ProgramItemTangoDay3({workout}){
     }
 
     const renderNumOfTimes = (selectedValue, name, numOfTimes) => {
-        console.log('rendering!')
-        console.log('conditioning1 ' + conditioning1)
-        //console.log('conditioning2 ' + conditioning2)
-        //console.log('conditioning3 ' + conditioning3)
-        console.log(selectedValue)
+
+        
         if (selectedValue === name && numOfTimes !== '0') {
             console.log('returning DB value')
-            return <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numOfTimes}</Text>
+            console.log('rendering values' + selectedValue + name)
+            return <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {numOfTimes}</Text>
         }
-        else {       
-            return <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+        else {    
+            console.log('rendering values' + selectedValue + name)   
+            return <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {numberOfTimes}</Text>
         }
         
     }
-    
-    
+
     return (
-        <View style={styles.container}>
-            <View style={styles.workRowWhite}>
-                <Text style={styles.subheader1}>Exercise:</Text>
-                <Text style={styles.subheader2}>Sets X Reps / {"\n"}Weights</Text>
-            </View>
-
-            {/* 1 WHITE  ------------------------ */}
-            <View style={styles.leftContainer}>
-
-                {/* Movement Prep-Mobility */}
-                <View style={styles.workRowWhite}>
-                    <View style={styles.worksideMed}>
-       
-                        <View style={styles.selecterContainer}> 
-                            <Text style={{color:'red', fontSize: 15}}>{workout.mobility[0].name}</Text>
-            
-                        </View>
-                    <View style={styles.description}>
-                    <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Sets x Reps / Weights</Text>
-                    <Text style={{fontSize:15 ,fontWeight: 'bold'}}>{workout.mobility[0].description}</Text>
-                    </View>
-                    </View>
-
-                    
-
-                </View>
-                <View style={styles.icons}>
-                <AntDesign onPress={() => Alert.alert("Open Video")}
-                            name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                            name="book" size={25} color="#595959" />
-                </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.mobility[0].name, setMobility1);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {mobility1 !== '0'  ? mobility1: numberOfTimes.toString() }</Text>
-                    </View>
-                </View>
-               
-
-                {/*Conditioning (see yellow box)*/}
-                <View style={styles.workRowWhite}>
-                    <View style={styles.worksideMed}>
-
-                        <View style={styles.selecterContainer}>
-                            <Text style={{color:'green', fontSize: 15}}>{workout.conditioning[0].name}</Text>
-                        </View>
-
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10,fontWeight: 'bold' }}>{workout.conditioning[0].description}</Text>
-                    </View>
-                    
-                </View> 
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.conditioning[0].name, setConditioning1);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {conditioning1 !== '0'  ? conditioning1: numberOfTimes.toString() }</Text>
-                    </View>
-                </View>        
-            </View>
-
-            {/* 1 BLUE ------------------------- */}
-            <View style={styles.leftContainerSmaller}>
-
-                {/* PLACE HOLDER */}
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideMed}>
-                        <View style={styles.selecterContainerBlue}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Exercise:</Text>
-                            {<Picker
-                                itemStyle={{height:150}}
-                                selectedValue={selectedValue1}
-                                style={styles.selecterRed}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue1(itemValue)}>
+    <>
+        {isLoading === false ?
+        <SafeAreaView>
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
+        <ScrollView contentContainerStyle={{height: '100%'}}>
         
-                                <Picker.Item label={workout.core[0].name} value={workout.core[0].name} />
-                                <Picker.Item label={workout.core[1].name} value={workout.core[1].name} />
-                            </Picker>}
-                        </View>
-                            <View style={styles.descriptionBlue}>
-                            <Text style={{fontSize:10 ,fontWeight: 'bold'}}>Sets x Reps / Weights</Text>
-                            <Text style={{fontSize:20 ,fontWeight: 'bold'}}>{'\n\n'} {workout.core[0].description}</Text>
-                            </View>
-                        </View>
-                      
+        <View style={styles.root}>
+
+            {/* WHITE SET */}
+            <View style={styles.whiteSet}>
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.mobility[0].name}</Text>
+
+                {/* TAG */}
+                <View style={styles.tag1}>
+                    <Text style={styles.tagText}>Mobility</Text>
                 </View>
 
 
-                {/* HYPER Oblique */}  
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
-                        <Text style={{color:'#9f272e'}}>{workout.core[2].name}</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[2].description}</Text>
-                    </View>
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
 
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.core[2].name, setCore3);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core3 !== '0'  ? core3: numberOfTimes.toString() }</Text>
-                    </View>
-                </View> 
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.mobility[0].description}</Text>
 
-
-                {/* Lateral Leg Raise to Hip Up */}
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
-                        <Text style={{color:'#8b0000'}}>{workout.core[3].name}</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[3].description}</Text>
-                    </View>
-
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.core[3].name, setCore4);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core4 !== '0'  ? core4: numberOfTimes.toString() }</Text>
-                    </View>
-                </View> 
-
-
-                {/* CROSSOVER SYMEMETRY -drop down */}
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
-                            {<Picker
-                                itemStyle={{height:150}}
-                                selectedValue={selectedValue2}
-                                style={styles.selecterBlack}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue2(itemValue)}>
-                                <Picker.Item label={workout.standard[0].name} value={workout.standard[0].name} />
-                                <Picker.Item label={workout.standard[1].name} value={workout.standard[1].name} />
-                                <Picker.Item label={workout.standard[2].name} value={workout.standard[2].name} />
-                                <Picker.Item label={workout.standard[3].name} value={workout.standard[3].name} />
-                                <Picker.Item label={workout.standard[4].name} value={workout.standard[4].name} />
-                                <Picker.Item label={workout.standard[5].name} value={workout.standard[5].name} />
-                            </Picker>}
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 }}>{workout.standard[0].description}</Text>
-                    </View>
-
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                selectedValue2 === workout.standard[0].name ?
-                                printPickerData(selectedValue2, workout.standard[0].name, setStandard1) :
-                                selectedValue2 === workout.standard[1].name ?
-                                printPickerData(selectedValue2, workout.standard[0].name, setStandard2) :
-                                selectedValue2 === workout.standard[2].name ?
-                                printPickerData(selectedValue2, workout.standard[0].name, setStandard3) :
-                                selectedValue2 === workout.standard[3].name ?
-                                printPickerData(selectedValue2, workout.standard[0].name, setStandard4) :
-                                selectedValue2 === workout.standard[4].name ?
-                                printPickerData(selectedValue2, workout.standard[0].name, setStandard5) :
-                                selectedValue2 === workout.standard[5].name ?
-                                printPickerData(selectedValue2, workout.standard[0].name, setStandard6) :
-                                printPickerData(selectedValue2, workout.standard[0].name, setStandard1) 
-                                
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        {   
-                            selectedValue2 === workout.standard[0].name ?
-                                renderNumOfTimes(selectedValue2, workout.standard[0].name, standard1) :
-                            setSelectedValue2 === workout.standard[1].name ?
-                                renderNumOfTimes(selectedValue2, workout.standard[1].name, standard2) :
-                                setSelectedValue2 === workout.standard[2].name ?
-                                renderNumOfTimes(selectedValue2, workout.standard[2].name, standard3) :
-                                setSelectedValue2 === workout.standard[3].name ?
-                                renderNumOfTimes(selectedValue2, workout.standard[3].name, standard4) :
-                                setSelectedValue2 === workout.standard[4].name ?
-                                renderNumOfTimes(selectedValue2, workout.standard[4].name, standard5) :
-                                setSelectedValue2 === workout.standard[5].name ?
-                                renderNumOfTimes(selectedValue2, workout.standard[5].name, standard6) :
-                            selectedValue2 === undefined && (standard1 !== '0') ? 
-                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard1}</Text>:
-                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
-                            
-                        }
-                    </View>
-                </View> 
-            </View>
-
-
-        {/* 2 WHITE --------------------------- */}
-            <View style={styles.leftContainer}>
-
-
-                {/* MED BALL SITUP*/}
-                <View style={styles.workRowWhite}>
-                    <View style={styles.worksideMed}>
-
-                        <View style={styles.selecterContainer}>
-                            <Text style={{color:'#8b0000', fontSize: 15}}>{workout.core[4].name}</Text>
-                            
-                        </View>
-                        </View>
-                    
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.core[4].description}</Text>
-        
-                    </View>
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.core[4].name, setCore5);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {core5 !== '0'  ? core5: numberOfTimes.toString() }</Text>
-                    </View>
-                </View> 
-
-
-
-                {/* KB SNATCH- drop down*/}
-                <View style={styles.workRowWhite}>
-                    <View style={styles.worksideMed}>
-
-                        <View style={styles.selecterContainer}>
-                        {<Picker
-                            selectedValue={selectedValue3}
-                            style={styles.selecterBlack}
-                            onValueChange={(itemValue, itemIndex) => setSelectedValue3(itemValue)}>
-                            <Picker.Item label={workout.standard[6].name} value={workout.standard[6].name} />
-                            <Picker.Item label={workout.standard[7].name} value={workout.standard[7].name} />
-                        </Picker>}
-                        </View>
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.standard[6].description}</Text>
-        
-                    </View> 
-                </View> 
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                selectedValue3 === workout.standard[6].name ?
-                                printPickerData(selectedValue3, workout.standard[6].name, setStandard7) :
-                                selectedValue3 === workout.standard[7].name ?
-                                printPickerData(selectedValue3, workout.standard[6].name, setStandard8) :
-                                printPickerData(selectedValue3, workout.standard[6].name, setStandard7)
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        {
-                            selectedValue3 === workout.standard[6].name ?
-                                renderNumOfTimes(selectedValue3, workout.standard[6].name, standard7) :
-                            selectedValue3 === workout.standard[7].name ?
-                                renderNumOfTimes(selectedValue3, workout.standard[7].name, standard8) :
-        
-                            selectedValue3 === undefined && (standard7 !== '0') ? 
-                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard7}</Text>:
-                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
-                            
-                        } 
-                    </View>
-                </View> 
-            </View>
-
-
-        {/* 2 BLUE ------------------------- */}
-            <View style={styles.leftContainerSmaller}>
-
-                {/* PLACEHOLDER */}
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideMed}>
-
-                        <View style={styles.selecterContainer}>
-
-                            {<Picker
-                                selectedValue={selectedValue5}
-                                style={styles.selecterRed}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue5(itemValue)}>
-                                <Picker.Item label={workout.standard[8].name} value={workout.standard[8].name} />
-                                <Picker.Item label={workout.standard[9].name} value={workout.standard[9].name} />
-                            </Picker>}
-                        </View>
-
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[8].description}</Text>
-                    </View>
-                </View>
-
-
-                {/* HIGH BOX STEP UP -drop down */}
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
-                    <View style={styles.selecterContainer}>
-                            {<Picker
-                                selectedValue={selectedValue5}
-                                style={styles.selecterBlackPicker}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue5(itemValue)}>
-                                <Picker.Item label={workout.standard[10].name} value={workout.standard[10].name} />
-                                <Picker.Item label={workout.standard[11].name} value={workout.standard[11].name} />
-
-                            </Picker>}
-                        </View>
-                    </View>
-                    <View style={styles.description}>
-                    <Text style={{fontSize:10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[10].description}</Text>
-                    </View>
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                </View>
-                <View style={styles.completed}>
-                    <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                    <Pressable
-                        onPress={() => {
-                            selectedValue5 === workout.standard[10].name ?
-                            printPickerData(selectedValue5, workout.standard[10].name, setStandard11) :
-                            selectedValue5 === workout.standard[11].name ?
-                            printPickerData(selectedValue5, workout.standard[10].name, setStandard12) :
-                            printPickerData(selectedValue5, workout.standard[10].name, setStandard11)
-                            //let newNumOfTimes = numberOfTimes + 1;
-                            //setNumberOfTimes(newNumOfTimes);
-                        }}
-                        >
-                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                    </Pressable>      
-                </View>
-                <View style={styles.timesCompleted}>
-                    {
-                        selectedValue5 === workout.standard[10].name ?
-                            renderNumOfTimes(selectedValue5, workout.standard[10].name, standard11) :
-                        selectedValue5 === workout.standard[11].name ?
-                            renderNumOfTimes(selectedValue5, workout.standard[11].name, standard12) :
-
-                        selectedValue5 === undefined && (standard11 !== '0') ? 
-                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard7}</Text>:
-                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
-                            
-                    } 
-                </View> 
-
-                {/*  STEP HOPS _ dropdown */}
-                <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
-                    <View style={styles.selecterContainer}>
-                            {/* <Text>A</Text> */}
-                            {<Picker
-                                selectedValue={selectedValue6}
-                                style={styles.selecterBlackPicker}
-                                onValueChange={(itemValue, itemIndex) => setSelectedValue6(itemValue)}>
-                                <Picker.Item label={workout.standard[12].name} value={workout.standard[12].name} />
-                                <Picker.Item label={workout.standard[13].name} value={workout.standard[13].name} />
-                                <Picker.Item label={workout.standard[14].name} value={workout.standard[14].name} />
-                            </Picker>}
-                        </View>
-                    </View>
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>{'\n\n'} {workout.standard[12].description}</Text>
-                    </View>
-                </View> 
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                <View style={styles.completed}>
-                    <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                    <Pressable
-                        onPress={() => {
-                            selectedValue6 === workout.standard[12].name ?
-                            printPickerData(selectedValue6, workout.standard[12].name, setStandard13) :
-                            selectedValue6 === workout.standard[13].name ?
-                            printPickerData(selectedValue6, workout.standard[12].name, setStandard14) :
-                            selectedValue6 === workout.standard[14].name ?
-                            printPickerData(selectedValue6, workout.standard[12].name, setStandard15) :
-                                
-                            printPickerData(selectedValue6, workout.standard[12].name, setStandard13)
-                            //let newNumOfTimes = numberOfTimes + 1;
-                            //setNumberOfTimes(newNumOfTimes);
-                        }}
-                    >
-                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                    </Pressable>      
-                </View>
-
-                    <View style={styles.timesCompleted}>
-                        {
-                            selectedValue6 === workout.standard[12].name ?
-                                renderNumOfTimes(selectedValue6, workout.standard[12].name, standard13) :
-                            selectedValue6 === workout.standard[13].name ?
-                                renderNumOfTimes(selectedValue6, workout.standard[13].name, standard14) :
-                            selectedValue6 === workout.standard[14].name ?
-                                renderNumOfTimes(selectedValue6, workout.standard[14].name, standard15) :
-                    
-                            selectedValue6 === undefined && (standard12 !== '0') ? 
-                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard12}</Text>:
-                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
-                            
-                        } 
-                    </View>
-                </View> 
-                {/* Multiple Response Box Jumps */}
-            <View style={styles.workRowBlue}>
-                    <View style={styles.worksideSmall}>
-                        <Text style={{color:'black'}}>{workout.standard[15].name}</Text>
-                    </View>
-                    <View style={styles.descriptionBlue}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.standard[15].description}</Text>
-                    </View>
-
-            </View>
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
                     <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
                     </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.standard[15].name, setStandard16);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard16 !== '0'  ? standard16: numberOfTimes.toString() }</Text>
-                    </View>
-                </View> 
-                
-            </View>
-
-            
-
-
-            <View style={styles.leftContainer}>
-                <View style={styles.workRowWhite}>
-                    <View style={styles.worksideMed}>
-                        {/* <Text >AAA</Text> */}
-                        <View style={styles.selecterContainer}>
-                            <Modal
-                                transparent={true}
-                                visible={modalVisibile}>
-                            <Pressable
-                                onPress={() => setModalVisibile(!modalVisibile)}
-                            >
-                            {/* <Text>A</Text> */}
-                            
-                            {<Picker
-                
-                                selectedValue={selectedValue6}
-                                style={styles.selecterBlack}
-                                onValueChange={(itemValue, itemIndex) => {setSelectedValue6(itemValue), setModalVisibile(!modalVisibile)}}>
-                                <Picker.Item label={workout.standard[13].name} value={workout.standard[13].name}/>
-                                <Picker.Item label={workout.standard[14].name} value={workout.standard[14].name}/>
-                                
-                            </Picker>}
-                            </Pressable>
-                            </Modal>
-                            
-                        </View>
-
-                    </View>
-                    <View style={styles.description}>
-                    <Text style={{ fontSize: 10 ,fontWeight: 'bold' }}>{workout.standard[13].description}</Text>
-                    </View>
-
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.mobility[0].name, setMobility1);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
                 </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {mobility1 !== '0'  ? mobility1: numberOfTimes.toString() }</Text>
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.conditioning[0].name}</Text>
+                
+                
+
+                {/* TAG */}
+                <View style={styles.tag2}>
+                    <Text style={styles.tagText}>Conditioning</Text>
+                </View>
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.conditioning[0].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
                     </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                selectedValue6 === workout.standard[13].name ?
-                                printPickerData(selectedValue6, workout.standard[13].name, setStandard14) :
-                                selectedValue6 === workout.standard[14].name ?
-                                printPickerData(selectedValue6, workout.standard[13].name, setStandard15) :
-                                printPickerData(selectedValue6, workout.standard[13].name, setStandard14)
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.conditioning[0].name, setConditioning1);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {conditioning1 !== '0'  ? conditioning1: numberOfTimes.toString() }</Text>
+
+
+
+            </View>
+            {/* END WHITE SET */}
+
+            {/* BLUE SET */}
+            <View style={styles.blueSet}>
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "gray",
+                    }}
+                />
+
+                {/* TAG */}
+                <View style={styles.tag4}>
+                    <Text style={styles.tagText}>Circuit</Text>
+                </View>
+                
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.mobility[2].description}</Text>
+                
+                
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "gray",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.core[0].name}</Text>
+                
+                
+
+                {/* TAG */}
+                <View style={styles.tag3}>
+                    <Text style={styles.tagText}>Core</Text>
+                </View>
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.core[0].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
                     </View>
-                    <View style={styles.timesCompleted}>
-                        {
-                            selectedValue6 === workout.standard[13].name ?
-                                renderNumOfTimes(selectedValue6, workout.standard[13].name, standard14) :
-                            selectedValue6 === workout.standard[14].name ?
-                                renderNumOfTimes(selectedValue6, workout.standard[14].name, standard15) :
-                            selectedValue6 === undefined && (standard14 !== '0') ? 
-                                <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {standard14}</Text>:
-                            <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {numberOfTimes}</Text>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.core[0].name, setCore1);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {core1 !== '0'  ? core1: numberOfTimes.toString() }</Text>
+                
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "gray",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.core[1].name}</Text>
+                
+                
+
+                {/* TAG */}
+                <View style={styles.tag3}>
+                    <Text style={styles.tagText}>Core</Text>
+                </View>
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.core[1].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.core[1].name, setCore2);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {core2 !== '0'  ? core2: numberOfTimes.toString() }</Text>
+                
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Dropdown
+                    data={dropdown1}
+                    labelField="label"
+                    valueField="value"
+                    value={selectedValue1}
+                    placeholder={workout.standard[0].name}
+                    onChange={item => {
+                        setSelectedValue1(item.value);
+                      }}
+                    placeholderStyle={styles.dropdownText}
+                    selectedTextStyle={styles.dropdownText}
+                    style={styles.dropdown}
+                    maxHeight={100}/>
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.standard[0].description}</Text>
+                
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            selectedValue1 === workout.standard[0].name ?
+                            printPickerData(selectedValue1, workout.standard[0].name, setStandard1) :
+                            selectedValue1 === workout.standard[1].name ?
+                            printPickerData(selectedValue1, workout.standard[0].name, setStandard2) :
+                            selectedValue1 === workout.standard[2].name ?
+                            printPickerData(selectedValue1, workout.standard[0].name, setStandard3) :
+                            selectedValue1 === workout.standard[3].name ?
+                            printPickerData(selectedValue1, workout.standard[0].name, setStandard4) :
+                            selectedValue1 === workout.standard[4].name ?
+                            printPickerData(selectedValue1, workout.standard[0].name, setStandard5) :
+                            selectedValue1 === workout.standard[5].name ?
+                            printPickerData(selectedValue1, workout.standard[0].name, setStandard6) :
+                            
+                            printPickerData(selectedValue1, workout.standard[0].name, setStandard1) 
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                {
+                            selectedValue1 === workout.standard[0].name ?
+                                renderNumOfTimes(selectedValue1, workout.standard[0].name, standard1) :
+                            selectedValue1 === workout.standard[1].name ?
+                                renderNumOfTimes(selectedValue1, workout.standard[1].name, standard2) :
+                            selectedValue1 === workout.standard[2].name ?
+                                renderNumOfTimes(selectedValue1, workout.standard[2].name, standard3) :
+                            selectedValue1 === workout.standard[3].name ?
+                                renderNumOfTimes(selectedValue1, workout.standard[3].name, standard4) :
+                            selectedValue1 === workout.standard[4].name ?
+                                renderNumOfTimes(selectedValue1, workout.standard[4].name, standard5) :
+                            selectedValue1 === workout.standard[5].name ?
+                                renderNumOfTimes(selectedValue1, workout.standard[5].name, standard6) :
+
+                            selectedValue1 === undefined && (standard1 !== '0') ? 
+                            <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {standard1}</Text>:
+                            <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                    }
+                
+
+            </View>
+            {/* END BLUE SET */}
+
+            {/* WHITE SET */}
+            <View style={styles.whiteSet}>
+                
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "gray",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.core[2].name}</Text>
+                
+                
+
+                {/* TAG */}
+                <View style={styles.tag3}>
+                    <Text style={styles.tagText}>Core</Text>
+                </View>
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.core[2].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.core[2].name, setCore3);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {core3 !== '0'  ? core3: numberOfTimes.toString() }</Text>
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Dropdown
+                    data={dropdown2}
+                    labelField="label"
+                    valueField="value"
+                    value={selectedValue2}
+                    placeholder={workout.standard[6].name}
+                    onChange={item => {
+                        setSelectedValue2(item.value);
+                      }}
+                    placeholderStyle={styles.dropdownText}
+                    selectedTextStyle={styles.dropdownText}
+                    style={styles.dropdown}
+                    maxHeight={200}/>
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.standard[6].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            selectedValue2 === workout.standard[6].name ?
+                            printPickerData(selectedValue2, workout.standard[6].name, setStandard7) :
+                            selectedValue2 === workout.standard[7].name ?
+                            printPickerData(selectedValue2, workout.standard[6].name, setStandard8) :
+                            printPickerData(selectedValue2, workout.standard[6].name, setStandard7) 
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                {
+                            selectedValue2 === workout.standard[6].name ?
+                                renderNumOfTimes(selectedValue2, workout.standard[6].name, standard7) :
+                            selectedValue2 === workout.standard[7].name ?
+                                renderNumOfTimes(selectedValue2, workout.standard[7].name, standard8) :
+                            selectedValue2 === undefined && (standard7 !== '0') ? 
+                            <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {standard7}</Text>:
+                            <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                    }
+
+            </View>
+            {/* END WHITE SET */}
+
+            {/* BLUE SET */}
+            <View style={styles.blueSet}>
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "gray",
+                    }}
+                />
+
+                {/* TAG */}
+                <View style={styles.tag4}>
+                    <Text style={styles.tagText}>Circuit</Text>
+                </View>
+                
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.standard[16].description}</Text>
+                
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Dropdown
+                    data={dropdown3}
+                    labelField="label"
+                    valueField="value"
+                    value={selectedValue3}
+                    placeholder={workout.standard[8].name}
+                    onChange={item => {
+                        setSelectedValue3(item.value);
+                      }}
+                    placeholderStyle={styles.dropdownText}
+                    selectedTextStyle={styles.dropdownText}
+                    style={styles.dropdown}
+                    maxHeight={200}/>
+                
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.standard[8].description}</Text>
+                
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            selectedValue3 === workout.standard[8].name ?
+                            printPickerData(selectedValue3, workout.standard[8].name, setStandard9) :
+                            selectedValue3 === workout.standard[9].name ?
+                            printPickerData(selectedValue3, workout.standard[8].name, setStandard10) :
+
+                            printPickerData(selectedValue3, workout.standard[8].name, setStandard9)
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                    {
+                            selectedValue3 === workout.standard[8].name ?
+                                renderNumOfTimes(selectedValue3, workout.standard[8].name, standard9) :
+                            selectedValue3 === workout.standard[9].name ?
+                                renderNumOfTimes(selectedValue3, workout.standard[9].name, standard10) :
+                            
+                            selectedValue3 === undefined && (standard9 !== '0') ? 
+                                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {standard9}</Text>:
+                            <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {numberOfTimes}</Text>
                             
                         } 
-                    </View>
-                </View> 
 
-                <View style={styles.workRowWhite}>
-                    <View style={styles.worksideMed}>
-                        <Text style={{color:'#9f272e'}}>{workout.mobility[1].name}</Text>
-                    </View>    
-                    <View style={styles.description}>
-                        <Text style={{ fontSize: 10 ,fontWeight: 'bold'}}>{workout.mobility[1].description}</Text>
-                    </View>
-                </View>
-                <View style={styles.icons}>
-                    <AntDesign onPress={() => Alert.alert("Open Video")}
-                        name="videocamera" size={25} color="#595959" />
-                    <AntDesign onPress={() => Alert.alert("Open Book")}
-                        name="book" size={25} color="#595959" />
-                    </View>
-                <View>
-                    <View style={styles.completed}>
-                        <Text style={{fontWeight: 'bold', paddingTop: 5, color: 'black'}}>Mark workout as completed  </Text>
-                        <Pressable
-                            onPress={() => {
-                                printData(workout.mobility[1].name, setMobility2);
-                                //let newNumOfTimes = numberOfTimes + 1;
-                                //setNumberOfTimes(newNumOfTimes);
-                            }}
-                            >
-                            <RNIcon name="check-bold" color={'#1F7A8C'} size={25} />
-                        </Pressable>
-                        
-                        
-                    </View>
-                    <View style={styles.timesCompleted}>
-                        <Text style={{fontStyle: 'italic', fontSize: 10}}>Number of Times Completed: {mobility2 !== '0'  ? mobility2: numberOfTimes.toString() }</Text>
-                    </View>
-                </View> 
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "gray",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Dropdown
+                    data={dropdown4}
+                    labelField="label"
+                    valueField="value"
+                    value={selectedValue4}
+                    placeholder={workout.standard[10].name}
+                    onChange={item => {
+                        setSelectedValue4(item.value);
+                      }}
+                    placeholderStyle={styles.dropdownText}
+                    selectedTextStyle={styles.dropdownText}
+                    style={styles.dropdown}
+                    maxHeight={200}/>
                 
+                
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.standard[10].description}</Text>
+                
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            selectedValue4 === workout.standard[10].name ?
+                            printPickerData(selectedValue4, workout.standard[10].name, setStandard11) :
+                            selectedValue4 === workout.standard[11].name ?
+                            printPickerData(selectedValue4, workout.standard[10].name, setStandard12) :
+                            selectedValue4 === workout.standard[12].name ?
+                            printPickerData(selectedValue4, workout.standard[10].name, setStandard13) :
+
+                            printPickerData(selectedValue4, workout.standard[10].name, setStandard11)
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                    {
+                            selectedValue4 === workout.standard[10].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[10].name, standard11) :
+                            selectedValue4 === workout.standard[11].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[11].name, standard12) :
+                            selectedValue4 === workout.standard[12].name ?
+                                renderNumOfTimes(selectedValue4, workout.standard[12].name, standard13) :
+                            
+                            selectedValue4 === undefined && (standard11 !== '0') ? 
+                                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {standard11}</Text>:
+                            <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}>Number of Times Completed: {numberOfTimes}</Text>
+                            
+                        } 
+                
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.standard[13].name}</Text>
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.standard[13].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.standard[13].name, setStandard14);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {standard14 !== '0'  ? standard14: numberOfTimes.toString() }</Text>
+                
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.standard[14].name}</Text>
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.standard[14].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.standard[14].name, setStandard15);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {standard15 !== '0'  ? standard15: numberOfTimes.toString() }</Text>
+
             </View>
-            
-            
+            {/* END BLUE SET */}
+
+            {/* WHITE SET */}
+            <View style={styles.whiteSet}>
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.standard[15].name}</Text>
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.standard[15].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.standard[15].name, setStandard16);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {standard16 !== '0'  ? standard16: numberOfTimes.toString() }</Text>
+
+                {/* ---------------------------  EXERCISE STARTS -------------------------*/}
+                {/* DIVIDER */}
+                <View
+                    style={{
+                        height: 1,
+                        width: "100%",
+                        backgroundColor: "#CBCEDA",
+                    }}
+                />
+                {/* WORKOUT NAME */}
+                <Text style={styles.name}>{workout.mobility[1].name}</Text>
+
+                {/* TAG */}
+                <View style={styles.tag1}>
+                    <Text style={styles.tagText}>Mobility</Text>
+                </View>
+
+
+                <Text style={{paddingTop: 20,paddingLeft: 15,color:'#8F979B', fontSize: 16}}> Sets x Reps / Weights </Text>
+
+                {/* WORKOUT DESCRIPTION */}
+                <Text style={styles.description}>{workout.mobility[1].description}</Text>
+
+                {/* ICONS AND DONE BUTTON */}
+                <View style={{flexDirection:'row', flex:1}}>
+                    {/* ICONS */}
+                    <View style={styles.icons}>
+                        <AntDesign onPress={() => Alert.alert("Open Video")}
+                            name="videocamera" size={25} color="#595959" />
+                        <AntDesign onPress={() => Alert.alert("Open Book")}
+                            name="book" size={25} color="#595959" />
+                    </View>
+                    {/* DONE BUTTON */}
+                    <Text style={{ fontSize: 16, paddingTop:25}}> Done ? </Text>
+                    <Pressable
+                        onPress={() => {
+                            printData(workout.mobility[1].name, setMobility2);
+                        }}>
+                        <RNIcon name="check-bold" color={'#1F7A8C'} size={25} style={{ paddingTop:20, marginRight:20}} />
+                    </Pressable>
+                </View>
+                <Text style={{ textAlign:'right', marginRight:20, marginBottom:20 ,fontSize: 14}}> Number of Times Completed: {mobility2 !== '0'  ? mobility2: numberOfTimes.toString() }</Text>
+
+            </View>
+            {/* END WHITE SET */}
+
+
         </View>
-        
-    
-    );
+        </ScrollView>
+        </KeyboardAvoidingView> 
+        </SafeAreaView> :
+        <View style={{flex: 1, justifyContent: "center"}}>
+            <ActivityIndicator size="large" color="#037ffc"/>
+        </View>
+        }</>
+    )
 }
+
+
+{/* STYLE SHEET */}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    keyboardViewContainer: {
+        width: '100%', 
+        //alignItems: 'center',
+        flex: 1
+    },
+    root: {
+        //alignItems: 'center',
+        //justifyContent: 'space-around',
+        backgroundColor: 'white',
+        flex: 1,
+    },
+    popup: {
+        zIndex: 1,
+    },
+    tag1: {
+        width:80,
+        height:30,
+        borderRadius: 100/2,
+        backgroundColor: "red",
+        marginLeft: 25,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+    tag2: {
+        width:80,
+        height:30,
+        borderRadius: 100/2,
+        backgroundColor: "#329632",
+        marginLeft: 25,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        
+    },
+    tag3: {
+        width:80,
+        height:30,
+        borderRadius: 100/2,
+        backgroundColor: "#8b0000",
+        marginLeft: 25,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        
+    },
+    tag4: {
+        width:80,
+        height:30,
+        borderRadius: 100/2,
+        backgroundColor: "#037ffc",
+        marginLeft: 25,
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        
+    },
+    tagText: {
+        color: "white",
+        fontSize: 11,
+        fontWeight: 'bold',
+    },
+    name: {
+        fontSize: 25,
+        paddingTop: 20, 
+        paddingBottom:12,
+        paddingLeft: 15,
+    },
+    dropdown: {
+        paddingTop: 20, 
+        paddingBottom:12,
+        paddingLeft: 15,
+        marginRight: 10
+    },
+    dropdownText: {
+        fontSize: 25,
+    },
+    description:{
+        marginLeft: 15,
+        marginTop:12,
+        fontSize: 18,
+    },
+    icons: {
+        flex: 1, 
+        flexDirection: 'row',
+        marginLeft: 15,
+        marginTop: 25,
+    },
+    whiteSet:{
+        backgroundColor: "white",
+    },
+    blueSet:{
+        backgroundColor: "#BFDBF7",
+    }
+    
+})
 

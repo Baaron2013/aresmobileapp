@@ -4,24 +4,15 @@ export default [{
     name: 'Movement Prep-Mobility',
     description: 'Myofascial Release (any system), Dynamic Warmup (video), Mobilize 1-2 areas of greatest restriction',
   }, {
-    name: '.',
-    description: '3-4x thru',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '3-4x thru',
-  },{
     name: 'Recovery / Regeneration / Mobility',
     description: 'Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas',
+  }, {
+    name: '.',
+    description: '3-4x thru',
   }],
 
 
   core: [{
-    name: '.',
-    description: '2-3x thru',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '2-3x thru',
-  },{
     name: 'HLR DB Knees Parallel',
     description: '6',
   }, {
@@ -42,6 +33,9 @@ export default [{
   },{
     name: 'Supine Paloff Press',
     description: '6',
+  }, {
+    name: '.',
+    description: '2-3x thru',
   }],
 
 
@@ -73,7 +67,7 @@ export default [{
   }, {
     name: 'DB Rack Stepup',
     reps: ['5', '5', '3', '3', '3'],
-    percentages: [.55, .75, .85, .95, .110],
+    percentages: [.55, .75, .85, .95, 1.10],
   }, {
     name: 'High Box Step Up',
     reps: ['5', '5', '3', '3', '3'],
@@ -101,8 +95,8 @@ export default [{
     description: '1-2',
   }, {
     name: 'Pit Shark Squat',
-    reps: ['50'],
-    percentages: [.61],
+    description: '50',
+    percentages: .61
   },{
     name: 'Goblet Squat',
     reps: ['50'],

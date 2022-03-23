@@ -4,36 +4,21 @@ export default [{
     name: 'Movement Prep-Mobility',
     description: 'Myofascial Release (any system), Dynamic Warmup (video), Mobilize 1-2 areas of greatest restriction',
   }, {
-    name: '.',
-    description: '4x thru',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '4x thru',
-  }, {
-    name: '.',
-    description: '3x thru',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '3x thru',
-  }, {
-    name: '.',
-    description: '3-4x thru',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '3-4x thru',
-  }, {
     name: 'Recovery / Regeneration / Mobility',
     description: 'Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas',
+  }, {
+    name: '.',
+    description: '4x thru',
+  }, {
+    name: '.',
+    description: '3x thru',
+  }, {
+    name: '.',
+    description: '3-4x thru',
   }],
 
 
   core: [{
-    name: '.',
-    description: '2-3x thru',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '2-3x thru',
-  }, {
     name: 'Oblique Press',
     description: '6 - 2 count in/out',
   }, {
@@ -50,16 +35,7 @@ export default [{
     description: '10-20',
   }, {
     name: '.',
-    description: '',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '',
-  }, {
-    name: '.',
-    description: '',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '',
+    description: '2-3x thru',
   }],
 
 
@@ -101,14 +77,15 @@ export default [{
     description: 'Descending set x6-5-4-3-2-1/arm',
   }, {
     name: 'DB Lunge Walk - Backward/Forward',
-    reps: ['5-8'],
+    description: '5-8',
     percentages: .61 ,
   }, {
     name: 'Sandbag Walking Lunge Backward/Forward',
-    reps: ['5-8'],
+    description: '5-8',
   }, {
     name: 'Reverse Forward Lunge',
-    reps: ['5-8 / 70'],
+    description: '5-8',
+    percentages: 1.95
   }, {
     name: 'Bent Knee Hip Extension',
     description: '5',

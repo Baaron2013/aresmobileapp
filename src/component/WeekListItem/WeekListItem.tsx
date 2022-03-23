@@ -99,7 +99,7 @@ const WeekListItem = (props:any) => {
     const renderButtons = () => {
         
         console.log(week1)
-        if (props.numOfWeeks === 8) {
+        if (props.numOfWeeks === 6) {
             return (
         <>  
 
@@ -125,14 +125,14 @@ const WeekListItem = (props:any) => {
                 week2 === true ?
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker2);
                     } }
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker2);
                     } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
@@ -143,14 +143,14 @@ const WeekListItem = (props:any) => {
                 week3 === true ?
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker3);
                     } }
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker3);
                     } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
@@ -161,14 +161,14 @@ const WeekListItem = (props:any) => {
                 week4 === true ?
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker4);
                     } }
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker4);
                     } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
@@ -179,14 +179,14 @@ const WeekListItem = (props:any) => {
                 week5 === true ?
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker5);
                     } }
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker5);
                     } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
@@ -197,90 +197,113 @@ const WeekListItem = (props:any) => {
                 week6 === true ?
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker6);
                     } }
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>6</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
                     onPress={() => {
-                    navigation.navigate(props.dayPicker1);
+                    navigation.navigate(props.dayPicker6);
                     } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>6</Text>
                 </TouchableOpacity>
-            }
-            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-            {
-                week7 === true ?
-                <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
-                    style={styles.roundWeekButton1}>
-                    <Text style={styles.roundWeekButtonText}>7</Text>
-                </TouchableOpacity> :
-                <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
-                    style={styles.roundWeekButton2}>
-                    <Text style={styles.roundWeekButtonText}>7</Text>
-                </TouchableOpacity>
-            }
-            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
-            {
-                week8 === true ?
-                <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
-                    style={styles.roundWeekButton1}>
-                    <Text style={styles.roundWeekButtonText}>8</Text>
-                </TouchableOpacity> :
-                <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
-                    style={styles.roundWeekButton2}>
-                    <Text style={styles.roundWeekButtonText}>8</Text>
-                </TouchableOpacity>
-            }
-                </>
+            }</>
             )} else {
                 return (
-            <><TouchableOpacity
-                onPress={() => {
+                <>  
+
+                {
+                week1 === true ?
+                <TouchableOpacity
+                    onPress={() => {
                     navigation.navigate(props.dayPicker1);
-                } }
-                style={styles.roundWeekButton1}>
-                <Text style={styles.roundWeekButtonText}>1</Text>
-            </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                onPress={() => { navigation.navigate(props.dayPicker2); } }
-                style={styles.roundWeekButton1}>
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>1</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker1);
+                    } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>1</Text>
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week2 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker2);
+                    } }
+                    style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker3); } }
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker2);
+                    } }
+                    style={styles.roundWeekButton2}>
+                    <Text style={styles.roundWeekButtonText}>2</Text>
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week3 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker3);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>3</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker3);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker4); } }
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week4 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker4);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>4</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker4);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
-                </TouchableOpacity><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker5); } }
+                </TouchableOpacity>
+            }
+            <Entypo style={styles.arrow} name="chevron-right" size={24} color="black" />
+            {
+                week5 === true ?
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker5);
+                    } }
+                    style={styles.roundWeekButton1}>
+                    <Text style={styles.roundWeekButtonText}>5</Text>
+                </TouchableOpacity> :
+                <TouchableOpacity
+                    onPress={() => {
+                    navigation.navigate(props.dayPicker5);
+                    } }
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker6); } }
-                    style={styles.roundWeekButton2}>
-                    <Text style={styles.roundWeekButtonText}>6</Text>
-                </TouchableOpacity><Entypo style={styles.arrow} name="chevron-right" size={24} color="black" /><TouchableOpacity
-                    onPress={() => { navigation.navigate(props.dayPicker7); } }
-                    style={styles.roundWeekButton2}>
-                    <Text style={styles.roundWeekButtonText}>7</Text>
-                </TouchableOpacity></>
-                )}
+                </TouchableOpacity>
+            }</>
+            )}
 
 
     }
@@ -364,7 +387,8 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         padding: 10,
         height: 140,
-        width: 315,
+        paddingLeft: 30,
+        width: 280,
         borderRadius: 35,
         justifyContent: 'center',
         alignItems: 'center'
@@ -374,7 +398,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         // alignSelf: 'flex-start',
-        //alignContent: 'center',
+        alignContent: 'center',
         //justifyContent: 'center'
     },
     roundWeekButton1:{

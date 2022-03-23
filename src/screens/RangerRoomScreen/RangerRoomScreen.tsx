@@ -196,16 +196,19 @@ const styles = StyleSheet.create({
     stats: {
         margin: 8,
         
+        
     },
     rowHead: {
         backgroundColor: '#404040',
-        color: 'white'
+        color: 'white',
+        
     },
     textHead: {
-        color: 'white'
+        color: 'white',
+        padding: 2
     },
     text: {
-
+        padding: 2
     },
     statsTitle: {
         color: 'grey',

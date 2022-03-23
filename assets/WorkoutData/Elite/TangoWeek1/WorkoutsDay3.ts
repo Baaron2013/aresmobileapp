@@ -6,16 +6,13 @@ export default [{
   }, {
     name: 'Recovery / Regeneration / Mobility',
     description: 'Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas',
+  }, {
+    name: '.',
+    description: '2-3x thru',
   }],
 
 
   core: [{
-    name: '.',
-    description: '2-3x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '2-3x thru',
-  },{
     name: 'Hyper Oblique',
     description: '6',
   }, {
@@ -58,12 +55,6 @@ export default [{
     name: 'Iowa - KB',
     description: '3-4x3-5',
   }, {
-    name: '.',
-    description: '3-4x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE', //10
-    description: '3-4x thru',
-  }, {
     name: 'High Box Step Up W Alternative Lateral/Front Raise',
     description: '5(24")',
   }, {
@@ -87,5 +78,8 @@ export default [{
   }, {
     name: 'Swing - Goblet Squat', //18
     description: 'descending set x10-9-8...x1, minimum 32kg\nIRONMAN <5 min, Goal finish under 6 min',
+  }, {
+    name: '.', //18
+    description: '3-4x thru',
   }],
 }]

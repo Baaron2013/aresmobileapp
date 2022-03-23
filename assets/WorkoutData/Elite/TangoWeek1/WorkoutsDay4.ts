@@ -4,30 +4,15 @@ export default [{
     name: 'Movement Prep-Mobility',
     description: 'Myofascial Release (any system), Dynamic Warmup (video), Mobilize 1-2 areas of greatest restriction',
   }, {
-    name: '.',
-    description: '3-4x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '3-4x thru',
-  }, {
-    name: '.',
-    description: '3-4x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '3-4x thru',
-  }, {
     name: 'Recovery / Regeneration / Mobility',
     description: 'Banded Stretch, Smash or Temper then Mobilize tight or fatigued areas',
+  }, {
+    name: 'PLACEHOLDER - DO NOT DELETE',
+    description: '3-4x thru',
   }],
 
 
   core: [{
-    name: '.',
-    description: '2-3x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '2-3x thru',
-  }, {
     name: 'Landmine Rotations',
     description: '8',
   }, {
@@ -43,12 +28,6 @@ export default [{
     name: 'Oblique Press',
     description: '8 - slow, use the landmine if you do not have an ab roller',
   }, {
-    name: '.',
-    description: ' ',
-  }, {
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: ' ',
-  },{
     name: 'McGill Curl-Up Level 1',
     description: '6-10',
   },{
@@ -60,6 +39,9 @@ export default [{
   },{
     name: 'McGill Curl-Up Level 4',
     description: '6-10',
+  }, {
+    name: '.',
+    description: '2-3x thru',
   }],
 
 

@@ -10,17 +10,14 @@ export default [{
 
 
   core: [{
-    name: '.',
-    description: '2-3x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '2-3x thru',
-  }, {
     name: 'Lateral Leg Raise to Hip Up',
     description: '5-10',
   }, {
     name: 'Hyper Grab and Reach',
     description: '6',
+  }, {
+    name: '.',
+    description: '2-3x thru',
   }],
 
 
@@ -52,24 +49,6 @@ export default [{
     name: '1 Arm Dead Stop Swing',
     description: '2x thru',
     reps: ['3', '2', '1', 'finish w 2-3x3'],
-  }, {
-    name: '.',
-    description: '3-4x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '3-4x thru',
-  }, {
-    name: 'KB Snatch - Press',
-    description: '3-4x3-5',
-  }, {
-    name: 'Iowa - KB',
-    description: '3-4x3-5',
-  }, {
-    name: '.',
-    description: '3-4x thru',
-  }, {
-    name: 'PLACEHOLDER - DO NOT DELETE',
-    description: '3-4x thru',
   }, {
     name: 'Bulgarian Squat w Front and Lateral Raise',
     description: '5 (front raise w 1 leg, lateral raise w other)',
@@ -108,6 +87,11 @@ export default [{
     description: '3-5',
   }, {
     name: 'Back Squat - Press - Front Squat - Press',
-    description: '25 total reps / 5\nPerform as many reps as possible, rack bar, rest 10 sec. Repeat until all 25 reps are done',
+    reps: '25 total reps /',
+    percentages: .61,
+    description: 'Perform as many reps as possible, rack bar, rest 10 sec. Repeat until all 25 reps are done',
+  }, {
+    name: '.',
+    description: '3-4x thru',
   }],
 }]
