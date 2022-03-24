@@ -20,7 +20,7 @@ const MessageNavigation = () =>  {
                     header: () => null
                 }}></MessageStack.Screen>
             <MessageStack.Screen name="ChatRoom" component={ChatRoomScreen}
-                options={{ title: '' }}></MessageStack.Screen>
+                options={({route}) => ({title: route.params.title})}></MessageStack.Screen>
             <MessageStack.Screen name="Contacts" component={Contacts}
                 options={{ title: 'Select Contact' }}></MessageStack.Screen>
             <MessageStack.Screen name="Ranger" component={RangerRoomScreen}

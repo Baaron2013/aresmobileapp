@@ -35,9 +35,20 @@ import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
     />
   );
 }; */
+
 const Messages = () => {
 
     const [chatRooms, setChatRooms] = useState<Chatroom[]>([]);
+
+    /*useEffect(() =>{
+      const subscription = DataStore.observe(Chatroom).subscribe(room =>{
+          //console.log(msg.model, msg.opType, msg.element);
+          if(room.model == Chatroom){
+              setChatRooms(existingRooms => [room.element,...existingRooms]);
+          }
+      })
+      return () => subscription.unsubscribe();
+  }, []);*/
 
     useEffect(() => {
         const fetchChatRooms = async () => {
@@ -45,19 +56,79 @@ const Messages = () => {
             const chatRooms = (await DataStore.query(ChatroomUser))
             .filter(chatRoomUser => chatRoomUser.user.id == userData.attributes.sub)
             .map(chatRoomUser => chatRoomUser.chatroom);
-            //console.log(chatRooms);
             setChatRooms(chatRooms);
         };
         fetchChatRooms();
     }, []);
+    
+    const [searchTerm, setSearchTerm] = useState('')
+
+    useEffect(() =>{
+      const newChatRooms = chatRooms.filter(room =>
+        room.Chatter.toLowerCase()
+        .includes(searchTerm.toLowerCase()),
+        );
+        setChatRooms(newChatRooms)
+    }, [searchTerm])
 
     const navigation = useNavigation(); 
 
     
+    /*function renderHeader() {
+      return (
+        <View
+          style={{
+            backgroundColor: '#022b3a',
+            padding: 8,
+            marginVertical: 10,
+            borderRadius: 19,
+            borderStyle: 'solid',
+            borderColor: 'black',
+            borderWidth: 2,
+            margin: 10,
+            
+          }}
+        >
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="always"
+            value={searchTerm}
+            //onChangeText={setSearchTerm}
+            placeholder="Search.."
+            style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
+          />
+        </View>
+      );
+    }*/
+    
     return (
         <View style={styles.page}> 
+                <View
+          style={{
+            backgroundColor: '#022b3a',
+            padding: 8,
+            marginVertical: 10,
+            borderRadius: 19,
+            borderStyle: 'solid',
+            borderColor: 'black',
+            borderWidth: 2,
+            margin: 10,
+            
+          }}
+        >
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="always"
+            value={searchTerm}
+            onChangeText={setSearchTerm}
+            placeholder="Search.."
+            style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
+          />
+        </View>
         <FlatList
-            ListHeaderComponent={renderHeader}
+            //ListHeaderComponent={renderHeader}
             data={chatRooms}
             renderItem={({item}) => <ChatRoomItem chatRoom={item} />}
         />
@@ -66,33 +137,6 @@ const Messages = () => {
     )
 }
 
-function renderHeader() {
-    return (
-      <View
-        style={{
-          backgroundColor: '#022b3a',
-          padding: 8,
-          marginVertical: 10,
-          borderRadius: 19,
-          borderStyle: 'solid',
-          borderColor: 'black',
-          borderWidth: 2,
-          margin: 10,
-          
-        }}
-      >
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          clearButtonMode="always"
-          value={"Search..."}
-          //onChangeText={queryText => handleSearch(queryText)}
-          placeholder="Search"
-          style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
-        />
-      </View>
-    );
-  }
 
 
 const styles = StyleSheet.create({

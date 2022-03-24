@@ -28,7 +28,7 @@ useEffect (() => {
 
 const sendMessage = async () => {
     //send message
-    //console.log("Message sent:", {message});
+    
     const user = await Auth.currentAuthenticatedUser();
     const newMessage =  await DataStore.save(new Message({
         content: message,
@@ -41,7 +41,7 @@ const sendMessage = async () => {
     setMessage('');
 }
 
-const updateLastMessage = async (newMessage) =>{
+const updateLastMessage = async (newMessage: Message | undefined) =>{
     DataStore.save(Chatroom.copyOf(chatRoom, updatedChatRoom=>{
         updatedChatRoom.LastMessage = newMessage;
     }))

@@ -4,13 +4,14 @@ import { Entypo } from '@expo/vector-icons';import { StyleSheet, TouchableOpacit
 import { NavigationRouteContext } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import Contacts from '../Contacts'
-
+import {DataStore, Auth} from 'aws-amplify';
+import { Chatroom, ChatroomUser} from '../../models';
 
 const NewMessageButton = () => {
 
     const navigation = useNavigation();
 
-    const onPress = () => {
+    const onPress = async () => {
         //console.warn("Pressed")
         navigation.navigate('Contacts');
     }
