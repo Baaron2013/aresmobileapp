@@ -1,0 +1,83 @@
+import React from 'react';
+import { ScrollView, View, Text, StyleSheet, Image} from 'react-native';
+import {useState, useEffect} from 'react';
+
+
+const PolarizedTraining = () => {
+   
+    return (
+        <ScrollView>
+            <View style={styles.content}>
+
+                <View style={styles.header_content}>
+                    <Text style={styles.item_title}>POLARIZED TRAINING</Text>
+
+                </View>
+                <View style={styles.item_fulltexts}>
+
+                    <Image style={styles.image1} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp1.jpg')}>
+                    </Image>
+                    <Image style={styles.image2} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp2.jpg')}>
+                    </Image>
+                    <Image style={styles.image3} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp3.jpg')}>
+                    </Image>
+                    <Image style={styles.image4} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp4.jpg')}>
+                    </Image>
+
+                </View>
+            </View>
+        </ScrollView>
+    )
+}
+
+const styles = StyleSheet.create({
+    content: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: '#ffffff',
+        alignItems: 'center'   
+    },
+    header_content: { 
+        margin: 10,
+        backgroundColor: '#ffffff'
+    },
+    item_fulltexts: {
+        backgroundColor: '#ffffff',
+        
+    },
+    item_title: {
+       fontWeight: '300',
+       fontSize: 20,
+    },
+    image1: {
+        resizeMode: 'contain',
+        height: 560,
+        width: 332,
+        marginLeft: -25,
+    },
+    image2: {
+        resizeMode: 'contain',
+        height: 620,
+        width: 335,
+        marginLeft: -26,
+    },
+    image3: {
+        resizeMode: 'contain',
+        height: 620,
+        width: 332,
+        marginLeft: -25,
+    },
+    image4: {
+        resizeMode: 'contain',
+        height: 70,
+        width: 332,
+        marginLeft: -22,
+    },
+    backButton: {
+        marginRight: 350,
+        marginTop: 10,
+    },
+
+});
+
+export default PolarizedTraining;
