@@ -124,6 +124,7 @@ const Messages = () => {
             value={searchTerm}
             onChangeText={setSearchTerm}
             placeholder="Search.."
+            placeholderTextColor={'white'}
             style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
           />
         </View>
