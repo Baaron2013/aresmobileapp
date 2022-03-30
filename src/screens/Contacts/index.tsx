@@ -40,6 +40,8 @@ const chatRoom4 = contactData[4];
 }; */
 const Contacts = () => {
   const [contacts, setContacts] = useState<User[]>([]);
+  const [filterContacts, setFilterContacts] = useState<User[]>([]);
+  const [searchTerm, setSearchTerm] = useState('')
 
   //fetching users from database and displaying them on contacts screen
   useEffect(() =>{
@@ -69,23 +71,58 @@ const Contacts = () => {
          })
          .map((item, i) => <List key={i} data={item} />);
         setContacts(filteredContacts);
+        setFilterContacts(filteredContacts);
   }
+
+
+  useEffect(() =>{
+    const newContacts = contacts.filter(contact =>
+      contact.name.toLowerCase()
+      .includes(searchTerm.toLowerCase()),
+      );
+      setFilterContacts(newContacts)
+  }, [searchTerm])
+
 
     const navigation = useNavigation(); 
 
     
     return (
+      
         <View style={styles.page}> 
+              <View
+        style={{
+          backgroundColor: '#022b3a',
+          padding: 8,
+          marginVertical: 10,
+          borderRadius: 19,
+          borderStyle: 'solid',
+          borderColor: 'black',
+          borderWidth: 2,
+          margin: 10,
+          
+        }}
+      >
+        <TextInput
+          autoCapitalize="none"
+          autoCorrect={false}
+          clearButtonMode="always"
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+          placeholder="Search"
+          style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
+        />
+      </View>
         <FlatList
-            ListHeaderComponent={renderHeader}
-            data={contacts}
+            //ListHeaderComponent={renderHeader}
+            data={filterContacts}
             renderItem={({item}) => <ContactListItem contact={item} />}
         />
-    </View>
+      </View>
     )
 }
 
-function renderHeader() {
+/*function renderHeader() {
     return (
       <View
         style={{
@@ -104,14 +141,14 @@ function renderHeader() {
           autoCapitalize="none"
           autoCorrect={false}
           clearButtonMode="always"
-          value={"Search..."}
-          //onChangeText={queryText => handleSearch(queryText)}
+          value={searchTerm}
+          onChangeText={setSearchTerm}
           placeholder="Search"
           style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
         />
       </View>
     );
-  }
+  }*/
 
 
 const styles = StyleSheet.create({

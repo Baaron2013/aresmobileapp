@@ -42,7 +42,7 @@ export default function ContactListItem({contact}){
             navigation.navigate('ChatRoom', {id: foundRoom});
         }else{
                     //create new chatroom with selected contact
-        const newChatRoom = await DataStore.save(new Chatroom({newMessages: "0", Chatter: contact.name}));
+        const newChatRoom = await DataStore.save(new Chatroom({newMessages: 0, Chatters:[authUser.attributes.name, contact.name] }));
 
         
         //connect current user with chatroom

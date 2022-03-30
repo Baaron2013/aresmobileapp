@@ -26,7 +26,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "s3aresmobileappfilestorage": {
+        "s37cf0df51": {
             "BucketName": "string",
             "Region": "string"
         }

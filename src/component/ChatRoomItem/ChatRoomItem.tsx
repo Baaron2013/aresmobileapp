@@ -7,8 +7,8 @@ import Navigation from '../../navigation';
 import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons } from '@expo/vector-icons';
 import {useState, useEffect} from 'react';
 import {DataStore, Auth} from 'aws-amplify';
-import Contact from '../../../assets/images/user.png'
-import {S3Image} from 'aws-amplify-react-native'
+import Contact from '../../../assets/images/user.png';
+import {S3Image} from 'aws-amplify-react-native';
 import Moment from 'react-moment';
 import moment from 'moment';
 
@@ -74,7 +74,7 @@ export default function ChatRoomItem({chatRoom}){
 
             {/* Trying to make the button more pressable instead of the container */}
 
-        {chatRoom.newMessages !="0" && <View style={styles.badgeContainer}>
+        {chatRoom.newMessages !=0 && <View style={styles.badgeContainer}>
             <Text style={styles.badgeText}>{chatRoom.newMessages}</Text>
         </View>}
         <View style={styles.rightContainer}>

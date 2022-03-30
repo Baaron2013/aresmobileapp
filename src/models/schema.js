@@ -13,7 +13,7 @@ export const schema = {
                 "newMessages": {
                     "name": "newMessages",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -58,12 +58,13 @@ export const schema = {
                         "associatedWith": "chatroom"
                     }
                 },
-                "Chatter": {
-                    "name": "Chatter",
-                    "isArray": false,
+                "Chatters": {
+                    "name": "Chatters",
+                    "isArray": true,
                     "type": "String",
-                    "isRequired": true,
-                    "attributes": []
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
                 }
             },
             "syncable": true,
@@ -751,5 +752,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "5cf6fdb2f11b10673c032e5ed5fc869c"
+    "version": "e13d52bc8e1165531aceca38aa5b4948"
 };

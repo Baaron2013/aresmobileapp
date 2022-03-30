@@ -1,10 +1,10 @@
 type Chatroom @model @auth(rules: [{allow: public}]) {
   id: ID!
-  newMessages: String!
+  newMessages: Int!
   LastMessage: Message @connection
   Messages: [Message] @connection(keyName: "byChatroom", fields: ["id"])
   ChatroomUsers: [ChatroomUser] @connection(keyName: "byChatroom", fields: ["id"])
-  Chatter: String!
+  Chatters: [String]
 }
 
 type Workouts @model @auth(rules: [{allow: public}]) {

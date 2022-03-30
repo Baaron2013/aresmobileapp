@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { View, ActivityIndicator,Text, TextInput, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-import Custombutton from '../../../component/CustomButton/Custombutton'
+import Custombutton from '../../CustomButton/Custombutton'
 import { Auth, Hub } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
