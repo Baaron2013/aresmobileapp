@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, Image, View, StyleSheet, Pressable, Button, Alert, ActivityIndicator} from 'react-native';
 import { User, ChatroomUser, Message } from '../../models';
 import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Navigation from '../../navigation';
 import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons } from '@expo/vector-icons';
 import {useState, useEffect} from 'react';
@@ -28,7 +28,7 @@ export default function RangerItem({chatRoom}){
     const onPress = () => {
         
         /* RangeringNavigation.navigate('RangerRoom'); */
-        navigation.navigate('RangerRoomScreen')
+        navigation.navigate('RangerRoomScreen', {ranger: chatRoom, title: chatRoom.name})
     }
 
     return (

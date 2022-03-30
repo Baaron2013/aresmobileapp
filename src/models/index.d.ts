@@ -6,11 +6,11 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 export declare class Chatroom {
   readonly id: string;
-  readonly newMessages: string;
+  readonly newMessages: number;
   readonly LastMessage?: Message;
   readonly Messages?: (Message | null)[];
   readonly ChatroomUsers?: (ChatroomUser | null)[];
-  readonly Chatter: string;
+  readonly Chatters?: (string | null)[];
   constructor(init: ModelInit<Chatroom>);
   static copyOf(source: Chatroom, mutator: (draft: MutableModel<Chatroom>) => MutableModel<Chatroom> | void): Chatroom;
 }

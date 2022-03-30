@@ -76,7 +76,7 @@ const Account = () => {
                 }
             })
             //userMetrics.sort(function(a, b){return b._lastChangedAt -a._lastChangedAt});
-            console.log(filteredMetrics.length)
+            //console.log(filteredMetrics.length)
             if(filteredMetrics.length > 7){
                 filteredMetrics = filteredMetrics.slice(0, 7)
             }

@@ -35,10 +35,10 @@ import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
     />
   );
 }; */
-
 const Messages = () => {
 
     const [chatRooms, setChatRooms] = useState<Chatroom[]>([]);
+    const [filteredChatRooms, setfilteredChatRooms] = useState<Chatroom[]>([]);
 
     /*useEffect(() =>{
       const subscription = DataStore.observe(Chatroom).subscribe(room =>{
@@ -56,6 +56,8 @@ const Messages = () => {
             const chatRooms = (await DataStore.query(ChatroomUser))
             .filter(chatRoomUser => chatRoomUser.user.id == userData.attributes.sub)
             .map(chatRoomUser => chatRoomUser.chatroom);
+            setfilteredChatRooms(chatRooms);
+            console.log(chatRooms);
             setChatRooms(chatRooms);
         };
         fetchChatRooms();
@@ -64,11 +66,40 @@ const Messages = () => {
     const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() =>{
-      const newChatRooms = chatRooms.filter(room =>
-        room.Chatter.toLowerCase()
-        .includes(searchTerm.toLowerCase()),
-        );
-        setChatRooms(newChatRooms)
+      const filterChatrooms = async () =>{
+        const userData = await Auth.currentAuthenticatedUser();
+        var newChatRooms1 = chatRooms.filter(room =>
+          room.Chatters[1].toLowerCase()
+          .includes(searchTerm.toLowerCase()),
+          );
+  
+        var newChatRooms2 = chatRooms.filter(room =>
+          room.Chatters[0].toLowerCase()
+          .includes(searchTerm.toLowerCase()),
+          );
+            const newChatRooms3 =[]
+
+            for(let i=0; i<newChatRooms1.length; i++){
+              if(newChatRooms1[i].Chatters[1] != userData.attributes.name){
+                newChatRooms3.push(newChatRooms1[i]);
+              }
+
+            }
+            for(let j=0; j<newChatRooms2.length; j++){
+              if(newChatRooms2[j].Chatters[0] != userData.attributes.name){
+                newChatRooms3.push(newChatRooms2[j]);
+              }
+            }
+            const newChatRooms4 = Array.from(new Set(newChatRooms3));
+  
+        /*const newChatRooms = chatRooms.filter(room =>
+          room.Chatters[0].toLowerCase()
+          .includes(searchTerm.toLowerCase()),
+          );*/
+  
+          setfilteredChatRooms(newChatRooms4)
+      }
+      filterChatrooms();
     }, [searchTerm])
 
     const navigation = useNavigation(); 
@@ -129,7 +160,7 @@ const Messages = () => {
         </View>
         <FlatList
             //ListHeaderComponent={renderHeader}
-            data={chatRooms}
+            data={filteredChatRooms}
             renderItem={({item}) => <ChatRoomItem chatRoom={item} />}
         />
         <NewMessageButton/>
