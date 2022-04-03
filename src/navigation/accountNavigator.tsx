@@ -15,7 +15,7 @@ function ProfileNavigation() {
                 }}></profileStack.Screen>
 
             
-            <profileStack.Screen name="Profile" 
+            <profileStack.Screen name="ProfileScreen" 
                 component={Profile} options = {{
                     headerTitle: ''
                 }}></profileStack.Screen>
