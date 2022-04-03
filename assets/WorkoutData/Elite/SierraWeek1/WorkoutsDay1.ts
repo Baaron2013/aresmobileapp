@@ -29,12 +29,6 @@ export default [{
 
 
   core: [{
-    name: '.',
-    description: '2-3x thru',
-  }, {    
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '2-3x thru',
-  }, {
     name: 'HLR Knee To Opposite Elbow',
     description: '8-12',
   }, {
@@ -57,11 +51,11 @@ export default [{
     description: '6/side',
   }, {
     name: '.',
+    description: '2-3x thru',
+  }, {
+    name: '.',
     description: '3-4x thru',
-  }, {    
-    name: 'PLACEHOLDER -DO NOT DELETE',
-    description: '3-4x thru',
-  },
+  }
 ],
 
 
@@ -123,28 +117,49 @@ export default [{
     percentages: .30
   }, {
     name: 'Squat',
-    reps: ['2x20'],
-    percentages: [.50]
+    description: '2x20',
+    percentages: .50
   }, {
     name: 'Front Sqaut',
-    reps: ['2x20'],
-    percentages: [.40]
+    description: '2x20',
+    percentages: .40
   }, {
     name: 'DB Squat',
-    reps: ['2x20'],
-    percentages: [.15]
+    description: '2x20',
+    percentages: .15
   }, {
     name: 'Pit Shark Squat',
-    reps: ['2x20'],
-    percentages: [.63]
+    description: '2x20',
+    percentages: .63
   }, {
     name: 'Bulgarian Squat',
-    reps: ['2x20'],
-    percentages: [.13]
+    description: '2x20',
+    percentages: .13
   }, {
     name: 'Rack Bulgarian Squat w Active Foot',
-    reps: ['2x20'],
-    percentages: [.08]
-  }, 
+    description: '2x20',
+    percentages: .08
+  }, {
+    name: 'DBO 3-Complex',
+    description: '5 - try center mass kb \n-upright row to alternate rotating press - bent over lat raise - pronating press - lat raise -elbows in press',
+  }, {
+    name: 'DBO-2 Complex',
+    description: '5 - try center mass kb \n-upright row to alternate rotating press - bent over lat raise - pronating press - lat raise -elbows in press',
+  }, {
+    name: 'DB Y and Rotating Press',
+    description: '5 - try center mass kb \n-upright row to alternate rotating press - bent over lat raise - pronating press - lat raise -elbows in press',
+  }, {
+    name: 'Outside Grip Pullup (weighted)',
+    description: 'x5, work to 5 rep max - chest to bar',
+  }, {
+    name: 'Reverse Back Extension',
+    description: '10',
+  }, {
+    name: 'Hyper Ham',
+    description: '10',
+  }, {
+    name: 'Iso Hyper Ham',
+    description: '10',
+  }
 ],
 }]

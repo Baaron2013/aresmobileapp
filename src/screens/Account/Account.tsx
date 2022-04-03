@@ -480,7 +480,7 @@ const styles = StyleSheet.create({
     },
     mylog:{
         backgroundColor: '#D2E5F8',
-        width: Platform.OS === 'ios' ? 345 : 320,
+        //width: Platform.OS === 'ios' ? 345 : 320,
         height: 250,
         marginLeft: Platform.OS === 'ios' ? 35 : 10, 
         marginRight: Platform.OS === 'ios' ? 35 : 10, 

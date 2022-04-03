@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Chatroom, ChatroomUser} from '../../models'
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 import RangerItem from '../../component/RangerItem'
-import {DataStore, Predicates} from '@aws-amplify/datastore';
+import {DataStore, Predicates, SortDirection} from '@aws-amplify/datastore';
 import {User} from '../../models';
 import Popup from '../PopUp/PopUp'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,18 +29,27 @@ const CoachHome = () => {
   const [filteredContacts, setFilteredContacts] = useState<User[]>([])
   const [isLoading, setIsLoading] = useState(true)
     
+    useEffect(() =>{
+        const subscription = DataStore.observeQuery(
+          User, 
+          c => c.type('eq', 'Ranger'), 
+          {
+            sort: s => s.name(SortDirection.ASCENDING)
+          }
+        ).subscribe(snapshot =>{
+            //console.log(msg.model, msg.opType, msg.element);
+            const { items, isSynced } = snapshot;
+            setContacts(items);
+            setFilteredContacts(items);
+            setIsLoading(false)
+            
+        });
+        return () => subscription.unsubscribe();
+    }, [isFocused]);
 
-  useEffect(() =>{
-    const subscription = DataStore.observe(User, (c) => c.type('eq', 'Ranger')).subscribe(user =>{
-      //console.log(msg.model, msg.opType, msg.element);
-      if(user.model == User){
-        setContacts(existingContacts => [user.element,...existingContacts]);
-        setFilteredContacts(existingContacts => [user.element,...existingContacts]);
-        setIsLoading(false)
-      }
-    })
-    return () => subscription.unsubscribe();
-  }, []);
+    useEffect(() =>{
+      setSearchTerm('')
+  }, [isFocused]);
       
     useEffect(() =>{
       const newContacts = contacts.filter(contact =>
@@ -57,51 +66,40 @@ const CoachHome = () => {
   
 
     return (
-      <SafeAreaView>
-      <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height" } keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -150}>
-      <ScrollView contentContainerStyle={{height: '100%'}}>
-      <View style={styles.popup}>
-        <Popup />
-      </View>
-      <View style={styles.page}>
-        <View style={{backgroundColor: '#bfdbf7'}}><Pressable style={styles.icon}
-            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <RNIcon name="menu" color={'black'} size={25} />
-          </Pressable>
-        </View>
+      <>
+      
+      {isLoading === false ?
+      <><View style={styles.popup}>
+            <Popup />
+          </View><View style={styles.page}>
+              <Text style={styles.headerTitle}>Rangers: </Text>
 
-         <Text style={styles.headerTitle}>Rangers: </Text>
-         
-        <View style={styles.search}>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="always"
-            value={searchTerm}
-            onChangeText={setSearchTerm}
-            placeholder="Search..."
-            style={styles.searchText}
-            placeholderTextColor="white" />
-        </View>
-          {/* <Button
-            onPress={onPress}
-            title="Clickable Placeholder for Ranger Items"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-            /> */}
-        {
-          isLoading === false ?
-          <FlatList
-            //ListHeaderComponent={renderHeader()}
-            data={filteredContacts}
-            renderItem={({ item }) => <RangerItem chatRoom={item} />} /> :
-            <ActivityIndicator />
+              <View style={styles.search}>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  clearButtonMode="always"
+                  value={searchTerm}
+                  onChangeText={setSearchTerm}
+                  placeholder="Search..."
+                  style={styles.searchText}
+                  placeholderTextColor="white" />
+              </View>
+              <FlatList
+                //ListHeaderComponent={renderHeader()}
+                data={filteredContacts}
+                renderItem={({ item }) => <RangerItem chatRoom={item} />} />
 
-        }    
-      </View>
-      </ScrollView>
-      </KeyboardAvoidingView>
-      </SafeAreaView>
+
+
+
+
+            </View></> :
+        <View style={{flex: 1, justifyContent: "center"}}>
+            <ActivityIndicator size="large" color="#037ffc"/>
+        </View>
+         }
+        </>
     )
 }
 
