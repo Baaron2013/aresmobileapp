@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Chatroom, ChatroomUser} from '../../models'
 import chatRoomsData from '../../../assets/dummy-data/ChatRooms';
 import RangerItem from '../../component/RangerItem'
-import {DataStore, Predicates} from '@aws-amplify/datastore';
+import {DataStore, Predicates, SortDirection} from '@aws-amplify/datastore';
 import {User} from '../../models';
 import Popup from '../PopUp/PopUp'
 import RangerRoomScreen from '../RangerRoomScreen'
@@ -28,37 +28,27 @@ const CoachHome = () => {
     const [filteredContacts, setFilteredContacts] = useState<User[]>([])
     const [isLoading, setIsLoading] = useState(true)
     
-      useEffect(() =>{
-        const subscription = DataStore.observe(User, (c) => c.type('eq', 'Ranger')).subscribe(user =>{
+    useEffect(() =>{
+        const subscription = DataStore.observeQuery(
+          User, 
+          c => c.type('eq', 'Ranger'), 
+          {
+            sort: s => s.name(SortDirection.ASCENDING)
+          }
+        ).subscribe(snapshot =>{
             //console.log(msg.model, msg.opType, msg.element);
-            if(user.model == User){
-                setContacts(existingContacts => [user.element,...existingContacts]);
-                setFilteredContacts(existingContacts => [user.element,...existingContacts]);
-                setIsLoading(false)
-            }
+            const { items, isSynced } = snapshot;
+            setContacts(items);
+            setFilteredContacts(items);
+            setIsLoading(false)
+            
         });
         return () => subscription.unsubscribe();
-    }, []);
+    }, [isFocused]);
 
-    const fetchContacts = async () =>{
-      console.log('starting fetching of contacts')
-      //DataStore.query(User).then(setContacts);
-      const myContacts = await DataStore.query(User, (c) => c.type('eq', 'Ranger'));
-      console.log(myContacts)
-
-      const newContacts = myContacts.sort(function(a, b) {
-        if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-        if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-        return 0;
-       })
-      console.log(newContacts)
-      setContacts(newContacts)
-      setFilteredContacts(newContacts)
-}
-
-useEffect(() =>{
-  fetchContacts();
-}, [isFocused])
+    useEffect(() =>{
+      setSearchTerm('')
+  }, [isFocused]);
       
       useEffect(() =>{
         const newContacts = contacts.filter(contact =>
@@ -76,32 +66,40 @@ useEffect(() =>{
   
 
     return (
+      <>
+      
+      {isLoading === false ?
       <><View style={styles.popup}>
-        <Popup />
-      </View><View style={styles.page}>
-          <Text style={styles.headerTitle}>Rangers: </Text>
+            <Popup />
+          </View><View style={styles.page}>
+              <Text style={styles.headerTitle}>Rangers: </Text>
 
-          <View style={styles.search}>
-            <TextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              clearButtonMode="always"
-              value={searchTerm}
-              onChangeText={setSearchTerm}
-              placeholder="Search..."
-              style={styles.searchText}
-              placeholderTextColor="white" />
-          </View>
-          <FlatList
-            //ListHeaderComponent={renderHeader()}
-            data={filteredContacts}
-            renderItem={({ item }) => <RangerItem chatRoom={item} />} />
-
-
+              <View style={styles.search}>
+                <TextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  clearButtonMode="always"
+                  value={searchTerm}
+                  onChangeText={setSearchTerm}
+                  placeholder="Search..."
+                  style={styles.searchText}
+                  placeholderTextColor="white" />
+              </View>
+              <FlatList
+                //ListHeaderComponent={renderHeader()}
+                data={filteredContacts}
+                renderItem={({ item }) => <RangerItem chatRoom={item} />} />
 
 
 
-        </View></>
+
+
+            </View></> :
+        <View style={{flex: 1, justifyContent: "center"}}>
+            <ActivityIndicator size="large" color="#037ffc"/>
+        </View>
+         }
+        </>
     )
 }
 

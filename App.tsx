@@ -61,12 +61,10 @@ if (Platform.OS === 'android') {
     };
 }
 
-const getUsers = async () => {
-  
-}
 
 const App = () => {
     const [loggedInUsers, setLoggedInUsers] = useState<UserModel[]>([]);
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
     // Create listener that will stop observing the model once the sync process is done
     const removeListener = Hub.listen("datastore", async (capsule) => {

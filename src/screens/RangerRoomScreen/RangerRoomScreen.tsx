@@ -10,9 +10,9 @@ import { Dropdown } from 'react-native-element-dropdown';
 import Plans from './Elite/WeeklyViewElite';
 import { User , RangerMetrics, WeeksCompleted, Workouts, TrainingLogs} from "../../models"
 import { CalculatorResults as Calculator } from "../../models"
-import { AWS_CLOUDWATCH_MAX_EVENT_SIZE } from '@aws-amplify/core'
+import { AWS_CLOUDWATCH_MAX_EVENT_SIZE, ConsoleLogger } from '@aws-amplify/core'
 import { greaterThan } from 'react-native-reanimated'
-import { Table, Row, Rows, Col, Cell } from 'react-native-table-component';
+import { Table, Row, Rows, Col, Cell, TableWrapper } from 'react-native-table-component';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import moment from "moment";
 //import { styles } from 'react-native-element-dropdown/src/TextInput/styles'
@@ -122,7 +122,8 @@ const RangerRoomScreen = () => {
 
       const programData ={
           tableHead: ["Program", "Level", "Week"],
-          tableData: []
+          tableData: [],
+          widthArr: [100, 100, 100]
               
      }
      for(let j=0; j<weeksCompleted.length; j++){
@@ -138,6 +139,81 @@ const RangerRoomScreen = () => {
     workoutData.tableData.push([workouts[l].program, workouts[l].level, workouts[l].week, workouts[l].day, workouts[l].workoutName])
 }
 console.log(state);
+
+
+    const setBackGroundColor = (value) => {
+
+        //set background color for weight column
+        if (initialWeight != 0 && initialWeight !== undefined) {
+            console.log(value)
+            const range1 = (initialWeight * .06)
+            const range2 =  (initialWeight * .05)
+            const range3 =  (initialWeight * .03)
+            console.log('range1' + range1)
+            if (value >= initialWeight + range1 || value <= initialWeight - range1){
+                console.log('this is my value' + value)
+                return {backgroundColor: 'red', width: 120}
+            }
+            if (value >= initialWeight + range2 || value <= initialWeight - range2){
+                return {backgroundColor: 'yellow', width: 120}
+            }
+            if (value >= initialWeight + range3 || value <= initialWeight - range3){
+                return {backgroundColor: 'yellow', width: 120}
+            }
+            if (value < initialWeight + range3 || value < initialWeight - range3){
+                return {backgroundColor: 'green', width: 120}
+            }
+        }
+
+        //set background color for sleep
+        if (value === '8+'){
+            return {backgroundColor: 'green', width: 120}
+        }
+        if (value === '6-8'){
+            return {backgroundColor: 'yellow', width: 120}
+        }
+        if (value === '<6'){
+            return {backgroundColor: 'red', width: 120}
+        }
+
+        //set background color for training willingness
+        if (value === 'High'){
+            return {backgroundColor: 'green', width: 120}
+        }
+        if (value === 'Average'){
+            return {backgroundColor: 'yellow', width: 120}
+        }
+        if (value === 'Low'){
+            return {backgroundColor: 'red', width: 120}
+        }
+        
+        //set background color for appetite
+        if (value === 'Good'){
+            return {backgroundColor: 'green', width: 120}
+        }
+        if (value === 'Normal'){
+            return {backgroundColor: 'yellow', width: 120}
+        }
+        if (value === 'Poor'){
+            return {backgroundColor: 'red', width: 120}
+        }
+
+        //set background color for soreness
+        if (value === 'None'){
+            return {backgroundColor: 'green', width: 120}
+        }
+        if (value === 'Mild'){
+            return {backgroundColor: 'yellow', width: 120}
+        }
+        if (value === 'Moderate'){
+            return {backgroundColor: 'red', width: 120}
+        }
+
+        //catch to set proper width of cell
+        return {width: 120};
+
+        
+    }
     
     
     return (
@@ -146,30 +222,49 @@ console.log(state);
             <View style={styles.head}>
                 <Text style={styles.rangerName}>{route.params.ranger.name}</Text>
             </View>
+            <ScrollView  horizontal={true} style={{marginTop: -1, overflow: "scroll"}}>
             <View style={styles.stats}>
                 <Text style={styles.statsTitle}>Daily Stats</Text>
                 <Text style={styles.initialWeight}>Initial Weight {initialWeight}</Text>
                 <Table borderStyle={{ borderWidth: 2, borderColor: 'black' }}>
-                    <Row data={state.tableHead} style={styles.rowHead} textStyle={styles.textHead} />
-                    <Rows data={state.tableData} /*style ={state.tableData[0][1] == 120? {backgroundColor: 'red'} : null}*/ textStyle={styles.text} />
-
+                    <Row data={state.tableHead} style={styles.rowHead} textStyle={styles.textHead} widthArr={[120, 120, 120, 120, 120, 120]}/>
+                    {state.tableData.map((rowData:any, index) => (
+                    <TableWrapper key={index} style={{flexDirection: "row", flex: 1}}>
+                        {rowData.map((cellData, cellIndex) => (
+                        <Cell
+                         key={cellIndex}
+                         data={cellData}
+                         style={setBackGroundColor(cellData)}
+                         textStyle={{margin: 6}}
+                         
+                        />
+                    ))}
+                 </TableWrapper>
+                ))}
                 </Table>
-            </View>    
+            </View>
+            </ScrollView>
 
             <View style={styles.programs}>
-                <Text style={styles.tableDescription}>Last 7 Weeks Completed</Text>
-                <Table style ={{paddingBottom: 50}} borderStyle={{ borderWidth: 0, borderColor: 'black'}}>
-                    <Row data={programData.tableHead} textStyle={styles.programHead} />
-                    <Rows data={programData.tableData}  textStyle={styles.programDataText} />
+            <Text style={styles.tableDescription}>Last 7 Weeks Completed</Text>
+            </View>
+            
+            <ScrollView horizontal={true}>
+            <View style={styles.programs}>
+                
+                <Table style ={{paddingBottom: 50}} borderStyle={{ borderWidth: 0, borderColor: 'black' }}>
+                    <Row data={programData.tableHead} textStyle={styles.programHead} widthArr={[110, 110, 110]}/>
+                    <Rows data={programData.tableData}  textStyle={styles.programDataText} widthArr={[110, 110, 110]}/>
                 </Table>
                 <Text style={styles.tableDescription}>Last 7 Workouts Completed</Text>
                 <Table style ={{paddingBottom: 50}} borderStyle={{ borderWidth: 0, borderColor: 'black' }}>
-                    <Row data={workoutData.tableHead} textStyle={styles.programHead} />
-                    <Rows data={workoutData.tableData}  textStyle={styles.programDataText} />
+                    <Row data={workoutData.tableHead} textStyle={styles.programHead}  widthArr={[70, 70, 70, 70, 200]}/>
+                    <Rows data={workoutData.tableData} textStyle={styles.programDataText} widthArr={[70, 70, 70, 70, 200]}/>
                 </Table>
                 
 
             </View>
+            </ScrollView>
             <View style={styles.logs}>
                 
                 <View style={styles.logTitle}>
@@ -302,6 +397,7 @@ const styles = StyleSheet.create({
     },
     stats: {
         margin: 8,
+        flex: 1
         
         
     },
@@ -332,7 +428,7 @@ const styles = StyleSheet.create({
         
     },
     programs: {
-        margin: 8
+        margin: 8,
     },
     programHead: {
         flexDirection: 'row',
