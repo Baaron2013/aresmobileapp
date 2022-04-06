@@ -152,7 +152,7 @@ console.log(state);
             console.log('range1' + range1)
             if (value >= initialWeight + range1 || value <= initialWeight - range1){
                 console.log('this is my value' + value)
-                return {backgroundColor: 'red', width: 120}
+                return {backgroundColor: 'red', width: 120, }
             }
             if (value >= initialWeight + range2 || value <= initialWeight - range2){
                 return {backgroundColor: 'yellow', width: 120}
@@ -161,41 +161,41 @@ console.log(state);
                 return {backgroundColor: 'yellow', width: 120}
             }
             if (value < initialWeight + range3 || value < initialWeight - range3){
-                return {backgroundColor: 'green', width: 120}
+                return {backgroundColor: 'green', width: 120, }
             }
         }
 
         //set background color for sleep
         if (value === '8+'){
-            return {backgroundColor: 'green', width: 120}
+            return {backgroundColor: 'green', width: 120, }
         }
         if (value === '6-8'){
             return {backgroundColor: 'yellow', width: 120}
         }
         if (value === '<6'){
-            return {backgroundColor: 'red', width: 120}
+            return {backgroundColor: 'red', width: 120, }
         }
 
         //set background color for training willingness
         if (value === 'High'){
-            return {backgroundColor: 'green', width: 120}
+            return {backgroundColor: 'green', width: 120, }
         }
         if (value === 'Average'){
             return {backgroundColor: 'yellow', width: 120}
         }
         if (value === 'Low'){
-            return {backgroundColor: 'red', width: 120}
+            return {backgroundColor: 'red', width: 120, }
         }
         
         //set background color for appetite
         if (value === 'Good'){
-            return {backgroundColor: 'green', width: 120}
+            return {backgroundColor: 'green', width: 120, }
         }
         if (value === 'Normal'){
             return {backgroundColor: 'yellow', width: 120}
         }
         if (value === 'Poor'){
-            return {backgroundColor: 'red', width: 120}
+            return {backgroundColor: 'red', width: 120, }
         }
 
         //set background color for soreness
@@ -211,6 +211,80 @@ console.log(state);
 
         //catch to set proper width of cell
         return {width: 120};
+
+        
+    }
+    
+    const setTextColor = (value) => {
+
+        //set background color for weight column
+        if (initialWeight != 0 && initialWeight !== undefined) {
+            console.log(value)
+            const range1 = (initialWeight * .06)
+            const range2 =  (initialWeight * .05)
+            const range3 =  (initialWeight * .03)
+            console.log('range1' + range1)
+            if (value >= initialWeight + range1 || value <= initialWeight - range1){
+                console.log('this is my value' + value)
+                return {color:'white', margin: 6}
+            }
+            if (value >= initialWeight + range2 || value <= initialWeight - range2){
+                return {color:'black', margin: 6}
+            }
+            if (value >= initialWeight + range3 || value <= initialWeight - range3){
+                return {color:'black', margin: 6}
+            }
+            if (value < initialWeight + range3 || value < initialWeight - range3){
+                return {color:'white', margin: 6}
+            }
+        }
+
+        //set background color for sleep
+        if (value === '8+'){
+            return {color:'white', margin: 6}
+        }
+        if (value === '6-8'){
+            return {color:'black', margin: 6}
+        }
+        if (value === '<6'){
+            return {color:'white', margin: 6}
+        }
+
+        //set background color for training willingness
+        if (value === 'High'){
+            return {color:'white', margin: 6}
+        }
+        if (value === 'Average'){
+            return {color:'black', margin: 6}
+        }
+        if (value === 'Low'){
+            return {color:'white', margin: 6}
+        }
+        
+        //set background color for appetite
+        if (value === 'Good'){
+            return {color:'white', margin: 6}
+        }
+        if (value === 'Normal'){
+            return {color:'black', margin: 6}
+        }
+        if (value === 'Poor'){
+            return {color:'white', margin: 6}
+        }
+
+        //set background color for soreness
+        if (value === 'None'){
+            return { color:'white', margin: 6}
+        }
+        if (value === 'Mild'){
+            return {color:'black', margin: 6}
+        }
+        if (value === 'Moderate'){
+            return {color:'white', margin: 6}
+        }
+
+        //catch to set proper width of cell
+        return {color:'black', margin: 6};
 
         
     }
@@ -235,7 +309,7 @@ console.log(state);
                          key={cellIndex}
                          data={cellData}
                          style={setBackGroundColor(cellData)}
-                         textStyle={{margin: 6}}
+                         textStyle={setTextColor(cellData)}
                          
                         />
                     ))}
@@ -258,8 +332,8 @@ console.log(state);
                 </Table>
                 <Text style={styles.tableDescription}>Last 7 Workouts Completed</Text>
                 <Table style ={{paddingBottom: 50}} borderStyle={{ borderWidth: 0, borderColor: 'black' }}>
-                    <Row data={workoutData.tableHead} textStyle={styles.programHead}  widthArr={[70, 70, 70, 70, 200]}/>
-                    <Rows data={workoutData.tableData} textStyle={styles.programDataText} widthArr={[70, 70, 70, 70, 200]}/>
+                    <Row data={workoutData.tableHead} textStyle={styles.programHead}  widthArr={[80, 70, 70, 70, 200]}/>
+                    <Rows data={workoutData.tableData} textStyle={styles.programDataText} widthArr={[80, 70, 70, 70, 200]}/>
                 </Table>
                 
 

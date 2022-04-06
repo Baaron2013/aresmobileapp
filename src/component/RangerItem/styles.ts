@@ -22,9 +22,8 @@ const styles = StyleSheet.create({
         
     },
     name: {
-        fontWeight: 'bold',
-        fontSize: 24,
-        color: '#185A74'
+        fontSize: 20,
+        color: '#022B3A'
     
     },
     /* badgeContainer: {

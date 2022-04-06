@@ -1,16 +1,20 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeTabsCoach from './coachTabNavigation';
 import { Auth, Hub, Storage, DataStore } from 'aws-amplify'
-import { useNavigation } from '@react-navigation/native'
-import { ImageBackground, StyleSheet } from 'react-native';
+import { useNavigation, useIsFocused } from '@react-navigation/native'
+import { ImageBackground, StyleSheet, TextInput, View } from 'react-native';
 
 import { Divider,Drawer, DrawerItem, DrawerGroup, Icon} from '@ui-kitten/components';
 import { PlusIcon} from '../../assets/icons.js';
 
-  
+
+
+
 const { Navigator, Screen } = createDrawerNavigator();
+
+
 //sign user out and clear datastore
 const signOut = async () => {
   try {
@@ -42,6 +46,9 @@ const ForwardIcon = (props) => (
 );
 const StarIcon = (props) => (
   <Icon {...props} name='star'/>
+);
+const GearIcon = (props) => (
+  <Icon {...props} name='settings-outline'/>
 );
 
 
@@ -82,7 +89,7 @@ const DrawerContent = () => {
       </DrawerGroup>
       <DrawerItem title='Brain' accessoryRight={ForwardIcon} onPress={() => navigation.navigate
         ('HomeTabsCoach', {screen: 'HomeCoach', params: {screen: 'Brain'}})} />
-        
+
       <DrawerItem title = 'Account Settings' accessoryLeft={GearIcon} onPress={() => navigation.navigate ('Profile', {screen: 'MainProfile', params: {screen: 'ProfileScreen'}})}/>
       <DrawerItem title = 'Sign Out' accessoryLeft={PersonIcon} onPress={signOut}/>
 
@@ -96,6 +103,21 @@ const styles = StyleSheet.create({
     height: 128,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  searchText: {
+    backgroundColor: '#022b3a', 
+    paddingHorizontal: 20, 
+    color: 'white'
+  },
+  search: {
+    backgroundColor: '#022b3a',
+    padding: 8,
+    marginVertical: 10,
+    borderRadius: 19,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    borderWidth: 2,
+    margin: 10,
   },
 });
 

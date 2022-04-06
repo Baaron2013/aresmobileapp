@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeTabsRanger from './rangerTabNavigator';
 import { Auth, Hub, Storage, DataStore } from 'aws-amplify'
 import { useNavigation } from '@react-navigation/native'
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, TextInput } from 'react-native';
 
 import { Divider,Drawer, DrawerItem, DrawerGroup, Icon} from '@ui-kitten/components';
 import { PlusIcon} from '../../assets/icons.js';
@@ -56,6 +56,7 @@ const DrawerContent = () => {
   <Drawer
     selectedIndex={selectedIndex}
     onSelect={index => setSelectedIndex(index)}>
+      <TextInput></TextInput>
       <DrawerItem title='Philosophy' accessoryRight={ForwardIcon} onPress={() => navigation.navigate('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'Philosophy'}})}/>
       <DrawerItem title='Injury Prevention' accessoryRight={ForwardIcon} onPress={() => navigation.navigate('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'InjuryPrevention'}})}/>
       <DrawerItem title='Core' accessoryRight={ForwardIcon} onPress={() => navigation.navigate

@@ -14,56 +14,62 @@ import img4half from '../../../assets/SplashPageImages/Philosophy/philosphyimage
 import img4half2 from '../../../assets/SplashPageImages/Philosophy/philosphyimage4-2.jpg'
 import img5 from '../../../assets/SplashPageImages/Philosophy/philosphyimage5.jpg'
 import { ScrollView } from 'react-native-gesture-handler'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SplashPagePhilosophy = () => {
-//    const navigation = useNavigation(); 
+const navigation = useNavigation(); 
 
     return (
-        <ScrollView>
-        <View style={styles.root}>                
-            <Text style={styles.title}>PHILOSOPHY</Text> 
-            <View style={styles.redTextContainer}>
-                <Text style={styles.redText}>20% will be injured on an airborne jump  -Army </Text> 
-                <Text style={styles.redText}>47% of all injuries occur during individual PT   -Thor3</Text>
-                <Text style={styles.redText}>Operators 2x are more likely to get hurt training on their own than jumping out of a plane</Text>
-                <Text style={styles.redText}>0.2% - the injury rate of those who work with their coaching staff across SOCOM</Text>
-                <Text style={styles.redText}> -DON'T BE A STATISTIC, TRAIN SMARTER</Text>
-                <Text style={[styles.redText, {fontStyle: 'italic'}, {textDecorationLine: 'underline'}]}>How To Use The Ares-HP System</Text>
-            </View>
 
-            <View style={styles.imageContainer}>
-                <Image style={[styles.image1]} source={img1} />
-            </View>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image2} source={img2} />
-            </View>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
+                <View style={styles.root}>
+                    <Text style={styles.title}>PHILOSOPHY</Text>
+                    <View style={styles.redTextContainer}>
+                        <Text style={styles.redText}>20% will be injured on an airborne jump  -Army </Text>
+                        <Text style={styles.redText}>47% of all injuries occur during individual PT   -Thor3</Text>
+                        <Text style={styles.redText}>Operators 2x are more likely to get hurt training on their own than jumping out of a plane</Text>
+                        <Text style={styles.redText}>0.2% - the injury rate of those who work with their coaching staff across SOCOM</Text>
+                        <Text style={styles.redText}> -DON'T BE A STATISTIC, TRAIN SMARTER</Text>
+                        <Text style={[styles.redText, { fontStyle: 'italic' }, { textDecorationLine: 'underline' }]}>How To Use The Ares-HP System</Text>
+                    </View>
 
-            <View style={styles.textContainer}>
-                <Text style={[styles.redText, {fontStyle: 'italic'}, {textDecorationLine: 'underline'}]}>Eliminate the Guesswork</Text>
-                <Text style={styles.textStyle}>
-                Our methodogy combines the latest scientific research with our decades of experience making the best better. You already work hard, now work smarter.
-                </Text>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image3} source={img3} />
-            </View>
-                <Text style={styles.textStyle}>
-                    Be Stronger with our training philosophy which encompases the Conjugate  and Post Activation Potentiation Systems based on the Super Compensation Model utilizing Segment Training and Olympic Lifting Methodology.  More total work will be done at a higher average intensity each day. Move more weight with quality movements (quality over quantity) and get stronger.
-                    {"\n\n"}Be Powerful - In order to be explosive you must train explosively.
-                    {"\n\n"}Increase Work Capacity - Have the ability to do more work in less time with a shorter recovery period while maintaining high quality movements. Be a machine.
-                    {"\n\n"}Train for the physical demands of your job. We are not Olympic Lifters, Powerlifters Sprinters or Marathon Runners. We utilize the most applicable parts of each area to make you a complete athlete giving you a broad base of elite level fitness while reducing your potential for injury.
-                    {"\n\n"}All of our programs have systematic progressions to improve your strength, speed, power and endurance at the same time. You will learn a variety of movements, lifts and techniques that will challenge you and make you a better all-around athlete.
-                    {"\n\n"}Any workout can make you tired, GOOD PROGRAMMING WILL GET YOU BETTER!
-                    {"\n\n"}During a Jorts Cycle, there are 31 possible training sessions (days with no training on the calendar) if everything goes according to plan. The average session is 30 minutes. On average, you train for 930 minutes between trips. Is 930 minutes of randomness preparing you for for the most complex operations across all types of terrain at a moments notice?
-                    {"\n\n"}Is this a good use of your limited time? {"\n"} </Text>
-                <Image style={[styles.image4, ]} source={img4half} />
-                <Image style={[styles.image4, ]} source={img4half2} />
-                <Text style={styles.textStyle}>The day the enemy sets up a posing stage or bench press in the middle of the battlefield is the day we become big benchers!</Text>
-            </View>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image5} source={img5} />
-            </View>
-        </View>
-        </ScrollView>
+                    <View style={styles.imageContainer}>
+                        <Image style={[styles.image1]} source={img1} />
+                    </View>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image2} source={img2} />
+                    </View>
+
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.redText, { fontStyle: 'italic' }, { textDecorationLine: 'underline' }]}>Eliminate the Guesswork</Text>
+                        <Text style={styles.textStyle}>
+                            Our methodogy combines the latest scientific research with our decades of experience making the best better. You already work hard, now work smarter.
+                        </Text>
+                        <View style={styles.imageContainer}>
+                            <Image style={styles.image3} source={img3} />
+                        </View>
+                        <Text style={styles.textStyle}>
+                            Be Stronger with our training philosophy which encompases the Conjugate  and Post Activation Potentiation Systems based on the Super Compensation Model utilizing Segment Training and Olympic Lifting Methodology.  More total work will be done at a higher average intensity each day. Move more weight with quality movements (quality over quantity) and get stronger.
+                            {"\n\n"}Be Powerful - In order to be explosive you must train explosively.
+                            {"\n\n"}Increase Work Capacity - Have the ability to do more work in less time with a shorter recovery period while maintaining high quality movements. Be a machine.
+                            {"\n\n"}Train for the physical demands of your job. We are not Olympic Lifters, Powerlifters Sprinters or Marathon Runners. We utilize the most applicable parts of each area to make you a complete athlete giving you a broad base of elite level fitness while reducing your potential for injury.
+                            {"\n\n"}All of our programs have systematic progressions to improve your strength, speed, power and endurance at the same time. You will learn a variety of movements, lifts and techniques that will challenge you and make you a better all-around athlete.
+                            {"\n\n"}Any workout can make you tired, GOOD PROGRAMMING WILL GET YOU BETTER!
+                            {"\n\n"}During a Jorts Cycle, there are 31 possible training sessions (days with no training on the calendar) if everything goes according to plan. The average session is 30 minutes. On average, you train for 930 minutes between trips. Is 930 minutes of randomness preparing you for for the most complex operations across all types of terrain at a moments notice?
+                            {"\n\n"}Is this a good use of your limited time?{"\n"} </Text>
+                        <Image style={[styles.image4,]} source={img4half} />
+                        <Image style={[styles.image4,]} source={img4half2} />
+                        <Text style={styles.textStyle}>The day the enemy sets up a posing stage or bench press in the middle of the battlefield is the day we become big benchers!</Text>
+                    </View>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image5} source={img5} />
+                    </View>
+                </View>
+            </ScrollView></>
     )
 }
 
@@ -75,6 +81,11 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5
     },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
+    },
     backButton: {
         marginRight: 350,
         marginTop: 10,
@@ -84,7 +95,7 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: '800',
         color: '#022B3A',
-       },    
+    },    
     redText: {
         color: '#800000',
         fontSize: 15,
@@ -100,7 +111,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginTop: 10,
         fontWeight: 'bold',
-     },
+    },
     redTextContainer: {
         justifyContent: 'center',
         //margin: 10,
