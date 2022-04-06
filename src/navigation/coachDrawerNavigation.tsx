@@ -52,7 +52,6 @@ const GearIcon = (props) => (
 );
 
 
-
 const DrawerContent = () => {
   const navigation = useNavigation();
   const [selectedIndex, setSelectedIndex] = React.useState(null);

@@ -1,10 +1,10 @@
 /* import React from 'react' */
 import * as React from 'react';
 
-import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList} from 'react-native'
+import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList, ActivityIndicator} from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useIsFocused } from '@react-navigation/native'
 import { Auth, DataStore} from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import ChatRoomItem from '../../component/ChatRoomItem';
@@ -39,6 +39,9 @@ const Messages = () => {
 
     const [chatRooms, setChatRooms] = useState<Chatroom[]>([]);
     const [filteredChatRooms, setfilteredChatRooms] = useState<Chatroom[]>([]);
+    const [isLoading, setIsLoading] = useState(true)
+    const isFocused = useIsFocused();
+    
 
     /*useEffect(() =>{
       const subscription = DataStore.observe(Chatroom).subscribe(room =>{
@@ -57,11 +60,12 @@ const Messages = () => {
             .filter(chatRoomUser => chatRoomUser.user.id == userData.attributes.sub)
             .map(chatRoomUser => chatRoomUser.chatroom);
             setfilteredChatRooms(chatRooms);
-            console.log(chatRooms);
+            
             setChatRooms(chatRooms);
+            console.log(chatRooms);
         };
-        fetchChatRooms();
-    }, []);
+        fetchChatRooms().then(() => {setIsLoading(false)});
+    }, [isFocused]);
     
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -100,7 +104,7 @@ const Messages = () => {
           setfilteredChatRooms(newChatRooms4)
       }
       filterChatrooms();
-    }, [searchTerm])
+    }, [searchTerm, isFocused])
 
     const navigation = useNavigation(); 
 
@@ -159,12 +163,16 @@ const Messages = () => {
             style={{ backgroundColor: '#022b3a', paddingHorizontal: 20, color: 'white' }}
           />
         </View>
-        <FlatList
+        {isLoading === false ?
+          <><FlatList
             //ListHeaderComponent={renderHeader}
             data={filteredChatRooms}
-            renderItem={({item}) => <ChatRoomItem chatRoom={item} />}
-        />
-        <NewMessageButton/>
+            renderItem={({ item }) => <ChatRoomItem chatRoom={item} />} /><NewMessageButton /></> :
+          <View style={{flex: 1, justifyContent: "center"}}>
+            <ActivityIndicator size="large" color="#037ffc"/>
+          </View>
+        }
+        
     </View>
     )
 }

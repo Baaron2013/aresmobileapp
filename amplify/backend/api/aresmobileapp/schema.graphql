@@ -1,0 +1,84 @@
+type Chatroom @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  newMessages: Int!
+  LastMessage: Message @connection
+  Messages: [Message] @connection(keyName: "byChatroom", fields: ["id"])
+  ChatroomUsers: [ChatroomUser] @connection(keyName: "byChatroom", fields: ["id"])
+  Chatters: [String]
+}
+
+type Workouts @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  program: String
+  level: String
+  week: String
+  day: String
+  numOfCompletions: String
+  workoutName: String
+  weekCompleted: Boolean
+  userID: ID!
+}
+
+type WeeksCompleted @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  program: String
+  level: String
+  week: String
+  userID: ID!
+}
+
+type TrainingLogs @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  program: String
+  level: String
+  week: String
+  day: String
+  description: String
+  userID: ID!
+}
+
+type CalculatorResults @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  clean: Int
+  bench: Int
+  squat: Int
+  level: String
+  userID: ID!
+  levelID: Int
+}
+
+type Message @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) @key(name: "byChatroom", fields: ["chatroomID"]) {
+  id: ID!
+  content: String!
+  userID: ID!
+  chatroomID: ID!
+}
+
+type RangerMetrics @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  weight: Int
+  sleep: String
+  willingness: String
+  appetite: String
+  soreness: String
+  userID: ID!
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  email: String!
+  type: String!
+  imageUri: String
+  status: String
+  Messages: [Message] @connection(keyName: "byUser", fields: ["id"])
+  chatrooms: [ChatroomUser] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type ChatroomUser @model(queries: null) @key(name: "byChatroom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  chatroomID: ID!
+  userID: ID!
+  chatroom: Chatroom! @connection(fields: ["chatroomID"])
+  user: User! @connection(fields: ["userID"])
+}

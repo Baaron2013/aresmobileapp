@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, Image, View, StyleSheet, Pressable, Button, Alert, ActivityIndicator} from 'react-native';
 import { User, ChatroomUser, Message } from '../../models';
 import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Navigation from '../../navigation';
 import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons } from '@expo/vector-icons';
 import {useState, useEffect} from 'react';
@@ -20,6 +20,7 @@ export default function ChatRoomItem({chatRoom}){
     const [lastMessage, setLastMessage] = useState<Message | undefined>();
 
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
 
     useEffect (() => {
         const fetchUsers = async () => {
@@ -43,7 +44,8 @@ export default function ChatRoomItem({chatRoom}){
         }
         DataStore.query(Message, chatRoom.chatroomLastMessageId).then(setLastMessage);
         console.log(lastMessage);
-    }, [])
+        console.log('message ID ' + chatRoom.chatroomLastMessageId);
+    }, [chatRoom._lastChangedAt])
 
     const onPress = () => {
         
