@@ -71,7 +71,13 @@ const CoachHome = () => {
       {isLoading === false ?
       <><View style={styles.popup}>
             <Popup />
-          </View><View style={styles.page}>
+          </View>
+          <View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View>
+        <View style={styles.page}>
               <Text style={styles.headerTitle}>Rangers: </Text>
 
               <View style={styles.search}>
@@ -127,7 +133,7 @@ const styles = StyleSheet.create({
   headerTitle : {
     fontSize: 30,
     left: 13,
-    top: 15,
+    top: 10,
     paddingBottom: 20,
     color: '#1F7A8C',
     fontWeight: '700'

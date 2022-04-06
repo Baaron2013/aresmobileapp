@@ -268,7 +268,7 @@ const Account = () => {
             <><View style={styles.root}>
             <View>
                 <Pressable style={styles.icon}
-                    onPress={() => navigation.navigate('Profile')}>
+                    onPress={() => navigation.navigate('ProfileScreen')}>
                     <RNIcon name="cog" color={'black'} size={25} />
                 </Pressable>
             </View>

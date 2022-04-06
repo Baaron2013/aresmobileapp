@@ -43,7 +43,9 @@ const ForwardIcon = (props) => (
 const StarIcon = (props) => (
   <Icon {...props} name='star'/>
 );
-
+const GearIcon = (props) => (
+  <Icon {...props} name='settings-outline'/>
+);
 
 
 const DrawerContent = () => {
