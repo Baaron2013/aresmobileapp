@@ -49,7 +49,7 @@ const CoachHome = () => {
 
     useEffect(() =>{
       setSearchTerm('')
-  }, [isFocused]);
+    }, [isFocused]);
       
     useEffect(() =>{
       const newContacts = contacts.filter(contact =>
@@ -57,7 +57,7 @@ const CoachHome = () => {
         .includes(searchTerm.toLowerCase()),
       );
       setFilteredContacts(newContacts)
-    }, [searchTerm])
+    }, [searchTerm]);
 
     const onPress = () => {
       /* RangeringNavigation.navigate('RangerRoom'); */
@@ -70,16 +70,17 @@ const CoachHome = () => {
       
       {isLoading === false ?
       <><View style={styles.popup}>
-            <Popup />
-          </View>
-          <View><Pressable style={styles.icon}
+          <Popup />
+        </View>
+        
+        <View><Pressable style={styles.icon}
             onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
             <RNIcon name="menu" color={'black'} size={25} />
         </Pressable>
         </View>
-        <View style={styles.page}>
-              <Text style={styles.headerTitle}>Rangers: </Text>
 
+        <View style={styles.page}>
+              
               <View style={styles.search}>
                 <TextInput
                   autoCapitalize="none"
@@ -91,6 +92,7 @@ const CoachHome = () => {
                   style={styles.searchText}
                   placeholderTextColor="white" />
               </View>
+              <Text style={styles.headerTitle}>Rangers: </Text>
               <FlatList
                 //ListHeaderComponent={renderHeader()}
                 data={filteredContacts}
@@ -148,7 +150,8 @@ const styles = StyleSheet.create({
 
   page: {
     backgroundColor: '#bfdbf7',
-    flex: 1
+    flex: 1,
+    paddingLeft:10,
   },
 
   icon: {
@@ -165,7 +168,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: 'black',
     borderWidth: 2,
-    margin: 10,
+    margin: 15,
   },
 
   searchText: {

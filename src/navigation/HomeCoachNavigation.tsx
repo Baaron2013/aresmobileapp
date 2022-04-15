@@ -87,7 +87,9 @@ function HomeNavigation() {
             <homeStack.Screen name="Under24" component={Under24} options = {{
                     header: () => null
                 }}></homeStack.Screen>
-            <homeStack.Screen name="RangerRoomScreen" component={RangerRoomScreen} options={({route}) => ({title: route.params.title})}></homeStack.Screen>    
+            <homeStack.Screen name="RangerRoomScreen" component={RangerRoomScreen} options = {{
+                    header: () => null
+                }}></homeStack.Screen>    
         </homeStack.Navigator>
 
     )
