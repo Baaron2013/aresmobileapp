@@ -56,14 +56,14 @@ const DrawerContent = () => {
   <Drawer
     selectedIndex={selectedIndex}
     onSelect={index => setSelectedIndex(index)}>
-      <TextInput></TextInput>
+      
       <DrawerItem title='Philosophy' accessoryRight={ForwardIcon} onPress={() => navigation.navigate('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'Philosophy'}})}/>
       <DrawerItem title='Injury Prevention' accessoryRight={ForwardIcon} onPress={() => navigation.navigate('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'InjuryPrevention'}})}/>
       <DrawerItem title='Core' accessoryRight={ForwardIcon} onPress={() => navigation.navigate
         ('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'Core'}})}/>
       <DrawerItem title='Techniques' accessoryRight={ForwardIcon} onPress={() => navigation.navigate('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'Techniques'}})}/>
 
-      <DrawerItem title='Programs' accessoryRight={ForwardIcon}/>
+      <DrawerItem title='Programs' accessoryRight={ForwardIcon} onPress={() => navigation.navigate('HomeTabsRanger', {screen: 'Programs'})}/>
 
       <DrawerGroup title='Combat Conditioning' accessoryRight={PlusIcon}>
         <DrawerItem title='Combat Conditioning' accessoryRight={ForwardIcon} onPress={() => navigation.navigate ('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'CombatConditioning'}})}/>
@@ -86,7 +86,8 @@ const DrawerContent = () => {
       </DrawerGroup>
       <DrawerItem title='Brain' accessoryRight={ForwardIcon} onPress={() => navigation.navigate
         ('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'Brain'}})} />
-
+      <DrawerItem title='Combatives' accessoryRight={ForwardIcon} onPress={() => navigation.navigate
+        ('HomeTabsRanger', {screen: 'HomeRanger', params: {screen: 'Combatives'}})} />
       <DrawerItem title = 'Account Settings' accessoryLeft={GearIcon} onPress={() => navigation.navigate ('Profile', {screen: 'MainProfile', params: {screen: 'ProfileScreen'}})}/>
       <DrawerItem title = 'Sign Out' accessoryLeft={PersonIcon} onPress={signOut}/>
 

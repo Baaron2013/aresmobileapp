@@ -10,12 +10,17 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import img1 from '../../../assets/SplashPageImages/Brain/brain3.jpg'
 import img2 from '../../../assets/SplashPageImages/Brain/glasses.jpg'
 import { ScrollView } from 'react-native-gesture-handler'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SplashPageBrain = () => {
-//    const navigation = useNavigation(); 
+const navigation = useNavigation(); 
 
     return (
-        <ScrollView>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
 
         <View style={styles.root}>                
             <Text style={styles.title}>COGNITIVE PERFORMANCE</Text> 
@@ -52,7 +57,7 @@ const SplashPageBrain = () => {
                                                 meaghan.c.sullivan.ctr@socom.mil</Text>
             </View>
         </View>
-        </ScrollView>
+        </ScrollView></>
     )
 }
 
@@ -134,6 +139,11 @@ const styles = StyleSheet.create({
         height: 190,
         width: 260,
         marginBottom: 10,
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
     },
 })
 

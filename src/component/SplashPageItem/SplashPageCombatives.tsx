@@ -8,15 +8,20 @@ import Logo from '../../../assets/images/ares-login-logo.png'
 import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import img1 from '../../../assets/SplashPageImages/Combatives/combatpic.jpg'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 import { ScrollView } from 'react-native-gesture-handler'
 
 const SplashPageCombatives = () => {
-//    const navigation = useNavigation(); 
+const navigation = useNavigation(); 
 
     return (
-        <ScrollView>
+        <><View><Pressable style={styles.icon}
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+        <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
         <View style={styles.root}>                
             <Text style={styles.title}>75TH RANGER REGIMENT COMBATIVES</Text> 
             <View style={styles.textContainer}>
@@ -36,7 +41,7 @@ const SplashPageCombatives = () => {
                 </View>
             </View>
         </View>
-        </ScrollView>
+        </ScrollView></>
     )
 }
 
@@ -99,6 +104,11 @@ const styles = StyleSheet.create({
         height: 150,
         width: 320,
         borderRadius: 10,
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
     },
 })
 

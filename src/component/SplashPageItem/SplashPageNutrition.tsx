@@ -14,12 +14,18 @@ import img4 from '../../../assets/SplashPageImages/Nutrition/smokincar.jpg'
 import img5 from '../../../assets/SplashPageImages/Nutrition/food3.jpg'
 import img6 from '../../../assets/SplashPageImages/Nutrition/pn13.addplate.jpg'
 import { ScrollView } from 'react-native-gesture-handler'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const SplashPageNutrition = () => {
-//    const navigation = useNavigation(); 
+const navigation = useNavigation(); 
 
     return (
-        <ScrollView>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
         <View style={styles.root}>                
             <Text style={styles.title}>NUTRITION</Text> 
             <View style={styles.textContainer}>
@@ -60,7 +66,7 @@ const SplashPageNutrition = () => {
                 </View>  
             </View>
         </View>
-        </ScrollView>
+        </ScrollView></>
     )
 }
 
@@ -157,7 +163,12 @@ const styles = StyleSheet.create({
         marginTop: 50,
         fontWeight: 'bold',
         padding: 5,
-    }
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
+    },
 })
 
 export default SplashPageNutrition

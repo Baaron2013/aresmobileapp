@@ -9,12 +9,17 @@ import { DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import img1 from '../../../assets/SplashPageImages/CombatConditioning/cond2.jpg'
 import { ScrollView } from 'react-native-gesture-handler'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SplashPageCombatConditioning = () => {
-//    const navigation = useNavigation(); 
+const navigation = useNavigation(); 
 
     return (
-        <ScrollView>
+        <><View><Pressable style={styles.icon}
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+        <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
         <View style={styles.root}>                
             <Text style={styles.title}>PREPARE FOR THE COMBAT MISSION</Text> 
             <View style={styles.textContainer}>
@@ -38,7 +43,7 @@ const SplashPageCombatConditioning = () => {
                 {"\n\t"}-Tim Kennedy, retired UFC fighter and SOF Operator </Text>
             </View>
         </View>
-        </ScrollView>
+        </ScrollView></>
     )
 }
 
@@ -101,6 +106,11 @@ const styles = StyleSheet.create({
         height: 220,
         width: 320,
         // borderRadius: 15,
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
     },
 })
 

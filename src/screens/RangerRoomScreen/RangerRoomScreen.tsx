@@ -291,8 +291,8 @@ console.log(state);
     
     
     return (
-        <ScrollView>
         <View style={styles.container}>
+            <ScrollView>
             <View style={styles.head}>
                 <Text style={styles.rangerName}>{route.params.ranger.name}</Text>
             </View>
@@ -444,9 +444,8 @@ console.log(state);
 
 
             </View>
-
-        </View>
         </ScrollView>
+        </View>
     )
 }
 
@@ -455,8 +454,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#BFDBF7',
         flexDirection: 'column',
-        
-        
     },
     logo: {
         width: '70%',

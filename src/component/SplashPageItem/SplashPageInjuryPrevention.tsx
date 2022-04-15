@@ -10,10 +10,16 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import img1 from '../../../assets/SplashPageImages/InjuryPrevention/injuryimage.jpeg'
 import img2 from '../../../assets/SplashPageImages/InjuryPrevention/injuryimage2.jpeg'
 import { ScrollView } from 'react-native-gesture-handler'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SplashPageInjuryPrevention = () => {
+const navigation = useNavigation(); 
     return (
-        <ScrollView>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
         <View style={styles.root}>                
             <Text style={styles.title}>INJURY PREVENTION</Text> 
             <View style={styles.textContainer}>
@@ -43,7 +49,7 @@ const SplashPageInjuryPrevention = () => {
                 <View style={{margin:3}}><Button color="#4a4d54" title="FOOT CARE" onPress={() => console.log('FAQ Button pressed')}/></View>
             </View>
         </View>
-        </ScrollView>
+        </ScrollView></>
     )
 }
 
@@ -113,6 +119,11 @@ const styles = StyleSheet.create({
         width: 360,
         marginLeft: -20,
     },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
+      },
 })
 
 export default SplashPageInjuryPrevention
