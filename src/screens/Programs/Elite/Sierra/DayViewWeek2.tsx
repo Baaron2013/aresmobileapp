@@ -1,16 +1,25 @@
-import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView} from 'react-native'
-import ProgramItemTangoDay1 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay1'
-import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay2'
-import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay3'
-import ProgramItemTangoDay4 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay4'
-import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use TouchOpac from 'react-native'
-import workoutData from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay1';
+import React, { useState, useEffect } from 'react'
+import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView, Alert} from 'react-native'
+import ProgramItemSierraDay1 from '../../../../component/ProgramItem/Elite/SierraWeek2/ProgramItemSierraDay1'
+import ProgramItemSierraDay2 from '../../../../component/ProgramItem/Elite/SierraWeek2/ProgramItemSierraDay2'
+import ProgramItemSierraDay3 from '../../../../component/ProgramItem/Elite/SierraWeek2/ProgramItemSierraDay3'
+import ProgramItemSierraDay4 from '../../../../component/ProgramItem/Elite/SierraWeek2/ProgramItemSierraDay4'
+import Custombutton from '../../../../component/CustomButton/Custombutton'
+import WorkoutDataDay1 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay1';
+import WorkoutDataDay2 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay2';
+import WorkoutDataDay3 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay3';
+import WorkoutDataDay4 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay4';
+import { DataStore, Auth } from 'aws-amplify';
+import {TrainingLogs as Logs} from '../../../../models'
+import CustomInput from '../../../../component/CustomInput'
+import { ConsoleLogger } from '@aws-amplify/core'
 
 const Plans = (  ) => {
 
     const [selected, setSelected] = useState('1');
-function DayButton({ onPress, value, dayText, numberText, style, styleText }) {
+
+
+    function DayButton({ onPress, value, dayText, numberText, style, styleText }) {
 
         return (
           <Pressable
@@ -21,7 +30,7 @@ function DayButton({ onPress, value, dayText, numberText, style, styleText }) {
             <Text style={styleText}> {numberText} </Text>
           </Pressable>
         );
-}
+    }
 
 const buttonClickHandler = (value) => {
         console.log("Button has been pressed." + value);
@@ -31,26 +40,21 @@ const buttonClickHandler = (value) => {
     
 } 
 
-const buttonClickedHandler = () => {
-    console.log('Button Clicked!');
-    //do something
-}
-
 function renderHeader() {
     return (
-      <View
-        style={{
-          //backgroundColor: '#bfdbf7',
-          padding: 5,
-          marginVertical: 5,
-          borderRadius: 10,
-          borderStyle: 'solid',
-          borderColor: 'black',
-          flex: 1,
-          alignContent: 'center',
-          flexDirection: 'row',
-        }}
-      >
+      <><View
+            style={{
+                //backgroundColor: '#bfdbf7',
+                padding: 5,
+                marginVertical: 5,
+                borderRadius: 10,
+                borderStyle: 'solid',
+                borderColor: 'black',
+                flex: 1,
+                alignContent: 'center',
+                flexDirection: 'row'
+            }}
+        >
             <DayButton
                 onPress={buttonClickHandler}
                 style={styles.roundProgramButton1}
@@ -83,8 +87,9 @@ function renderHeader() {
                 numberText={'4'}
                 value={selected}>
             </DayButton>
-        
-      </View>
+
+        </View>
+        </>
     );
   }
 
@@ -93,8 +98,8 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
-                renderItem={({item}) => <ProgramItemTangoDay1 workout={item} />}
+                data={WorkoutDataDay1}
+                renderItem={({item}) => <ProgramItemSierraDay1 workout={item} />}
             />
         )
       }
@@ -102,8 +107,8 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
-                renderItem={({item}) => <ProgramItemTangoDay2 workout={item} />}
+                data={WorkoutDataDay2}
+                renderItem={({item}) => <ProgramItemSierraDay2 workout={item} />}
             />
         )
       }
@@ -111,8 +116,8 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
-                renderItem={({item}) => <ProgramItemTangoDay3 workout={item} />}
+                data={WorkoutDataDay3}
+                renderItem={({item}) => <ProgramItemSierraDay3 workout={item} />}
             />
         )
       }
@@ -120,43 +125,30 @@ function renderHeader() {
         return (
             <FlatList
                 ListHeaderComponent={renderHeader}
-                data={workoutData}
-                renderItem={({item}) => <ProgramItemTangoDay4 workout={item} />}
+                data={WorkoutDataDay4}
+                renderItem={({item}) => <ProgramItemSierraDay4 workout={item} />}
             />
         )
       }
   }
 
 
-    return (
-        /* <View style={styles.root}>
-            <Image source={Logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.banner}></View> */
-         <View style={styles.page}> 
-         
-         <Text style={styles.mainheadingweektitle}>Tango --- Power Endurance</Text> 
-            {renderPrograms()}
-            {/* </View>  */}
-            <View style={styles.log}>
-                <Text style={{fontSize: 25, color: 'green', marginLeft: 10}}>Training Log</Text>
-                <SafeAreaView>
-                    <TextInput
-                        //numberOfLines={(4)}
-                        style={styles.input}
-                        //onChangeText={onChangeNumber}
-                        //value={number}
-                        multiline={true}
-                        numberOfLines={10}
-                        placeholder="Enter your workout log here..."
-                        
-                    />
-                </SafeAreaView>
-            </View>
-            
-        </View>
+  return (
+    /* <View style={styles.root}>
+        <Image source={Logo} style={styles.logo} resizeMode="contain" />
+        <View style={styles.banner}></View> */
+     
+        <View style={styles.page}> 
+     
+     <Text style={styles.mainheadingweektitle}>Sierra --- Olympic Lifting 101</Text> 
+        {renderPrograms()}
+        {/* </View>  */}
         
-        
-    )
+    </View>
+    
+    
+    
+)
 }
 
 
@@ -192,6 +184,13 @@ const styles = StyleSheet.create({
         /* flexDirection: 'column', // inner items will be added vertically
         flexGrow: 1,            // all the available vertical space will be occupied by it
         justifyContent: 'space-between' // will create the gutter between body and footer */
+    },
+    saveButton: {
+        height: 30,
+        width: 75,
+        padding: 5,
+        marginTop: 15,
+        marginLeft: 10
     },
     input: {
         height: 100,

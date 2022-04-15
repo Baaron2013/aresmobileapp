@@ -212,8 +212,14 @@ const Programs = () => {
                     
             }
             if (value === 2) {
-                navigation.navigate('ShortWeek')
-                console.log('label' + label); console.log('bench: ' + newBench + ' clean: ' + newClean + ' squat: ' + newSquat)
+                Alert.alert(
+                    " ",
+                    "Coming Soon!",
+                    [
+                        {text: "OK"} 
+                    ]
+                )
+                return;
             }
             if (value === 3) {
                 Alert.alert(

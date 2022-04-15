@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { View, ActivityIndicator,Text, TextInput, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-import Custombutton from '../../CustomButton/Custombutton'
+import Custombutton from '../../../CustomButton/Custombutton'
 import { Auth, Hub } from 'aws-amplify'
 import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,11 +9,11 @@ import { DrawerActions } from '@react-navigation/native'
 import { DataStore } from '@aws-amplify/datastore'
 import {AntDesign} from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
-import { Workouts as WorkoutModel } from "../../../models"
-import { CalculatorResults as Calculator} from "../../../models"
-import {TrainingLogs as Logs} from '../../../models'
+import { Workouts as WorkoutModel } from "../../../../models"
+import { CalculatorResults as Calculator} from "../../../../models"
+import {TrainingLogs as Logs} from '../../../../models'
 
-export default function ProgramItemTangoDay3 ({workout}){
+export default function ProgramItemSierraDay3 ({workout}){
 
     const [log3, setLog3] = useState<Logs>()
     const [description3, setDescription3] = useState<string | undefined>('')
@@ -59,7 +59,7 @@ export default function ProgramItemTangoDay3 ({workout}){
     const [bench, setBench] = useState<number | undefined>(0)
     const [squat, setSquat] = useState<number | undefined>(0)
 
-    let programName = 'Tango'
+    let programName = 'Sierra'
     let week = '1'
     let level = 'Elite'
     let completions = '1'
@@ -104,7 +104,7 @@ export default function ProgramItemTangoDay3 ({workout}){
             setSquat(newCalculator[0].squat)
         }
 
-        const newLog3 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        const newLog3 = await DataStore.query(Logs, c => c.userID ('eq', authUser.attributes.sub).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newLog3[0] !== undefined) {
             setLog3(newLog3[0])
             setDescription3(newLog3[0].description)
@@ -112,115 +112,115 @@ export default function ProgramItemTangoDay3 ({workout}){
 
 
         const newMobility1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.mobility[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.mobility[0].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newMobility1.length !== 0) {
             setMobility1(newMobility1.length.toString())
         }
         const newMobility2 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.mobility[1].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.mobility[1].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newMobility2.length !== 0) {
             setMobility2(newMobility2.length.toString())
         }
 
         const newCore1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.core[0].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newCore1.length !== 0) {
             setCore1(newCore1.length.toString())
         }
         const newCore2 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[1].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.core[1].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newCore2.length !== 0) {
             setCore2(newCore2.length.toString())
         }
         const newCore3 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.core[2].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.core[2].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newCore3.length !== 0) {
             setCore3(newCore3.length.toString())
         }
 
         const newConditioning1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.conditioning[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.conditioning[0].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newConditioning1.length !== 0) {
             setConditioning1(newConditioning1.length.toString())
         }
 
         const newStandard1 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[0].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[0].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard1.length !== 0) {
             setStandard1(newStandard1.length.toString())
         }
         const newStandard2 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[1].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[1].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard2.length !== 0) {
             setStandard2(newStandard2.length.toString())
         }
         const newStandard3 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[2].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[2].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard3.length !== 0) {
             setStandard3(newStandard3.length.toString())
         }
         const newStandard4 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[3].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[3].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard4.length !== 0) {
             setStandard4(newStandard4.length.toString())
         }
         const newStandard5 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[4].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[4].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard5.length !== 0) {
             setStandard5(newStandard5.length.toString())
         }
         const newStandard6 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[5].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[5].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard6.length !== 0) {
             setStandard6(newStandard6.length.toString())
         }
         const newStandard7 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[6].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[6].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard7.length !== 0) {
             setStandard7(newStandard7.length.toString())
         }
         const newStandard8 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[7].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[7].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard8.length !== 0) {
             setStandard8(newStandard8.length.toString())
         }
         const newStandard9 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[8].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[8].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard9.length !== 0) {
             setStandard9(newStandard9.length.toString())
         }
         const newStandard10 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[9].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[9].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard10.length !== 0) {
             setStandard10(newStandard10.length.toString())
         }
         const newStandard11 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[10].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[10].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard11.length !== 0) {
             setStandard11(newStandard11.length.toString())
         }
         const newStandard12 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[11].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[11].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard12.length !== 0) {
             setStandard12(newStandard12.length.toString())
         }
         const newStandard13 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[12].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[12].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard13.length !== 0) {
             setStandard13(newStandard13.length.toString())
         }
         const newStandard14 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[13].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[13].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard14.length !== 0) {
             setStandard14(newStandard14.length.toString())
         }
         const newStandard15 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[14].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[14].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard15.length !== 0) {
             setStandard15(newStandard15.length.toString())
         }
         const newStandard16 = await DataStore.query(WorkoutModel, c => c.userID ('eq', authUser.attributes.sub)
-        .workoutName('eq', workout.standard[15].name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', workout.standard[15].name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newStandard16.length !== 0) {
             setStandard16(newStandard16.length.toString())
         }
@@ -239,7 +239,7 @@ export default function ProgramItemTangoDay3 ({workout}){
         //get DB user one time to set current profile pic, if it exists
         console.log('getting user')
         const newValue = await DataStore.query(WorkoutModel, c => c.userID ('eq', userID)
-        .workoutName('eq', name).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        .workoutName('eq', name).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
         if (newValue.length !== 0) {
             setValue(newValue.length.toString())
         }
@@ -336,13 +336,13 @@ export default function ProgramItemTangoDay3 ({workout}){
     const save = async () => {
         if (userID){
             console.log('save log pressed. New Description: ' + newDescription)
-        const dbLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        const dbLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
 
         if (newDescription !== ''){
             await DataStore.save(
                 new Logs ({
                     userID: userID,
-                    program: 'Tango',
+                    program: 'Sierra',
                     level: 'Elite',
                     week: '1',
                     day: '3',
@@ -376,7 +376,7 @@ export default function ProgramItemTangoDay3 ({workout}){
             )     
         }
 
-        const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3').week('eq', '1').program('eq', 'Tango').level('eq', 'Elite'));
+        const newLog1 = await DataStore.query(Logs, c => c.userID ('eq', userID).day('eq', '3').week('eq', '1').program('eq', 'Sierra').level('eq', 'Elite'));
             
         if (newLog1[0] !== undefined) {
                 setLog3(newLog1[0])

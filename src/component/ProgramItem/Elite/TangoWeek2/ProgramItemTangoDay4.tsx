@@ -1,18 +1,17 @@
 import React, { useEffect, useState} from 'react'
 import { View, ActivityIndicator,Text, TextInput, StyleSheet, Pressable, KeyboardAvoidingView, SafeAreaView, ScrollView, Platform, Alert } from 'react-native'
 import { useIsFocused, useNavigation } from '@react-navigation/native'
-import Custombutton from '../../../component/CustomButton/Custombutton'
+import Custombutton from '../../../../component/CustomButton/Custombutton'
 import { Auth, Hub } from 'aws-amplify'
-import Logo from '../../../assets/images/ares-login-logo.png'
 import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DrawerActions } from '@react-navigation/native'
 import { DataStore } from '@aws-amplify/datastore'
 import {AntDesign} from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
-import { Workouts as WorkoutModel } from "../../../models"
-import { CalculatorResults as Calculator} from "../../../models"
-import {TrainingLogs as Logs} from '../../../models'
-import { WeeksCompleted as WeeksCompleted} from "../../../models"
+import { Workouts as WorkoutModel } from "../../../../models"
+import { CalculatorResults as Calculator} from "../../../../models"
+import {TrainingLogs as Logs} from "../../../../models"
+import { WeeksCompleted as WeeksCompleted} from "../../../../models"
 
 
 export default function ProgramItemTangoDay2 ({workout}){

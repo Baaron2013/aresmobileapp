@@ -86,13 +86,24 @@ const WeekListItem = (props:any) => {
         
     }
 
-/*     useEffect (() => {
-        getUser();
-    }, []);  */
-
     useEffect (() => {
         getUser();
     }, [isFocused]); 
+
+
+    const navigate = (value) => {
+        navigation.navigate(value);
+    }
+
+    const alert = () => {
+        Alert.alert(
+            " ",
+            "Coming Soon!",
+            [
+                {text: "OK"} 
+            ]
+        )
+    }
 
 
     const navigation = useNavigation(); 
@@ -106,16 +117,12 @@ const WeekListItem = (props:any) => {
             {
                 week1 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
+                    onPress={() => {navigate(props.dayPicker1)}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>1</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
+                    onPress={() => {navigate(props.dayPicker1)}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>1</Text>
                 </TouchableOpacity>
@@ -124,16 +131,12 @@ const WeekListItem = (props:any) => {
             {
                 week2 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker2);
-                    } }
+                    onPress={() => {navigate(props.dayPicker2)}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker2);
-                    } }
+                    onPress={() => {navigate(props.dayPicker2)}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
                 </TouchableOpacity>
@@ -142,16 +145,12 @@ const WeekListItem = (props:any) => {
             {
                 week3 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker3);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker3);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
                 </TouchableOpacity>
@@ -160,16 +159,12 @@ const WeekListItem = (props:any) => {
             {
                 week4 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker4);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker4);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
                 </TouchableOpacity>
@@ -178,16 +173,12 @@ const WeekListItem = (props:any) => {
             {
                 week5 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker5);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker5);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
                 </TouchableOpacity>
@@ -196,16 +187,12 @@ const WeekListItem = (props:any) => {
             {
                 week6 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker6);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>6</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker6);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>6</Text>
                 </TouchableOpacity>
@@ -217,16 +204,12 @@ const WeekListItem = (props:any) => {
                 {
                 week1 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
+                    onPress={() => {navigate(props.dayPicker1)}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>1</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker1);
-                    } }
+                    onPress={() => {navigate(props.dayPicker1)}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>1</Text>
                 </TouchableOpacity>
@@ -235,16 +218,12 @@ const WeekListItem = (props:any) => {
             {
                 week2 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker2);
-                    } }
+                    onPress={() => {navigate(props.dayPicker2)}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker2);
-                    } }
+                    onPress={() => {navigate(props.dayPicker2)}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>2</Text>
                 </TouchableOpacity>
@@ -253,16 +232,12 @@ const WeekListItem = (props:any) => {
             {
                 week3 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker3);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker3);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>3</Text>
                 </TouchableOpacity>
@@ -271,16 +246,12 @@ const WeekListItem = (props:any) => {
             {
                 week4 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker4);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker4);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>4</Text>
                 </TouchableOpacity>
@@ -289,16 +260,12 @@ const WeekListItem = (props:any) => {
             {
                 week5 === true ?
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker5);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton1}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
                 </TouchableOpacity> :
                 <TouchableOpacity
-                    onPress={() => {
-                    navigation.navigate(props.dayPicker5);
-                    } }
+                    onPress={() => {alert()}}
                     style={styles.roundWeekButton2}>
                     <Text style={styles.roundWeekButtonText}>5</Text>
                 </TouchableOpacity>

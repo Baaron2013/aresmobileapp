@@ -20,21 +20,16 @@ const Plans = ( props ) => {
                     <WeekListItem 
                         programName={'Tango'} 
                         level={'Elite'}
-                        dayPicker1={'EliteDayViewWeek1'} 
-                        dayPicker2={'EliteDayViewWeek2'}
-                        dayPicker3={'EliteDayViewWeek3'} 
-                        dayPicker4={'EliteDayViewWeek4'} 
-                        dayPicker5={'EliteDayViewWeek2'} 
-                        dayPicker6={'EliteDayViewWeek2'} 
-                        dayPicker7={'EliteDayViewWeek2'} 
-                        dayPicker8={'EliteDayViewWeek2'}  
+                        dayPicker1={'TangoEliteDayViewWeek1'} 
+                        dayPicker2={'TangoEliteDayViewWeek2'}  
                         numOfWeeks={6}
                         description={'POWER / POWER ENDURANCE via Kettlebells / Dumbells ---Improve Ruck --- ENDURANCE FOCUS'} />   
                     <WeekListItem 
                         programName={'Sierra'} 
                         level={'Elite'}
                         dayPicker1={'SierraEliteDayViewWeek1'} 
-                        numOfWeeks={7}
+                        dayPicker2={'SierraEliteDayViewWeek2'} 
+                        numOfWeeks={6}
                         description={'Train like an Olympic Lifter w Ranger Mentality --- Daily skill development prior to main Olympic lift for technical mastery. Power/strength focus.'}/>
                     
  

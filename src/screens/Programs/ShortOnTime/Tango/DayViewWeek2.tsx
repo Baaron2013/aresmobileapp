@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView} from 'react-native'
-import ProgramItemTangoDay1 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay1'
-import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay2'
-import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay3'
-import ProgramItemTangoDay4 from '../../../../component/ProgramItem/TangoWeek1/ProgramItemTangoDay4'
+import ProgramItemTangoDay1 from '../../../../component/ProgramItem/Elite/TangoWeek1/ProgramItemTangoDay1'
+import ProgramItemTangoDay2 from '../../../../component/ProgramItem/Elite/TangoWeek1/ProgramItemTangoDay2'
+import ProgramItemTangoDay3 from '../../../../component/ProgramItem/Elite/TangoWeek1/ProgramItemTangoDay3'
+import ProgramItemTangoDay4 from '../../../../component/ProgramItem/Elite/TangoWeek1/ProgramItemTangoDay4'
 import workoutData from '../../../../../assets/WorkoutData/Elite/TangoWeek1/WorkoutsDay1';
 
 const Plans = (  ) => {

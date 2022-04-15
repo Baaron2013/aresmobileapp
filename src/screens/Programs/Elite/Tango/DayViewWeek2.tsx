@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Pressable, Image , FlatList , SafeAreaView} from 'react-native'
-import ProgramItemTangoDay1 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay1'
-import ProgramItemTangoDay2 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay2'
-import ProgramItemTangoDay3 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay3'
-import ProgramItemTangoDay4 from '../../../../component/ProgramItem/TangoWeek2/ProgramItemTangoDay4'
+import ProgramItemTangoDay1 from '../../../../component/ProgramItem/Elite/TangoWeek2/ProgramItemTangoDay1'
+import ProgramItemTangoDay2 from '../../../../component/ProgramItem/Elite/TangoWeek2/ProgramItemTangoDay2'
+import ProgramItemTangoDay3 from '../../../../component/ProgramItem/Elite/TangoWeek2/ProgramItemTangoDay3'
+import ProgramItemTangoDay4 from '../../../../component/ProgramItem/Elite/TangoWeek2/ProgramItemTangoDay4'
 import { TouchableOpacity } from 'react-native-gesture-handler' //Can also use TouchOpac from 'react-native'
 import WorkoutDataDay1 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay1';
 import WorkoutDataDay2 from '../../../../../assets/WorkoutData/Elite/TangoWeek2/WorkoutsDay2';

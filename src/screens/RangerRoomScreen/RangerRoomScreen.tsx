@@ -217,8 +217,9 @@ console.log(state);
     
     
     return (
-        <ScrollView>
+        
         <View style={styles.container}>
+            <ScrollView>
             <View style={styles.head}>
                 <Text style={styles.rangerName}>{route.params.ranger.name}</Text>
             </View>
@@ -370,9 +371,9 @@ console.log(state);
 
 
             </View>
-
+            </ScrollView>
         </View>
-        </ScrollView>
+        
     )
 }
 
