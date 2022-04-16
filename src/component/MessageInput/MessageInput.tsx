@@ -44,6 +44,7 @@ const sendMessage = async () => {
         userID: user.attributes.sub,
         chatroomID: chatRoom.id, 
         isRead: false,
+        isRead: false
     }))
 
     updateLastMessage(newMessage);

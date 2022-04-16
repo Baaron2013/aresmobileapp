@@ -59,9 +59,15 @@ const Messages = () => {
             const chatRooms = (await DataStore.query(ChatroomUser))
             .filter(chatRoomUser => chatRoomUser.user.id == userData.attributes.sub)
             .map(chatRoomUser => chatRoomUser.chatroom);
-            setfilteredChatRooms(chatRooms);
-            
-            setChatRooms(chatRooms);
+          
+            var realChatRooms =[]
+            for(let k =0; k < chatRooms.length; k++){
+              if(chatRooms[k].chatroomLastMessageId ||chatRooms[k].LastMessage){
+                realChatRooms.push(chatRooms[k])
+              }
+            }
+            setChatRooms(realChatRooms);
+            setfilteredChatRooms(realChatRooms)
             console.log(chatRooms);
         };
         fetchChatRooms().then(() => {setIsLoading(false)});
