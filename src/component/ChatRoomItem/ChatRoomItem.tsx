@@ -168,7 +168,7 @@ export default function ChatRoomItem({chatRoom}){
         <View style={styles.rightContainer}>
             <View style={styles.row}>
                 <Text style={styles.name}>{user.name}</Text>
-                <Text style={styles.text}>{moment(new Date(lastMessage?._lastChangedAt)).format('MM/DD/YYYY hh')}</Text>
+                <Text style={styles.text}>{moment(new Date(lastMessage?._lastChangedAt)).format('MM/DD/YYYY')}</Text>
             </View>    
             <Text numberOfLines={1} style={styles.text}>{lastMessage?.content}</Text>
         </View>

@@ -13,6 +13,7 @@ const [message, setMessage] = useState('');
 const [image, setImage] = useState<string | null>(null);
 const [newChatroom, setNewChatroom] = useState<Chatroom | undefined>();
 
+
 useEffect (() => {
     (async () => {
         const user = await Auth.currentAuthenticatedUser();
@@ -43,24 +44,24 @@ const sendMessage = async () => {
         content: message,
         userID: user.attributes.sub,
         chatroomID: chatRoom.id, 
-        isRead: false,
         isRead: false
     }))
-
     updateLastMessage(newMessage);
-    console.log('NEW MESSAGE SAVED' + message)
+
+    //console.log('NEW MESSAGE SAVED' + message)
 
     setMessage('');
 }
 
 const updateLastMessage = async (newMessage: Message | undefined) =>{
-    if (newChatroom !== undefined){
-        DataStore.save(Chatroom.copyOf(newChatroom, updatedChatRoom=>{
+    
+        const thisRoom = await DataStore.query(Chatroom, chatRoom.id)
+
+        await DataStore.save(Chatroom.copyOf(thisRoom, updatedChatRoom=>{
             updatedChatRoom.LastMessage = newMessage;
             //updatedChatRoom.newMessages = newMessages + 1
         }))
-    }
-    
+            
 }
 
 const onPlusClicked = () => {
@@ -135,11 +136,11 @@ const pickImage = async () => {
 
                 <Pressable onPress = {pickImage}>
                 <Feather name="image" size={24} color="#595959" style={styles.icon}/>
-                </Pressable>
+                </Pressable> 
                 
                 <Pressable onPress = {takePhoto}>
                 <Feather  name="camera" size={24} color="#595959" style={styles.icon}/>
-                </Pressable>
+                </Pressable> 
                 
             </View>
             <Pressable onPress={onPress} style={styles.buttonContainer}>
