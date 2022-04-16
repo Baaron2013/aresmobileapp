@@ -1,45 +1,53 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Image} from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {useState, useEffect} from 'react';
 import capture from '../../../../assets/images/Capture.jpg'
 import urine2 from '../../../../assets/images/urine2.jpg'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native'
+import { DrawerActions } from '@react-navigation/native';
+
 const AreYouDehydrated = () => {
-   
+    const navigation = useNavigation(); 
     return (
-        <ScrollView>
-            <View style={styles.content}>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
+                <View style={styles.content}>
 
-                <View style={styles.header_content}>
-                    <Text style={styles.item_title}>Hydration</Text>
+                    <View style={styles.header_content}>
+                        <Text style={styles.item_title}>Hydration</Text>
 
-                </View>
-                <View style={styles.item_fulltexts}>
-
-                    <Image style={styles.item_image} source={capture}>
-
-                    </Image>
-                    <View>
-                        <Text style={{ fontWeight: 'bold' }}>Dehydration can lead to a loss of strength and stamina and is the main cause of heat exhaustion.</Text>
                     </View>
-                    <Image style={styles.item_image} source={urine2}>
-                    </Image>
-                    <View>
-                        <Text>Early signs of dehydration are thirst and dark-coloured urine. This is the body's way of trying to increase water intake and decrease water loss.
-                            Other symptoms may include:
-                            -dizziness or light-headedness
-                            -headache
-                            -tiredness
-                            -dry mouth, lips and eyes
-                            -passing small amounts of urine infrequently
-                            (less than three or four times a day)
+                    <View style={styles.item_fulltexts}>
 
-                            If dehydration is ongoing (chronic), it can affect your kidney function and increase the risk of kidney stones. It can also lead to muscle damage and constipation.
+                        <Image style={styles.item_image} source={capture}>
 
-                            Dehydration can be mild, moderate or severe, depending on how much of your body weight is lost through fluids</Text>
+                        </Image>
+                        <View>
+                            <Text style={{ fontWeight: 'bold' }}>Dehydration can lead to a loss of strength and stamina and is the main cause of heat exhaustion.</Text>
+                        </View>
+                        <Image style={styles.item_image} source={urine2}>
+                        </Image>
+                        <View>
+                            <Text>Early signs of dehydration are thirst and dark-coloured urine. This is the body's way of trying to increase water intake and decrease water loss.
+                                Other symptoms may include:
+                                -dizziness or light-headedness
+                                -headache
+                                -tiredness
+                                -dry mouth, lips and eyes
+                                -passing small amounts of urine infrequently
+                                (less than three or four times a day)
+
+                                If dehydration is ongoing (chronic), it can affect your kidney function and increase the risk of kidney stones. It can also lead to muscle damage and constipation.
+
+                                Dehydration can be mild, moderate or severe, depending on how much of your body weight is lost through fluids</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-        </ScrollView>
+            </ScrollView></>
     )
 }
 
@@ -74,6 +82,11 @@ const styles = StyleSheet.create({
     backButton: {
         marginRight: 350,
         marginTop: 10,
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
     },
 
 });

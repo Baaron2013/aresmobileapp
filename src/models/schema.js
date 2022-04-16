@@ -122,6 +122,13 @@ export const schema = {
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
+                },
+                "isRead": {
+                    "name": "isRead",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -177,6 +184,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "newMessages": {
+                    "name": "newMessages",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "chatroom": {
                     "name": "chatroom",
                     "isArray": false,
@@ -209,9 +223,7 @@ export const schema = {
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {
-                        "queries": null
-                    }
+                    "properties": {}
                 },
                 {
                     "type": "key",
@@ -752,5 +764,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "e13d52bc8e1165531aceca38aa5b4948"
+    "version": "bd527e8fbb2ec66f413c52efd39b0baa"
 };

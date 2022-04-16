@@ -39,8 +39,6 @@ export default function RangerItem({chatRoom}){
                 <Image source={Contact} style={styles.image} />
                 
             }
-            {chatRoom.newMessages && <View style={styles.badgeContainer}>              
-            </View>}
             <View style={styles.rightContainer}>
                 <View style={styles.row}>
                     <Text style={styles.name}>{chatRoom.name}</Text>

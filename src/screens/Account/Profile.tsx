@@ -107,12 +107,12 @@ const Profile = () => {
     //save user udpates to DynamoDB and cognito
     const onPressSave = async () => {
         console.log('button pressed')
-        Alert.alert(
+/*         Alert.alert(
             "Updating!",
             "We are updating your settings.",
             [
             ]
-        )
+        ) */
         //if new image exists, upload the image
         let fileKey;
         if (newLocalImage){
@@ -158,6 +158,7 @@ const Profile = () => {
             navigation.navigate("ConfirmEmail")
             setName(newName);
             setEmail(newEmail);
+            return;
         } else {
             Alert.alert(
                 "Updated!",
@@ -170,9 +171,12 @@ const Profile = () => {
             setEmail(newEmail);
             console.log('name before edits: ' + newName);
             navigation.navigate('Profile');
+            if (newLocalImage){
+                setCurrentImage(fileKey)
+            }
             setNewLocalImage(null)
-            navigation.navigate("Profile")
-            setCurrentImage(fileKey)
+
+            
 
         }
     }

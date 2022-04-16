@@ -20,12 +20,14 @@ export declare class Message {
   readonly content: string;
   readonly userID: string;
   readonly chatroomID: string;
+  readonly isRead: boolean;
   constructor(init: ModelInit<Message>);
   static copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
 }
 
 export declare class ChatroomUser {
   readonly id: string;
+  readonly newMessages?: number;
   readonly chatroom: Chatroom;
   readonly user: User;
   constructor(init: ModelInit<ChatroomUser>);

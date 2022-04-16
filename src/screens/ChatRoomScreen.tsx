@@ -4,8 +4,9 @@ import {Text, View, StyleSheet, FlatList, SafeAreaView, ActivityIndicator} from 
 import Message from '../component/Message';
 //import chatRoomData from '../../assets/dummy-data/Chats';
 import MessageInput from '../component/MessageInput';
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { useRoute, useNavigation, useIsFocused } from "@react-navigation/native";
 import {DataStore, Predicates} from '@aws-amplify/datastore';
+import {Auth} from 'aws-amplify';
 import {Message as MessageModel, Chatroom} from '../models';
 import {SortDirection} from 'aws-amplify';
 
@@ -15,6 +16,7 @@ export default function ChatRoomScreen() {
 
     const route = useRoute();
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
 
     useEffect(() => {
 
@@ -26,7 +28,7 @@ export default function ChatRoomScreen() {
 
         fetchMessages();
 
-    }, [chatRoom])
+    }, [chatRoom, isFocused])
 
     useEffect(() =>{
         const subscription = DataStore.observe(MessageModel).subscribe(msg =>{
@@ -55,6 +57,7 @@ export default function ChatRoomScreen() {
         if(!chatRoom){
             return;
         }
+        const user = await Auth.currentAuthenticatedUser();
         const fetchedMessages = await DataStore.query(MessageModel, 
             message => message.chatroomID("eq", chatRoom?.id));
         //fetchedMessages.reverse();
@@ -63,6 +66,14 @@ export default function ChatRoomScreen() {
         //console.log(fetchedMessages);
         setMessages(fetchedMessages);
         
+        for(let i = fetchedMessages.length -1; i >=0; i--){
+            if(fetchedMessages[i].userID !== user.attributes.sub){
+                DataStore.save(MessageModel.copyOf(fetchedMessages[i], updatedMessage=>{
+                    updatedMessage.isRead = true;
+                }));
+            }
+
+        }
         
     };
 

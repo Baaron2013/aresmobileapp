@@ -52,6 +52,7 @@ type Message @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields:
   content: String!
   userID: ID!
   chatroomID: ID!
+  isRead: Boolean!
 }
 
 type RangerMetrics @model @auth(rules: [{allow: public}]) {
@@ -75,10 +76,11 @@ type User @model @auth(rules: [{allow: public}]) {
   chatrooms: [ChatroomUser] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type ChatroomUser @model(queries: null) @key(name: "byChatroom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+type ChatroomUser @model @key(name: "byChatroom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {
   id: ID!
   chatroomID: ID!
   userID: ID!
+  newMessages: Int
   chatroom: Chatroom! @connection(fields: ["chatroomID"])
   user: User! @connection(fields: ["userID"])
-}
+} 

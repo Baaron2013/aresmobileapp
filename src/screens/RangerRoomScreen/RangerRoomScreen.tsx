@@ -288,6 +288,7 @@ console.log(state);
 
         
     }
+
     
     
     return (
@@ -296,10 +297,11 @@ console.log(state);
             <View style={styles.head}>
                 <Text style={styles.rangerName}>{route.params.ranger.name}</Text>
             </View>
+            <Text style={styles.statsTitle}>Daily Stats</Text>
+            <Text style={styles.initialWeight}>Initial Weight {initialWeight}</Text>
             <ScrollView  horizontal={true} style={{marginTop: -1, overflow: "scroll"}}>
             <View style={styles.stats}>
-                <Text style={styles.statsTitle}>Daily Stats</Text>
-                <Text style={styles.initialWeight}>Initial Weight {initialWeight}</Text>
+                
                 <Table borderStyle={{ borderWidth: 2, borderColor: 'black' }}>
                     <Row data={state.tableHead} style={styles.rowHead} textStyle={styles.textHead} widthArr={[120, 120, 120, 120, 120, 120]}/>
                     {state.tableData.map((rowData:any, index) => (
@@ -323,14 +325,22 @@ console.log(state);
             <Text style={styles.tableDescription}>Last 7 Weeks Completed</Text>
             </View>
             
-            <ScrollView horizontal={true}>
+            <ScrollView  horizontal={true} style={{marginTop: -1, overflow: "scroll"}}>
             <View style={styles.programs}>
                 
                 <Table style ={{paddingBottom: 50}} borderStyle={{ borderWidth: 0, borderColor: 'black' }}>
-                    <Row data={programData.tableHead} textStyle={styles.programHead} widthArr={[110, 110, 110]}/>
+                    <Row data={programData.tableHead} textStyle={styles.programHead} widthArr={[114, 110, 110]}/>
                     <Rows data={programData.tableData}  textStyle={styles.programDataText} widthArr={[110, 110, 110]}/>
                 </Table>
-                <Text style={styles.tableDescription}>Last 7 Workouts Completed</Text>
+            </View>
+            </ScrollView>
+
+            <View style={styles.programs}>
+            <Text style={styles.tableDescription}>Last 7 Workouts Completed</Text>
+            </View>
+            <ScrollView  horizontal={true} style={{marginTop: -1, overflow: "scroll"}}>
+            <View style={styles.programs}>
+                
                 <Table style ={{paddingBottom: 50}} borderStyle={{ borderWidth: 0, borderColor: 'black' }}>
                     <Row data={workoutData.tableHead} textStyle={styles.programHead}  widthArr={[80, 70, 70, 70, 200]}/>
                     <Rows data={workoutData.tableData} textStyle={styles.programDataText} widthArr={[80, 70, 70, 70, 200]}/>
@@ -487,14 +497,16 @@ const styles = StyleSheet.create({
     statsTitle: {
         color: 'grey',
         fontSize: 33,
+        paddingLeft: 10
     },
     initialWeight: {
         color: 'black',
         fontSize: 20,
+        paddingLeft: 10
     },
     rangerName: {
         color: 'navy',
-        fontSize: 40,
+        fontSize: 35,
         
         
     },
@@ -546,7 +558,8 @@ const styles = StyleSheet.create({
     logRow: {
         backgroundColor: 'transparent',
         marginTop: 5,
-        paddingBottom: 10
+        paddingBottom: 10,
+        paddingLeft: 10
     },
     logRowTitle: {
         fontSize: 15

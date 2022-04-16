@@ -10,7 +10,7 @@ export const createChatroom = /* GraphQL */ `
     createChatroom(input: $input, condition: $condition) {
       id
       newMessages
-      Chatter
+      Chatters
       _version
       _deleted
       _lastChangedAt
@@ -21,6 +21,7 @@ export const createChatroom = /* GraphQL */ `
         content
         userID
         chatroomID
+        isRead
         _version
         _deleted
         _lastChangedAt
@@ -33,6 +34,7 @@ export const createChatroom = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -47,6 +49,7 @@ export const createChatroom = /* GraphQL */ `
           id
           chatroomID
           userID
+          newMessages
           _version
           _deleted
           _lastChangedAt
@@ -67,7 +70,7 @@ export const updateChatroom = /* GraphQL */ `
     updateChatroom(input: $input, condition: $condition) {
       id
       newMessages
-      Chatter
+      Chatters
       _version
       _deleted
       _lastChangedAt
@@ -78,6 +81,7 @@ export const updateChatroom = /* GraphQL */ `
         content
         userID
         chatroomID
+        isRead
         _version
         _deleted
         _lastChangedAt
@@ -90,6 +94,7 @@ export const updateChatroom = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -104,6 +109,7 @@ export const updateChatroom = /* GraphQL */ `
           id
           chatroomID
           userID
+          newMessages
           _version
           _deleted
           _lastChangedAt
@@ -124,7 +130,7 @@ export const deleteChatroom = /* GraphQL */ `
     deleteChatroom(input: $input, condition: $condition) {
       id
       newMessages
-      Chatter
+      Chatters
       _version
       _deleted
       _lastChangedAt
@@ -135,6 +141,7 @@ export const deleteChatroom = /* GraphQL */ `
         content
         userID
         chatroomID
+        isRead
         _version
         _deleted
         _lastChangedAt
@@ -147,6 +154,7 @@ export const deleteChatroom = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -161,6 +169,7 @@ export const deleteChatroom = /* GraphQL */ `
           id
           chatroomID
           userID
+          newMessages
           _version
           _deleted
           _lastChangedAt
@@ -435,6 +444,7 @@ export const createMessage = /* GraphQL */ `
       content
       userID
       chatroomID
+      isRead
       _version
       _deleted
       _lastChangedAt
@@ -453,6 +463,7 @@ export const updateMessage = /* GraphQL */ `
       content
       userID
       chatroomID
+      isRead
       _version
       _deleted
       _lastChangedAt
@@ -471,6 +482,7 @@ export const deleteMessage = /* GraphQL */ `
       content
       userID
       chatroomID
+      isRead
       _version
       _deleted
       _lastChangedAt
@@ -565,6 +577,7 @@ export const createUser = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -579,6 +592,7 @@ export const createUser = /* GraphQL */ `
           id
           chatroomID
           userID
+          newMessages
           _version
           _deleted
           _lastChangedAt
@@ -614,6 +628,7 @@ export const updateUser = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -628,6 +643,7 @@ export const updateUser = /* GraphQL */ `
           id
           chatroomID
           userID
+          newMessages
           _version
           _deleted
           _lastChangedAt
@@ -663,6 +679,7 @@ export const deleteUser = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -677,6 +694,7 @@ export const deleteUser = /* GraphQL */ `
           id
           chatroomID
           userID
+          newMessages
           _version
           _deleted
           _lastChangedAt
@@ -698,6 +716,7 @@ export const createChatroomUser = /* GraphQL */ `
       id
       chatroomID
       userID
+      newMessages
       _version
       _deleted
       _lastChangedAt
@@ -706,7 +725,7 @@ export const createChatroomUser = /* GraphQL */ `
       chatroom {
         id
         newMessages
-        Chatter
+        Chatters
         _version
         _deleted
         _lastChangedAt
@@ -717,6 +736,7 @@ export const createChatroomUser = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -765,6 +785,7 @@ export const updateChatroomUser = /* GraphQL */ `
       id
       chatroomID
       userID
+      newMessages
       _version
       _deleted
       _lastChangedAt
@@ -773,7 +794,7 @@ export const updateChatroomUser = /* GraphQL */ `
       chatroom {
         id
         newMessages
-        Chatter
+        Chatters
         _version
         _deleted
         _lastChangedAt
@@ -784,6 +805,7 @@ export const updateChatroomUser = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt
@@ -832,6 +854,7 @@ export const deleteChatroomUser = /* GraphQL */ `
       id
       chatroomID
       userID
+      newMessages
       _version
       _deleted
       _lastChangedAt
@@ -840,7 +863,7 @@ export const deleteChatroomUser = /* GraphQL */ `
       chatroom {
         id
         newMessages
-        Chatter
+        Chatters
         _version
         _deleted
         _lastChangedAt
@@ -851,6 +874,7 @@ export const deleteChatroomUser = /* GraphQL */ `
           content
           userID
           chatroomID
+          isRead
           _version
           _deleted
           _lastChangedAt

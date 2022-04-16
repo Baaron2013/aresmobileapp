@@ -1,32 +1,39 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Image} from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {useState, useEffect} from 'react';
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native'
+import { DrawerActions } from '@react-navigation/native';
 
 
 const PolarizedTraining = () => {
-   
+    const navigation = useNavigation(); 
     return (
-        <ScrollView>
-            <View style={styles.content}>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
+                <View style={styles.content}>
 
-                <View style={styles.header_content}>
-                    <Text style={styles.item_title}>POLARIZED TRAINING</Text>
+                    <View style={styles.header_content}>
+                        <Text style={styles.item_title}>POLARIZED TRAINING</Text>
 
+                    </View>
+                    <View style={styles.item_fulltexts}>
+
+                        <Image style={styles.image1} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp1.jpg')}>
+                        </Image>
+                        <Image style={styles.image2} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp2.jpg')}>
+                        </Image>
+                        <Image style={styles.image3} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp3.jpg')}>
+                        </Image>
+                        <Image style={styles.image4} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp4.jpg')}>
+                        </Image>
+
+                    </View>
                 </View>
-                <View style={styles.item_fulltexts}>
-
-                    <Image style={styles.image1} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp1.jpg')}>
-                    </Image>
-                    <Image style={styles.image2} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp2.jpg')}>
-                    </Image>
-                    <Image style={styles.image3} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp3.jpg')}>
-                    </Image>
-                    <Image style={styles.image4} source={require('../../../../assets/ArticleResources/CombatConditioning/ZoneTraining/PolarizedTraining/pp4.jpg')}>
-                    </Image>
-
-                </View>
-            </View>
-        </ScrollView>
+            </ScrollView></>
     )
 }
 
@@ -76,6 +83,11 @@ const styles = StyleSheet.create({
     backButton: {
         marginRight: 350,
         marginTop: 10,
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
     },
 
 });

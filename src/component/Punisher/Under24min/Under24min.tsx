@@ -1,26 +1,33 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Image} from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {useState, useEffect} from 'react';
 import capture from '../../../../assets/images/Capture.jpg'
 import urine2 from '../../../../assets/images/urine2.jpg'
+import RNIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native'
+import { DrawerActions } from '@react-navigation/native';
 
 const Under24min = () => {
-   
+    const navigation = useNavigation(); 
     return (
-        <ScrollView>
-            <View style={styles.content}>
+        <><View><Pressable style={styles.icon}
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <RNIcon name="menu" color={'black'} size={25} />
+        </Pressable>
+        </View><ScrollView>
+                <View style={styles.content}>
 
-                <View style={styles.header_content}>
-                    <Text style={styles.item_title}>UNDER 24 MIN</Text>
+                    <View style={styles.header_content}>
+                        <Text style={styles.item_title}>UNDER 24 MIN</Text>
 
+                    </View>
+                    <View style={styles.item_fulltexts}>
+                        <Text style={styles.boldTextStyle}>{'<'} 24 Min</Text>
+                        <Image style={styles.image1} source={require('../../../../assets/ArticleResources/CombatConditioning/Punisher/Under24min/Punisher.Pullup.jpeg')}>
+                        </Image>
+                    </View>
                 </View>
-                <View style={styles.item_fulltexts}>
-                <Text style={styles.boldTextStyle}>{'<'} 24 Min</Text>
-                <Image style={styles.image1} source={require('../../../../assets/ArticleResources/CombatConditioning/Punisher/Under24min/Punisher.Pullup.jpeg')}>
-                </Image>
-                </View>
-            </View>
-        </ScrollView>
+            </ScrollView></>
     )
 }
 
@@ -67,6 +74,11 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         margin: 15
+    },
+    icon: {
+        backgroundColor: 'white',
+        paddingLeft: 15,
+        paddingTop: 10,
     },
 });
 
