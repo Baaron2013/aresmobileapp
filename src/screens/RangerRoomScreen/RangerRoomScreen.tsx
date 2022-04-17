@@ -1,22 +1,13 @@
 import React, { useState, useEffect , Component} from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native'
-import Custombutton from '../../component/CustomButton/Custombutton'
+import { View, Text, StyleSheet, Image} from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import { Auth, navItem, withSSRContext, DataStore } from 'aws-amplify'
-import Logo from '../../../assets/images/ares-login-logo.png'
-import { DrawerActions } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Dropdown } from 'react-native-element-dropdown';
-import Plans from './Elite/WeeklyViewElite';
-import { User , RangerMetrics, WeeksCompleted, Workouts, TrainingLogs} from "../../models"
-import { CalculatorResults as Calculator } from "../../models"
-import { AWS_CLOUDWATCH_MAX_EVENT_SIZE, ConsoleLogger } from '@aws-amplify/core'
-import { greaterThan } from 'react-native-reanimated'
+import { DataStore } from 'aws-amplify'
+import { User, RangerMetrics, WeeksCompleted, Workouts, TrainingLogs} from "../../models"
 import { Table, Row, Rows, Col, Cell, TableWrapper } from 'react-native-table-component';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import moment from "moment";
-//import { styles } from 'react-native-element-dropdown/src/TextInput/styles'
-
+import {S3Image} from 'aws-amplify-react-native';
+import Contact from '../../../assets/images/user.png'
 
 
 const RangerRoomScreen = () => {
@@ -28,6 +19,7 @@ const RangerRoomScreen = () => {
     const [workouts, setWorkouts] = useState<Workouts[]>([]);
     const [rangerLogs, setRangerLogs] = useState<TrainingLogs[]>([]);
     const [initialWeight, setInitialWeight] = useState<number | undefined>();
+    const [currentImage, setCurrentImage] = useState<string | undefined>(undefined);
 
     useEffect(() =>{
         const fetchedRangerMetrics = async () => {
@@ -100,6 +92,36 @@ const RangerRoomScreen = () => {
         fetchedLogs();
         
     },[]);
+
+    const getRanger = async () => {
+
+        //get DB user one time to set current profile pic, if it exists
+        const user = await DataStore.query(User, route.params.ranger.id);
+        console.log('got user')
+        if (user === undefined) {
+            console.log(user + 'error finding user' + userID);
+            return;
+        }
+        else {
+            console.log(user);
+            setCurrentImage(user.imageUri)
+        }
+        
+    }
+
+    useEffect (() => {
+        getRanger();
+    }, []);
+
+    const renderImage = () => {
+        if (currentImage) {
+            console.log('rendering current s3 image')
+            return <S3Image imgKey={currentImage} style={styles.profilePic} />
+        }
+        console.log('rendering contact image')
+        return <Image source={Contact} style={styles.profilePic} />
+
+    }
     
     const navigation = useNavigation(); 
 
@@ -295,6 +317,9 @@ console.log(state);
         <View style={styles.container}>
             <ScrollView>
             <View style={styles.head}>
+                <View style={styles.profile}>
+                    {renderImage()}
+                </View>
                 <Text style={styles.rangerName}>{route.params.ranger.name}</Text>
             </View>
             <Text style={styles.statsTitle}>Daily Stats</Text>
@@ -357,8 +382,8 @@ console.log(state);
                 {rangerLogs[0] &&  
                 <View style={styles.logRow}>
                     <View>
-                        <Text style={styles.logRowTitle}>1) {moment(new Date(rangerLogs[0]._lastChangedAt)).format('MM/DD/YYYY')} 
-                        {rangerLogs[0].program} > {rangerLogs[0].level}
+                        <Text style={styles.logRowTitle}>{moment(new Date(rangerLogs[0]._lastChangedAt)).format('MM/DD/YYYY')} 
+                        {''} {rangerLogs[0].program} > {rangerLogs[0].level}
                          > week {rangerLogs[0].week} > day {rangerLogs[0].day}</Text>
                     </View>
                     <View>
@@ -371,8 +396,8 @@ console.log(state);
                 {rangerLogs[1] &&  
                 <View style={styles.logRow}>
                     <View>
-                        <Text style={styles.logRowTitle}>2) {moment(new Date(rangerLogs[1]._lastChangedAt)).format('MM/DD/YYYY')} 
-                        {rangerLogs[1].program} > {rangerLogs[1].level}
+                        <Text style={styles.logRowTitle}>{moment(new Date(rangerLogs[1]._lastChangedAt)).format('MM/DD/YYYY')} 
+                        {''}{rangerLogs[1].program} > {rangerLogs[1].level}
                          > week {rangerLogs[1].week} > day {rangerLogs[1].day}</Text>
                     </View>
                     <View>
@@ -385,8 +410,8 @@ console.log(state);
                 {rangerLogs[2] &&  
                 <View style={styles.logRow}>
                     <View>
-                        <Text style={styles.logRowTitle}>3) {moment(new Date(rangerLogs[2]._lastChangedAt)).format('MM/DD/YYYY')} 
-                         {rangerLogs[2].program} > {rangerLogs[2].level}
+                        <Text style={styles.logRowTitle}>{moment(new Date(rangerLogs[2]._lastChangedAt)).format('MM/DD/YYYY')} 
+                        {''}{rangerLogs[2].program} > {rangerLogs[2].level}
                          > week {rangerLogs[2].week} > day {rangerLogs[2].day}</Text>
                     </View>
                     <View>
@@ -399,8 +424,8 @@ console.log(state);
                 {rangerLogs[3] &&  
                 <View style={styles.logRow}>
                     <View>
-                        <Text style={styles.logRowTitle}>4) {moment(new Date(rangerLogs[3]._lastChangedAt)).format('MM/DD/YYYY')} 
-                         {rangerLogs[3].program} > {rangerLogs[3].level}
+                        <Text style={styles.logRowTitle}>{moment(new Date(rangerLogs[3]._lastChangedAt)).format('MM/DD/YYYY')} 
+                        {''}{rangerLogs[3].program} > {rangerLogs[3].level}
                          > week {rangerLogs[3].week} > day {rangerLogs[3].day}</Text>
                     </View>
                     <View>
@@ -413,8 +438,8 @@ console.log(state);
                 {rangerLogs[4] &&  
                 <View style={styles.logRow}>
                     <View>
-                        <Text style={styles.logRowTitle}>5) {moment(new Date(rangerLogs[4]._lastChangedAt)).format('MM/DD/YYYY')} 
-                         {rangerLogs[4].program} > {rangerLogs[4].level}
+                        <Text style={styles.logRowTitle}>{moment(new Date(rangerLogs[4]._lastChangedAt)).format('MM/DD/YYYY')}
+                        {' '}{rangerLogs[4].program} > {rangerLogs[4].level}
                          > week {rangerLogs[4].week} > day {rangerLogs[4].day}</Text>
                     </View>
                     <View>
@@ -427,8 +452,8 @@ console.log(state);
                 {rangerLogs[5] &&  
                 <View style={styles.logRow}>
                     <View>
-                        <Text style={styles.logRowTitle}>6) {moment(new Date(rangerLogs[5]._lastChangedAt)).format('MM/DD/YYYY')} 
-                         {rangerLogs[5].program} > {rangerLogs[4].level}
+                        <Text style={styles.logRowTitle}>{moment(new Date(rangerLogs[5]._lastChangedAt)).format('MM/DD/YYYY')} 
+                        {''}{rangerLogs[5].program} > {rangerLogs[4].level}
                          > week {rangerLogs[5].week} > day {rangerLogs[5].day}</Text>
                     </View>
                     <View>
@@ -441,8 +466,8 @@ console.log(state);
                 {rangerLogs[6] &&  
                 <View style={styles.logRow}>
                     <View>
-                        <Text style={styles.logRowTitle}>7) {moment(new Date(rangerLogs[6]._lastChangedAt)).format('MM/DD/YYYY')} 
-                         {rangerLogs[6].program} > {rangerLogs[6].level}
+                        <Text style={styles.logRowTitle}>{moment(new Date(rangerLogs[6]._lastChangedAt)).format('MM/DD/YYYY')} 
+                        {''}{rangerLogs[6].program} > {rangerLogs[6].level}
                          > week {rangerLogs[6].week} > day {rangerLogs[6].day}</Text>
                     </View>
                     <View>
@@ -479,8 +504,6 @@ const styles = StyleSheet.create({
     stats: {
         margin: 8,
         flex: 1
-        
-        
     },
     rowHead: {
         backgroundColor: '#404040',
@@ -495,7 +518,7 @@ const styles = StyleSheet.create({
         padding: 2
     },
     statsTitle: {
-        color: 'grey',
+        color: '#857979',
         fontSize: 33,
         paddingLeft: 10
     },
@@ -505,7 +528,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     rangerName: {
-        color: 'navy',
+        color: '#1F7A8C',
         fontSize: 35,
         
         
@@ -517,7 +540,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         display: 'flex',
         width: '100%',
-        color: 'navy',
+        color: '#022B3A',
         textAlign: 'center',
         fontSize: 17,
         fontWeight: 'bold',
@@ -536,7 +559,7 @@ const styles = StyleSheet.create({
     },
     programDataText: {
         alignSelf: 'center',
-        color: 'navy'
+        color: '#022B3A'
     },
     programCol: {
         flex: 1,
@@ -562,18 +585,33 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     logRowTitle: {
-        fontSize: 15
+        fontSize: 15,
+        color: '#022B3A',
     },
     logRowEntry: {
-        color: 'grey',
+        color: '#8F979B',
         fontSize: 12
     },
     tableDescription:{
-        color: 'grey',
+        color: '#857979',
         textAlign: 'center',
         fontSize: 30,
         paddingBottom: 10
-    }
+    },
+    profilePic: {
+        marginTop: 10,
+        //marginBottom: 20,
+        height: 100,
+        width: 100,
+        borderRadius: 50,
+
+    },
+    profile: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        //paddingLeft: 25
+
+    },
 
 
 
