@@ -57,7 +57,7 @@ const Message = ( {message}) => {
              :message.content}</Text> */}
 {/*             <Image source={{uri: imageUrl}} style={{ height: 100, width: 100 }}/>
             <Text style={{color : isMe ? 'black' : 'white'}}>{message.content}</Text> */}
-            {message.image !=""? 
+            {message.image? 
             <S3Image imgKey={message.image} style={{ height: 200, width: 200 }}/> 
              :<Text style={{color : isMe ? 'black' : 'white'}}>{message.content}</Text>}
         </View>

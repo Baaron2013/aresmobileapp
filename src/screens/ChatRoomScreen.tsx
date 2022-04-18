@@ -30,14 +30,14 @@ export default function ChatRoomScreen() {
 
     }, [chatRoom, isFocused])
 
-    useEffect(() =>{
-        const subscription = DataStore.observe(MessageModel).subscribe(msg =>{
+/*     useEffect(() =>{
+        const subscription = DataStore.observe(MessageModel, (c) => c.chatroomID('eq', chatRoom.id)).subscribe(msg =>{
             if(msg.model == MessageModel && msg.opType == 'INSERT'){
                 setMessages(existingMessages => [msg.element,...existingMessages])
             }
         });
         return () => subscription.unsubscribe();
-    }, []);
+    }, []); */
 
     const fetchChatRoom = async () => {
         if (!route.params?.id){
@@ -52,6 +52,14 @@ export default function ChatRoomScreen() {
         }
         
     };
+    useEffect(() =>{
+        const subscription = DataStore.observe(MessageModel, (c) => c.chatroomID('eq', route.params.id)).subscribe(msg =>{
+            if(msg.model == MessageModel && msg.opType == 'INSERT'){
+                setMessages(existingMessages => [msg.element,...existingMessages])
+            }
+        });
+        return () => subscription.unsubscribe();
+    }, []);
 
     const fetchMessages = async () =>{
         if(!chatRoom){

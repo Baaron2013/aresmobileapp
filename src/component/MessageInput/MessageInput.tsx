@@ -16,6 +16,7 @@ const [message, setMessage] = useState('');
 const [image, setImage] = useState<string | null>(null);
 const [newChatroom, setNewChatroom] = useState<Chatroom | undefined>();
 const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+const [isSending, setIsSending] = useState(false);
 
 useEffect (() => {
     (async () => {
@@ -78,6 +79,7 @@ const onPress = () => {
         //console.log("==================================")
         //console.log(image)
         sendImage()
+        //setTimeout(5000);
     }
     else if (message) {
         sendMessage();
@@ -86,6 +88,8 @@ const onPress = () => {
         onPlusClicked();
     }
 }
+
+//setTimeout(() => {  console.log("World!"); }, 2000);
 
 //image picker
 const pickImage = async () => {
@@ -127,10 +131,11 @@ try{
     const urlParts = image.split('.');
     const extension = urlParts[urlParts.length - 1];
     const fileKey = `${uuidv4()}.${extension}`;
+    setIsSending(true);
     await Storage.put(fileKey, blob, {
         contentType: 'image/jpeg'
     });
-
+    setImage(null);
     const user = await Auth.currentAuthenticatedUser();
     const newMessage =  await DataStore.save(new Message({
         content: "",
@@ -140,13 +145,13 @@ try{
         isRead: false
     }))
     updateLastMessage(newMessage);
-    setImage(null);
     setIsEmojiPickerOpen(false);
     }
      catch (err) {
     console.log("Error uploading file:", err);
     return null;
   }
+  setIsSending(false)
     return null;
 
   }
@@ -205,9 +210,8 @@ try{
                     </Pressable>
                     
                 </View>
-                <Pressable onPress={onPress} style={styles.buttonContainer}>
-                    {message || image ? <Ionicons name="send" size={18} color="white" /> : <AntDesign name="plus" size={24} color="white" />}
-                </Pressable>
+                {message || image  && !isSending?
+                 <Pressable onPress={onPress} style={styles.buttonContainer}><Ionicons name="send" size={18} color="white" /></Pressable>: null}
             </View>
 
 
