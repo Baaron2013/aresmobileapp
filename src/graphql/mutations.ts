@@ -19,6 +19,7 @@ export const createChatroom = /* GraphQL */ `
       LastMessage {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -32,6 +33,7 @@ export const createChatroom = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -79,6 +81,7 @@ export const updateChatroom = /* GraphQL */ `
       LastMessage {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -92,6 +95,7 @@ export const updateChatroom = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -139,6 +143,7 @@ export const deleteChatroom = /* GraphQL */ `
       LastMessage {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -152,6 +157,7 @@ export const deleteChatroom = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -442,6 +448,7 @@ export const createMessage = /* GraphQL */ `
     createMessage(input: $input, condition: $condition) {
       id
       content
+      image
       userID
       chatroomID
       isRead
@@ -461,6 +468,7 @@ export const updateMessage = /* GraphQL */ `
     updateMessage(input: $input, condition: $condition) {
       id
       content
+      image
       userID
       chatroomID
       isRead
@@ -480,6 +488,7 @@ export const deleteMessage = /* GraphQL */ `
     deleteMessage(input: $input, condition: $condition) {
       id
       content
+      image
       userID
       chatroomID
       isRead
@@ -575,6 +584,7 @@ export const createUser = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -626,6 +636,7 @@ export const updateUser = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -677,6 +688,7 @@ export const deleteUser = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -734,6 +746,7 @@ export const createChatroomUser = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -803,6 +816,7 @@ export const updateChatroomUser = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -872,6 +886,7 @@ export const deleteChatroomUser = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead

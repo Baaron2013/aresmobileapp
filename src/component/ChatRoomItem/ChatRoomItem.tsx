@@ -169,8 +169,9 @@ export default function ChatRoomItem({chatRoom}){
             <View style={styles.row}>
                 <Text style={styles.name}>{user.name}</Text>
                 <Text style={styles.text}>{moment(new Date(lastMessage?._lastChangedAt)).format('MM/DD/YYYY')}</Text>
-            </View>    
-            <Text numberOfLines={1} style={styles.text}>{lastMessage?.content}</Text>
+            </View> 
+            {lastMessage?.image?<Text numberOfLines={1} style={styles.text}>Image</Text>:
+            <Text numberOfLines={1} style={styles.text}>{lastMessage?.content}</Text> }   
         </View>
     </Pressable>
     );

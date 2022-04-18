@@ -71,7 +71,7 @@ const Profile = () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: false,
-            quality: 0,
+            quality: 0.5,
           });
       
           console.log(result);

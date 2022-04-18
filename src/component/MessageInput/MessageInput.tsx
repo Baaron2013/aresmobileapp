@@ -1,18 +1,21 @@
 
-import { jitteredExponentialRetry } from '@aws-amplify/core'
+import { jitteredExponentialRetry } from '@aws-amplify/core';
 import React, {useState, useEffect } from 'react'
 import {View , Text, StyleSheet, TextInput, Pressable, KeyboardAvoidingView, Platform, Image} from 'react-native'
 import { SimpleLineIcons, Feather, MaterialCommunityIcons, AntDesign , Ionicons } from '@expo/vector-icons';
-import {DataStore, Auth} from 'aws-amplify';
+import {DataStore, Auth, Storage} from 'aws-amplify';
 import {Message, Chatroom} from '../../../src/models';
-import * as ImagePicker from 'expo-image-picker';;
+import * as ImagePicker from 'expo-image-picker';
+import EmojiSelector, { Categories } from "react-native-emoji-selector";
+import {v4 as uuidv4} from 'uuid';
+
 
 const MessageInput = ( {chatRoom} ) => {
 
 const [message, setMessage] = useState('');
 const [image, setImage] = useState<string | null>(null);
 const [newChatroom, setNewChatroom] = useState<Chatroom | undefined>();
-
+const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
 
 useEffect (() => {
     (async () => {
@@ -42,6 +45,7 @@ const sendMessage = async () => {
     const user = await Auth.currentAuthenticatedUser();
     const newMessage =  await DataStore.save(new Message({
         content: message,
+        image: "",
         userID: user.attributes.sub,
         chatroomID: chatRoom.id, 
         isRead: false
@@ -51,6 +55,7 @@ const sendMessage = async () => {
     //console.log('NEW MESSAGE SAVED' + message)
 
     setMessage('');
+    setIsEmojiPickerOpen(false);
 }
 
 const updateLastMessage = async (newMessage: Message | undefined) =>{
@@ -69,7 +74,12 @@ const onPlusClicked = () => {
 }
 
 const onPress = () => {
-    if (message) {
+    if(image){
+        //console.log("==================================")
+        //console.log(image)
+        sendImage()
+    }
+    else if (message) {
         sendMessage();
 
     } else {
@@ -82,9 +92,9 @@ const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
+      allowsEditing: false,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0.5,
     });
 
     console.log(result);
@@ -104,9 +114,55 @@ const pickImage = async () => {
       }
   };
 
+  const sendImage = async() : Promise<string | null> =>{
+    if(!image){
+         return null;
+    }
+try{ 
+    //const blob = getImageBlob();
+    const response = await fetch(image);
+    const blob = await response.blob();
+    //const {key} = await Storage.put(`${uuidv4()}.png`, blob);
+
+    const urlParts = image.split('.');
+    const extension = urlParts[urlParts.length - 1];
+    const fileKey = `${uuidv4()}.${extension}`;
+    await Storage.put(fileKey, blob, {
+        contentType: 'image/jpeg'
+    });
+
+    const user = await Auth.currentAuthenticatedUser();
+    const newMessage =  await DataStore.save(new Message({
+        content: "",
+        image: fileKey,
+        userID: user.attributes.sub,
+        chatroomID: chatRoom.id, 
+        isRead: false
+    }))
+    updateLastMessage(newMessage);
+    setImage(null);
+    setIsEmojiPickerOpen(false);
+    }
+     catch (err) {
+    console.log("Error uploading file:", err);
+    return null;
+  }
+    return null;
+
+  }
+
+  const getImageBlob = async() =>{
+      if(!image){
+          return null;
+      }
+      const response = await fetch(image);
+      const blob = await response.blob();
+      return blob;
+  }
+
     return (
 
-        <KeyboardAvoidingView style={styles.root} 
+        <KeyboardAvoidingView style={[styles.root,{height: isEmojiPickerOpen ? "50%": "auto"} ]} 
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         keyboardVerticalOffset={100}>
 
@@ -122,37 +178,49 @@ const pickImage = async () => {
             </View>
              )}
 
-                             
-            <View style={styles.inputContainer}>
-                
-                <TextInput
-                 style={styles.input}
-                 value={message}
-                 onChangeText={setMessage}
+            <View style = {styles.row}>
+                <View style={styles.inputContainer}>
+                    <Pressable onPress = {() => setIsEmojiPickerOpen((currentValue) => !currentValue)}>
 
-                 placeholder="Type message..."
-                 />
-                 
+                    <SimpleLineIcons name="emotsmile" size={24} color="#595959" style={styles.icon}
+                    keyboardVerticalOffset={100}/> 
 
-                <Pressable onPress = {pickImage}>
-                <Feather name="image" size={24} color="#595959" style={styles.icon}/>
-                </Pressable> 
-                
-                <Pressable onPress = {takePhoto}>
-                <Feather  name="camera" size={24} color="#595959" style={styles.icon}/>
-                </Pressable> 
-                
+                    </Pressable>
+                    
+                    <TextInput
+                    style={styles.input}
+                    value={message}
+                    onChangeText={setMessage}
+
+                    placeholder="Type message..."
+                    />
+                    
+
+                    <Pressable onPress = {pickImage}>
+                    <Feather name="image" size={24} color="#595959" style={styles.icon}/>
+                    </Pressable>
+                    
+                    <Pressable onPress = {takePhoto}>
+                    <Feather  name="camera" size={24} color="#595959" style={styles.icon}/>
+                    </Pressable>
+                    
+                </View>
+                <Pressable onPress={onPress} style={styles.buttonContainer}>
+                    {message || image ? <Ionicons name="send" size={18} color="white" /> : <AntDesign name="plus" size={24} color="white" />}
+                </Pressable>
             </View>
-            <Pressable onPress={onPress} style={styles.buttonContainer}>
-                {message ? <Ionicons name="send" size={18} color="white" /> : <AntDesign name="plus" size={24} color="white" />}
-            </Pressable>
+
+
+            {isEmojiPickerOpen &&<EmojiSelector onEmojiSelected={emoji => setMessage(currentMessage => currentMessage + emoji)}
+            columns={8} 
+            />}
+
         </KeyboardAvoidingView>
     )
 }
 
 const styles = StyleSheet.create({ 
     root:{
-        flexDirection: 'row',
         padding: 10,
     },
     inputContainer: {
@@ -191,11 +259,14 @@ const styles = StyleSheet.create({
     sendImageContainer :{
         flexDirection: 'row',
         margin: 10,
-        //alignSelf: "stretch",
+        alignSelf: "stretch",
         justifyContent: "space-between",
         borderWidth:1,
         borderColor: "lightgrey",
         borderRadius: 10
+    },
+    row:{
+        flexDirection: 'row',
     }
 
 });

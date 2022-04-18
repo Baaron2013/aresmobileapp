@@ -16,6 +16,7 @@ export const getChatroom = /* GraphQL */ `
       LastMessage {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -29,6 +30,7 @@ export const getChatroom = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -78,6 +80,7 @@ export const listChatrooms = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -126,6 +129,7 @@ export const syncChatrooms = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -462,6 +466,7 @@ export const getMessage = /* GraphQL */ `
     getMessage(id: $id) {
       id
       content
+      image
       userID
       chatroomID
       isRead
@@ -483,6 +488,7 @@ export const listMessages = /* GraphQL */ `
       items {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -513,6 +519,7 @@ export const syncMessages = /* GraphQL */ `
       items {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -621,6 +628,7 @@ export const getUser = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -747,6 +755,7 @@ export const getChatroomUser = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead

@@ -88,7 +88,8 @@ export type Chatroom = {
 export type Message = {
   __typename: "Message",
   id?: string,
-  content?: string,
+  content?: string | null,
+  image?: string | null,
   userID?: string,
   chatroomID?: string,
   isRead?: boolean,
@@ -403,7 +404,8 @@ export type DeleteCalculatorResultsInput = {
 
 export type CreateMessageInput = {
   id?: string | null,
-  content: string,
+  content?: string | null,
+  image?: string | null,
   userID: string,
   chatroomID: string,
   isRead: boolean,
@@ -412,6 +414,7 @@ export type CreateMessageInput = {
 
 export type ModelMessageConditionInput = {
   content?: ModelStringInput | null,
+  image?: ModelStringInput | null,
   userID?: ModelIDInput | null,
   chatroomID?: ModelIDInput | null,
   isRead?: ModelBooleanInput | null,
@@ -423,6 +426,7 @@ export type ModelMessageConditionInput = {
 export type UpdateMessageInput = {
   id: string,
   content?: string | null,
+  image?: string | null,
   userID?: string | null,
   chatroomID?: string | null,
   isRead?: boolean | null,
@@ -654,6 +658,7 @@ export type ModelCalculatorResultsConnection = {
 export type ModelMessageFilterInput = {
   id?: ModelIDInput | null,
   content?: ModelStringInput | null,
+  image?: ModelStringInput | null,
   userID?: ModelIDInput | null,
   chatroomID?: ModelIDInput | null,
   isRead?: ModelBooleanInput | null,
@@ -730,7 +735,8 @@ export type CreateChatroomMutation = {
     LastMessage?:  {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -745,7 +751,8 @@ export type CreateChatroomMutation = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -797,7 +804,8 @@ export type UpdateChatroomMutation = {
     LastMessage?:  {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -812,7 +820,8 @@ export type UpdateChatroomMutation = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -864,7 +873,8 @@ export type DeleteChatroomMutation = {
     LastMessage?:  {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -879,7 +889,8 @@ export type DeleteChatroomMutation = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1197,7 +1208,8 @@ export type CreateMessageMutation = {
   createMessage?:  {
     __typename: "Message",
     id: string,
-    content: string,
+    content?: string | null,
+    image?: string | null,
     userID: string,
     chatroomID: string,
     isRead: boolean,
@@ -1218,7 +1230,8 @@ export type UpdateMessageMutation = {
   updateMessage?:  {
     __typename: "Message",
     id: string,
-    content: string,
+    content?: string | null,
+    image?: string | null,
     userID: string,
     chatroomID: string,
     isRead: boolean,
@@ -1239,7 +1252,8 @@ export type DeleteMessageMutation = {
   deleteMessage?:  {
     __typename: "Message",
     id: string,
-    content: string,
+    content?: string | null,
+    image?: string | null,
     userID: string,
     chatroomID: string,
     isRead: boolean,
@@ -1344,7 +1358,8 @@ export type CreateUserMutation = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1401,7 +1416,8 @@ export type UpdateUserMutation = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1458,7 +1474,8 @@ export type DeleteUserMutation = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1521,7 +1538,8 @@ export type CreateChatroomUserMutation = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1599,7 +1617,8 @@ export type UpdateChatroomUserMutation = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1677,7 +1696,8 @@ export type DeleteChatroomUserMutation = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1743,7 +1763,8 @@ export type GetChatroomQuery = {
     LastMessage?:  {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -1758,7 +1779,8 @@ export type GetChatroomQuery = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1813,7 +1835,8 @@ export type ListChatroomsQuery = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -1862,7 +1885,8 @@ export type SyncChatroomsQuery = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -2220,7 +2244,8 @@ export type GetMessageQuery = {
   getMessage?:  {
     __typename: "Message",
     id: string,
-    content: string,
+    content?: string | null,
+    image?: string | null,
     userID: string,
     chatroomID: string,
     isRead: boolean,
@@ -2244,7 +2269,8 @@ export type ListMessagesQuery = {
     items:  Array< {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -2272,7 +2298,8 @@ export type SyncMessagesQuery = {
     items:  Array< {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -2391,7 +2418,8 @@ export type GetUserQuery = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -2530,7 +2558,8 @@ export type GetChatroomUserQuery = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -2695,7 +2724,8 @@ export type OnCreateChatroomSubscription = {
     LastMessage?:  {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -2710,7 +2740,8 @@ export type OnCreateChatroomSubscription = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -2757,7 +2788,8 @@ export type OnUpdateChatroomSubscription = {
     LastMessage?:  {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -2772,7 +2804,8 @@ export type OnUpdateChatroomSubscription = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -2819,7 +2852,8 @@ export type OnDeleteChatroomSubscription = {
     LastMessage?:  {
       __typename: "Message",
       id: string,
-      content: string,
+      content?: string | null,
+      image?: string | null,
       userID: string,
       chatroomID: string,
       isRead: boolean,
@@ -2834,7 +2868,8 @@ export type OnDeleteChatroomSubscription = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -3087,7 +3122,8 @@ export type OnCreateMessageSubscription = {
   onCreateMessage?:  {
     __typename: "Message",
     id: string,
-    content: string,
+    content?: string | null,
+    image?: string | null,
     userID: string,
     chatroomID: string,
     isRead: boolean,
@@ -3103,7 +3139,8 @@ export type OnUpdateMessageSubscription = {
   onUpdateMessage?:  {
     __typename: "Message",
     id: string,
-    content: string,
+    content?: string | null,
+    image?: string | null,
     userID: string,
     chatroomID: string,
     isRead: boolean,
@@ -3119,7 +3156,8 @@ export type OnDeleteMessageSubscription = {
   onDeleteMessage?:  {
     __typename: "Message",
     id: string,
-    content: string,
+    content?: string | null,
+    image?: string | null,
     userID: string,
     chatroomID: string,
     isRead: boolean,
@@ -3204,7 +3242,8 @@ export type OnCreateUserSubscription = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -3256,7 +3295,8 @@ export type OnUpdateUserSubscription = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -3308,7 +3348,8 @@ export type OnDeleteUserSubscription = {
       items:  Array< {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -3366,7 +3407,8 @@ export type OnCreateChatroomUserSubscription = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -3439,7 +3481,8 @@ export type OnUpdateChatroomUserSubscription = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,
@@ -3512,7 +3555,8 @@ export type OnDeleteChatroomUserSubscription = {
       LastMessage?:  {
         __typename: "Message",
         id: string,
-        content: string,
+        content?: string | null,
+        image?: string | null,
         userID: string,
         chatroomID: string,
         isRead: boolean,

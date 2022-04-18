@@ -16,6 +16,7 @@ export const onCreateChatroom = /* GraphQL */ `
       LastMessage {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -29,6 +30,7 @@ export const onCreateChatroom = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -73,6 +75,7 @@ export const onUpdateChatroom = /* GraphQL */ `
       LastMessage {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -86,6 +89,7 @@ export const onUpdateChatroom = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -130,6 +134,7 @@ export const onDeleteChatroom = /* GraphQL */ `
       LastMessage {
         id
         content
+        image
         userID
         chatroomID
         isRead
@@ -143,6 +148,7 @@ export const onDeleteChatroom = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -394,6 +400,7 @@ export const onCreateMessage = /* GraphQL */ `
     onCreateMessage {
       id
       content
+      image
       userID
       chatroomID
       isRead
@@ -410,6 +417,7 @@ export const onUpdateMessage = /* GraphQL */ `
     onUpdateMessage {
       id
       content
+      image
       userID
       chatroomID
       isRead
@@ -426,6 +434,7 @@ export const onDeleteMessage = /* GraphQL */ `
     onDeleteMessage {
       id
       content
+      image
       userID
       chatroomID
       isRead
@@ -509,6 +518,7 @@ export const onCreateUser = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -557,6 +567,7 @@ export const onUpdateUser = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -605,6 +616,7 @@ export const onDeleteUser = /* GraphQL */ `
         items {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -659,6 +671,7 @@ export const onCreateChatroomUser = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -725,6 +738,7 @@ export const onUpdateChatroomUser = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead
@@ -791,6 +805,7 @@ export const onDeleteChatroomUser = /* GraphQL */ `
         LastMessage {
           id
           content
+          image
           userID
           chatroomID
           isRead

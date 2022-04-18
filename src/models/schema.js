@@ -106,7 +106,14 @@ export const schema = {
                     "name": "content",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "image": {
+                    "name": "image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "userID": {
@@ -764,5 +771,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "bd527e8fbb2ec66f413c52efd39b0baa"
+    "version": "9b16b086ab410d62b454bdc50a654e92"
 };

@@ -17,7 +17,8 @@ export declare class Chatroom {
 
 export declare class Message {
   readonly id: string;
-  readonly content: string;
+  readonly content?: string;
+  readonly image?: string;
   readonly userID: string;
   readonly chatroomID: string;
   readonly isRead: boolean;
