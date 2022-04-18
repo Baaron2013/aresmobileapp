@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
+import Logo from '../../../assets/images/ares-login-logo.png'
 
 const ChooseUser = (  ) => {
     //create navigator
@@ -24,6 +25,7 @@ const ChooseUser = (  ) => {
 
     return (
         <View style={styles.root}>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <Custombutton 
                 text="Ranger Sign Up"
                 onPress={onSignUpRangerPressed}

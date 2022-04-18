@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
+import Logo from '../../../assets/images/ares-login-logo.png'
 
 const ForgotPassword = (  ) => {
     //set initial state for username
@@ -22,6 +23,7 @@ const ForgotPassword = (  ) => {
 
     return (
         <View style={styles.root}>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
             <CustomInput 
                 placeholder="Email"
                 value={username}
@@ -45,7 +47,13 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: 'white',
         flex: 1,
-    }
+    },
+    logo: {
+        width: '70%',
+        height: 75,
+        marginBottom: 0,
+        marginTop: 0,
+    },
 })
 
 export default ForgotPassword

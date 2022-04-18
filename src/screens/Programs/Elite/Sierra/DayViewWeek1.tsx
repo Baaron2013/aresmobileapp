@@ -45,7 +45,7 @@ function renderHeader() {
       <><View
             style={{
                 //backgroundColor: '#bfdbf7',
-                padding: 5,
+                padding: 10,
                 marginVertical: 5,
                 borderRadius: 10,
                 borderStyle: 'solid',

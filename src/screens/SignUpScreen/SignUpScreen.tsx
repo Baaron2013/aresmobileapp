@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { View, Text, StyleSheet, Alert, Image } from 'react-native'
 import CustomInput from '../../component/CustomInput'
 import Custombutton from '../../component/CustomButton/Custombutton'
 import { useNavigation } from '@react-navigation/native'
 import { Auth } from 'aws-amplify'
+import Logo from '../../../assets/images/ares-login-logo.png'
 
 const SignUpScreen = ( props ) => {
     //set initial state for cognito username (we will use this as email), cognito password, and cognito name
@@ -70,6 +71,7 @@ const SignUpScreen = ( props ) => {
 
     return (
         <View style={styles.root}>
+            <Image source={Logo} style={styles.logo} resizeMode="contain" />
             {/* input field for name */}
             <CustomInput 
                 placeholder="Name"
@@ -107,7 +109,13 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: 'white',
         flex: 1,
-    }
+    },
+    logo: {
+        width: '70%',
+        height: 100,
+        marginBottom: 30,
+        marginTop: 20,
+    },
 })
 
 export default SignUpScreen

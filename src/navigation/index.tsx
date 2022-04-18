@@ -28,8 +28,7 @@ const Navigation = () => {
 
     return (
          <NavigationContainer>
-            <Stack.Navigator 
-                screenOptions={{headerRight: () => <Image source={Logo} style={styles.logo} resizeMode="contain" />}}>
+            <Stack.Navigator>
                 {!isLoggedIn ? (
                     <>
                         
@@ -40,9 +39,9 @@ const Navigation = () => {
                             }}></Stack.Screen>    
                         <Stack.Screen name="Forgot" component={ForgotPassword} options={{ title: '' }}></Stack.Screen>
                         <Stack.Screen name="ConfirmForgot" component={ConfirmForgotPassword} options={{ header: () => null }}></Stack.Screen>
-                        <Stack.Screen name="SignUp" component={SignUpScreen} ></Stack.Screen>
+                        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: '' }}></Stack.Screen>
                         <Stack.Screen name="Confirm" component={ConfirmSignUp} options={{ header: () => null }}></Stack.Screen>
-                        <Stack.Screen name="ConfirmNew" component={ConfirmNewPassword}></Stack.Screen>
+                        <Stack.Screen name="ConfirmNew" component={ConfirmNewPassword} options={{ header: () => null }}></Stack.Screen>
                         <Stack.Screen name="ChooseUser" component={Chooseuser} options={{ title: '' }}></Stack.Screen>
                         
                     </>
