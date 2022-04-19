@@ -45,14 +45,17 @@ function renderHeader() {
       <><View
             style={{
                 //backgroundColor: '#bfdbf7',
-                padding: 10,
+                padding: 5,
                 marginVertical: 5,
                 borderRadius: 10,
                 borderStyle: 'solid',
                 borderColor: 'black',
                 flex: 1,
                 alignContent: 'center',
-                flexDirection: 'row'
+                flexDirection: 'row',
+                justifyContent: 'space-between', //CHANGED
+                paddingLeft: 15, //CHANGED
+                paddingRight: 15, //CHANGED
             }}
         >
             <DayButton
@@ -158,6 +161,7 @@ function renderHeader() {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
+        //justifyContent: 'space-between',
         backgroundColor: 'white',
         flex: 1,
         
@@ -174,44 +178,16 @@ const styles = StyleSheet.create({
         height: 20,
         marginBottom: 70,
     },
-    log: {
-        //flex: 0
-        //position: 'absolute', left: 0, right: 0, bottom: 0,
-        alignSelf: 'auto',
-        position: 'relative', 
-
-        
-        /* flexDirection: 'column', // inner items will be added vertically
-        flexGrow: 1,            // all the available vertical space will be occupied by it
-        justifyContent: 'space-between' // will create the gutter between body and footer */
-    },
-    saveButton: {
-        height: 30,
-        width: 75,
-        padding: 5,
-        marginTop: 15,
-        marginLeft: 10
-    },
-    input: {
-        height: 100,
-        margin: 12,
-        borderWidth: 2,
-        borderColor: 'green',
-        padding: 10,
-        justifyContent: 'flex-start',
-        textAlignVertical: 'top',
-        
-    },
     mainheadingweektitle: {
         color: '#1F7A8C',
         fontSize: 20,
         fontWeight: '700',
-        textShadowColor: 'black',
-        textShadowOffset: {width: -0.5, height: 0.5},
-        textShadowRadius: 4,
+        //textShadowColor: 'black', CHANGED
+        //textShadowOffset: {width: -0.5, height: 0.5}, CHANGED
+        //textShadowRadius: 4, CHANGED
         left: 10,
         marginBottom: 4,
-        marginTop: 2,
+        marginTop: 15, //CHANGED
 
     },
     roundProgamButtonText: {

@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
-        marginBottom: 80,
+        marginBottom: 50,
         marginTop:50,
     },
     stext:{
@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     button3:{
-        marginTop: 50,
+        marginTop: 40,
         width: 175,
         height: 80,
         justifyContent: 'space-around',

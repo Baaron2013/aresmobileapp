@@ -211,6 +211,9 @@ const Profile = () => {
             console.log('rendering contact image')
             return <Image source={Contact} style={styles.profilePic} />
 
+        } else {
+            console.log('rendering contact image')
+            return <Image source={Contact} style={styles.profilePic} />
         }
         
 

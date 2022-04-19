@@ -72,6 +72,8 @@ const Messages = () => {
         };
         fetchChatRooms().then(() => {setIsLoading(false)});
     }, [isFocused]);
+
+
     
     const [searchTerm, setSearchTerm] = useState('')
 
