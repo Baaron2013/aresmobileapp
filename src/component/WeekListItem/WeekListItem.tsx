@@ -19,8 +19,6 @@ const WeekListItem = (props:any) => {
     const [week4, setWeek4] = useState(false)
     const [week5, setWeek5] = useState(false)
     const [week6, setWeek6] = useState(false)
-    const [week7, setWeek7] = useState(false)
-    const [week8, setWeek8] = useState(false)
 
     const isFocused = useIsFocused();
 
@@ -44,37 +42,29 @@ const WeekListItem = (props:any) => {
                 console.log('finding weeks')
 
     
-                if (newWeeks[i].week === '1' && newWeeks[i].level === props.level) {
+                if (newWeeks[i].week === '1' && newWeeks[i].level === props.level && newWeeks[i].program === props.programName) {
                     console.log('found week 1')
                     setWeek1(true)
                 }
-                if (newWeeks[i].week === '2') {
+                if (newWeeks[i].week === '2' && newWeeks[i].level === props.level && newWeeks[i].program === props.programName) {
                     console.log('found week 2')
                     setWeek2(true)
                 }
-                if (newWeeks[i].week === '3') {
+                if (newWeeks[i].week === '3' && newWeeks[i].level === props.level && newWeeks[i].program === props.programName) {
                     console.log('found week 1')
                     setWeek3(true)
                 }
-                if (newWeeks[i].week === '4') {
+                if (newWeeks[i].week === '4' && newWeeks[i].level === props.level && newWeeks[i].program === props.programName) {
                     console.log('found week 1')
                     setWeek4(true)
                 }
-                if (newWeeks[i].week === '5') {
+                if (newWeeks[i].week === '5' && newWeeks[i].level === props.level && newWeeks[i].program === props.programName) {
                     console.log('found week 1')
                     setWeek5(true)
                 }
-                if (newWeeks[i].week === '6') {
+                if (newWeeks[i].week === '6' && newWeeks[i].level === props.level && newWeeks[i].program === props.programName) {
                     console.log('found week 1')
                     setWeek6(true)
-                }
-                if (newWeeks[i].week === '7') {
-                    console.log('found week 1')
-                    setWeek7(true)
-                }
-                if (newWeeks[i].week === '8') {
-                    console.log('found week 1')
-                    setWeek8(true)
                 }
                 
             }
